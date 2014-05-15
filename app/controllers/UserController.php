@@ -2,8 +2,11 @@
 
 class UserController extends \BaseController {
 
-    public function __construct()
+    protected $user;
+
+    public function __construct(User $user)
     {
+        $this->user = $user;
         $this->beforeFilter('auth');
     }
 
@@ -38,6 +41,13 @@ class UserController extends \BaseController {
     {
         $user = new User;
 
+        $input = Input::all();
+
+        if ( ! $this->user->fill($input)->isValid())
+        {
+            return Redirect::back()->withInput()->withErrors($this->user->errors);
+        }
+
         $user->first_name = Input::get('first_name');
         $user->last_name  = Input::get('last_name');
         $user->username   = Input::get('username');
@@ -71,6 +81,13 @@ class UserController extends \BaseController {
     public function update($id)
     {
         $user = User::find($id);
+
+        $input = Input::all();
+
+        if ( ! $this->user->fill($input)->isValid($id))
+        {
+            return Redirect::back()->withInput()->withErrors($this->user->errors);
+        }
 
         $user->first_name = Input::get('first_name');
         $user->last_name  = Input::get('last_name');
