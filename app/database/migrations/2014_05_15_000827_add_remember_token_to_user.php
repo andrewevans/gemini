@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddUniquesToArtistsTable extends Migration {
+class AddRememberTokenToUser extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,10 +12,10 @@ class AddUniquesToArtistsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('artists', function(Blueprint $table)
+		Schema::table('users', function(Blueprint $table)
 		{
 			//
-            $table->unique('slug');
+            $table->string('remember_token', 100);
 		});
 	}
 
@@ -26,11 +26,11 @@ class AddUniquesToArtistsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('artists', function(Blueprint $table)
+		Schema::table('users', function(Blueprint $table)
 		{
 			//
-            $table->dropUnique('slug');
-        });
+            $table->removeColumn('remember_token');
+		});
 	}
 
 }

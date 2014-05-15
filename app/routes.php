@@ -13,8 +13,5 @@
 
 Route::resource('artists', 'ArtistsController');
 
-
-Route::get('/', function()
-{
-	return View::make('hello');
-});
+Route::resource('/user', 'UserController');
+Route::controller('/', 'HomeController');
