@@ -8,7 +8,7 @@
 <!-- if there are creation errors, they will show here -->
 {{ HTML::ul($errors->all()) }}
 
-{{ Form::model($artist, array('route' => array('artists.update', $artist->id), 'method' => 'PUT')) }}
+{{ Form::model($artist, array('route' => array('artists.update', $artist->id), 'files' => true, 'method' => 'PUT')) }}
 
 <div class="form-group">
     {{ Form::label('first_name', 'First Name') }}
@@ -53,6 +53,11 @@
 <div class="form-group">
     {{ Form::label('year_end', 'Year End') }}
     {{ Form::text('year_end', null, array('class' => 'form-control')) }}
+</div>
+
+<div class="form-group">
+    {{ Form::label('avatar', 'Avatar') }}
+    {{ Form::file('avatar', array('class' => 'form-control')) }}
 </div>
 
 
