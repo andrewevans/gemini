@@ -10,6 +10,9 @@
     <p>
         <strong>slug:</strong> {{ $artist->slug }}<br />
         <strong>url_slug:</strong> {{ $artist->url_slug }}<br />
+        @if (file_exists($artist->img_url))
+            <strong>Avatar:</strong> {{ HTML::image($artist->img_url, 'Profile of ' . $artist->alias) }}<br />
+        @endif
 
     </p>
 </div>

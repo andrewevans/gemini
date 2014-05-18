@@ -85,6 +85,7 @@ class ArtistsController extends \BaseController {
 		//
         if (! is_numeric($data)) {
             $artist = Artist::whereUrlSlug($data)->first();
+            $artist->img_url = $this->img_url($artist); // should be stored in artists table
             return View::make('artists.show', ['artist' => $artist]);
         }
 
@@ -146,6 +147,21 @@ class ArtistsController extends \BaseController {
         $artist->year_end      = Input::get('year_end');
 //        $artist->slug       = $artist->url_slug(Input::get('slug'));
 
+        $artist_dir = 'img/artists/' . $artist->url_slug . '/profile';
+
+        // should be an easier way to create if not exists, or at least put in function
+        if ( ! File::isDirectory($artist_dir)) {
+            $result = File::makeDirectory($artist_dir, 0757, true);
+        }
+
+        $avatar = Input::file('avatar');
+
+        // resizing an uploaded file
+        if ($avatar != null) {
+            $mime_type = $avatar->getClientOriginalExtension(); // unused
+            $image['profile'] = Image::make(Input::file('avatar')->getRealPath())->resize(300, null, true, false)->resize(null, 200, true, false)->save($this->img_url($artist));
+        }
+
         $artist->save();
 
         // redirect
@@ -172,5 +188,16 @@ class ArtistsController extends \BaseController {
         return Redirect::to('artists');
 	}
 
+
+    public function img_url($artist)
+    {
+        return $this->img_directory_url($artist) . '/' . $artist->url_slug . '.jpg';
+    }
+
+
+    public function img_directory_url($artist)
+    {
+        return $artist_dir = 'img/artists/' . $artist->url_slug . '/profile';
+    }
 
 }
