@@ -6,6 +6,7 @@
     {{ HTML::style('css/bootstrap.min.css', array('media' => 'screen')) }}
     {{ HTML::style('css/nerds-default.css', array('media' => 'screen')) }}
     {{ HTML::script('js/ckeditor/ckeditor.js?2') }}
+    {{ HTML::script('js/jquery-2.1.1.min.js') }}
 </head>
 <body>
 <div class="container">
