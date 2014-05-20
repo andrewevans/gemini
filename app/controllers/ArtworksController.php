@@ -73,7 +73,13 @@ class ArtworksController extends \BaseController {
 	public function edit($id)
 	{
 		//
-	}
+        $artwork = Artwork::find($id);
+
+        // show the edit form and pass the artwork
+        return View::make('artworks.edit')
+            ->with('artwork', $artwork);
+
+    }
 
 
 	/**
@@ -84,8 +90,26 @@ class ArtworksController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
-	}
+        $artwork = Artwork::whereId($id)->first();
+
+        $input = Input::all();
+
+        if ( ! $this->artwork->fill($input)->isValid($id))
+        {
+            return Redirect::back()->withInput()->withErrors($this->artwork->errors);
+        }
+
+        $artwork->title       = Input::get('title');
+        $artwork->price      = Input::get('price');
+        $artwork->medium      = Input::get('medium');
+
+        $artwork->save();
+
+        // redirect
+        Session::flash('message', 'Successfully updated artwork!');
+        return Redirect::to('artworks');
+
+    }
 
 
 	/**
@@ -96,8 +120,15 @@ class ArtworksController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
-	}
+        $artwork = Artwork::find($id);
+
+        $artwork->delete();
+
+        // redirect
+        Session::flash('message', 'Successfully deleted the artwork!');
+        return Redirect::to('artworks');
+
+    }
 
 
 }
