@@ -52,10 +52,16 @@ class ArtworksController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function show($data)
 	{
 		//
-	}
+        $artwork = Artwork::find($data);
+        return View::make('artworks.show', ['artwork' => $artwork]);
+
+        Session::flash('message', 'You were forwarded here from ' . '<b>artworks/' . $data . '</b>');
+        return Redirect::to('artworks/' . $artwork->url_slug);
+
+    }
 
 
 	/**
