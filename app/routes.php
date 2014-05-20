@@ -12,6 +12,7 @@
 */
 
 Route::resource('artists', 'ArtistsController');
+Route::resource('artworks', 'ArtworksController');
 
 Route::resource('/user', 'UserController');
 Route::controller('/', 'HomeController');
