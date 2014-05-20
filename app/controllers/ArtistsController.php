@@ -194,13 +194,13 @@ class ArtistsController extends \BaseController {
 
     public function img_url($artist)
     {
-        return $this->img_directory_url($artist) . '/' . $artist->url_slug . '.jpg';
+        return $this->img_directory_url($artist) . '/profile/' . $artist->url_slug . '.jpg';
     }
 
 
     public function img_directory_url($artist)
     {
-        return $artist_dir = 'img/artists/' . $artist->url_slug . '/profile';
+        return $artist_dir = 'img/artists/' . $artist->url_slug;
     }
 
 }
