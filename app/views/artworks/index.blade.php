@@ -32,7 +32,7 @@
             {{ Form::close() }}
 
             <!-- show the artwork (uses the show method found at GET /artworks/{id} -->
-            <a class="btn btn-small btn-success" href="{{ URL::to('artworks/' . $artwork->url_slug) }}">Show this artwork</a>
+            <a class="btn btn-small btn-success" href="{{ URL::to('artworks/' . $artwork->id) }}">Show this artwork</a>
 
             <!-- edit this artwork (uses the edit method found at GET /artworks/{id}/edit -->
             <a class="btn btn-small btn-info" href="{{ URL::to('artworks/' . $artwork->id . '/edit') }}">Edit this artwork</a>

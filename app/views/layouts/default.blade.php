@@ -18,6 +18,7 @@
         <ul class="nav navbar-nav">
             <li><a href="{{ URL::to('/') }}">Home</a></li>
             <li><a href="{{ URL::to('artists') }}">View All Artists</a></li>
+            <li><a href="{{ URL::to('artworks') }}">View All Artworks</a></li>
         </ul>
     </nav>
 
