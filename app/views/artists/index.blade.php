@@ -10,6 +10,7 @@
         <td>Alias</td>
         <td>Name</td>
         <td>metas</td>
+        <td>Artworks</td>
         <td>&nbsp;</td>
     </tr>
     </thead>
@@ -20,6 +21,11 @@
         <td>{{ $artist->alias }}</td>
         <td>{{ $artist->first_name }} {{ $artist->last_name }} ({{ $artist->year_begin }} - {{ $artist->year_end }})</td>
         <td><b>{{ $artist->meta_title }}:</b> {{ $artist->meta_description }}</td>
+        <td>
+            @foreach($artist->artworks as $artwork)
+            <pre>{{ $artwork->title }}</pre>
+            @endforeach
+        </td>
 
         <!-- we will also add show, edit, and delete buttons -->
         <td>

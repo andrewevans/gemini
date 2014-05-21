@@ -41,4 +41,10 @@ class Artist extends Eloquent
         return false;
     }
 
+    public function artworks()
+    {
+        return $this->hasMany('Artwork');
+    }
+
+
 }

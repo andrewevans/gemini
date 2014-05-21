@@ -15,8 +15,14 @@ class Artwork extends Eloquent
     protected $guarded = [];
 
     public static $rules = array(
-        'title'       => 'required',
+        'artist_id'     => 'required|numeric|min:0',
         'price'       => 'required|numeric|min:0',
+        'title'       => 'required',
+        'medium'       => 'required',
+        'price_on_req'       => 'required|numeric|min:0|max:1',
+        'sold'       => 'required|numeric|min:0|max:3',
+        'onhold'       => 'required|numeric|min:0|max:1',
+        'hidden'       => 'required|numeric|min:0|max:2',
     );
 
     public static $messages = [
@@ -33,6 +39,11 @@ class Artwork extends Eloquent
 
         $this->errors = $validation->messages();
         return false;
+    }
+
+    public function artist()
+    {
+        return $this->belongsTo('Artist');
     }
 
 

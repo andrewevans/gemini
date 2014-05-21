@@ -6,6 +6,7 @@
 <table class="table table-striped table-bordered">
     <thead>
     <tr>
+        <td>Artwork Name</td>
         <td>ID</td>
         <td>Title</td>
         <td>Medium</td>
@@ -16,6 +17,9 @@
     <tbody>
     @foreach($artworks as $key => $artwork)
     <tr>
+        <td>
+            <pre>{{ $artwork->artist->alias }}</pre>
+        </td>
         <td>{{ $artwork->id }}</td>
         <td>{{ $artwork->title }}</td>
         <td>{{ $artwork->medium }}</td>
