@@ -32,7 +32,11 @@ class ArtworksController extends \BaseController {
 	public function create()
 	{
 		//
-	}
+        $artists = DB::table('artists')->orderBy('alias', 'desc')->lists('alias','id');
+
+        return View::make('artworks.create')
+            ->with('artists', $artists);
+    }
 
 
 	/**
@@ -43,7 +47,20 @@ class ArtworksController extends \BaseController {
 	public function store()
 	{
 		//
-	}
+        $input = Input::all();
+
+        if ( ! $this->artwork->fill($input)->isValid())
+        {
+            return Redirect::back()->withInput()->withErrors($this->artwork->errors);
+        }
+
+        Artwork::create($input);
+
+        // redirect
+        Session::flash('message', 'Successfully created artwork!');
+        return Redirect::to('artworks');
+
+    }
 
 
 	/**
