@@ -16,7 +16,7 @@ class ArtworksController extends \BaseController {
      */
     public function index()
     {
-        $artworks = $this->artwork->all();
+        $artworks = $this->artwork->orderBy('artist_id', 'desc')->get();
 
         // load the view and pass the artworks
         return View::make('artworks.index')
@@ -74,10 +74,12 @@ class ArtworksController extends \BaseController {
 	{
 		//
         $artwork = Artwork::find($id);
+        $artists = DB::table('artists')->orderBy('alias', 'desc')->lists('alias','id');
 
         // show the edit form and pass the artwork
         return View::make('artworks.edit')
-            ->with('artwork', $artwork);
+            ->with('artwork', $artwork)
+            ->with('artists', $artists);
 
     }
 

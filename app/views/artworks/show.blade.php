@@ -8,6 +8,7 @@
 <div class="jumbotron text-center">
     <h2>{{ $artwork->title }}</h2>
     <p>
+        <strong>Artist:</strong> {{ $artwork->artist->first_name }}  {{ $artwork->artist->last_name }} (A.K.A. {{ $artwork->artist->alias }})<br />
         <strong>Price:</strong> {{ $artwork->price }}<br />
         <strong>Title:</strong> {{ $artwork->title }}<br />
         <strong>Title SHORT:</strong> {{ $artwork->title_short }}<br />
