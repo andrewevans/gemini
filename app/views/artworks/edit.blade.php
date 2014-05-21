@@ -11,8 +11,8 @@
 {{ Form::model($artwork, array('route' => array('artworks.update', $artwork->id), 'files' => true, 'method' => 'PUT')) }}
 
 <div class="form-group">
-    {{ Form::label('Title', 'Title') }}
-    {{ Form::text('title', null, array('class' => 'form-control')) }}
+    {{ Form::label('artist_id', 'Artist ID') }}
+    {{ Form::text('artist_id', null, array('class' => 'form-control')) }}
 </div>
 
 <div class="form-group">
@@ -21,13 +21,68 @@
 </div>
 
 <div class="form-group">
-    {{ Form::label('medium', 'Medium') }}
-    {{ Form::text('medium', null, array('class' => 'form-control')) }}
+    {{ Form::label('Title', 'Title') }}
+    {{ Form::textarea('title', null, array('class' => 'form-control')) }}
 </div>
 
 <div class="form-group">
-    {{ Form::label('thumb', 'Thumbnail') }}
-    {{ Form::file('thumb', array('class' => 'form-control')) }}
+    {{ Form::label('title_short', 'Title SHORT') }}
+    {{ Form::textarea('title_short', null, array('class' => 'form-control')) }}
+</div>
+
+<div class="form-group">
+    {{ Form::label('series', 'Series') }}
+    {{ Form::textarea('series', null, array('class' => 'form-control')) }}
+</div>
+
+<div class="form-group">
+    {{ Form::label('series_short', 'Series SHORT') }}
+    {{ Form::textarea('series_short', null, array('class' => 'form-control')) }}
+</div>
+
+<div class="form-group">
+    {{ Form::label('medium', 'Medium') }}
+    {{ Form::textarea('medium', null, array('class' => 'form-control')) }}
+</div>
+
+<div class="form-group">
+    {{ Form::label('medium_short', 'Medium SHORT') }}
+    {{ Form::textarea('medium_short', null, array('class' => 'form-control')) }}
+</div>
+
+<div class="form-group">
+    {{ Form::label('after', 'After') }}
+    {{ Form::textarea('after', null, array('class' => 'form-control')) }}
+</div>
+
+<div class="form-group">
+    {{ Form::label('signature', 'Signature') }}
+    {{ Form::textarea('signature', null, array('class' => 'form-control')) }}
+</div>
+
+<div class="form-group">
+    {{ Form::label('condition', 'Condition') }}
+    {{ Form::textarea('condition', null, array('class' => 'form-control')) }}
+</div>
+
+<div class="form-group">
+    {{ Form::label('price_on_req', 'Price on Request') }}
+    {{ Form::text('price_on_req', null, array('class' => 'form-control')) }}
+</div>
+
+<div class="form-group">
+    {{ Form::label('sold', 'Sold') }}
+    {{ Form::text('sold', null, array('class' => 'form-control')) }}
+</div>
+
+<div class="form-group">
+    {{ Form::label('onhold', 'On Hold') }}
+    {{ Form::text('onhold', null, array('class' => 'form-control')) }}
+</div>
+
+<div class="form-group">
+    {{ Form::label('hidden', 'Hidden') }}
+    {{ Form::text('hidden', null, array('class' => 'form-control')) }}
 </div>
 
 

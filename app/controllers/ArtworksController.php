@@ -99,11 +99,7 @@ class ArtworksController extends \BaseController {
             return Redirect::back()->withInput()->withErrors($this->artwork->errors);
         }
 
-        $artwork->title       = Input::get('title');
-        $artwork->price      = Input::get('price');
-        $artwork->medium      = Input::get('medium');
-
-        $artwork->save();
+        $artwork->update($input);
 
         // redirect
         Session::flash('message', 'Successfully updated artwork!');
