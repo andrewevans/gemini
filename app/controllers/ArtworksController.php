@@ -73,6 +73,7 @@ class ArtworksController extends \BaseController {
 	{
 		//
         $artwork = Artwork::find($data);
+        $artwork->img_urls = $this->fetch_images($artwork);
         return View::make('artworks.show', ['artwork' => $artwork]);
 
         Session::flash('message', 'You were forwarded here from ' . '<b>artworks/' . $data . '</b>');
@@ -111,12 +112,14 @@ class ArtworksController extends \BaseController {
 	{
         $artwork = Artwork::whereId($id)->first();
 
-        $input = Input::all();
+        $input = Input::except('img_main');
 
         if ( ! $this->artwork->fill($input)->isValid($id))
         {
             return Redirect::back()->withInput()->withErrors($this->artwork->errors);
         }
+
+        $this->update_image($artwork);
 
         $artwork->update($input);
 
@@ -142,6 +145,56 @@ class ArtworksController extends \BaseController {
         // redirect
         Session::flash('message', 'Successfully deleted the artwork!');
         return Redirect::to('artworks');
+
+    }
+
+
+    public function img_url($artwork, $img_main)
+    {
+        $extension = strtolower($img_main->getClientOriginalExtension());
+        return $this->img_directory_url($artwork) . '/' . $artwork->artist->slug . $artwork->id . '.' . $extension;
+    }
+
+
+    public function img_directory_url($artwork)
+    {
+        return 'img/artists/' . $artwork->artist->url_slug . '/' . $artwork->id;
+    }
+
+
+    public function update_image($artwork)
+    {
+        $artwork_dir = $this->img_directory_url($artwork);
+
+        // should be an easier way to create if not exists, or at least put in function
+        if ( ! File::isDirectory($artwork_dir)) {
+            $result = File::makeDirectory($artwork_dir, 0757, true);
+        }
+
+        $img_main = Input::file('img_main');
+
+        if ($img_main != null) {
+            $image['main'] = Image::make($img_main->getRealPath())->resize(ARTWORK_MAX_WIDTH, null, true, false)->resize(null, ARTWORK_MAX_HEIGHT, true, false)->save($this->img_url($artwork, $img_main));
+        }
+
+    }
+
+
+    public function fetch_images($artwork)
+    {
+        $list_of_user_files = scandir($this->img_directory_url($artwork));
+
+        $artwork_images = array();
+
+        foreach ($list_of_user_files as $file) {
+            $pos = strpos($file, $artwork->artist->slug);
+
+            if ($pos !== false) {
+                $artwork_images[] = $this->img_directory_url($artwork) . '/' . $file;
+            }
+        }
+
+        return $artwork_images;
 
     }
 
