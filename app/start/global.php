@@ -11,6 +11,9 @@
 |
 */
 
+define('ARTWORK_MAX_WIDTH', '850');
+define('ARTWORK_MAX_HEIGHT', '800');
+
 ClassLoader::addDirectories(array(
 
 	app_path().'/commands',

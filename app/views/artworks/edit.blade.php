@@ -85,6 +85,10 @@
     {{ Form::text('hidden', null, array('class' => 'form-control')) }}
 </div>
 
+<div class="form-group">
+    {{ Form::label('img_main', 'Main image') }}
+    {{ Form::file('img_main', null, array('class' => 'form-control')) }}
+</div>
 
 {{ Form::submit('Edit the Artwork!', array('class' => 'btn btn-primary')) }}
 

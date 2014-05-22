@@ -8,6 +8,14 @@
 <div class="jumbotron text-center">
     <h2>{{ $artwork->title }}</h2>
     <p>
+        @foreach ($artwork->img_urls as $img_url)
+            @if (file_exists($img_url))
+            <strong>Image:</strong> {{ HTML::image($img_url, 'Image of ' . $artwork->title) }}<br />
+            @else
+            <strong>Image:</strong> {{ HTML::image('img/no-image.jpg', 'No image available') }}<br />
+            @endif
+        @endforeach
+
         <strong>Artist:</strong> {{ $artwork->artist->first_name }}  {{ $artwork->artist->last_name }} (A.K.A. {{ $artwork->artist->alias }})<br />
         <strong>Price:</strong> {{ $artwork->price }}<br />
         <strong>Title:</strong> {{ $artwork->title }}<br />
