@@ -84,11 +84,28 @@
     {{ Form::label('hidden', 'Hidden') }}
     {{ Form::text('hidden', null, array('class' => 'form-control')) }}
 </div>
+<?php $count = 0; ?>
+@foreach ((array)$artwork->img_urls as $key => $img_url)
+    <div class="form-group">
+        <?php $count = $key + 1; ?>
+        @if (file_exists($img_url))
+            {{ HTML::image($img_url, 'Image of ' . $artwork->title) }}<br />
+        @else
+            {{ HTML::image('img/no-image.jpg', 'No image available') }}<br />
+        @endif
 
-<div class="form-group">
-    {{ Form::label('img_main', 'Main image') }}
-    {{ Form::file('img_main', null, array('class' => 'form-control')) }}
-</div>
+        {{ Form::label('img_' . $count, 'Image ' . $count) }}
+        {{ Form::file('img_' . $count, null, array('class' => 'form-control')) }}
+    </div>
+@endforeach
+
+@if ($count > 1)
+    <?php $count +=1; ?>
+    <div class="form-group">
+        {{ Form::label('img_' . $count, 'Image ' . $count) }}
+        {{ Form::file('img_' . $count, null, array('class' => 'form-control')) }}
+    </div>
+@endif
 
 {{ Form::submit('Edit the Artwork!', array('class' => 'btn btn-primary')) }}
 
