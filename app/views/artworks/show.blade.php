@@ -8,7 +8,7 @@
 <div class="jumbotron text-center">
     <h2>{{ $artwork->title }}</h2>
     <p>
-        @foreach ($artwork->img_urls as $img_url)
+        @foreach ((array)$artwork->img_urls as $img_url)
             @if (file_exists($img_url))
             <strong>Image:</strong> {{ HTML::image($img_url, 'Image of ' . $artwork->title) }}<br />
             @else

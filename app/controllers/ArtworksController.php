@@ -92,6 +92,8 @@ class ArtworksController extends \BaseController {
 	{
 		//
         $artwork = Artwork::find($id);
+        $artwork->img_urls = $this->fetch_images($artwork);
+
         $artists = DB::table('artists')->orderBy('alias', 'desc')->lists('alias','id');
 
         // show the edit form and pass the artwork
@@ -112,14 +114,14 @@ class ArtworksController extends \BaseController {
 	{
         $artwork = Artwork::whereId($id)->first();
 
-        $input = Input::except('img_main');
+        $input = Input::except('img_main', 'img[1]');
 
         if ( ! $this->artwork->fill($input)->isValid($id))
         {
             return Redirect::back()->withInput()->withErrors($this->artwork->errors);
         }
 
-        $this->update_image($artwork);
+        $this->update_images($artwork);
 
         $artwork->update($input);
 
@@ -149,10 +151,14 @@ class ArtworksController extends \BaseController {
     }
 
 
-    public function img_url($artwork, $img_main)
+    public function img_url($artwork, $img_main, $key = null)
     {
         $extension = strtolower($img_main->getClientOriginalExtension());
-        return $this->img_directory_url($artwork) . '/' . $artwork->artist->slug . $artwork->id . '.' . $extension;
+
+        if ($key == null)
+            return $this->img_directory_url($artwork) . '/' . $artwork->artist->slug . $artwork->id . '.' . $extension;
+        else
+            return $this->img_directory_url($artwork) . '/' . $artwork->artist->slug . $artwork->id . '_' . $key . '.' . $extension;
     }
 
 
@@ -162,7 +168,7 @@ class ArtworksController extends \BaseController {
     }
 
 
-    public function update_image($artwork)
+    public function update_images($artwork)
     {
         $artwork_dir = $this->img_directory_url($artwork);
 
@@ -171,18 +177,37 @@ class ArtworksController extends \BaseController {
             $result = File::makeDirectory($artwork_dir, 0757, true);
         }
 
-        $img_main = Input::file('img_main');
+        $img_1 = Input::file('img_1');
+        $img_2 = Input::file('img_2');
+        $img_3 = Input::file('img_3');
 
-        if ($img_main != null) {
-            $image['main'] = Image::make($img_main->getRealPath())->resize(ARTWORK_MAX_WIDTH, null, true, false)->resize(null, ARTWORK_MAX_HEIGHT, true, false)->save($this->img_url($artwork, $img_main));
+        if ($img_1 != null) {
+            $this->make_image($artwork, $img_1);
         }
 
+        if ($img_2 != null) {
+            $this->make_image($artwork, $img_2, 2);
+        }
+
+        if ($img_3 != null) {
+            $this->make_image($artwork, $img_3, 3);
+        }
+
+    }
+
+    public function make_image($artwork, $image, $key = null)
+    {
+        Image::make($image->getRealPath())->resize(ARTWORK_MAX_WIDTH, null, true, false)->resize(null, ARTWORK_MAX_HEIGHT, true, false)->save($this->img_url($artwork, $image, $key));
     }
 
 
     public function fetch_images($artwork)
     {
-        $list_of_user_files = scandir($this->img_directory_url($artwork));
+        $img_dir = $this->img_directory_url($artwork);
+
+        if( ! is_dir($img_dir)) return false;
+
+        $list_of_user_files = scandir($img_dir);
 
         $artwork_images = array();
 
@@ -190,7 +215,7 @@ class ArtworksController extends \BaseController {
             $pos = strpos($file, $artwork->artist->slug);
 
             if ($pos !== false) {
-                $artwork_images[] = $this->img_directory_url($artwork) . '/' . $file;
+                $artwork_images[] = $img_dir . '/' . $file;
             }
         }
 
