@@ -3,6 +3,36 @@
 
 @section('content')
 
+<!-- Carousel
+================================================== -->
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+        <li data-target="#myCarousel" data-slide-to="3"></li>
+        <li data-target="#myCarousel" data-slide-to="4"></li>
+    </ol>
+    <div class="carousel-inner">
+        @foreach ($artworks as $key => $artwork)
+            <div class="item <?= ($key == 0 ? 'active' : '') ?>">
+                <img src="/img/artists/{{ $artwork->artist->url_slug }}/{{ $artwork->id }}/{{ $artwork->artist->slug }}{{ $artwork->id }}.jpg" alt="{{ $artwork->title }}">
+                <div class="container">
+                    <div class="carousel-caption">
+                        <h1>{{ $artwork->title }}</h1>
+                        <p>{{ $artwork->medium }}</p>
+                        <p><a class="btn btn-lg btn-primary" href="/artworks/{{ $artwork->id }}" role="button">View Artwork</a></p>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
+
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+</div><!-- /.carousel -->
+
 <h1>Showing {{ $artist->alias }}</h1>
 
 <div class="jumbotron text-center">
