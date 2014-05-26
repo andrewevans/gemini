@@ -71,12 +71,6 @@
 
 <div class="container">
 
-    <div class="starter-template">
-        <h1>Welcome to The Gemini Project</h1>
-        <p class="lead">Austin Echo Park mumblecore kitsch, Schlitz Cosby sweater forage fanny pack VHS Helvetica Etsy mlkshk sustainable drinking vinegar.
-            <br> All you get is this text and a mostly barebones HTML document.</p>
-    </div>
-
     <!-- will be used to show any messages -->
     @if (Session::has('message'))
     <div class="alert alert-info">{{ Session::get('message') }}</div>

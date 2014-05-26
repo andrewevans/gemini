@@ -3,6 +3,8 @@
 
 @section('content')
 
+<h1>{{ $artist->alias }} {{ $artist->meta_title }}</h1>
+<p>{{ $artist->meta_description }}</p>
 <!-- Carousel
 ================================================== -->
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -17,11 +19,11 @@
     <div class="carousel-inner">
         @foreach ($artworks as $key => $artwork)
             <div class="item <?= ($key == 0 ? 'active' : '') ?>">
-                <img src="/img/artists/{{ $artwork->artist->url_slug }}/{{ $artwork->id }}/{{ $artwork->artist->slug }}{{ $artwork->id }}.jpg" alt="{{ $artwork->title }}">
+                <img src="/img/artists/{{ $artwork->artist->url_slug }}/{{ $artwork->id }}/{{ $artwork->artist->slug }}{{ $artwork->id }}.jpg" alt="{{ $artwork->title_short }}">
                 <div class="container">
                     <div class="carousel-caption">
-                        <h1>{{ $artwork->title }}</h1>
-                        <p>{{ $artwork->medium }}</p>
+                        <h1>{{ $artwork->title_short }}</h1>
+                        <p>{{ $artwork->medium_short }}</p>
                         <p><a class="btn btn-lg btn-primary" href="/artworks/{{ $artwork->id }}" role="button">View Artwork</a></p>
                     </div>
                 </div>
@@ -39,7 +41,7 @@
             <a href="/artworks/{{ $artwork->id }}">
                 @if (file_exists('img/artists/' . $artwork->artist->url_slug . '/' . $artwork->id . '/' . $artwork->artist->slug . $artwork->id . '.jpg'))
                     {{ HTML::image('img/artists/' . $artwork->artist->url_slug . '/' . $artwork->id . '/' . $artwork->artist->slug . $artwork->id . '.jpg') }}<br />
-                {{ $artwork->title }}
+                {{ $artwork->title_short }}
                 @else
                     {{ HTML::image('img/no-image.jpg', 'Profile of ' . $artist->alias) }}<br />
                 @endif
@@ -54,18 +56,16 @@
     @endforeach
 </div>
 
-<h1>Showing {{ $artist->alias }}</h1>
-
 <div class="jumbotron text-center">
-    <h2>{{ $artist->first_name }} {{ $artist->last_name }}</h2>
+    <h1>{{ $artist->first_name }} {{ $artist->last_name }}</h1>
     <p>
-        <strong>slug:</strong> {{ $artist->slug }}<br />
-        <strong>url_slug:</strong> {{ $artist->url_slug }}<br />
         @if (file_exists($artist->img_url))
-            <strong>Avatar:</strong> {{ HTML::image($artist->img_url, 'Profile of ' . $artist->alias) }}<br />
+            {{ HTML::image($artist->img_url, 'Profile of ' . $artist->alias) }}<br />
         @else
-            <strong>Avatar:</strong> {{ HTML::image('img/no-image.jpg', 'Profile of ' . $artist->alias) }}<br />
+            {{ HTML::image('img/no-image.jpg', 'Profile of ' . $artist->alias) }}<br />
         @endif
+
+        {{ $artist->meta_description }}
 
     </p>
 </div>
