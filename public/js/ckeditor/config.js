@@ -46,4 +46,6 @@ CKEDITOR.editorConfig = function( config ) {
         [ 'Source', '-', 'Bold' ]
     ];
 
+    config.enterMode = CKEDITOR.ENTER_BR;
+
 };
