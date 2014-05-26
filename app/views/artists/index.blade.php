@@ -3,6 +3,12 @@
 @section('content')
 <!-- app/views/artists/index.blade.php -->
 
+<div class="starter-template">
+    <h1>Welcome to The Gemini Project</h1>
+    <p class="lead">Austin Echo Park mumblecore kitsch, Schlitz Cosby sweater forage fanny pack VHS Helvetica Etsy mlkshk sustainable drinking vinegar.
+        <br> All you get is this text and a mostly barebones HTML document.</p>
+</div>
+
 <table class="table table-striped table-bordered">
     <thead>
     <tr>
