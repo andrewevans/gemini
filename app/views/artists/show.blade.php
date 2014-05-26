@@ -33,6 +33,27 @@
     <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
 </div><!-- /.carousel -->
 
+<div class="row">
+    @foreach ($artworks as $key => $artwork)
+        <div class="col-md-4">
+            <a href="/artworks/{{ $artwork->id }}">
+                @if (file_exists('img/artists/' . $artwork->artist->url_slug . '/' . $artwork->id . '/' . $artwork->artist->slug . $artwork->id . '.jpg'))
+                    {{ HTML::image('img/artists/' . $artwork->artist->url_slug . '/' . $artwork->id . '/' . $artwork->artist->slug . $artwork->id . '.jpg') }}<br />
+                {{ $artwork->title }}
+                @else
+                    {{ HTML::image('img/no-image.jpg', 'Profile of ' . $artist->alias) }}<br />
+                @endif
+            </a>
+
+            <b>{{ strip_tags($artwork->artist->alias . ' ' . $artwork->medium_short) }} for sale.</b>
+            <i>{{ strip_tags($artwork->title_short) }}</i><br />
+            ${{ number_format($artwork->price) }}
+
+
+        </div>
+    @endforeach
+</div>
+
 <h1>Showing {{ $artist->alias }}</h1>
 
 <div class="jumbotron text-center">
