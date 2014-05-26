@@ -99,13 +99,13 @@
     </div>
 @endforeach
 
-@if ($count > 1)
+@if ($count > 0)
     <?php $count +=1; ?>
+@endif
     <div class="form-group">
         {{ Form::label('img_' . $count, 'Image ' . $count) }}
         {{ Form::file('img_' . $count, null, array('class' => 'form-control')) }}
     </div>
-@endif
 
 {{ Form::submit('Edit the Artwork!', array('class' => 'btn btn-primary')) }}
 
