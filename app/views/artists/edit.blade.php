@@ -12,17 +12,17 @@
 
 <div class="form-group">
     {{ Form::label('first_name', 'First Name') }}
-    {{ Form::text('first_name', null, array('class' => 'form-control')) }}
+    {{ Form::textarea('first_name', null, array('class' => 'form-control')) }}
 </div>
 
 <div class="form-group">
     {{ Form::label('last_name', 'Last Name') }}
-    {{ Form::text('last_name', null, array('class' => 'form-control')) }}
+    {{ Form::textarea('last_name', null, array('class' => 'form-control')) }}
 </div>
 
 <div class="form-group">
     {{ Form::label('alias', 'Alias') }}
-    {{ Form::text('alias', null, array('class' => 'form-control')) }}
+    {{ Form::textarea('alias', null, array('class' => 'form-control')) }}
 </div>
 
 <div class="form-group">
@@ -37,12 +37,12 @@
 
 <div class="form-group">
     {{ Form::label('meta_title', 'meta Title') }}
-    {{ Form::text('meta_title', null, array('class' => 'form-control')) }}
+    {{ Form::textarea('meta_title', null, array('class' => 'form-control')) }}
 </div>
 
 <div class="form-group">
     {{ Form::label('meta_description', 'meta Description') }}
-    {{ Form::text('meta_description', null, array('class' => 'form-control')) }}
+    {{ Form::textarea('meta_description', null, array('class' => 'form-control')) }}
 </div>
 
 <div class="form-group">
