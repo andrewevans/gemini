@@ -185,7 +185,11 @@ class ArtistsController extends \BaseController {
         // delete
         $artist = Artist::find($id);
 
-        File::deleteDirectory($this->img_directory_url($artist), false);
+        $artist_dir = $this->img_directory_url($artist);
+
+        if ($artist->url_slug != '') {
+            File::deleteDirectory($artist_dir, false);
+        }
 
         $artist->delete();
 
