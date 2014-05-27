@@ -1,0 +1,1 @@
+workflow of deleting an artist that has belongsTo artworks attached to it. Should it allow and orphan those artworks or delete those artworks?
