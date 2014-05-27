@@ -19,14 +19,12 @@ class Artist extends Eloquent
         'first_name'       => 'required',
         'last_name'       => 'required',
         'alias'       => 'required',
-        'slug'       => 'required',
-        'url_slug'       => 'required',
         'year_begin'      => 'required|numeric|min:0',
         'year_end'      => 'required|numeric|min:0',
     );
 
     public static $messages = [
-        'slug.required' => "You need a slug.",
+        'alias.required' => "You need a alias.",
     ];
 
     public function isValid($id = null)

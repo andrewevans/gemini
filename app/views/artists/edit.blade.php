@@ -27,12 +27,12 @@
 
 <div class="form-group">
     {{ Form::label('slug', 'Slug') }}
-    {{ Form::text('slug', null, array('class' => 'form-control')) }}
+    {{ Form::text('slug', null, array('class' => 'form-control', 'disabled' => 'disabled')) }}
 </div>
 
 <div class="form-group">
     {{ Form::label('url_slug', 'URL Slug') }}
-    {{ Form::text('url_slug', null, array('class' => 'form-control')) }}
+    {{ Form::text('url_slug', null, array('class' => 'form-control', 'disabled' => 'disabled')) }}
 </div>
 
 <div class="form-group">

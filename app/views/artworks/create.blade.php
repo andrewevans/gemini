@@ -4,15 +4,13 @@
 @section('content')
 
 <h1>Creat new Artwork</h1>
-
 <!-- if there are creation errors, they will show here -->
 {{ HTML::ul($errors->all()) }}
 
 {{ Form::open(array('url' => 'artworks')) }}
-
 <div class="form-group">
     {{ Form::label('artist_id', 'Artist ID') }}
-    {{ Form::select('artist_id', $artists , Input::old('country'), array('class' => 'form-control')) }}
+    {{ Form::select('artist_id', $artists , Input::old('artist_id') ? Input::old('artist_id') : $artwork_newest['artist_id'], array('class' => 'form-control')) }}
 </div>
 
 <div class="form-group">
