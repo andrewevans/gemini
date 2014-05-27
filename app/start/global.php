@@ -13,6 +13,8 @@
 
 define('ARTWORK_MAX_WIDTH', '850');
 define('ARTWORK_MAX_HEIGHT', '800');
+define('ARTIST_MAX_WIDTH', '850');
+define('ARTIST_MAX_HEIGHT', '800');
 
 ClassLoader::addDirectories(array(
 

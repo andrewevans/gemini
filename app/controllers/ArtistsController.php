@@ -162,7 +162,7 @@ class ArtistsController extends \BaseController {
         // resizing an uploaded file
         if ($avatar != null) {
             $mime_type = $avatar->getClientOriginalExtension(); // unused
-            $image['profile'] = Image::make(Input::file('avatar')->getRealPath())->resize(300, null, true, false)->resize(null, 200, true, false)->save($this->img_url($artist));
+            $image['profile'] = Image::make(Input::file('avatar')->getRealPath())->resize(ARTIST_MAX_WIDTH, null, true, false)->resize(null, ARTIST_MAX_HEIGHT, true, false)->save($this->img_url($artist));
         }
 
         $artist->save();
