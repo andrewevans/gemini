@@ -33,10 +33,12 @@ class ArtworksController extends \BaseController {
 	public function create()
 	{
 		//
-        $artists = DB::table('artists')->orderBy('alias', 'desc')->lists('alias','id');
+        $artists = DB::table('artists')->orderBy('alias', 'asc')->lists('alias','id');
+        $artwork_newest = Artwork::orderBy('id', 'desc')->first();
 
         return View::make('artworks.create')
-            ->with('artists', $artists);
+            ->with('artists', $artists)
+            ->with('artwork_newest', $artwork_newest);
     }
 
 
