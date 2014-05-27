@@ -175,6 +175,11 @@ body {
 
 
 /* custom styles */
+
+img {
+    max-width: 100%;
+}
+
 .container {
     padding-right: 15px;
     padding-left: 15px;
