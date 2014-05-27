@@ -78,3 +78,9 @@ Route::filter('csrf', function()
 		throw new Illuminate\Session\TokenMismatchException;
 	}
 });
+
+View::composer('layouts.default', function($view){
+    $artists = Artist::all();
+
+    $view->with('artists', $artists);
+});

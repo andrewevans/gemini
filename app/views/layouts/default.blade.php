@@ -50,7 +50,20 @@
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="{{ URL::to('/') }}">Home</a></li>
-                <li><a href="{{ URL::to('artists') }}">Artists</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Artist List <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ URL::to('artists') }}">Artists</a></li>
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Featured Artists</li>
+                            <li><a href="/artists/pablo-picasso">Pablo Picasso</a></li>
+                        <li class="divider"></li>
+                        <li class="dropdown-header">All Artists</li>
+                        @foreach ($artists as $artist)
+                        <li><a href="/artists/{{ $artist->url_slug }}">{{ $artist->alias }}</a></li>
+                        @endforeach
+                    </ul>
+                </li>
                 <li><a href="{{ URL::to('artworks') }}">Artworks</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
