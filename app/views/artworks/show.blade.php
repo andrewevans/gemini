@@ -3,30 +3,46 @@
 
 @section('content')
 
-<h1>Showing "{{ $artwork->title }}"</h1>
+<h1>{{ $artwork->artist->alias }}, <i>{{ $artwork->title }}</i></h1>
 
 <div class="jumbotron text-center">
-    <h2>{{ $artwork->title }}</h2>
     <p>
         @foreach ((array)$artwork->img_urls as $img_url)
             @if (file_exists($img_url))
-            <strong>Image:</strong> {{ HTML::image($img_url, 'Image of ' . $artwork->title) }}<br />
+            {{ HTML::image($img_url, 'Image of ' . $artwork->title) }}<br />
             @else
-            <strong>Image:</strong> {{ HTML::image('img/no-image.jpg', 'No image available') }}<br />
+            {{ HTML::image('img/no-image.jpg', 'No image available') }}<br />
             @endif
         @endforeach
+    </p>
 
-        <strong>Artist:</strong> {{ $artwork->artist->first_name }}  {{ $artwork->artist->last_name }} (A.K.A. {{ $artwork->artist->alias }})<br />
-        <strong>Price:</strong> {{ $artwork->price }}<br />
-        <strong>Title:</strong> {{ $artwork->title }}<br />
-        <strong>Title SHORT:</strong> {{ $artwork->title_short }}<br />
-        <strong>Series:</strong> {{ $artwork->series }}<br />
-        <strong>Series SHORT:</strong> {{ $artwork->series_short }}<br />
-        <strong>Medium:</strong> {{ $artwork->medium }}<br />
-        <strong>Medium SHORT:</strong> {{ $artwork->medium_short }}<br />
+    <table class="table text-left">
+        <tbody>
+        <tr>
+            <th>Artist</th><td> <b><a href="{{ URL::to('artists/' . $artwork->artist->url_slug) }}">{{ $artwork->artist->first_name }} {{ $artwork->artist->last_name }}</a></b></td>
+        </tr>
+        <tr>
+            <th>Title</th><td> {{ $artwork->title }}</td>
+        </tr>
+        <tr>
+            <th>Medium</th><td> {{ $artwork->medium }}</td>
+        </tr>
+        <tr>
+            <th>Series</th><td> {{ $artwork->series }}</td>
+        </tr>
+        <tr>
+            <th>Signature</th><td> {{ $artwork->signature }}</td>
+        </tr>
+        <tr>
+            <th>Condition</th><td> {{ $artwork->condition }}</td>
+        </tr>
+        <tr>
+            <th>Gallery Price</th><td> ${{ number_format($artwork->price) }}</td>
+        </tr>
+        </tbody>
+    </table>
+
         <strong>After:</strong> {{ $artwork->after }}<br />
-        <strong>Signature:</strong> {{ $artwork->signature }}<br />
-        <strong>Condition:</strong> {{ $artwork->condition }}<br />
         <strong>Price on Request:</strong> {{ $artwork->price_on_req }}<br />
         <strong>Sold:</strong> {{ $artwork->sold }}<br />
         <strong>On Hold:</strong> {{ $artwork->onhold }}<br />
