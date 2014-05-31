@@ -87,7 +87,7 @@ class ArtistsController extends \BaseController {
         if (! is_numeric($data)) {
             $artist = Artist::whereUrlSlug($data)->first();
             $artist->img_url = $this->img_url($artist); // should be stored in artists table
-            $artworks = $artist->artworks()->take(5)->orderBy('id', 'desc')->get();
+            $artworks = $artist->artworks()->where('hidden', '!=', 1)->take(50)->orderBy('id', 'desc')->get();
 
             return View::make('artists.show', ['artist' => $artist, 'artworks' => $artworks]);
         }

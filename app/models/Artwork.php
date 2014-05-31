@@ -41,6 +41,24 @@ class Artwork extends Eloquent
         return false;
     }
 
+    public function title_short()
+    {
+        if ($this->title_short == '') {
+            return $this->title;
+        }
+
+        return $this->title_short;
+    }
+
+    public function medium_short()
+    {
+        if ($this->medium_short == '') {
+            return $this->medium;
+        }
+
+        return $this->medium_short;
+    }
+
     public function artist()
     {
         return $this->belongsTo('Artist');

@@ -17,17 +17,27 @@
         <li data-target="#myCarousel" data-slide-to="4"></li>
     </ol>
     <div class="carousel-inner">
+        <?php $count = 0; ?>
         @foreach ($artworks as $key => $artwork)
             <div class="item <?= ($key == 0 ? 'active' : '') ?>">
-                <img src="/img/artists/{{ $artwork->artist->url_slug }}/{{ $artwork->id }}/{{ $artwork->artist->slug }}{{ $artwork->id }}.jpg" alt="{{ $artwork->title_short }}">
+                @if (file_exists('img/artists/' . $artwork->artist->slug . '/original/' . $artwork->artist->slug . $artwork->id . '.jpg'))
+                    {{ HTML::image('img/artists/' . $artwork->artist->slug . '/original/' . $artwork->artist->slug . $artwork->id . '.jpg') }}
+                @else
+                    {{ HTML::image('img/no-image.jpg', 'Profile of ' . $artist->alias) }}<br />
+                @endif
                 <div class="container">
                     <div class="carousel-caption">
-                        <h1>{{ $artwork->title_short }}</h1>
-                        <p>{{ $artwork->medium_short }}</p>
+                        <h1>{{ $artwork->title_short() }}</h1>
+                        <p>{{ $artwork->medium_short() }}</p>
                         <p><a class="btn btn-lg btn-primary" href="/artworks/{{ $artwork->id }}" role="button">View Artwork</a></p>
                     </div>
                 </div>
             </div>
+        <?php
+        $count++;
+        if ($count > 3) break;
+        ?>
+
         @endforeach
     </div>
 
@@ -39,16 +49,16 @@
     @foreach ($artworks as $key => $artwork)
         <div class="col-md-4">
             <a href="/artworks/{{ $artwork->id }}">
-                @if (file_exists('img/artists/' . $artwork->artist->url_slug . '/' . $artwork->id . '/' . $artwork->artist->slug . $artwork->id . '.jpg'))
-                    {{ HTML::image('img/artists/' . $artwork->artist->url_slug . '/' . $artwork->id . '/' . $artwork->artist->slug . $artwork->id . '.jpg') }}<br />
-                {{ $artwork->title_short }}
+                @if (file_exists('img/artists/' . $artwork->artist->slug . '/original/' . $artwork->artist->slug . $artwork->id . '.jpg'))
+                {{ HTML::image('img/artists/' . $artwork->artist->slug . '/original/' . $artwork->artist->slug . $artwork->id . '.jpg') }}<br />
                 @else
                     {{ HTML::image('img/no-image.jpg', 'Profile of ' . $artist->alias) }}<br />
                 @endif
             </a>
+            {{ $artwork->title_short }}
 
             <b>{{ strip_tags($artwork->artist->alias . ' ' . $artwork->medium_short) }} for sale.</b>
-            <i>{{ strip_tags($artwork->title_short) }}</i><br />
+            <i>{{ strip_tags($artwork->title_short()) }}</i><br />
             ${{ number_format($artwork->price) }}
 
 
