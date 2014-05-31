@@ -2,14 +2,25 @@
 
 class HomeController extends BaseController {
 
+    public function __construct(Artwork $artwork, Artist $artist)
+    {
+        $this->artwork = $artwork;
+        $this->artist = $artist;
+    }
+
     public function getIndex()
     {
+        $artworks = $this->artwork->whereIn('artist_id', array(23, 44, 36, 41))->whereSold(0)->whereHidden(0)->orderBy('artist_id', 'desc')->orderBy('id', 'desc')->get();
+        $artists = $this->artist->whereIn('id', array(23, 44, 36, 41))->orderBy('id', 'desc')->get();
+
         if (Auth::check())
         {
             // The user is logged in...
-            return Redirect::to('user');
+            return View::make('home.index')
+                ->with('artworks', $artworks)
+                ->with('artists', $artists);
         }
-        return View::make('home.index');
+        return Redirect::to('login');
     }
 
     public function postIndex()
@@ -29,7 +40,7 @@ class HomeController extends BaseController {
 
     public function getLogin()
     {
-        return Redirect::to('/');
+        return View::make('home.login');
     }
 
     public function getLogout()
