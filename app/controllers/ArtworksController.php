@@ -17,7 +17,7 @@ class ArtworksController extends \BaseController {
      */
     public function index()
     {
-        $artworks = $this->artwork->orderBy('artist_id', 'desc')->get();
+        $artworks = $this->artwork->whereIn('artist_id', array(23, 44, 36, 41))->orderBy('artist_id', 'desc')->get();
 
         // load the view and pass the artworks
         return View::make('artworks.index')
@@ -167,7 +167,8 @@ class ArtworksController extends \BaseController {
 
     public function img_directory_url($artwork)
     {
-        return 'img/artists/' . $artwork->artist->url_slug . '/' . $artwork->id;
+        return 'img/artists/' . $artwork->artist->slug . '/original';
+        //return 'img/artists/' . $artwork->artist->url_slug . '/' . $artwork->id;
     }
 
 
@@ -215,7 +216,8 @@ class ArtworksController extends \BaseController {
         $artwork_images = array();
 
         foreach ($list_of_user_files as $file) {
-            $pos = strpos($file, $artwork->artist->slug);
+            $pos = strpos($file, $artwork->artist->slug .  $artwork->id);
+            //$pos = strpos($file, $artwork->artist->slug);
 
             if ($pos !== false) {
                 $artwork_images[] = $img_dir . '/' . $file;
