@@ -2,9 +2,6 @@
 <!-- app/views/artists/show.blade.php -->
 
 @section('content')
-
-<h1>{{ $artist->alias }} {{ $artist->meta_title }}</h1>
-<p>{{ $artist->meta_description }}</p>
 <!-- Carousel
 ================================================== -->
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -17,9 +14,19 @@
         <li data-target="#myCarousel" data-slide-to="4"></li>
     </ol>
     <div class="carousel-inner">
-        <?php $count = 0; ?>
+        <div class="item active">
+            <img src="http://www.masterworksfineart.com/images/splashes/picasso-jacqueline-for-sale.jpg">                                <div class="container">
+                <div class="carousel-caption">
+                    <h1>Picador and Horse</h1>
+                    <p>Color Linocut</p>
+                    <p><a class="btn btn-lg btn-primary" href="/artworks/4968" role="button">View Artwork</a></p>
+                </div>
+            </div>
+        </div>
+
+        <?php $count = 1; ?>
         @foreach ($artworks as $key => $artwork)
-            <div class="item <?= ($key == 0 ? 'active' : '') ?>">
+            <div class="item <?= ($key == -1 ? 'active' : '') ?>">
                 @if (file_exists('img/artists/' . $artwork->artist->slug . '/original/' . $artwork->artist->slug . $artwork->id . '.jpg'))
                     {{ HTML::image('img/artists/' . $artwork->artist->slug . '/original/' . $artwork->artist->slug . $artwork->id . '.jpg') }}
                 @else
@@ -79,5 +86,9 @@
 
     </p>
 </div>
+
+
+<h1>{{ $artist->alias }} {{ $artist->meta_title }}</h1>
+<p>{{ $artist->meta_description }}</p>
 
 @stop
