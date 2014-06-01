@@ -82,7 +82,7 @@
     </div>
 </div>
 
-<div class="container">
+<!--<div class="container">-->
 
     <!-- will be used to show any messages -->
     @if (Session::has('message'))
@@ -95,7 +95,7 @@
         <p>&copy; Gemini 2014</p>
     </footer>
 
-</div><!-- /.container -->
+<!--</div>--><!-- /.container -->
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
@@ -105,6 +105,7 @@
 {{ HTML::script('js/jquery-2.1.1.min.js') }}
 {{ HTML::script('vendor/bootstrap/docs.min.js') }}
 {{ HTML::script('vendor/bootstrap/js/bootstrap.min.js') }}
+{{ HTML::script('js/gemini-default.js') }}
 
 <script>
     CKEDITOR.replaceAll();
