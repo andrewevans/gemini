@@ -15,11 +15,31 @@
     </ol>
     <div class="carousel-inner">
         <div class="item active">
+            <div class="color-text" style="cursor: pointer;">
+                <div class="ttl" style="position: relative; top: 0px; opacity: 1;">
+                    <h1>Pablo Picasso</h1>
+                    <h2>It is your work in life that is the ultimate seduction.</h2>
+                    <p>Picasso revolutionized the art world and to many is THE artist of the 20th century. He is famous for his role in pioneering Cubism with Georges Braque and for his melancholy Blue Period pieces.</p>
+                </div>
+                <a href="#">
+                    <span>
+                        View All
+                    </span>
+                </a>
+                <a href="#">
+                    <span>
+                         | Ceramics
+                    </span>
+                </a>
+                <a href="#">
+                    <span>
+                         | Linocuts
+                    </span>
+                </a>
+            </div>
+
             <img src="http://www.masterworksfineart.com/images/splashes/picasso-jacqueline-for-sale.jpg">                                <div class="container">
                 <div class="carousel-caption">
-                    <h1>Picador and Horse</h1>
-                    <p>Color Linocut</p>
-                    <p><a class="btn btn-lg btn-primary" href="/artworks/4968" role="button">View Artwork</a></p>
                 </div>
             </div>
         </div>
@@ -51,6 +71,13 @@
     <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
     <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
 </div><!-- /.carousel -->
+
+<div class="container">
+<div class="intro-header" style="text-align: center; width:450px;"> <i class="sprite-h gtitle-deco above"></i>
+    <h2>View Our Collection of Picasso Ceramics, Linocuts, & Prints</h2>
+    <i class="sprite-h gtitle-deco below"></i>
+</div>
+</div>
 
 <div class="row">
     @foreach ($artworks as $key => $artwork)

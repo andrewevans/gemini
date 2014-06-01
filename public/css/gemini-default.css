@@ -1,7 +1,7 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto:100|Roboto+Slab:400,300);
 
 body {
-    padding-top: 70px;
+    padding-top: 101px;
     padding-bottom: 30px;
         font-family: 'Roboto';
     background: #cccc99 url('http://www.masterworksfineart.com/foxy/public/skins/blues/images/background.png');
@@ -82,8 +82,6 @@ body {
     max-width: none;
     max-height: 100%;
     position: absolute;
-    top: -9999px;
-    bottom: -9999px;
     left: -9999px;
     right: -9999px;
     margin: auto;
@@ -138,8 +136,8 @@ body {
         max-width: none;
         max-height: 100%;
         position: absolute;
-        top: -9999px;
-        bottom: -9999px;
+        top:inherit;
+        bottom: inherit;
         left: -9999px;
         right: -9999px;
         margin: auto;
@@ -239,4 +237,80 @@ hr {
 [class*="col-"] img {
     max-width:100%;
     max-height: 100%;
+}
+
+
+/* hacked custom */
+.color-text {
+    z-index: 10;
+    position: absolute;
+    top: 33%;
+    left: 70%;
+    width: 400px;
+    margin-left: -200px;
+    padding-bottom: 40px;
+    left: 40%;
+    top: 33%;
+    width: 420px;
+    margin-left: -475px;
+}
+
+.color-text p {
+    font-size: 18px;
+}
+
+.color-text h1 {
+    font-size:64px;
+}
+
+.color-text h2 {
+    font-style: italic;
+}
+
+.intro-header {
+    zoom: 1;
+    position: relative;
+    margin: 0 auto 25px;
+    padding: 60px 0 30px 0;
+}
+
+.intro-header h2 {
+    font-size: 33px;
+}
+
+.logo {
+    overflow: visible;
+    margin-top: -3px;
+    height: 60px;
+    float: left;
+    padding-top:10px;
+}
+
+.container>.navbar-header {
+    float: left;
+    height: 40px;
+    float: left;
+    width: auto;
+    clear: left;
+    margin-left: 150px;
+}
+
+
+.collapse.navbar-collapse {
+    float: left;
+    height: 40px;
+    float: left;
+    height: 80px;
+    width: 509px;
+    width: auto;
+    float: none;
+}
+
+.contact-info {
+    text-align: right;
+    margin: 5px 0;
+    color: #555;
+    line-height: 18px;
+    font-size: 15px;
+    padding-top: 0.5em;
 }

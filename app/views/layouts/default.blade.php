@@ -38,6 +38,13 @@
 
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
+        <div class="logo">
+            <a href="http://www.masterworksfineart.com"><img src="http://www.masterworksfineart.com/foxy/public/skins/blues/images/masterworks-fine-art.gif" alt="Masterworks Fine Art Gallery"></a>
+        </div>
+        <div class="contact-info">
+            510-777-9970 / <span id="phone_number_800">800-805-7060</span><br>
+            <span class="address">13470 Campus Drive, Oakland Hills, CA 94619</span>
+        </div>
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="sr-only">Toggle navigation</span>
@@ -49,9 +56,8 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="{{ URL::to('/') }}">Home</a></li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Artists <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle active" data-toggle="dropdown">Artists <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="{{ URL::to('artists') }}">Artists</a></li>
                         <li class="divider"></li>
@@ -65,6 +71,11 @@
                     </ul>
                 </li>
                 <li><a href="{{ URL::to('artworks') }}">Artworks</a></li>
+                <li><a href="#">Art Education</a></li>
+                <li><a href="#">Buying From Us</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">Sell Your Fine Art</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
