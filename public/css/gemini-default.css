@@ -53,7 +53,6 @@ body {
     padding-left: 15px;
 }
 
-
 /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */
 
@@ -189,6 +188,11 @@ body {
     .featurette-heading {
         margin-top: 120px;
     }
+
+    ul.nav li.dropdown:hover > ul.dropdown-menu {
+        display: block;
+    }
+
 }
 /* end caurosel */
 
