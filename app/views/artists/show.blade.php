@@ -74,8 +74,8 @@
 
 <div class="container">
 <div class="intro-header" style="text-align: center; width:450px;"> <i class="sprite-h gtitle-deco above"></i>
-    <h2>View Our Collection of Picasso Ceramics, Linocuts, & Prints</h2>
-    <i class="sprite-h gtitle-deco below"></i>
+    <h1>{{ $artist->alias }} {{ $artist->meta_title }}</h1>
+    <p>{{ $artist->meta_description }}</p>
 </div>
 </div>
 
@@ -115,7 +115,5 @@
 </div>
 
 
-<h1>{{ $artist->alias }} {{ $artist->meta_title }}</h1>
-<p>{{ $artist->meta_description }}</p>
 
 @stop
