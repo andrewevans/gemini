@@ -109,4 +109,13 @@
     @endforeach
 </div>
 
+<div class="container">
+    @foreach ($posts as $post)
+    <div>
+        <h2>{{ $post->post_title }}</h2>
+        <p>{{ $post->post_content }}</p>
+    </div>
+    @endforeach
+</div>
+
 @stop
