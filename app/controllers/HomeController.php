@@ -10,15 +10,25 @@ class HomeController extends BaseController {
 
     public function getIndex()
     {
-        $artworks = $this->artwork->whereIn('artist_id', array(23, 44, 36, 41))->whereSold(0)->whereHidden(0)->orderBy('artist_id', 'desc')->orderBy('id', 'desc')->get();
+        $artworks = $this->artwork->whereIn('artist_id', array(23, 44, 36, 41))->whereSold(0)->whereHidden(0)->take(20)->orderBy('artist_id', 'desc')->orderBy('id', 'desc')->get();
         $artists = $this->artist->whereIn('id', array(23, 44, 36, 41))->orderBy('id', 'desc')->get();
+
+        $query = new WP_Query(array(
+            'post_type' => 'post',
+            'posts_per_page' => 2,
+            'order' => 'ASC',
+            'orderby' => 'post_title',
+        ));
+
+        $posts = $query->get_posts();
 
         if (Auth::check())
         {
             // The user is logged in...
             return View::make('home.index')
                 ->with('artworks', $artworks)
-                ->with('artists', $artists);
+                ->with('artists', $artists)
+                ->with('posts', $posts);
         }
         return Redirect::to('login');
     }
