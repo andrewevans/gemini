@@ -72,6 +72,7 @@
                 </li>
                 <li><a href="{{ URL::to('artworks') }}">Artworks</a></li>
                 <li><a href="#">Art Education</a></li>
+                <li><a href="{{ URL::to('blog') }}">Blog</a></li>
                 <li><a href="#">Buying From Us</a></li>
                 <li><a href="#">About Us</a></li>
                 <li><a href="#">Contact Us</a></li>
