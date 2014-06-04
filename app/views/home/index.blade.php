@@ -93,29 +93,18 @@
     @endforeach
 </div>
 
-<div class="jumbotron text-center">
-    @foreach ($artists as $artist)
-        <h1>{{ $artist->first_name }} {{ $artist->last_name }}</h1>
-        <p>
-            @if (file_exists($artist->img_url))
-            {{ HTML::image($artist->img_url, 'Profile of ' . $artwork->artist->alias) }}<br />
-            @else
-            {{ HTML::image('img/no-image.jpg', 'Profile of ' . $artwork->artist->alias) }}<br />
-            @endif
-
-            {{ $artist->meta_description }}
-
-        </p>
-    @endforeach
-</div>
-
-<div class="container">
-    @foreach ($posts as $post)
-    <div>
-        <h2>{{ $post->post_title }}</h2>
-        <p>{{ $post->post_content }}</p>
+@foreach ($artists as $artist)
+    <div class="jumbotron text-center">
+        @include('widgets.artists.bio', array('artist' => $artist))
     </div>
-    @endforeach
-</div>
+
+    <div class="container">
+        @include('widgets.artists.pages', array('artist' => $artist))
+    </div>
+
+    <div class="container">
+        @include('widgets.artists.posts', array('artist' => $artist))
+    </div>
+@endforeach
 
 @stop
