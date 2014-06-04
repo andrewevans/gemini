@@ -84,3 +84,41 @@ View::composer('layouts.default', function($view){
 
     $view->with('artists', $artists);
 });
+
+View::composer('widgets.artists.artist', function($view){
+    $view->with('artist', $view->artist);
+});
+
+View::composer('widgets.artists.bio', function($view){
+    $view->with('artist', $view->artist);
+});
+
+View::composer('widgets.artists.pages', function($view){
+    $args = array(
+        'category_name'    => $view->artist->url_slug,
+        'post_type'        => 'page',
+        'orderby'          => 'post_date',
+        'order'            => 'DESC',
+        'post_status'      => 'publish',
+        'suppress_filters' => true );
+
+    $posts = get_posts( $args );
+
+    $view->with('artist', $view->artist)
+        ->with('posts', $posts);
+});
+
+View::composer('widgets.artists.posts', function($view){
+    $args = array(
+        'category_name'    => $view->artist->url_slug,
+        'post_type'        => 'post',
+        'orderby'          => 'post_date',
+        'order'            => 'DESC',
+        'post_status'      => 'publish',
+        'suppress_filters' => true );
+
+    $posts = get_posts( $args );
+
+    $view->with('artist', $view->artist)
+        ->with('posts', $posts);
+});
