@@ -1,1 +1,7 @@
 workflow of deleting an artist that has belongsTo artworks attached to it. Should it allow and orphan those artworks or delete those artworks?
+
+downloaded/installed a wp plugin to fetch category_name
+in /Users/vesper/Sites/gemini/wordpress/wp-content/plugins/post-tags-and-categories-for-pages/post-tag.php i edited the function to just return. on update of that plugin it will revert and show all posts AND pages!
+what if article is about more than one artist? needs link at bottom saying 'also available at [url]' for other urls so dont get dinged for duplicate content
+
+there's words like 'lithographs' and 'bio' that CANT be titles of pieces if doing /artists/NAME/TITLE
