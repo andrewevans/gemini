@@ -100,6 +100,34 @@ class ArtistsController extends \BaseController {
 
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  string $data OR int  $data
+     * @return Response
+     */
+    public function showBio($artist_url_slug = null, $wp_url_slug = null)
+    {
+        $artist = Artist::whereUrlSlug($artist_url_slug)->first();
+        $artist->img_url = $this->img_url($artist); // should be stored in artists table
+        $artworks = $artist->artworks()->where('hidden', '!=', 1)->take(50)->orderBy('id', 'desc')->get();
+
+        $args = array(
+            'category_name'    => $artist->url_slug,
+            'name'         => $wp_url_slug,
+            'post_type'        => 'page',
+            'orderby'          => 'post_date',
+            'order'            => 'DESC',
+            'post_status'      => 'publish',
+            'suppress_filters' => true );
+
+        $post = current( get_posts( $args ) );
+
+        if ( $wp_url_slug != null ) {
+            return View::make('artists.showBioArticle', ['artist' => $artist, 'artworks' => $artworks, 'post' => $post]);
+        }
+        return View::make('artists.showBio', ['artist' => $artist, 'artworks' => $artworks]);
+    }
 
 	/**
 	 * Show the form for editing the specified resource.
