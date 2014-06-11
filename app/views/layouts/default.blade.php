@@ -39,7 +39,7 @@
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="logo">
-            <a href="http://www.masterworksfineart.com"><img src="http://www.masterworksfineart.com/foxy/public/skins/blues/images/masterworks-fine-art.gif" alt="Masterworks Fine Art Gallery"></a>
+            <!--<a href="http://www.masterworksfineart.com"><img src="http://www.masterworksfineart.com/foxy/public/skins/blues/images/masterworks-fine-art.gif" alt="Masterworks Fine Art Gallery"></a>-->
         </div>
         <div class="contact-info">
             510-777-9970 / <span id="phone_number_800">800-805-7060</span><br>
@@ -77,6 +77,18 @@
                 <li><a href="#">About Us</a></li>
                 <li><a href="#">Contact Us</a></li>
                 <li><a href="#">Sell Your Fine Art</a></li>
+                <li>
+                    <div id="multiple-datasets">
+                        {{ Form::open(array('method' => 'get', 'url' => 'search')) }}
+                            <div class="form-group">
+                                {{ Form::label('q', 'Search') }}
+                                {{ Form::text('q', null, array('class' => 'typeahead form-control', 'placeholder' => 'Search artists or artworks')) }}
+                            </div>
+                            {{ Form::submit('Search', array('class' => 'btn btn-primary')) }}
+                        {{ Form::close() }}
+                    </div>
+
+                </li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
@@ -106,10 +118,86 @@
 {{ HTML::script('vendor/bootstrap/docs.min.js') }}
 {{ HTML::script('vendor/bootstrap/js/bootstrap.min.js') }}
 {{ HTML::script('js/gemini-default.js') }}
+<!--<link href="/vendor/jquery-ui/css/ui-lightness/jquery-ui-1.10.4.css" rel="stylesheet">-->
+<!--<script src="/vendor/jquery-ui/js/jquery-ui-1.10.4.js"></script>-->
+<script src="/vendor/typeahead.js-master/dist/bloodhound.js"></script>
+<script src="/vendor/typeahead.js-master/dist/typeahead.bundle.js"></script>
+<script src="/vendor/handlebars-v1.3.0.js"></script>
 
 <script>
     CKEDITOR.replaceAll();
 </script>
 
+<script>
+    var charMap = {'àáâããäå': 'a', 'èéêë': 'e', 'ç': 'c', 'ß': 'ss'};
+
+    var normalize = function(str) {
+        $.each(charMap, function(chars, normalized) {
+            var regex = new RegExp('[' + chars + ']', 'gi');
+            str = str.replace(regex, normalized);
+        });
+
+        return str;
+    }
+
+    var queryTokenizer = function(q) {
+        var normalized = normalize(q);
+        return Bloodhound.tokenizers.whitespace(normalized);
+    };
+
+    var artists_list = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        prefetch: {
+            ttl: 0,
+            url: '/api/v1/url/artists',
+        }
+    });
+
+    var artworks_list = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+        queryTokenizer: queryTokenizer,
+        prefetch: {
+            ttl: 0,
+            url: '/api/v1/url/artworks'
+        }
+    });
+
+    artists_list.initialize();
+    artworks_list.initialize();
+
+    $('#multiple-datasets .typeahead').typeahead({
+            highlight: true
+        },
+        {
+            name: 'artists-list',
+            displayKey: 'value',
+            source: artists_list.ttAdapter(),
+            templates: {
+                header: '<h3 class="table-name">Artists</h3>',
+                empty: [
+                    '<div class="empty-message">',
+                    '<p>No artists found.</p>',
+                    '</div>'
+                ].join('\n'),
+                suggestion: Handlebars.compile('<p><strong>\{\{value\}\}</strong>  (\{\{year_begin\}\} - \{\{year_end\}\})</p>')
+            }
+
+        },
+        {
+            name: 'artworks-list',
+            displayKey: 'value',
+            source: artworks_list.ttAdapter(),
+            templates: {
+                header: '<h3 class="table-name">Artworks</h3>',
+                empty: [
+                    '<div class="empty-message">',
+                    '<p>No artwork found.</p>',
+                    '</div>'
+                ].join('\n'),
+                suggestion: Handlebars.compile('<p><strong>\{\{value\}\}</strong>  (\{\{medium_short\}\})</p>')
+            }
+        });
+</script>
 </body>
 </html>

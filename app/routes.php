@@ -16,6 +16,11 @@ Route::get('artists/{artist_url_slug?}/bio', 'ArtistsController@showBio');
 Route::get('artists/{artist_url_slug?}/bio/{wp_url_slug?}', 'ArtistsController@showBio');
 Route::resource('artworks', 'ArtworksController');
 Route::resource('blog', 'BlogController');
+// Route group for API versioning
+Route::group(array('prefix' => 'api/v1', 'before' => 'auth.basic'), function()
+{
+    Route::resource('url', 'UrlController');
+});
 
 Route::resource('/user', 'UserController');
 Route::controller('/', 'HomeController');
