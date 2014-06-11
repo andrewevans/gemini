@@ -5,3 +5,5 @@ in /Users/vesper/Sites/gemini/wordpress/wp-content/plugins/post-tags-and-categor
 what if article is about more than one artist? needs link at bottom saying 'also available at [url]' for other urls so dont get dinged for duplicate content
 
 there's words like 'lithographs' and 'bio' that CANT be titles of pieces if doing /artists/NAME/TITLE
+
+'dog' search doesn't find 3570 and 2963 like it should! maybe parens and quotes in fields?
