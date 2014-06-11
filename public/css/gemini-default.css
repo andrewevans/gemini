@@ -480,3 +480,14 @@ p + p {
 h3.table-name {
     font-weight: bold;
 }
+
+
+/* construction CSS, pardon the dust! */
+.navbar {
+    margin-top: -92px;
+}
+
+#multiple-datasets label,
+#multiple-datasets .btn-primary{
+    display: none;
+}
