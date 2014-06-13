@@ -72,10 +72,10 @@ class ArtworksController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($data)
+	public function show($artist_url_slug, $artwork_url_slug, $id)
 	{
 		//
-        $artwork = Artwork::find($data);
+        $artwork = Artwork::find($id);
         $artwork->img_urls = $this->fetch_images($artwork);
         return View::make('artworks.show', ['artwork' => $artwork]);
 

@@ -8,7 +8,7 @@
     <h2>Artworks</h2>
     @foreach ($artworks as $artwork)
     <div class="col-md-4">
-        <a href="/artworks/{{ $artwork->id }}">
+        <a href="{{ $artwork->url() }}">
             @if (file_exists('img/artists/' . $artwork->artist->slug . '/original/' . $artwork->artist->slug . $artwork->id . '.jpg'))
             {{ HTML::image('img/artists/' . $artwork->artist->slug . '/original/' . $artwork->artist->slug . $artwork->id . '.jpg') }}<br />
             @else
