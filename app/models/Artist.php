@@ -39,6 +39,11 @@ class Artist extends Eloquent
         return false;
     }
 
+    public function url()
+    {
+        return '/artists/' . $this->url_slug;
+    }
+
     public function artworks()
     {
         return $this->hasMany('Artwork');
