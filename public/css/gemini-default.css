@@ -4,8 +4,7 @@ body {
     padding-top: 101px;
     padding-bottom: 30px;
         font-family: 'Roboto';
-/*    background: #cccc99 url('http://www.masterworksfineart.com/foxy/public/skins/blues/images/background.png');*/
-    background:#000000;
+    background: #cccc99 url('http://www.masterworksfineart.com/foxy/public/skins/blues/images/background.png');
 }
 
 .theme-dropdown .dropdown-menu {
@@ -217,7 +216,7 @@ h4 {
   margin-top: 10px;
   margin-bottom: 0;
 }
-[class*="col-"] {
+.row [class*="col-"] {
   padding-top: 15px;
   padding-bottom: 15px;
   background-color: #eee;
@@ -388,12 +387,17 @@ p + p {
     margin: 50px 0;
 }
 
+.twitter-typeahead {
+    vertical-align: middle;
+    float: right;
+}
+
 .typeahead,
 .tt-query,
 .tt-hint {
     padding: 8px 12px;
-    font-size: 24px;
-    line-height: 30px;
+    font-size: 14px;
+    line-height: 16px;
     border: 2px solid #ccc;
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
@@ -420,7 +424,7 @@ p + p {
 }
 
 .tt-dropdown-menu {
-    width: 422px;
+    width: 300px;
     margin-top: 12px;
     padding: 8px 0;
     background-color: #fff;
@@ -436,8 +440,8 @@ p + p {
 
 .tt-suggestion {
     padding: 3px 20px;
-    font-size: 18px;
-    line-height: 24px;
+    font-size: 14px;
+    line-height: 16px;
 }
 
 .tt-suggestion.tt-cursor {
@@ -451,7 +455,7 @@ p + p {
 }
 
 .gist {
-    font-size: 14px;
+    font-size: 12px;
 }
 
 /* example specific styles */
@@ -484,7 +488,7 @@ h3.table-name {
 
 /* construction CSS, pardon the dust! */
 .navbar {
-    margin-top: -92px;
+    background: #cccc99 url('http://www.masterworksfineart.com/foxy/public/skins/blues/images/background.png');
 }
 
 #multiple-datasets label,
