@@ -21,6 +21,34 @@ class SearchController extends \BaseController {
 		//
         $q = Str::lower(Input::get('q'));
 
+        $q_id = Str::lower(Input::get('q_id'));
+
+        if ($q_id != '') {
+
+            $guid = explode('-', $q_id);
+
+            switch ($guid[0]) {
+                case 'a':
+                    $artist_match = Artist::find($guid[1]);
+                    $destination_url = $artist_match->url();
+                    Session::flash('message', 'Directed to artist because exact match!');
+                    break;
+
+                case 'w':
+                    $artwork_match = Artwork::find($guid[1]);
+                    $destination_url = $artwork_match->url();
+                    Session::flash('message', 'Directed to artwork because exact match!');
+                    break;
+
+                default:
+                    $destination_url = '/';
+                    Session::flash('message', 'Directed to home because invalid guid.');
+                    break;
+            }
+
+            return Redirect::to($destination_url);
+        }
+
         $q_all = explode(' ', $q);
 
         $artists_all = Artist::orderBy('last_name', 'asc')->get();
