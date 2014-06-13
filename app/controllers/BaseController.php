@@ -9,6 +9,8 @@ class BaseController extends Controller {
 	 */
 	protected function setupLayout()
 	{
+        View::share('title', SITE_NAME);
+
 		if ( ! is_null($this->layout))
 		{
 			$this->layout = View::make($this->layout);
