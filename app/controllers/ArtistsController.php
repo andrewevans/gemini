@@ -101,6 +101,24 @@ class ArtistsController extends \BaseController {
     }
 
     /**
+     * Display the specified resource filtered by #data.
+     *
+     * @param  string $data
+     * @return Response
+     */
+    public function filtered($data, $filter)
+    {
+        //
+        $artist = Artist::whereUrlSlug($data)->first();
+
+        $medium_query = $artist->medium_query($filter);
+        $artist->img_url = $this->img_url($artist); // should be stored in artists table
+        $artworks = $artist->artworks()->whereRaw("(" . $medium_query . ")")->where('sold', '!=', '1')->where('hidden', '=', 0)->orderBy('id', 'desc')->get();
+
+        return View::make('artists.show', ['artist' => $artist, 'artworks' => $artworks, 'title' => $artist->title($filter)]);
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  string $data OR int  $data

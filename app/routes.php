@@ -12,6 +12,7 @@
 */
 
 Route::resource('artists', 'ArtistsController');
+Route::get('artists/{artist_url_slug}/{filter}', 'ArtistsController@filtered');
 Route::get('artists/{artist_url_slug?}/bio', 'ArtistsController@showBio');
 Route::get('artists/{artist_url_slug?}/bio/{wp_url_slug?}', 'ArtistsController@showBio');
 Route::resource('artworks', 'ArtworksController');
