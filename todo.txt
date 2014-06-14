@@ -25,3 +25,14 @@ needs better image not found image
 
 good 404 page http://bootsnipp.com/snippets/featured/sample-404-page
 
+since overloading the filter slot of URL, a medium can't be called "Bible Series" and a series can't be called "Lithographs"
+
+do series sometimes have several names, like "Bible Series" and "Illustrations from the Bible"
+
+does a piece ever belong to more than one series? i'm thinking no, but then again a piece might be "blue period" and "rose period" at the same time
+
+for pablo-picasso/blue-period the bio should be specifically about the blue period with maybe a boiler about overall picasso bio
+for pablo-picasso/ceramics " "
+
+also, pages and posts pulled should be about the filter first, then the rest. We want the page to be THE page for that artist+filter
+
