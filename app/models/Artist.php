@@ -114,9 +114,54 @@ class Artist extends Eloquent
                         return array($medium);
                 }
 
-            return array($medium);
+                return array($medium);
         }
     }
+
+    function filterSeriesSearch($series) {
+
+        switch($this->slug) {
+            case 'picasso':
+                switch($series) {
+                    case 'blue-period':
+                        return 'blue period';
+                        break;
+
+                    case 'cubism':
+                        return 'cubism';
+                        break;
+
+                    default:
+                        return $series;
+                }
+                break;
+
+            case 'chagall':
+                switch($series) {
+                    case 'bible-series':
+                        return "bible series";
+                        break;
+
+                    case 'tribes-of-israel':
+                        return "tribes of israel";
+                        break;
+
+                    case 'daphnis-and-chloe':
+                        return "daphnis and chloe";
+                        break;
+
+                    default:
+                        return $series;
+                }
+                break;
+
+            default:
+                break;
+        }
+
+        return $series;
+    }
+
 
     public function medium_query($filter)
     {
@@ -129,6 +174,13 @@ class Artist extends Eloquent
         }
 
         return 'medium ' . $like . ' "%' . implode('%" ' . $conjunction . ' medium ' . $like . ' "%', $this->filterMediumSearch($filter)). '%"';
+    }
+
+    public function series_query($filter)
+    {
+        $like = 'LIKE';
+
+        return 'series ' . $like . ' "%' . $this->filterSeriesSearch($filter). '%"';
     }
 
     function filterMediumReadable($medium) {
@@ -151,6 +203,53 @@ class Artist extends Eloquent
 
                     case 'prints':
                         return 'Works on Paper';
+                        break;
+
+                    default:
+                        break;
+                }
+                break;
+
+            default:
+                switch($medium) {
+                    default:
+                        break;
+                }
+        }
+
+        return false;
+    }
+
+    function filterSeriesReadable($medium) {
+
+        switch($this->slug) {
+            case 'picasso':
+                switch($medium) {
+                    case 'blue-period':
+                        return 'Blue Period';
+                        break;
+
+                    case 'cubism':
+                        return 'Cubism';
+                        break;
+
+                    default:
+                        break;
+                }
+                break;
+
+            case 'chagall':
+                switch($medium) {
+                    case 'bible-series':
+                        return 'Bible Series';
+                        break;
+
+                    case 'tribes-of-israel':
+                        return 'Tribes of Israel';
+                        break;
+
+                    case 'daphnis-and-chloe':
+                        return 'Daphnis and Chloe';
                         break;
 
                     default:
