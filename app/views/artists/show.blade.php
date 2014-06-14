@@ -74,7 +74,7 @@
 
 <div class="container">
 <div class="intro-header" style="text-align: center; width:450px;"> <i class="sprite-h gtitle-deco above"></i>
-    <h1>{{ $artist->alias }} {{ $artist->meta_title }}</h1>
+    <h1>{{ $title }}</h1>
     <p>{{ $artist->meta_description }}</p>
 </div>
 </div>
