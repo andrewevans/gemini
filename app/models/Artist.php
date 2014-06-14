@@ -54,6 +54,10 @@ class Artist extends Eloquent
                         return ['ceramic', 'clay', 'sculpture', 'plate', 'madoura'];
                         break;
 
+                    case 'lithographs':
+                        return ['lithograph', 'litho'];
+                        break;
+
                     case 'linocuts':
                         return ['linocut', 'linoleum'];
                         break;
@@ -68,7 +72,7 @@ class Artist extends Eloquent
                         break;
 
                     default:
-                        return $medium;
+                        return array($medium);
                 }
                 break;
 
@@ -84,7 +88,33 @@ class Artist extends Eloquent
                 break;
 
             default:
-                return $medium;
+                switch($medium) {
+                    case 'ceramics':
+                        return ['ceramic', 'clay', 'sculpture', 'plate', 'madoura'];
+                        break;
+
+                    case 'lithographs':
+                        return ['lithograph', 'litho'];
+                        break;
+
+                    case 'linocuts':
+                        return ['linocut', 'linoleum'];
+                        break;
+
+                    case 'etchings':
+                        return ['etching'];
+                        break;
+
+                    // prints are all that are NOT ceramics, so it returns the words to avoid
+                    case 'prints':
+                        return ['ceramic', 'clay', 'sculpture', 'plate', 'madoura'];
+                        break;
+
+                    default:
+                        return array($medium);
+                }
+
+            return array($medium);
         }
     }
 
@@ -124,29 +154,32 @@ class Artist extends Eloquent
                         break;
 
                     default:
-                        return $medium;
+                        break;
                 }
                 break;
 
             default:
-                return $medium;
+                switch($medium) {
+                    default:
+                        break;
+                }
         }
 
+        return false;
     }
 
+    /*
+     * Creates page title by concatenating alias and, if available, 1) filter, or 2) meta title, or 3) default value;
+     */
     public function title($filter = null)
     {
-        $title = $this->alias;
-
-        if ($filter != null) {
-            return $title . ' ' . $this->filterMediumReadable($filter);
+        if ($filter) {
+            return $this->alias . ' ' . $filter;
         } else if ($this->meta_title != '') {
-            return $title . ' ' . $this->meta_title;
-        } else {
-            return $title . ' Original Prints';
+            return $this->alias . ' ' . $this->meta_title;
         }
 
-        return $title;
+        return $this->alias . " Original Prints";
     }
 
     public function artworks()

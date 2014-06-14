@@ -9,7 +9,7 @@ class BaseController extends Controller {
 	 */
 	protected function setupLayout()
 	{
-        View::share('title', SITE_NAME);
+        View::share('page_title', SITE_NAME);
 
 		if ( ! is_null($this->layout))
 		{
