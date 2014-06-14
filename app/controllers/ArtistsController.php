@@ -113,20 +113,26 @@ class ArtistsController extends \BaseController {
         //
         $artist = Artist::whereUrlSlug($data)->first();
 
-        $valid_filter = $artist->filterMediumReadable($filter);
+        $valid_medium = $artist->filterMediumReadable($filter);
 
-        // if a filter cannot be found for this artist, then redirect to artist page
-        if (! $valid_filter) {
+        $valid_series = $artist->filterSeriesReadable($filter);
+
+        if ($valid_medium) {
+            $filter_query = $artist->medium_query($filter);
+            $page_title = $valid_medium;
+        } else if ($valid_series) {
+            $filter_query = $artist->series_query($filter);
+            $page_title = $valid_series;
+        } else {
+            // if a medium/series cannot be found for this artist, then redirect to artist page
             Session::flash('message', 'Redirected to artist page not a valid filter for this artist.');
             return Redirect::to($artist->url());
         }
-
-        $medium_query = $artist->medium_query($filter);
         $artist->img_url = $this->img_url($artist); // should be stored in artists table
-        $artworks = $artist->artworks()->whereRaw("(" . $medium_query . ")")->where('sold', '!=', '1')->where('hidden', '=', 0)->orderBy('id', 'desc')->get();
+        $artworks = $artist->artworks()->whereRaw("(" . $filter_query . ")")->where('sold', '!=', '1')->where('hidden', '=', 0)->orderBy('id', 'desc')->get();
 
 
-        return View::make('artists.show', ['artist' => $artist, 'artworks' => $artworks, 'page_title' => $artist->title($valid_filter)]);
+        return View::make('artists.show', ['artist' => $artist, 'artworks' => $artworks, 'page_title' => $artist->title($page_title)]);
     }
 
     /**
