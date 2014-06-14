@@ -86,10 +86,12 @@ class ArtistsController extends \BaseController {
 		//
         if (! is_numeric($data)) {
             $artist = Artist::whereUrlSlug($data)->first();
+
+            $page_title = $artist->title();
             $artist->img_url = $this->img_url($artist); // should be stored in artists table
             $artworks = $artist->artworks()->where('hidden', '!=', 1)->take(50)->orderBy('id', 'desc')->get();
 
-            return View::make('artists.show', ['artist' => $artist, 'artworks' => $artworks]);
+            return View::make('artists.show', ['artist' => $artist, 'artworks' => $artworks, 'page_title' => $page_title]);
         }
 
         // get the artist
@@ -111,11 +113,20 @@ class ArtistsController extends \BaseController {
         //
         $artist = Artist::whereUrlSlug($data)->first();
 
+        $valid_filter = $artist->filterMediumReadable($filter);
+
+        // if a filter cannot be found for this artist, then redirect to artist page
+        if (! $valid_filter) {
+            Session::flash('message', 'Redirected to artist page not a valid filter for this artist.');
+            return Redirect::to($artist->url());
+        }
+
         $medium_query = $artist->medium_query($filter);
         $artist->img_url = $this->img_url($artist); // should be stored in artists table
         $artworks = $artist->artworks()->whereRaw("(" . $medium_query . ")")->where('sold', '!=', '1')->where('hidden', '=', 0)->orderBy('id', 'desc')->get();
 
-        return View::make('artists.show', ['artist' => $artist, 'artworks' => $artworks, 'title' => $artist->title($filter)]);
+
+        return View::make('artists.show', ['artist' => $artist, 'artworks' => $artworks, 'page_title' => $artist->title($valid_filter)]);
     }
 
     /**
