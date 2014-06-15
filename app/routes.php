@@ -21,7 +21,7 @@ Route::resource('blog', 'BlogController');
 Route::resource('search', 'SearchController');
 
 // Route group for API versioning
-Route::group(array('prefix' => 'api/v1', 'before' => 'auth.basic'), function()
+Route::group(array('prefix' => 'api/v1'), function()
 {
     Route::resource('url', 'UrlController');
 });

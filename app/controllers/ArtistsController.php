@@ -7,7 +7,7 @@ class ArtistsController extends \BaseController {
     public function __construct(Artist $artist)
     {
         $this->artist = $artist;
-        $this->beforeFilter('auth');
+        //$this->beforeFilter('auth');
     }
 
     /**
