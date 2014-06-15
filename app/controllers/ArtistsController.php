@@ -118,9 +118,11 @@ class ArtistsController extends \BaseController {
         $valid_series = $artist->filterSeriesReadable($filter);
 
         if ($valid_medium) {
+            $valid_filter = $valid_medium;
             $filter_query = $artist->medium_query($filter);
             $page_title = $valid_medium;
         } else if ($valid_series) {
+            $valid_filter = $valid_series;
             $filter_query = $artist->series_query($filter);
             $page_title = $valid_series;
         } else {
@@ -132,7 +134,7 @@ class ArtistsController extends \BaseController {
         $artworks = $artist->artworks()->whereRaw("(" . $filter_query . ")")->where('sold', '!=', '1')->where('hidden', '=', 0)->orderBy('id', 'desc')->get();
 
 
-        return View::make('artists.show', ['artist' => $artist, 'artworks' => $artworks, 'page_title' => $artist->title($page_title)]);
+        return View::make('artists.show', ['artist' => $artist, 'artworks' => $artworks, 'page_title' => $artist->title($page_title), 'filter' => $valid_filter]);
     }
 
     /**

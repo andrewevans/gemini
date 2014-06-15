@@ -150,6 +150,10 @@ class Artist extends Eloquent
                         return "daphnis and chloe";
                         break;
 
+                    case 'nice-and-the-cote-dazur':
+                        return "nice and the c&ocirc;te d'azur";
+                        break;
+
                     default:
                         return $series;
                 }
@@ -250,6 +254,10 @@ class Artist extends Eloquent
 
                     case 'daphnis-and-chloe':
                         return 'Daphnis and Chloe';
+                        break;
+
+                    case 'nice-and-the-cote-dazur':
+                        return 'Nice and The C&ocirc;te d\'Azur';
                         break;
 
                     default:
