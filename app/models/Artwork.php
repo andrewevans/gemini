@@ -70,8 +70,10 @@ class Artwork extends Eloquent
     }
 
     // mediums() needs serious refactoring and cleanup!
-    public function mediums($medium)
+    public function mediums($medium = null)
     {
+        if ($medium == null) $medium = $this->medium_short;
+
         $seomediumnone=$medium;
 
         $seomedium = "";
