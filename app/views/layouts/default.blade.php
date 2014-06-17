@@ -37,14 +37,29 @@
 <body role="document">
 
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container size-xs">
+        <div class="contact-us-info">
+            <span class="phone-number">510-777-9970</span> / <span id="phone_number_800">800-805-7060</span>
+            <span class="address size-s"> / 13470 Campus Drive, Oakland Hills, CA 94619 USA</span>
+        </div>
+
+        <div class="collapse navbar-collapse" style="float: right;">
+            <ul class="nav navbar-nav navbar-secondary" style="border-top: 2px solid #6383a1; margin-left: 0">
+                <li><a href="http://wp.andrew.com">Blog</a></li>
+                <li><a href=""><i>Sell Your Fine Art</i></a></li>
+                <!--<li><a href="/login"><span class="size-l">Sign in</span> <span class="glyphicon glyphicon-log-in"></span></a></li>-->
+                <li><a href=""><span class="size-l">Shopping Bag</span> <span class="glyphicon glyphicon-shopping-cart"></span> <span class="badge">2</span></a></li>
+            </ul>
+
+        </div>
+    </div>
     <div class="container">
-        <div class="logo">
-            <a href="http://www.masterworksfineart.com"><img src="http://www.masterworksfineart.com/foxy/public/skins/blues/images/masterworks-fine-art.gif" alt="Masterworks Fine Art Gallery"></a>
+
+        <div class="logo size-xs">
+            <a href="http://gemini.andrew.com"><img src="/img/masterworks-fine-art.gif" alt="Masterworks Fine Art Gallery"></a>
         </div>
-        <div class="contact-info">
-            510-777-9970 / <span id="phone_number_800">800-805-7060</span><br>
-            <span class="address">13470 Campus Drive, Oakland Hills, CA 94619</span>
-        </div>
+        <div class="logo-xs"><img src="http://placehold.it/200x50/cccc99/111&text=Masterworks+Fine+Art+Gallery" /></div>
+
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="sr-only">Toggle navigation</span>
@@ -69,33 +84,38 @@
                         <li><a href="/artists/{{ $artist->url_slug }}">{{ $artist->alias }}</a></li>
                         @endforeach
                     </ul>
+
                 </li>
-                <li><a href="wp.appelfineart.com">Blog</a></li>
-                <li><a href="#">Education</a></li>
+                <li><a href="">Art Education</a></li>
                 <li><a href="#">Why Choose Us</a></li>
+                <li><a href="">About</a></li>
                 <li><a href="#">Contact Us</a></li>
-                <li><a href="#">Sell Your Fine Art</a></li>
             </ul>
-            <div id="multiple-datasets" class="col-sm-3 col-md-3 pull-right">
-                {{ Form::open(array('method' => 'get', 'url' => 'search', 'class' => 'navbar-form navbar-right', 'role' => 'search')) }}
-                    <div class="input-group">
-                        {{ Form::label('q', 'Search') }}
-                        {{ Form::text('q', null, array('class' => 'typeahead form-control', 'placeholder' => 'Search artists or artworks', 'autocomplete' => 'off')) }}
-                        {{ Form::hidden('q_id', null, array('class' => 'q_id', 'id' => 'q_id')) }}
+        </div><!--/.nav-collapse -->
+        <div id="multiple-datasets" class="">
+            {{ Form::open(array('method' => 'get', 'url' => 'search', 'class' => '', 'role' => 'search')) }}
+            <div class="input-group">
+                    {{ Form::label('q', 'Search') }}
+                    {{ Form::text('q', null, array('class' => 'typeahead form-control size-s', 'placeholder' => 'Search artists or artworks', 'autocomplete' => 'off')) }}
+                    {{ Form::hidden('q_id', null, array('class' => 'q_id', 'id' => 'q_id')) }}
 
-                        <div class="input-group-btn">
-                            <button class="btn btn-default">
-                                <span class="glyphicon glyphicon-search"></span>
-                            </button>
-                        </div>
+                <div class="input-group-btn">
+                    <button class="btn btn-default">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </div>
 
-                    </div>
-
-                {{ Form::close() }}
             </div>
 
-        </div><!--/.nav-collapse -->
+            {{ Form::close() }}
+        </div>
+
     </div>
+
+</div>
+
+<div class="container size-xs">
+    @include('widgets.breadcrumb')
 </div>
 
 <!--<div class="container">-->
