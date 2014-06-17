@@ -7,3 +7,45 @@ what if article is about more than one artist? needs link at bottom saying 'also
 there's words like 'lithographs' and 'bio' that CANT be titles of pieces if doing /artists/NAME/TITLE
 
 'dog' search doesn't find 3570 and 2963 like it should! maybe parens and quotes in fields?
+
+make sure /artists/ARTIST-URL-SLUG/blah/id/ARTWORK-ID that artist url slug and artwork ID are consistent with each other
+
+need alt/title attributes SEO text
+
+favico
+
+endless scroll
+
+bold text that is searched and matched in dropdown typeahead list
+make accents show up in dropdown typeahead list
+
+has no image, not even placeholder? http://gemini.andrew.com/artists/pablo-picasso/ceramic-madoura-sculpture/mat-dove-1948/id/4482
+
+needs better image not found image
+
+good 404 page http://bootsnipp.com/snippets/featured/sample-404-page
+
+since overloading the filter slot of URL, a medium can't be called "Bible Series" and a series can't be called "Lithographs"
+
+do series sometimes have several names, like "Bible Series" and "Illustrations from the Bible"
+
+does a piece ever belong to more than one series? i'm thinking no, but then again a piece might be "blue period" and "rose period" at the same time
+
+for pablo-picasso/blue-period the bio should be specifically about the blue period with maybe a boiler about overall picasso bio
+for pablo-picasso/ceramics " "
+
+also, pages and posts pulled should be about the filter first, then the rest. We want the page to be THE page for that artist+filter
+
+pages like http://gemini.andrew.com/artists/pablo-picasso///id/4967 have no medium or slug so it has several slashes. needs fallback
+
+add list of museums, people, etc. to search and have pages or external links!
+
+have artworks marked as featured
+
+yields no results yet it should because there are 2 pieces with 'dog' in title http://gemini.andrew.com/search?q=dog%29&q_id=
+
+make design such that the '+' maximize makes the window open all the way (like in Mac Chrome)
+
+canonical urls
+
+artworks need <title>
