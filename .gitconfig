@@ -1,0 +1,5 @@
+[user]
+	name = appel_remote
+	email = andrewevansc@gmail.com
+[credential]
+	helper = osxkeychain
