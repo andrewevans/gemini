@@ -36,3 +36,16 @@ for pablo-picasso/ceramics " "
 
 also, pages and posts pulled should be about the filter first, then the rest. We want the page to be THE page for that artist+filter
 
+pages like http://gemini.andrew.com/artists/pablo-picasso///id/4967 have no medium or slug so it has several slashes. needs fallback
+
+add list of museums, people, etc. to search and have pages or external links!
+
+have artworks marked as featured
+
+yields no results yet it should because there are 2 pieces with 'dog' in title http://gemini.andrew.com/search?q=dog%29&q_id=
+
+make design such that the '+' maximize makes the window open all the way (like in Mac Chrome)
+
+canonical urls
+
+artworks need <title>
