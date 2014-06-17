@@ -64,6 +64,7 @@ class UrlController extends \BaseController {
                         'value' => $artist->alias,
                         'year_begin' => $artist->year_begin,
                         'year_end' => $artist->year_end,
+                        'guid' => 'a-' . $artist->id,
                         'id' => $artist->id);
                 }
                 break;
@@ -75,6 +76,7 @@ class UrlController extends \BaseController {
                     $return_array[] = array(
                         'value' => $artwork->title_short,
                         'medium_short' => $artwork->medium_short,
+                        'guid' => 'w-' . $artwork->id,
                         'id' => $artwork->id);
                 }
                 break;
