@@ -26,4 +26,9 @@ public_ftp/
 public_html/
 tmp/
 www
+app/config/database.php
+wordpress/wp-config.php
+wordpress/wp-admin/error_log
+.composer/
+.vim/
 
