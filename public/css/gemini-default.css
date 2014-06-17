@@ -1,10 +1,14 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto:100|Roboto+Slab:400,300);
 
 body {
-    padding-top: 101px;
+    padding-top: 0;
     padding-bottom: 30px;
-        font-family: 'Roboto';
-    background: #cccc99 url('http://www.masterworksfineart.com/foxy/public/skins/blues/images/background.png');
+    font-family: 'Roboto', sans-serif;
+    background-color: #CC9;
+    background-image: url('/img/theme/gemini/background.png');
+    background-repeat: repeat;
+    background-position: top left;
+    background-attachment: fixed;
 }
 
 .theme-dropdown .dropdown-menu {
@@ -17,8 +21,9 @@ body {
     margin: 5px 0;
 }
 
-
-
+.logo-xs {
+    display: none;
+}
 /* carousel */
 /* GLOBAL STYLES
 -------------------------------------------------- */
@@ -33,6 +38,9 @@ body {
 
 /* CUSTOMIZE THE NAVBAR
 -------------------------------------------------- */
+.navbar {
+    margin-bottom: 0;
+}
 
 /* Special class on .container surrounding .navbar, used for positioning it into place. */
 .navbar-wrapper {
@@ -52,6 +60,12 @@ body {
     padding-right: 15px;
     padding-left: 15px;
 }
+
+.navbar-fixed-top, .navbar-fixed-bottom {
+    position: relative;
+    border-bottom: 2px solid #e7e7c6;
+}
+
 
 /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */
@@ -218,11 +232,9 @@ h4 {
 }
 .row [class*="col-"] {
   padding-top: 15px;
-  padding-bottom: 15px;
   background-color: #eee;
   background-color: rgba(86,61,124,.15);
   border: 1px solid #ddd;
-  border: 1px solid rgba(86,61,124,.2);
     overflow: hidden;
     height: 360px;
     padding-bottom: 5em;
@@ -244,10 +256,6 @@ hr {
 .color-text {
     z-index: 10;
     position: absolute;
-    top: 33%;
-    left: 70%;
-    width: 400px;
-    margin-left: -200px;
     padding-bottom: 40px;
     left: 40%;
     top: 33%;
@@ -280,30 +288,27 @@ hr {
 
 .logo {
     overflow: visible;
-    margin-top: -3px;
-    height: 60px;
-    float: left;
-    padding-top:10px;
+    margin-top: 0;
+    height: 49px;
+    width: 510px;
+    padding-top:0;
 }
 
+/*
 .container>.navbar-header {
     float: left;
     height: 40px;
     float: left;
     width: auto;
     clear: left;
-    margin-left: 150px;
+    margin-left: 100px;
 }
-
+*/
 
 .collapse.navbar-collapse {
     float: left;
-    height: 40px;
-    float: left;
     height: 80px;
-    width: 509px;
     width: auto;
-    float: none;
 }
 
 .contact-info {
@@ -312,7 +317,7 @@ hr {
     color: #555;
     line-height: 18px;
     font-size: 15px;
-    padding-top: 0.5em;
+    padding-top: 5px;
 }
 
 #custom-templates .empty-message {
@@ -485,13 +490,167 @@ h3.table-name {
     font-weight: bold;
 }
 
-
 /* construction CSS, pardon the dust! */
 .navbar {
-    background: #cccc99 url('http://www.masterworksfineart.com/foxy/public/skins/blues/images/background.png');
+    background:none;
 }
 
 #multiple-datasets label,
 #multiple-datasets .btn-primary{
     display: none;
+}
+
+.collapse .navbar-nav {
+    margin-left: 100px;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+    color: #111;
+    text-transform: uppercase;
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    letter-spacing: 0.03em;
+}
+
+.navbar-inverse .navbar-nav>li>a:hover {
+    color: #eee;
+}
+
+.navbar-inverse .navbar-nav.navbar-secondary {
+    float: right;
+}
+
+.navbar-inverse .navbar-nav.navbar-secondary>li>a {
+    font-weight:normal;
+    font-size:13px;
+    color: #6383a1;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-shadow: none;
+    letter-spacing: 0.05em;
+}
+
+.breadcrumb>li+li:before {
+    content: "\003e";
+    padding: 0 5px;
+    color: #666;
+}
+
+.breadcrumb>.active {
+    color: #666;
+}
+
+.breadcrumb {
+    background-color: transparent;
+    margin-bottom: 0;
+}
+
+.breadcrumb li>a {
+    text-transform: uppercase;
+}
+
+.contact-us-info {
+    float: left;
+    font-size: 14px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: #6c6c6c;
+    font-family: 'Arial', sans-serif;
+    line-height: 20px;
+    letter-spacing: 0.03em;
+    border-top: 2px solid transparent;
+}
+
+.contact-us-info span.phone-number {
+    font-weight: bold;
+}
+
+@media (max-width: 1280px) {
+
+    .size-l {
+        display: none !important;
+    }
+
+    .navbar-inverse .navbar-nav>li>a {
+        letter-spacing: 0;
+    }
+
+    .navbar-inverse .navbar-nav.navbar-secondary>li>a {
+        font-weight:normal;
+        font-size:12px;
+        letter-spacing: 0;
+    }
+}
+
+@media (max-width: 1024px) {
+
+    body {
+        font-size: 13px;
+    }
+
+    .contact-us-info {
+        font-size: 13px;
+    }
+
+    .size-m {
+        display: none !important;
+    }
+
+    .collapse .navbar-nav a{
+        padding: 15px 10px;
+    }
+
+    .navbar-inverse .navbar-nav>li>a {
+        letter-spacing: 0;
+    }
+}
+
+@media (max-width: 1023px) {
+
+    .size-s {
+        display: none !important;
+    }
+}
+
+@media (max-width: 767px) {
+
+    .container>.navbar-header{
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin: 0;
+        padding: 0;
+    }
+
+    .size-xs {
+        display: none;
+    }
+
+    .collapse .navbar-nav {
+        margin-left: 0;
+    }
+
+    .logo-xs {
+        display: inline-block;
+        text-align: center;
+        width: 100%;
+        height: 50px;
+    }
+
+    #multiple-datasets {
+        width: 100px;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+
+    /* Carousel base class */
+    .carousel {
+        height: 180px !important;
+    }
+
+    .carousel .item{
+        height: 180px !important;
+    }
 }

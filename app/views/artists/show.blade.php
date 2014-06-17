@@ -38,7 +38,7 @@
                 </a>
             </div>
 
-            <img src="http://www.masterworksfineart.com/images/splashes/picasso-jacqueline-for-sale.jpg">                                <div class="container">
+            <img src="http://placekitten.com/1920/800">                                <div class="container">
                 <div class="carousel-caption">
                 </div>
             </div>
@@ -56,7 +56,7 @@
                     <div class="carousel-caption">
                         <h1>{{ $artwork->title_short() }}</h1>
                         <p>{{ $artwork->medium_short() }}</p>
-                        <p><a class="btn btn-lg btn-primary" href="/artworks/{{ $artwork->id }}" role="button">View Artwork</a></p>
+                        <p><a class="btn btn-lg btn-primary" href="{{ $artwork->url() }}" role="button">View Artwork</a></p>
                     </div>
                 </div>
             </div>
@@ -73,7 +73,7 @@
 </div><!-- /.carousel -->
 
 <div class="container">
-<div class="intro-header" style="text-align: center; width:450px;"> <i class="sprite-h gtitle-deco above"></i>
+<div class="intro-header" style="text-align: center; max-width:450px;"> <i class="sprite-h gtitle-deco above"></i>
     <h1>{{ $page_title }}</h1>
     <p>{{ $artist->meta_description }}</p>
 </div>
