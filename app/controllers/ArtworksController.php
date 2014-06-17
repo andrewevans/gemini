@@ -7,7 +7,7 @@ class ArtworksController extends \BaseController {
     public function __construct(Artwork $artwork)
     {
         $this->artwork = $artwork;
-        $this->beforeFilter('auth');
+        //$this->beforeFilter('auth');
     }
 
     /**
@@ -72,10 +72,13 @@ class ArtworksController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($data)
+	public function show($artist_url_slug = null, $artwork_url_slug = null, $id = null)
 	{
+        // if we only get the ID, then set it
+        if (is_numeric($artist_url_slug)) $id = $artist_url_slug;
+
 		//
-        $artwork = Artwork::find($data);
+        $artwork = Artwork::find($id);
         $artwork->img_urls = $this->fetch_images($artwork);
         return View::make('artworks.show', ['artwork' => $artwork]);
 
