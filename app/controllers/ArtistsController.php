@@ -7,7 +7,7 @@ class ArtistsController extends \BaseController {
     public function __construct(Artist $artist)
     {
         $this->artist = $artist;
-        $this->beforeFilter('auth');
+        //$this->beforeFilter('auth');
     }
 
     /**
@@ -86,10 +86,12 @@ class ArtistsController extends \BaseController {
 		//
         if (! is_numeric($data)) {
             $artist = Artist::whereUrlSlug($data)->first();
+
+            $page_title = $artist->title();
             $artist->img_url = $this->img_url($artist); // should be stored in artists table
             $artworks = $artist->artworks()->where('hidden', '!=', 1)->take(50)->orderBy('id', 'desc')->get();
 
-            return View::make('artists.show', ['artist' => $artist, 'artworks' => $artworks]);
+            return View::make('artists.show', ['artist' => $artist, 'artworks' => $artworks, 'page_title' => $page_title]);
         }
 
         // get the artist
@@ -98,6 +100,41 @@ class ArtistsController extends \BaseController {
         Session::flash('message', 'You were forwarded here from ' . '<b>artists/' . $data . '</b>');
         return Redirect::to('artists/' . $artist->url_slug);
 
+    }
+
+    /**
+     * Display the specified resource filtered by #data.
+     *
+     * @param  string $data
+     * @return Response
+     */
+    public function filtered($data, $filter)
+    {
+        //
+        $artist = Artist::whereUrlSlug($data)->first();
+
+        $valid_medium = $artist->filterMediumReadable($filter);
+
+        $valid_series = $artist->filterSeriesReadable($filter);
+
+        if ($valid_medium) {
+            $valid_filter = $valid_medium;
+            $filter_query = $artist->medium_query($filter);
+            $page_title = $valid_medium;
+        } else if ($valid_series) {
+            $valid_filter = $valid_series;
+            $filter_query = $artist->series_query($filter);
+            $page_title = $valid_series;
+        } else {
+            // if a medium/series cannot be found for this artist, then redirect to artist page
+            Session::flash('message', 'Redirected to artist page not a valid filter for this artist.');
+            return Redirect::to($artist->url());
+        }
+        $artist->img_url = $this->img_url($artist); // should be stored in artists table
+        $artworks = $artist->artworks()->whereRaw("(" . $filter_query . ")")->where('sold', '!=', '1')->where('hidden', '=', 0)->orderBy('id', 'desc')->get();
+
+
+        return View::make('artists.show', ['artist' => $artist, 'artworks' => $artworks, 'page_title' => $artist->title($page_title), 'filter' => $valid_filter]);
     }
 
     /**
