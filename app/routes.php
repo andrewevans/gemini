@@ -12,11 +12,12 @@
 */
 
 Route::resource('artists', 'ArtistsController');
-Route::get('artists/{artist_url_slug}/{filter}', 'ArtistsController@filtered');
+Route::get('artists/id/{artwork_id}', 'ArtworksController@show');
+Route::get('artists/{artist_url_slug}/{filter}', ['as' => 'artists.show.filter', 'uses' =>'ArtistsController@filtered']);
 Route::get('artists/{artist_url_slug?}/bio', 'ArtistsController@showBio');
 Route::get('artists/{artist_url_slug?}/bio/{wp_url_slug?}', 'ArtistsController@showBio');
-Route::resource('artworks', 'ArtworksController');
-Route::get('artists/{artist_url_slug}/{artwork_url_slug?}/id/{id}', 'ArtworksController@show')->where('artwork_url_slug', '(.*)');
+//Route::resource('artworks', 'ArtworksController');
+Route::get('artists/{artist_url_slug}/{artwork_url_slug?}/id/{id}', array('as' => 'artworks.showOne', 'uses' => 'ArtworksController@show'))->where('artwork_url_slug', '(.*)');
 Route::resource('blog', 'BlogController');
 Route::resource('search', 'SearchController');
 
