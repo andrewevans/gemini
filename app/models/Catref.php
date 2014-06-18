@@ -1,7 +1,7 @@
 <?php
-// app/models/Catalogue.php
+// app/models/Catref.php
 
-class Catalogue extends Eloquent
+class Catref extends Eloquent
 {
     public $timestamp = false;
 
@@ -10,17 +10,19 @@ class Catalogue extends Eloquent
      *
      * @var string
      */
-    protected $table = 'catalogues';
+    protected $table = 'catrefs';
 
-    protected $fillable = ['slug', 'alias', 'title', 'url_slug', 'meta_title', 'meta_description', 'year_begin', 'year_end'];
+    protected $fillable = ['catalogue_id', 'reference_num', 'title', 'title_ext', 'size', 'signed', 'edition', 'medium', 'therest'];
 
 
     public static $rules = array(
-        'alias'       => 'required',
+        'catalogue_id'       => 'required',
+        'reference_num'       => 'required',
     );
 
     public static $messages = [
-        'alias.required' => "You need a alias.",
+        'catalogue_id.required' => "You need a Catalogue ID.",
+        'reference_num.required' => "You need a Reference Number.",
     ];
 
     public function isValid($id = null)
@@ -37,7 +39,7 @@ class Catalogue extends Eloquent
 
     public function url()
     {
-        return '/catrefs/' . $this->id;
+        return '/catrefs/' . $this->url_slug;
     }
 
 
@@ -276,13 +278,7 @@ class Catalogue extends Eloquent
      */
     public function title($filter = null)
     {
-        if ($filter) {
-            return $this->alias . ' ' . $filter;
-        } else if ($this->meta_title != '') {
-            return $this->alias . ' ' . $this->meta_title;
-        }
-
-        return $this->alias . " Original Prints";
+        return $this->title;
     }
 
     public function artworks()
