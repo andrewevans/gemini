@@ -1,30 +1,14 @@
 @extends('layouts.default')
-<!-- app/views/artists/edit.blade.php -->
+<!-- app/views/persons/edit.blade.php -->
 
 @section('content')
 
-<h1>Creat new Artist</h1>
+<h1>Edit {{ $person->alias }}</h1>
 
 <!-- if there are creation errors, they will show here -->
 {{ HTML::ul($errors->all()) }}
 
-{{ Form::open(array('url' => 'artists')) }}
-
-<div class="form-group">
-
-    <div class="input-group">
-      <span class="input-group-addon">
-        {{ Form::label('niche_artist', 'Artist') }}
-        {{ Form::radio('person_niche', 'niche_artist', true, array('id' => 'niche_artist', 'class' => 'form-control')) }}
-      </span>
-
-      <span class="input-group-addon">
-        {{ Form::label('niche_other', 'Non-artist') }}
-        {{ Form::radio('person_niche', 'niche_other', false, array('id' => 'niche_other', 'class' => 'form-control')) }}
-      </span>
-    </div><!-- /input-group -->
-
-</div>
+{{ Form::model($person, array('route' => array('people.update', $person->id), 'files' => true, 'method' => 'PUT')) }}
 
 <div class="form-group">
     {{ Form::label('first_name', 'First Name') }}
@@ -43,12 +27,12 @@
 
 <div class="form-group">
     {{ Form::label('slug', 'Slug') }}
-    {{ Form::text('slug', null, array('class' => 'form-control')) }}
+    {{ Form::text('slug', null, array('class' => 'form-control', 'readonly' => 'readonly')) }}
 </div>
 
 <div class="form-group">
     {{ Form::label('url_slug', 'URL Slug') }}
-    {{ Form::text('url_slug', null, array('class' => 'form-control')) }}
+    {{ Form::text('url_slug', null, array('class' => 'form-control', 'readonly' => 'readonly')) }}
 </div>
 
 <div class="form-group">
@@ -71,8 +55,13 @@
     {{ Form::text('year_end', null, array('class' => 'form-control')) }}
 </div>
 
+<div class="form-group">
+    {{ Form::label('avatar', 'Avatar') }}
+    {{ Form::file('avatar', array('class' => 'form-control')) }}
+</div>
 
-{{ Form::submit('Create the Artist!', array('class' => 'btn btn-primary')) }}
+
+{{ Form::submit('Edit the person!', array('class' => 'btn btn-primary')) }}
 
 {{ Form::close() }}
 
