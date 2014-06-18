@@ -13,6 +13,7 @@
 
 Route::resource('artists', 'ArtistsController');
 Route::resource('people', 'ArtistsController');
+Route::resource('catalogues', 'CataloguesController');
 Route::get('artists/id/{artwork_id}', 'ArtworksController@show');
 Route::get('artists/{artist_url_slug}/{filter}', ['as' => 'artists.show.filter', 'uses' =>'ArtistsController@filtered']);
 Route::get('artists/{artist_url_slug?}/bio', 'ArtistsController@showBio');
