@@ -5,9 +5,18 @@
     <li class="active">BUY ORIGINALS</li>
     @endif
 
+    @if('people.index' == Route::current()->getName() )
+    <li class="active">PEOPLE</li>
+    @endif
+
     @if('artists.show' == Route::current()->getName() )
     <li><a href="/artists">BUY ORIGINALS</a></li>
     <li class="active">{{ $artwork->artist->alias }}</li>
+    @endif
+
+    @if('people.show' == Route::current()->getName() )
+    <li><a href="/artists">PEOPLE</a></li>
+    <li class="active">{{ $person->alias }}</li>
     @endif
 
     @if('artists.show.filter' == Route::current()->getName() )
