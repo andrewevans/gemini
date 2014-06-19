@@ -12,7 +12,7 @@
 
 <div class="form-group">
     {{ Form::label('catalogue_id', 'Catalogue ID') }}
-    {{ Form::textarea('catalogue_id', null, array('class' => 'form-control')) }}
+    {{ Form::select('catalogue_id', $catalogues, $catref->catalogue_id, array('class' => 'form-control')) }}
 </div>
 
 <div class="form-group">
