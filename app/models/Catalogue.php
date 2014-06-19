@@ -12,15 +12,17 @@ class Catalogue extends Eloquent
      */
     protected $table = 'catalogues';
 
-    protected $fillable = ['slug', 'alias', 'title', 'url_slug', 'meta_title', 'meta_description', 'year_begin', 'year_end'];
+    protected $fillable = ['artist_id', 'slug', 'title', 'url_slug', 'meta_description'];
 
 
     public static $rules = array(
-        'alias'       => 'required',
+        'slug'       => 'required',
+        'title'       => 'required',
+        'url_slug'       => 'required',
     );
 
     public static $messages = [
-        'alias.required' => "You need a alias.",
+        'title.required' => "You need a title!",
     ];
 
     public function isValid($id = null)
@@ -37,9 +39,8 @@ class Catalogue extends Eloquent
 
     public function url()
     {
-        return '/catrefs/' . $this->id;
+        return '/artists/' . $this->artist->url_slug . "/bio/catalogue-raisonnes/" . $this->url_slug;
     }
-
 
     function filterMediumSearch($medium) {
 
@@ -276,19 +277,14 @@ class Catalogue extends Eloquent
      */
     public function title($filter = null)
     {
-        if ($filter) {
-            return $this->alias . ' ' . $filter;
-        } else if ($this->meta_title != '') {
-            return $this->alias . ' ' . $this->meta_title;
-        }
-
-        return $this->alias . " Original Prints";
+        return $this->title;
     }
 
-    public function artworks()
+    public function artist()
     {
-        //return $this->hasMany('Artwork');
+        return $this->belongsTo('Artist');
     }
+
 
 
 }
