@@ -3,6 +3,8 @@
 
 @section('content')
 
+<a class="btn btn-small btn-success" href="/catrefs/create">Create new catref</a>
+
 <table>
     @foreach ($catrefs as $catref)
     <tr>
