@@ -1,7 +1,7 @@
 /bootstrap/compiled.php
 /wordpress/wp-content/uploads/
 /vendor
-/public/img
+/public/img/artists
 .idea/
 composer.phar
 composer.lock
