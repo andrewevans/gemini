@@ -20,7 +20,7 @@
             {{ Form::close() }}
 
             <!-- show the artist (uses the show method found at GET /artists/{id} -->
-            <a class="btn btn-small btn-success" href="{{ URL::to('catalogues/' . $catalogue->url_slug) }}">Show this catalogue</a>
+            <a class="btn btn-small btn-success" href="{{ URL::to($catalogue->url()) }}">Show this catalogue</a>
 
             <!-- edit this artist (uses the edit method found at GET /artists/{id}/edit -->
             <a class="btn btn-small btn-info" href="{{ URL::to('catalogues/' . $catalogue->id . '/edit') }}">Edit this catalogue</a>

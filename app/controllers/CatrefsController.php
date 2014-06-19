@@ -76,7 +76,7 @@ class CatrefsController extends \BaseController {
      * @param  string $data
      * @return Response
      */
-    public function show($artist_url_slug = null, $catalogue_url_slug = null, $id = null)
+    public function show($artist_url_slug = null, $catalogue_url_slug = null, $catref_url_slug = null, $id = null)
     {
         //
         // attempt to find catalogue url slug in first param
