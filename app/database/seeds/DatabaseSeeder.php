@@ -13,6 +13,8 @@ class DatabaseSeeder extends Seeder {
 
         Artwork::truncate();
 
+        $this->call('CataloguesTableSeeder');
+
         $this->call('CatrefsTableSeeder');
 
     }

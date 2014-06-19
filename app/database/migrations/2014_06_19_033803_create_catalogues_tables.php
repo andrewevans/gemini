@@ -14,12 +14,11 @@ class CreateCataloguesTables extends Migration {
 	{
 		Schema::create('catalogues', function(Blueprint $table)
 		{
-			$table->increments('id');
+            $table->increments('id');
+            $table->integer('artist_id')->unsigned();
             $table->string('slug');
-            $table->string('alias');
             $table->string('title');
             $table->string('url_slug');
-            $table->string('meta_title');
             $table->string('meta_description');
             $table->timestamps();
 		});
