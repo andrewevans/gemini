@@ -3,6 +3,8 @@
 
 @section('content')
 
+<a class="btn btn-small btn-success" href="/catalogues/create">Create new catalogue</a>
+
 <table>
     @foreach ($catalogues as $catalogue)
     <tr>
