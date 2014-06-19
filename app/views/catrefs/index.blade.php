@@ -7,7 +7,7 @@
     @foreach ($catrefs as $catref)
     <tr>
         <td>
-            <a href="{{ $catref->url() }}">{{ $catref->title }}</a>
+            <a href="/catrefs/{{ $catref->id }}">{{ $catref->title }}</a>
         </td>
         <td>
             <!-- delete the artist (uses the destroy method DESTROY /artists/{id} -->
