@@ -3,10 +3,12 @@
 class CatrefsController extends \BaseController {
 
     protected $catref;
+    protected $catalogue;
 
-    public function __construct(Catref $catref)
+    public function __construct(Catref $catref, Catalogue $catalogue)
     {
         $this->catref = $catref;
+        $this->catalogue = $catalogue;
         //$this->beforeFilter('auth');
     }
 
@@ -31,8 +33,11 @@ class CatrefsController extends \BaseController {
      */
     public function create()
     {
+        $catalogues = DB::table('catalogues')->orderBy('title', 'asc')->lists('title','id');
+        $catref_newest = Catref::orderBy('id', 'desc')->first();
+
         //
-        return View::make('catrefs.create');
+        return View::make('catrefs.create', ['catalogues' => $catalogues, 'catref_newest' => $catref_newest]);
     }
 
 
@@ -105,9 +110,12 @@ class CatrefsController extends \BaseController {
         //
         $catref = Catref::find($id);
 
+        $catalogues = DB::table('catalogues')->orderBy('title', 'desc')->lists('title','id');
+
         // show the edit form and pass the catref
         return View::make('catrefs.edit')
-            ->with('catref', $catref);
+            ->with('catref', $catref)
+            ->with('catalogues', $catalogues);
     }
 
 
