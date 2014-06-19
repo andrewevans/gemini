@@ -16,7 +16,6 @@ class CreateCatrefTable extends Migration {
 		{
 			$table->increments('id');
             $table->integer('catalogue_id')->unsigned();
-            $table->foreign('catalogue_id')->references('id')->on('catalogue');
             $table->string('reference_num');
             $table->string('title');
             $table->string('title_ext');
