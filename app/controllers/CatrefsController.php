@@ -76,10 +76,15 @@ class CatrefsController extends \BaseController {
      * @param  string $data
      * @return Response
      */
-    public function show($data)
+    public function show($artist_url_slug = null, $catalogue_url_slug = null, $id = null)
     {
         //
-        $catref = Catref::find($data)->first();
+        // attempt to find catalogue url slug in first param
+        if('artists.catrefs.show' != Route::current()->getName()) {
+            $id = $artist_url_slug;
+        }
+        //
+        $catref = Catref::find($id);
 
         $page_title = $catref->title();
 //        $catref->img_url = $this->img_url($catref); // should be stored in catrefs model

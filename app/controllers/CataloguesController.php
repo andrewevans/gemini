@@ -73,10 +73,15 @@ class CataloguesController extends \BaseController {
 	 * @param  string $data
 	 * @return Response
 	 */
-	public function show($data)
-	{
+    public function show($artist_url_slug = null, $catalogue_url_slug = null)
+    {
 		//
-        $catalogue = Catalogue::whereUrlSlug($data)->first();
+        // attempt to find catalogue url slug in first param
+        if('artists.catalogues.show' != Route::current()->getName()) {
+            $catalogue_url_slug = $artist_url_slug;
+        }
+
+        $catalogue = Catalogue::whereUrlSlug($catalogue_url_slug)->first();
 
         $page_title = $catalogue->title();
 //        $catalogue->img_url = $this->img_url($catalogue); // should be stored in catalogues model

@@ -49,3 +49,6 @@ make design such that the '+' maximize makes the window open all the way (like i
 canonical urls
 
 artworks need <title>
+
+catalogues and other URLS need to check that the artist matches to make sure bullshit URLs can't be made like /chagall/picassos-catalogue-of-ceramics
+
