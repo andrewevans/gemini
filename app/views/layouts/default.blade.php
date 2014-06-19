@@ -80,8 +80,8 @@
                             <li><a href="/artists/pablo-picasso">Pablo Picasso</a></li>
                         <li class="divider"></li>
                         <li class="dropdown-header">All Artists</li>
-                        @foreach ($artists as $artist)
-                        <li><a href="/artists/{{ $artist->url_slug }}">{{ $artist->alias }}</a></li>
+                        @foreach ($artists as $artist_each)
+                        <li><a href="{{ $artist_each->url() }}">{{ $artist_each->alias }}</a></li>
                         @endforeach
                     </ul>
 

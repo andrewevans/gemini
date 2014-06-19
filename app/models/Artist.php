@@ -294,5 +294,10 @@ class Artist extends Eloquent
         return $this->hasMany('Artwork');
     }
 
+    public function catalogues()
+    {
+        return $this->hasMany('Catalogue');
+    }
+
 
 }

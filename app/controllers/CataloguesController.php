@@ -3,10 +3,12 @@
 class CataloguesController extends \BaseController {
 
     protected $catalogue;
+    protected $artist;
 
-    public function __construct(Catalogue $catalogue)
+    public function __construct(Catalogue $catalogue, Artist $artist)
     {
         $this->catalogue = $catalogue;
+        $this->artist = $artist;
         //$this->beforeFilter('auth');
     }
 
@@ -15,10 +17,15 @@ class CataloguesController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function index($artist_url_slug = null)
 	{
 		//
-        $catalogues = $this->catalogue->all();
+        if ($artist_url_slug == null) {
+            $catalogues = $this->catalogue->all();
+        } else {
+            $artist = Artist::whereUrlSlug($artist_url_slug)->first();
+            $catalogues = $this->catalogue->whereArtistId($artist->id)->get();
+        }
 
         return View::make('catalogues.index', ['catalogues' => $catalogues]);
     }
@@ -32,7 +39,10 @@ class CataloguesController extends \BaseController {
 	public function create()
 	{
 		//
-        return View::make('catalogues.create');
+        $artists = DB::table('artists')->orderBy('alias', 'asc')->lists('alias','id');
+        $catalogue_newest = Catalogue::orderBy('id', 'desc')->first();
+
+        return View::make('catalogues.create', ['artists' => $artists, 'catalogue_newest' => $catalogue_newest]);
 	}
 
 
@@ -53,11 +63,10 @@ class CataloguesController extends \BaseController {
             return Redirect::back()->withInput()->withErrors($this->catalogue->errors);
         }
 
+        $catalogue->artist_id   = Input::get('artist_id');
         $catalogue->slug       = Input::get('slug');
-        $catalogue->alias      = Input::get('alias');
         $catalogue->title      = Input::get('title');
         $catalogue->url_slug      = Input::get('url_slug');
-        $catalogue->meta_title      = Input::get('meta_title');
         $catalogue->meta_description      = Input::get('meta_description');
 
         $catalogue->save();
@@ -82,11 +91,12 @@ class CataloguesController extends \BaseController {
         }
 
         $catalogue = Catalogue::whereUrlSlug($catalogue_url_slug)->first();
+        $catrefs = Catref::whereCatalogueId($catalogue->id)->get();
 
         $page_title = $catalogue->title();
 //        $catalogue->img_url = $this->img_url($catalogue); // should be stored in catalogues model
 
-        return View::make('catalogues.show', ['catalogue' => $catalogue, 'page_title' => $page_title]);
+        return View::make('catalogues.show', ['catalogue' => $catalogue, 'page_title' => $page_title, 'catrefs' => $catrefs]);
 
     }
 
@@ -101,10 +111,12 @@ class CataloguesController extends \BaseController {
 	{
 		//
         $catalogue = Catalogue::find($id);
+        $artists = DB::table('artists')->orderBy('alias', 'desc')->lists('alias','id');
 
         // show the edit form and pass the catalogue
         return View::make('catalogues.edit')
-            ->with('catalogue', $catalogue);
+            ->with('catalogue', $catalogue)
+            ->with('artists', $artists);
     }
 
 
@@ -127,11 +139,10 @@ class CataloguesController extends \BaseController {
         }
 
         // store
+        $catalogue->artist_id       = Input::get('artist_id');
         $catalogue->slug       = Input::get('slug');
-        $catalogue->alias      = Input::get('alias');
         $catalogue->title      = Input::get('title');
         $catalogue->url_slug      = Input::get('url_slug');
-        $catalogue->meta_title      = Input::get('meta_title');
         $catalogue->meta_description      = Input::get('meta_description');
 
         $catalogue_dir = 'img/catalogues/' . $catalogue->url_slug . '/profile';
