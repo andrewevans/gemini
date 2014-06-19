@@ -12,7 +12,7 @@
 
 <div class="form-group">
     {{ Form::label('artist_id', 'Artist ID') }}
-    {{ Form::select('artist_id', $artists , Input::old('country'), array('class' => 'form-control')) }}
+    {{ Form::select('artist_id', $artists , Input::old(), array('class' => 'form-control')) }}
 </div>
 
 <div class="form-group">

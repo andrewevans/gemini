@@ -33,22 +33,22 @@
 
     @if('artists.catalogues.index' == Route::current()->getName() )
     <li><a href="/artists">BUY ORIGINALS</a></li>
-    <li><a href="{{ $artist->url() }}">{{ $artist->alias }}</a></li>
-    <li class="active">{{ $artist->alias }} Catalogue Raisonn&eacute;s</li>
+    <li><a href="{{ $catalogue->artist->url() }}">{{ $catalogue->artist->alias }}</a></li>
+    <li class="active">{{ $catalogue->artist->alias }} Catalogue Raisonn&eacute;s</li>
     @endif
 
     @if('artists.catalogues.show' == Route::current()->getName() )
     <li><a href="/artists">BUY ORIGINALS</a></li>
-    <li><a href="{{ $artist->url() }}">{{ $artist->alias }}</a></li>
-    <li><a href="{{ $artist->url() }}/bio/catalogue-raisonnes">Catalogue Raisonn&eacute;s</a></li>
+    <li><a href="{{ $catalogue->artist->url() }}">{{ $catalogue->artist->alias }}</a></li>
+    <li><a href="{{ $catalogue->artist->url() }}/bio/catalogue-raisonnes">Catalogue Raisonn&eacute;s</a></li>
     <li class="active">{{ $catalogue->title }}</li>
     @endif
 
     @if('artists.catrefs.show' == Route::current()->getName() )
     <li><a href="/artists">BUY ORIGINALS</a></li>
-    <li><a href="{{ $artist->url() }}">{{ $artist->alias }}</a></li>
-    <li><a href="{{ $artist->url() }}/bio/catalogue-raisonnes">Catalogue Raisonn&eacute;s</a></li>
-    <li><a href="{{ $artist->url() }}/bio/catalogue-raisonnes/catalogue-title">Catalogue Title</a></li>
+    <li><a href="{{ $catref->catalogue->artist->url() }}">{{ $catref->catalogue->artist->alias }}</a></li>
+    <li><a href="{{ $catref->catalogue->artist->url() }}/bio/catalogue-raisonnes">Catalogue Raisonn&eacute;s</a></li>
+    <li><a href="{{ $catref->catalogue->url() }}">{{ $catref->catalogue->title }}</a></li>
     <li class="active">{{ $catref->title }}</li>
     @endif
 

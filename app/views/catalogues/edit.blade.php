@@ -11,13 +11,13 @@
 {{ Form::model($catalogue, array('route' => array('catalogues.update', $catalogue->id), 'files' => true, 'method' => 'PUT')) }}
 
 <div class="form-group">
-    {{ Form::label('title', 'Title') }}
-    {{ Form::textarea('title', null, array('class' => 'form-control')) }}
+    {{ Form::label('artist_id', 'Artist ID') }}
+    {{ Form::select('artist_id', $artists , Input::old(), array('class' => 'form-control')) }}
 </div>
 
 <div class="form-group">
-    {{ Form::label('alias', 'Alias') }}
-    {{ Form::textarea('alias', null, array('class' => 'form-control')) }}
+    {{ Form::label('title', 'Title') }}
+    {{ Form::textarea('title', null, array('class' => 'form-control')) }}
 </div>
 
 <div class="form-group">
@@ -28,11 +28,6 @@
 <div class="form-group">
     {{ Form::label('url_slug', 'URL Slug') }}
     {{ Form::text('url_slug', null, array('class' => 'form-control')) }}
-</div>
-
-<div class="form-group">
-    {{ Form::label('meta_title', 'meta Title') }}
-    {{ Form::textarea('meta_title', null, array('class' => 'form-control')) }}
 </div>
 
 <div class="form-group">
