@@ -55,6 +55,10 @@
     {{ Form::textarea('therest', null, array('class' => 'form-control')) }}
 </div>
 
+<div class="form-group">
+    {{ Form::label('catref_img', 'Catref Image') }}
+    {{ Form::file('catref_img', array('class' => 'form-control')) }}
+</div>
 
 {{ Form::submit('Edit the Catref!', array('class' => 'btn btn-primary')) }}
 
