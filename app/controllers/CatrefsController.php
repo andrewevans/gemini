@@ -129,6 +129,7 @@ class CatrefsController extends \BaseController {
     {
         //
         $input = Input::all();
+        $input = Tools::array_strip_tags($input);
 
         $catref = Catref::whereId($id)->first();
 
@@ -140,7 +141,7 @@ class CatrefsController extends \BaseController {
         // store
         $catref->catalogue_id       = Input::get('catalogue_id');
         $catref->reference_num      = Input::get('reference_num');
-        $catref->title      = Input::get('title');
+        $catref->title      = $input['title'];
         $catref->title_ext      = Input::get('title_ext');
         $catref->size      = Input::get('size');
         $catref->signed      = Input::get('signed');
