@@ -19,7 +19,7 @@ Route::get('artists/{artist_url_slug}/bio/catalogue-raisonnes', ['as' => 'artist
 Route::get('artists/{artist_url_slug}/bio/catalogue-raisonnes/{catalogue_url_slug}', ['as' => 'artists.catalogues.show', 'uses' => 'CataloguesController@show']);
 Route::get('artists/{artist_url_slug}/bio/catalogue-raisonnes/{catalogue_url_slug}/{catref_url_slug}/id/{catref_id}', ['as' => 'artists.catrefs.show', 'uses' => 'CatrefsController@show']);
 Route::get('artists/id/{artwork_id}', 'ArtworksController@show');
-Route::get('artists/{artist_url_slug}/{filter}', ['as' => 'artists.show.filter', 'uses' =>'ArtistsController@filtered'])->where('filter', '^(?!bio)$');
+Route::get('artists/{artist_url_slug}/{filter}', ['as' => 'artists.show.filter', 'uses' =>'ArtistsController@filtered'])->where('filter', '^(?!bio).*$');
 Route::get('artists/{artist_url_slug?}/bio', ['as' => 'artists.show.bio', 'uses' => 'ArtistsController@showBio']);
 Route::get('artists/{artist_url_slug?}/bio/{wp_url_slug?}', 'ArtistsController@showBio')->where('wp_url_slug', '^(?!catalogue\-raisonne)$');
 Route::resource('artworks', 'ArtworksController');
