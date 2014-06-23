@@ -23,14 +23,16 @@ class ArtistsController extends \BaseController {
             $persons = $this->person->all();
 
             return View::make('persons.index')
-                ->with('persons', $persons);
+                ->with('persons', $persons)
+                ->with('page_title', "All the People");
         }
 
         $artists = $this->artist->all();
 
         // load the view and pass the artists
         return View::make('artists.index')
-            ->with('artists', $artists);
+            ->with('artists', $artists)
+            ->with('page_title', "All the Artists");
     }
 
 
@@ -42,7 +44,8 @@ class ArtistsController extends \BaseController {
 	public function create()
 	{
 		//
-        return View::make('artists.create');
+        return View::make('artists.create')
+            ->with('page_title', "Create Artist or Person");
     }
 
 
@@ -204,10 +207,12 @@ class ArtistsController extends \BaseController {
 
         $post = current( get_posts( $args ) );
 
+        // if this is a page/post, then display it
         if ( $wp_url_slug != null ) {
             return View::make('artists.showBioArticle', ['artist' => $artist, 'artworks' => $artworks, 'post' => $post]);
         }
-        return View::make('artists.showBio', ['artist' => $artist, 'artworks' => $artworks]);
+
+        return View::make('artists.showBio', ['artist' => $artist, 'artworks' => $artworks, 'page_title' => $artist->alias . " Biography"]);
     }
 
 	/**
@@ -223,7 +228,9 @@ class ArtistsController extends \BaseController {
 
             // show the edit form and pass the artist
             return View::make('persons.edit')
-                ->with('person', $person);
+                ->with('person', $person)
+                ->with('page_title', "Edit: " . $person->alias);
+
         }
 
         // get the artist
@@ -231,7 +238,8 @@ class ArtistsController extends \BaseController {
 
         // show the edit form and pass the artist
         return View::make('artists.edit')
-            ->with('artist', $artist);
+            ->with('artist', $artist)
+            ->with('page_title', "Edit: " . $artist->alias);
 	}
 
 

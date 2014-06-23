@@ -19,7 +19,8 @@ class HomeController extends BaseController {
             // The user is logged in...
             return View::make('home.index')
                 ->with('artworks', $artworks)
-                ->with('artists', $artists);
+                ->with('artists', $artists)
+                ->with('page_title', "Original Lithographs, Drawings, Etchings, Sculptures, Prints, Masterworks Fine Art Gallery");
         }
         return Redirect::to('login');
     }
@@ -41,7 +42,7 @@ class HomeController extends BaseController {
 
     public function getLogin()
     {
-        return View::make('home.login');
+        return View::make('home.login', ['page_title' => "Log in."]);
     }
 
     public function getLogout()
