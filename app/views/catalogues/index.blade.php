@@ -12,9 +12,6 @@
             <a href="{{ $catalogue->url() }}">{{ $catalogue->title }}</a>
         </td>
         <td>
-            {{ $catalogue->meta_description }}
-        </td>
-        <td>
 
 
             <!-- delete the artist (uses the destroy method DESTROY /artists/{id} -->
