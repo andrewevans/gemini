@@ -27,7 +27,7 @@ class CataloguesController extends \BaseController {
             $catalogues = $this->catalogue->whereArtistId($artist->id)->get();
         }
 
-        return View::make('catalogues.index', ['catalogues' => $catalogues]);
+        return View::make('catalogues.index', ['catalogues' => $catalogues, 'page_title' => "All the Catalogues"]);
     }
 
 
@@ -42,7 +42,7 @@ class CataloguesController extends \BaseController {
         $artists = DB::table('artists')->orderBy('alias', 'asc')->lists('alias','id');
         $catalogue_newest = Catalogue::orderBy('id', 'desc')->first();
 
-        return View::make('catalogues.create', ['artists' => $artists, 'catalogue_newest' => $catalogue_newest]);
+        return View::make('catalogues.create', ['artists' => $artists, 'catalogue_newest' => $catalogue_newest, 'page_title' => "Create Catalogue"]);
 	}
 
 
@@ -96,7 +96,7 @@ class CataloguesController extends \BaseController {
         $page_title = $catalogue->title();
 //        $catalogue->img_url = $this->img_url($catalogue); // should be stored in catalogues model
 
-        return View::make('catalogues.show', ['catalogue' => $catalogue, 'page_title' => $page_title, 'catrefs' => $catrefs]);
+        return View::make('catalogues.show', ['catalogue' => $catalogue, 'catrefs' => $catrefs, 'page_title' => $page_title]);
 
     }
 
@@ -116,7 +116,8 @@ class CataloguesController extends \BaseController {
         // show the edit form and pass the catalogue
         return View::make('catalogues.edit')
             ->with('catalogue', $catalogue)
-            ->with('artists', $artists);
+            ->with('artists', $artists)
+            ->with('page_title', "Edit: " . $catalogue->title);
     }
 
 

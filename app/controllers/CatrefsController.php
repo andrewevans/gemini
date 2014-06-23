@@ -22,7 +22,7 @@ class CatrefsController extends \BaseController {
         //
         $catrefs = $this->catref->all();
 
-        return View::make('catrefs.index', ['catrefs' => $catrefs]);
+        return View::make('catrefs.index', ['catrefs' => $catrefs, 'page_title' => "All the Catrefs"]);
     }
 
 
@@ -37,7 +37,7 @@ class CatrefsController extends \BaseController {
         $catref_newest = Catref::orderBy('id', 'desc')->first();
 
         //
-        return View::make('catrefs.create', ['catalogues' => $catalogues, 'catref_newest' => $catref_newest]);
+        return View::make('catrefs.create', ['catalogues' => $catalogues, 'catref_newest' => $catref_newest, 'page_title' => 'Create Catref']);
     }
 
 
@@ -91,10 +91,9 @@ class CatrefsController extends \BaseController {
         //
         $catref = Catref::find($id);
 
-        $page_title = $catref->title();
 //        $catref->img_url = $this->img_url($catref); // should be stored in catrefs model
 
-        return View::make('catrefs.show', ['catref' => $catref, 'page_title' => $page_title]);
+        return View::make('catrefs.show', ['catref' => $catref, 'page_title' => $catref->title() . ", " . $catref->catalogue->artist->alias . ", from " . $catref->catalogue->title]);
 
     }
 
@@ -115,7 +114,8 @@ class CatrefsController extends \BaseController {
         // show the edit form and pass the catref
         return View::make('catrefs.edit')
             ->with('catref', $catref)
-            ->with('catalogues', $catalogues);
+            ->with('catalogues', $catalogues)
+            ->with('page_title', "Edit: " . $catref->title());
     }
 
 
