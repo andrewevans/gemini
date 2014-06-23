@@ -291,6 +291,14 @@ class Artwork extends Eloquent
         return $options['lowercase'] ? mb_strtolower($str, 'UTF-8') : $str;
     }
 
+    public function page_title()
+    {
+        $page_title = $this->artist->last_name . " " . $this->medium_short() . " | " . $this->title_short();
+
+        if ($this->sold) $page_title .= " (Sold)";
+
+        return $page_title;
+    }
 
     public function artist()
     {
