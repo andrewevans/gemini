@@ -9,6 +9,8 @@
         <br> All you get is this text and a mostly barebones HTML document.</p>
 </div>
 
+<a class="btn btn-small btn-success" href="/artists/create">Create Artist or Person</a>
+
 <table class="table table-striped table-bordered">
     <thead>
     <tr>
@@ -28,8 +30,13 @@
         <td>{{ $artist->first_name }} {{ $artist->last_name }} ({{ $artist->year_begin }} - {{ $artist->year_end }})</td>
         <td><b>{{ $artist->meta_title }}:</b> {{ $artist->meta_description }}</td>
         <td>
+            <?php $count = 0; ?>
             @foreach($artist->artworks as $artwork)
             <pre>{{ $artwork->title }}</pre>
+            <?php
+            $count++;
+            if ($count > 3) break;
+            ?>
             @endforeach
         </td>
 
