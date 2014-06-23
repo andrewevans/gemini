@@ -14,7 +14,11 @@
     @foreach ($catrefs as $key => $catref)
     <div class="col-md-4">
         <a href="{{ $catref->url() }}">
-            {{ HTML::image('img/no-image.jpg') }}<br />
+            @if ($catref->catalogue->slug == "sorlier")
+            {{ HTML::image("http://www.masterworksfineart.com/catalogue/chagall/sorlier/original/sorlier" . $catref->reference_num . ".jpg", 'Image of ' . $catref->title) }}<br />
+            @else
+            {{ HTML::image('img/no-image.jpg', 'No image available') }}<br />
+            @endif
         </a>
         {{ $catref->title }}
 
