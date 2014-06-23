@@ -12,6 +12,5 @@
 </div>
 </div>
 
-@include('widgets.artists.artist', array('artist' => $person))
 
 @stop
