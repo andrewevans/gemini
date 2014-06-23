@@ -54,3 +54,7 @@ catalogues and other URLS need to check that the artist matches to make sure bul
 
 For entering catalogue data:
 list artists by last_name, first_name
+
+get fonts locally as backup!
+
+people need pages/posts/catalogues on /people/URL_SLUG
