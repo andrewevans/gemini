@@ -90,10 +90,11 @@ class CatrefsController extends \BaseController {
         }
         //
         $catref = Catref::find($id);
+        $artworks = $catref->catalogue->artist->artworks()->where('hidden', '!=', 1)->take(50)->orderBy('id', 'desc')->get();
 
 //        $catref->img_url = $this->img_url($catref); // should be stored in catrefs model
 
-        return View::make('catrefs.show', ['catref' => $catref, 'page_title' => $catref->title() . ", " . $catref->catalogue->artist->alias . ", from " . $catref->catalogue->title]);
+        return View::make('catrefs.show', ['catref' => $catref, 'artworks' => $artworks, 'page_title' => $catref->title() . ", " . $catref->catalogue->artist->alias . ", from " . $catref->catalogue->title]);
 
     }
 
