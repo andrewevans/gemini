@@ -12,7 +12,7 @@
 
 <div class="row">
     @foreach ($catrefs as $key => $catref)
-    <div class="col-md-4">
+    <div class="col-md-4 card">
         <a href="{{ $catref->url() }}">
             @if ($catref->catalogue->slug == "sorlier")
             {{ HTML::image("http://www.masterworksfineart.com/catalogue/chagall/sorlier/original/sorlier" . $catref->reference_num . ".jpg", 'Image of ' . $catref->title) }}<br />
@@ -20,7 +20,11 @@
             {{ HTML::image('img/no-image.jpg', 'No image available') }}<br />
             @endif
         </a>
-        {{ $catref->title }}
+        <p>
+            <i>{{ $catref->title }}</i><br />
+            {{ $catref->catalogue->artist->alias }}<br />
+            ({{ $catref->reference_num }})
+        </p>
 
         <i>{{ strip_tags($catref->meta_description) }}</i><br />
 
