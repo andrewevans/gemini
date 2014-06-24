@@ -118,7 +118,8 @@
     @include('widgets.breadcrumb')
 </div>
 
-<!--<div class="container">-->
+<section>
+    <!--<div class="container">-->
 
     <!-- will be used to show any messages -->
     @if (Session::has('message'))
@@ -127,11 +128,13 @@
 
     @yield('content')
 
-    <footer>
-        <p>&copy; Gemini 2014</p>
-    </footer>
+    <!--</div>--><!-- /.container -->
 
-<!--</div>--><!-- /.container -->
+</section>
+
+<footer>
+    <p>&copy; Gemini 2014</p>
+</footer>
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
