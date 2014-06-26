@@ -4,11 +4,13 @@ class CataloguesController extends \BaseController {
 
     protected $catalogue;
     protected $artist;
+    protected $artists;
 
     public function __construct(Catalogue $catalogue, Artist $artist)
     {
         $this->catalogue = $catalogue;
         $this->artist = $artist;
+        $this->artists = DB::table('artists')->orderBy('last_name', 'asc')->lists('alias','id');
         //$this->beforeFilter('auth');
     }
 
@@ -39,10 +41,9 @@ class CataloguesController extends \BaseController {
 	public function create()
 	{
 		//
-        $artists = DB::table('artists')->orderBy('alias', 'asc')->lists('alias','id');
         $catalogue_newest = Catalogue::orderBy('id', 'desc')->first();
 
-        return View::make('catalogues.create', ['artists' => $artists, 'catalogue_newest' => $catalogue_newest, 'page_title' => "Create Catalogue"]);
+        return View::make('catalogues.create', ['artists' => $this->artists, 'catalogue_newest' => $catalogue_newest, 'page_title' => "Create Catalogue"]);
 	}
 
 
@@ -111,12 +112,11 @@ class CataloguesController extends \BaseController {
 	{
 		//
         $catalogue = Catalogue::find($id);
-        $artists = DB::table('artists')->orderBy('alias', 'desc')->lists('alias','id');
 
         // show the edit form and pass the catalogue
         return View::make('catalogues.edit')
             ->with('catalogue', $catalogue)
-            ->with('artists', $artists)
+            ->with('artists', $this->artists)
             ->with('page_title', "Edit: " . $catalogue->title);
     }
 
@@ -188,6 +188,14 @@ class CataloguesController extends \BaseController {
                     File::deleteDirectory($catalogue_dir, false);
                 }
         */
+
+        $catrefs = $catalogue->catrefs()->get();
+
+        foreach ($catrefs as $catref) {
+            $catref->catalogue_id = 0;
+            $catref->save();
+        }
+
         $catalogue->delete();
 
         // redirect
