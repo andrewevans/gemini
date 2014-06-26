@@ -6,22 +6,27 @@
 <h1>Creat new Catref</h1>
 
 <!-- if there are creation errors, they will show here -->
-{{ HTML::ul($errors->all()) }}
+@if($errors->has())
+<div class="alert alert-danger">
+    {{ HTML::ul($errors->all()) }}
+</div>
+@endif
 
-{{ Form::open(array('url' => 'catrefs')) }}
+{{ Form::open(array('url' => 'catrefs', 'files' => true)) }}
+* = Required
 
 <div class="form-group">
-    {{ Form::label('catalogue_id', 'Catalogue ID') }}
+    {{ Form::label('catalogue_id', 'Catalogue *') }}
     {{ Form::select('catalogue_id', $catalogues , Input::old('catalogue_id') ? Input::old('catalogue_id') : $catref_newest['catalogue_id'], array('class' => 'form-control')) }}
 </div>
 
 <div class="form-group">
-    {{ Form::label('reference_num', 'Reference Number') }}
+    {{ Form::label('reference_num', 'Reference Number *') }}
     {{ Form::textarea('reference_num', null, array('class' => 'form-control')) }}
 </div>
 
 <div class="form-group">
-    {{ Form::label('title', 'Title') }}
+    {{ Form::label('title', 'Title *') }}
     {{ Form::textarea('title', null, array('class' => 'form-control')) }}
 </div>
 
@@ -53,6 +58,11 @@
 <div class="form-group">
     {{ Form::label('therest', 'The rest') }}
     {{ Form::textarea('therest', null, array('class' => 'form-control')) }}
+</div>
+
+<div class="form-group">
+    {{ Form::label('catref_img', 'Catref Image') }}
+    {{ Form::file('catref_img', array('class' => 'form-control')) }}
 </div>
 
 {{ Form::submit('Create the Catref!', array('class' => 'btn btn-primary')) }}
