@@ -13,7 +13,9 @@ class DatabaseSeeder extends Seeder {
 
         Artwork::truncate();
 
-        $this->call('ArtworksTableSeeder');
+        $this->call('CataloguesTableSeeder');
+
+        $this->call('CatrefsTableSeeder');
 
     }
 

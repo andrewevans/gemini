@@ -21,6 +21,11 @@ class SearchController extends \BaseController {
 		//
         $q = Str::lower(Input::get('q'));
 
+        if ($q == '') {
+            Session::flash('message', 'Redirected from blank search');
+            return Redirect::to('/');
+        }
+
         $q_id = Str::lower(Input::get('q_id'));
 
         if ($q_id != '') {
@@ -103,17 +108,13 @@ class SearchController extends \BaseController {
         $pages = new WP_Query( 's=' . $q . '&posts_per_page=-1&post_type=page');
         $posts = new WP_Query( 's=' . $q . '&posts_per_page=-1&post_type=post');
 
-        if ($q == '') {
-            Session::flash('message', 'Redirected from blank search');
-            return Redirect::to('/');
-        }
-
         return View::make('search.show')
             ->with('q', $q)
             ->with('artworks', $artworks_qualified)
             ->with('artists', $artists_qualified)
             ->with('pages', $pages)
-            ->with('posts', $posts);
+            ->with('posts', $posts)
+            ->with('page_title', $q . " - Artist/Artwork Search");
 
     }
 
