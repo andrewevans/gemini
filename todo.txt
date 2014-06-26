@@ -58,3 +58,15 @@ list artists by last_name, first_name
 get fonts locally as backup!
 
 people need pages/posts/catalogues on /people/URL_SLUG
+
+figure out canonical URLs for wp pages like "Picasso and Braque", right now it has two distinct URLs but same content! is it braque's or picasso's or the default wp.andrew.com url?
+
+design still needs social icons
+
+in Setup, show artists in drop down like LASTNAME, Firstname
+
+needs multiple types of ckeditor, UX sucks when typing in small box
+
+model should check a-z, no spaces, etc. for things like slug
+
+catrefs catalogue list needs artist like "(PICASSO) Raime edition blah blah" and order by artist last_name
