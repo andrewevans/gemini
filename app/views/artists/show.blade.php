@@ -79,25 +79,33 @@
 </div>
 </div>
 
-<div class="row">
-    @foreach ($artworks as $key => $artwork)
-        <div class="col-md-4">
-            <a href="{{ $artwork->url() }}">
-                @if (file_exists('img/artists/' . $artwork->artist->slug . '/original/' . $artwork->artist->slug . $artwork->id . '.jpg'))
-                {{ HTML::image('img/artists/' . $artwork->artist->slug . '/original/' . $artwork->artist->slug . $artwork->id . '.jpg') }}<br />
-                @else
-                    {{ HTML::image('img/no-image.jpg', 'Profile of ' . $artist->alias) }}<br />
-                @endif
-            </a>
-            {{ $artwork->title_short }}
+<div class="container">
+    Filters:
+    <?php
+        switch($artist->slug) {
 
-            <b>{{ strip_tags($artwork->artist->alias . ' ' . $artwork->medium_short) }} for sale.</b>
-            <i>{{ strip_tags($artwork->title_short()) }}</i><br />
-            ${{ number_format($artwork->price) }}
+            case 'picasso':
+                $filters = ['ceramics', 'etchings', 'linocuts', 'prints'];
+                break;
 
+            case 'rembrandt':
+                $filters = ['etchings'];
 
-        </div>
-    @endforeach
+                break;
+            default:
+                $filters = [];
+                break;
+        }
+
+        foreach ($filters as $filter) {
+            echo '<a href="/artists/' . $artist->url_slug . '/' . $filter . '">' . $filter . '</a> | ';
+
+        }
+    ?>
+</div>
+
+<div class="container">
+    @include('widgets.artworks.card', array('artworks' => $artworks))
 </div>
 
 @include('widgets.artists.artist', array('artist' => $artist))

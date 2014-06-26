@@ -9,3 +9,7 @@
 <div class="container">
     @include('widgets.artists.posts', array('artist' => $artist, 'var' => 'mydata'))
 </div>
+
+<div class="container">
+    @include('widgets.artists.catalogues', array('artist' => $artist, 'var' => 'mydata'))
+</div>
