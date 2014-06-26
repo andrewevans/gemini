@@ -4,11 +4,15 @@ class UrlController extends \BaseController {
 
     protected $artist;
     protected $artwork;
+    protected $catalogue;
+    protected $catref;
 
-    public function __construct(Artist $artist, Artwork $artwork)
+    public function __construct(Artist $artist, Artwork $artwork, Catalogue $catalogue, Catref $catref)
     {
         $this->artist = $artist;
         $this->artwork = $artwork;
+        $this->catalogue = $catalogue;
+        $this->catref =$catref;
     }
 
     /**
@@ -78,6 +82,37 @@ class UrlController extends \BaseController {
                         'medium_short' => $artwork->medium_short,
                         'guid' => 'w-' . $artwork->id,
                         'id' => $artwork->id);
+                }
+                break;
+
+            case 'catalogues':
+                $catalogues = $this->catalogue->orderBy('id', 'DESC')->get();
+
+                foreach ($catalogues as $catalogue) {
+                    $return_array[] = array(
+                        'value' => $catalogue->title,
+                        'url_slug' => $catalogue->url_slug,
+                        'artist_id' => $catalogue->artist_id,
+                        'guid' => 'c-' . $catalogue->id,
+                        'id' => $catalogue->id);
+                }
+                break;
+
+            case 'catrefs':
+                $catrefs = $this->catref->orderBy('id', 'DESC')->get();
+
+                foreach ($catrefs as $catref) {
+                    $return_array[] = array(
+                        'value' => $catref->title,
+                        'size' => $catref->size,
+                        'signed' => $catref->signed,
+                        'edition' => $catref->edition,
+                        'medium' => $catref->medium,
+                        'therest' => $catref->therest,
+                        'reference_num' => $catref->reference_num,
+                        'catalogue_id' => $catref->catalogue_id,
+                        'guid' => 'r-' . $catref->id,
+                        'id' => $catref->id);
                 }
                 break;
 

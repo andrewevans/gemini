@@ -1,5 +1,4 @@
 <h1>{{ $artist->first_name }} {{ $artist->last_name }}</h1>
-<p>
     @if (file_exists($artist->img_url))
     {{ HTML::image($artist->img_url, 'Profile of ' . $artist->alias) }}<br />
     @else
@@ -7,4 +6,7 @@
     @endif
 
     {{ $artist->meta_description }}
-</p>
+
+<div>
+    <a href="/artists/{{ $artist->url_slug }}/bio">Read more about {{ $artist->alias }}</a>
+</div>

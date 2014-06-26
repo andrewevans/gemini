@@ -223,20 +223,17 @@ img {
 h4 {
   margin-top: 25px;
 }
+
 .row {
-  margin-bottom: 20px;
 }
+
 .row .row {
-  margin-top: 10px;
-  margin-bottom: 0;
 }
+
 .row [class*="col-"] {
   padding-top: 15px;
-  background-color: #eee;
-  background-color: rgba(86,61,124,.15);
   border: 1px solid #ddd;
     overflow: hidden;
-    height: 360px;
     padding-bottom: 5em;
     text-align: center;
 }
@@ -563,6 +560,52 @@ h3.table-name {
 
 .contact-us-info span.phone-number {
     font-weight: bold;
+}
+
+
+.card {
+    float: left;
+/*    width: 280px;*/
+    padding: 15px 15px 15px;
+    margin: 15px 15px 0 0;
+    box-shadow: 0 1px 3px rgba(34, 25, 25, 0.4);
+    -moz-box-shadow: 0 1px 2px rgba(34,25,25,0.4);
+    -webkit-box-shadow: 0 1px 3px rgba(34, 25, 25, 0.4);
+    overflow: hidden;
+    position: relative;
+    background: #f2f0f0;
+    text-align: center;
+}
+
+.card p,
+.card a {
+    text-align: left;
+}
+
+.card a.card-image {
+    display: block;
+    height: 320px;
+    min-height: 320px;
+    text-align: center;
+}
+
+.card figcaption {
+    text-align: left;
+}
+
+.card-details {
+    background: transparent;
+    overflow: hidden;
+}
+
+.card-details figure {
+    max-width: 450px;
+    float: left;
+}
+
+.card-details .catref.specs {
+    width: 450px;
+    float: left;
 }
 
 @media (max-width: 1280px) {
