@@ -5,10 +5,10 @@
 
 <a class="btn btn-small btn-success" href="/catrefs/create">Create new catref</a>
 
-<table>
+<table class="table table-striped table-bordered">
     <tr>
         <th>ID</th>
-        <th>Cat ID</th>
+        <th>(Artist) Catalogue</th>
         <th>Ref #</th>
         <th>Title</th>
         <th>&nbsp;</th>
