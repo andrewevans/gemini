@@ -135,3 +135,7 @@ var artworkItemSelectedHandler = function (eventObject, suggestionObject, sugges
 $('#multiple-datasets .typeahead').on('typeahead:selected', artistItemSelectedHandler);
 $('#multiple-datasets .typeahead').on('typeahead:selected', artworkItemSelectedHandler);
 /* END search typeahead */
+
+$(function () {
+    $("[data-toggle='tooltip']").tooltip();
+});
