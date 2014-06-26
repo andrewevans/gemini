@@ -16,6 +16,7 @@ class Catalogue extends Eloquent
 
 
     public static $rules = array(
+        'artist_id' => 'required',
         'slug'       => 'required',
         'title'       => 'required',
         'url_slug'       => 'required',
@@ -285,6 +286,10 @@ class Catalogue extends Eloquent
         return $this->belongsTo('Artist');
     }
 
+    public function catrefs()
+    {
+        return $this->hasMany('Catref');
+    }
 
 
 }
