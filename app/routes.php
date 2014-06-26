@@ -22,7 +22,7 @@ Route::get('artists/id/{artwork_id}', 'ArtworksController@show');
 Route::get('artists/{artist_url_slug}/{artwork_url_slug?}/id/{id}', array('as' => 'artworks.showOne', 'uses' => 'ArtworksController@show'))->where('artwork_url_slug', '(.*)');
 Route::get('artists/{artist_url_slug}/{filter}', ['as' => 'artists.show.filter', 'uses' =>'ArtistsController@filtered'])->where('filter', '^(?!bio).*$');
 Route::get('artists/{artist_url_slug?}/bio', ['as' => 'artists.show.bio', 'uses' => 'ArtistsController@showBio']);
-Route::get('artists/{artist_url_slug?}/bio/{wp_url_slug?}', 'ArtistsController@showBio')->where('wp_url_slug', '^(?!catalogue\-raisonne)$');
+Route::get('artists/{artist_url_slug?}/bio/{wp_url_slug}', ['as' => 'artists.show.bio.page', 'uses' => 'ArtistsController@showBio'])->where('wp_url_slug', '^((?!catalogue-raisonne).)*$');
 Route::resource('artworks', 'ArtworksController');
 Route::resource('blog', 'BlogController');
 Route::resource('search', 'SearchController');
