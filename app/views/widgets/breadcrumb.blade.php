@@ -31,6 +31,12 @@
     <li class="active">{{ $artist->alias }} Biography</li>
     @endif
 
+    @if('artists.show.bio.page' == Route::current()->getName() )
+    <li><a href="/artists">BUY ORIGINALS</a></li>
+    <li><a href="{{ $artist->url() }}">{{ $artist->alias }}</a></li>
+    <li class="active">{{ $post->post_title }}</li>
+    @endif
+
     @if('artists.catalogues.index' == Route::current()->getName() )
     <li><a href="/artists">BUY ORIGINALS</a></li>
     <li><a href="{{ $catalogue->artist->url() }}">{{ $catalogue->artist->alias }}</a></li>
