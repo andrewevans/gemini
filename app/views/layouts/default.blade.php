@@ -80,8 +80,8 @@
                             <li><a href="/artists/pablo-picasso">Pablo Picasso</a></li>
                         <li class="divider"></li>
                         <li class="dropdown-header">All Artists</li>
-                        @foreach ($artists as $artist)
-                        <li><a href="/artists/{{ $artist->url_slug }}">{{ $artist->alias }}</a></li>
+                        @foreach ($artists as $artist_each)
+                        <li><a href="{{ $artist_each->url() }}">{{ $artist_each->alias }}</a></li>
                         @endforeach
                     </ul>
 
@@ -118,7 +118,8 @@
     @include('widgets.breadcrumb')
 </div>
 
-<!--<div class="container">-->
+<section>
+    <!--<div class="container">-->
 
     <!-- will be used to show any messages -->
     @if (Session::has('message'))
@@ -127,11 +128,13 @@
 
     @yield('content')
 
-    <footer>
-        <p>&copy; Gemini 2014</p>
-    </footer>
+    <!--</div>--><!-- /.container -->
 
-<!--</div>--><!-- /.container -->
+</section>
+
+<footer>
+    <p>&copy; Gemini 2014</p>
+</footer>
 
 <!-- Bootstrap core JavaScript
 ================================================== -->

@@ -3,10 +3,12 @@
 class ArtistsController extends \BaseController {
 
     protected $artist;
+    protected $person;
 
-    public function __construct(Artist $artist)
+    public function __construct(Artist $artist, Person $person)
     {
         $this->artist = $artist;
+        $this->person = $person;
         //$this->beforeFilter('auth');
     }
 
@@ -17,11 +19,20 @@ class ArtistsController extends \BaseController {
      */
     public function index()
     {
+        if ($this->isNonartist()) {
+            $persons = $this->person->all();
+
+            return View::make('persons.index')
+                ->with('persons', $persons)
+                ->with('page_title', "All the People");
+        }
+
         $artists = $this->artist->all();
 
         // load the view and pass the artists
         return View::make('artists.index')
-            ->with('artists', $artists);
+            ->with('artists', $artists)
+            ->with('page_title', "All the Artists");
     }
 
 
@@ -33,7 +44,8 @@ class ArtistsController extends \BaseController {
 	public function create()
 	{
 		//
-        return View::make('artists.create');
+        return View::make('artists.create')
+            ->with('page_title', "Create Artist or Person");
     }
 
 
@@ -45,9 +57,35 @@ class ArtistsController extends \BaseController {
 	public function store()
 	{
         //
-        $artist = new Artist;
-
         $input = Input::all();
+
+        if ($input['person_niche'] != 'artist') {
+
+            $artist = new Person;
+
+            if ( ! $this->artist->fill($input)->isValid())
+            {
+                return Redirect::back()->withInput()->withErrors($this->artist->errors);
+            }
+
+            // store
+            $artist->slug       = Input::get('slug');
+            $artist->alias      = Input::get('alias');
+            $artist->first_name      = Input::get('first_name');
+            $artist->last_name      = Input::get('last_name');
+            $artist->url_slug      = Input::get('url_slug');
+            $artist->meta_title      = Input::get('meta_title');
+            $artist->meta_description      = Input::get('meta_description');
+            $artist->year_begin      = Input::get('year_begin');
+            $artist->year_end      = Input::get('year_end');
+
+            $artist->save();
+            // redirect
+            Session::flash('message', 'Successfully updated person!');
+            return Redirect::to('people');
+        }
+
+        $artist = new Artist;
 
         if ( ! $this->artist->fill($input)->isValid())
         {
@@ -64,7 +102,6 @@ class ArtistsController extends \BaseController {
         $artist->meta_description      = Input::get('meta_description');
         $artist->year_begin      = Input::get('year_begin');
         $artist->year_end      = Input::get('year_end');
-//        $artist->slug       = $artist->url_slug(Input::get('slug'));
 
         $artist->save();
 
@@ -83,6 +120,16 @@ class ArtistsController extends \BaseController {
 	 */
 	public function show($data)
 	{
+        if ($this->isNonartist()) {
+            $person = Person::whereUrlSlug($data)->first();
+
+            $page_title = $person->title();
+            $person->img_url = $this->img_url($person); // should be stored in artists table
+
+            return View::make('persons.show', ['person' => $person, 'page_title' => $page_title]);
+
+        }
+
 		//
         if (! is_numeric($data)) {
             $artist = Artist::whereUrlSlug($data)->first();
@@ -160,10 +207,12 @@ class ArtistsController extends \BaseController {
 
         $post = current( get_posts( $args ) );
 
+        // if this is a page/post, then display it
         if ( $wp_url_slug != null ) {
             return View::make('artists.showBioArticle', ['artist' => $artist, 'artworks' => $artworks, 'post' => $post]);
         }
-        return View::make('artists.showBio', ['artist' => $artist, 'artworks' => $artworks]);
+
+        return View::make('artists.showBio', ['artist' => $artist, 'artworks' => $artworks, 'page_title' => $artist->alias . " Biography"]);
     }
 
 	/**
@@ -174,12 +223,23 @@ class ArtistsController extends \BaseController {
 	 */
 	public function edit($id)
 	{
+        if ($this->isNonartist()) {
+            $person = Person::find($id);
+
+            // show the edit form and pass the artist
+            return View::make('persons.edit')
+                ->with('person', $person)
+                ->with('page_title', "Edit: " . $person->alias);
+
+        }
+
         // get the artist
         $artist = Artist::find($id);
 
         // show the edit form and pass the artist
         return View::make('artists.edit')
-            ->with('artist', $artist);
+            ->with('artist', $artist)
+            ->with('page_title', "Edit: " . $artist->alias);
 	}
 
 
@@ -192,18 +252,58 @@ class ArtistsController extends \BaseController {
 	public function update($id)
 	{
 		//
-        $artist = Artist::whereId($id)->first();
-
         $input = Input::all();
+
+        if ($this->isNonartist()) {
+            $person = Person::whereId($id)->first();
+
+            if ( ! $this->artist->fill($input)->isValid($id))
+            {
+                return Redirect::back()->withInput()->withErrors($this->artist->errors);
+            }
+
+            // store
+            $person->slug       = Input::get('slug');
+            $person->alias      = Input::get('alias');
+            $person->first_name      = Input::get('first_name');
+            $person->last_name      = Input::get('last_name');
+            $person->url_slug      = Input::get('url_slug');
+            $person->meta_title      = Input::get('meta_title');
+            $person->meta_description      = Input::get('meta_description');
+            $person->year_begin      = Input::get('year_begin');
+            $person->year_end      = Input::get('year_end');
+
+            $person_dir = 'img/artists/' . $person->url_slug . '/profile';
+
+            // should be an easier way to create if not exists, or at least put in function
+            if ( ! File::isDirectory($person_dir)) {
+                $result = File::makeDirectory($person_dir, 0757, true);
+            }
+
+            $avatar = Input::file('avatar');
+
+            // resizing an uploaded file
+            if ($avatar != null) {
+                $mime_type = $avatar->getClientOriginalExtension(); // unused
+                $image['profile'] = Image::make(Input::file('avatar')->getRealPath())->resize(ARTIST_MAX_WIDTH, null, true, false)->resize(null, ARTIST_MAX_HEIGHT, true, false)->save($this->img_url($person));
+            }
+
+            $person->save();
+
+            // redirect
+            Session::flash('message', 'Successfully updated person!');
+            return Redirect::to('people');
+
+        }
+
+        $artist = Artist::whereId($id)->first();
 
         if ( ! $this->artist->fill($input)->isValid($id))
         {
             return Redirect::back()->withInput()->withErrors($this->artist->errors);
         }
-//  ['slug', 'alias', 'first_name', 'last_name', 'url_slug', 'meta_title', 'meta_description', 'year_begin', 'year_end'];
 
         // store
-        //$artist = Artist::find($id);
         $artist->slug       = Input::get('slug');
         $artist->alias      = Input::get('alias');
         $artist->first_name      = Input::get('first_name');
@@ -213,7 +313,6 @@ class ArtistsController extends \BaseController {
         $artist->meta_description      = Input::get('meta_description');
         $artist->year_begin      = Input::get('year_begin');
         $artist->year_end      = Input::get('year_end');
-//        $artist->slug       = $artist->url_slug(Input::get('slug'));
 
         $artist_dir = 'img/artists/' . $artist->url_slug . '/profile';
 
@@ -248,6 +347,22 @@ class ArtistsController extends \BaseController {
 	public function destroy($id)
 	{
         // delete
+        if ($this->isNonartist()) {
+            $person = Person::find($id);
+
+            $person_dir = $this->img_directory_url($person);
+
+            if ($person->url_slug != '') {
+                File::deleteDirectory($person_dir, false);
+            }
+
+            $person->delete();
+
+            // redirect
+            Session::flash('message', 'Successfully deleted the person!');
+            return Redirect::to('people');
+        }
+
         $artist = Artist::find($id);
 
         $artist_dir = $this->img_directory_url($artist);
@@ -273,6 +388,18 @@ class ArtistsController extends \BaseController {
     public function img_directory_url($artist)
     {
         return $artist_dir = 'img/artists/' . $artist->url_slug;
+    }
+
+    public function isNonartist()
+    {
+        $current_route = Route::currentRouteName();
+
+        // if this is a non-artist...
+        if (strpos($current_route, 'people') !== false) {
+            return true;
+        }
+
+        return false;
     }
 
 }

@@ -11,6 +11,22 @@
 {{ Form::open(array('url' => 'artists')) }}
 
 <div class="form-group">
+
+    <div class="input-group">
+      <span class="input-group-addon">
+        {{ Form::label('niche_artist', 'Artist') }}
+        {{ Form::radio('person_niche', 'niche_artist', true, array('id' => 'niche_artist', 'class' => 'form-control')) }}
+      </span>
+
+      <span class="input-group-addon">
+        {{ Form::label('niche_other', 'Non-artist') }}
+        {{ Form::radio('person_niche', 'niche_other', false, array('id' => 'niche_other', 'class' => 'form-control')) }}
+      </span>
+    </div><!-- /input-group -->
+
+</div>
+
+<div class="form-group">
     {{ Form::label('first_name', 'First Name') }}
     {{ Form::textarea('first_name', null, array('class' => 'form-control')) }}
 </div>
