@@ -18,11 +18,13 @@ class Catref extends Eloquent
     public static $rules = array(
         'catalogue_id'       => 'required',
         'reference_num'       => 'required',
+        'title'     => 'required',
     );
 
     public static $messages = [
-        'catalogue_id.required' => "You need a Catalogue ID.",
+        'catalogue_id.required' => "Your catref needs a Catalogue to belong to.",
         'reference_num.required' => "You need a Reference Number.",
+        'title'                 => "You need a title.",
     ];
 
     public function isValid($id = null)
@@ -403,6 +405,16 @@ class Catref extends Eloquent
         $str = trim($str, $options['delimiter']);
 
         return $options['lowercase'] ? mb_strtolower($str, 'UTF-8') : $str;
+    }
+
+    public function img_url()
+    {
+        return $this->img_directory_url() . '/' . $this->catalogue->slug . $this->id . '.jpg';
+    }
+
+    public function img_directory_url()
+    {
+        return 'img/catalogues/' . $this->catalogue->artist->slug . '/' . $this->catalogue->slug;
     }
 
     public function catalogue()

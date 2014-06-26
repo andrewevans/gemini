@@ -4,11 +4,13 @@ class CatrefsController extends \BaseController {
 
     protected $catref;
     protected $catalogue;
+    protected $catalogues;
 
     public function __construct(Catref $catref, Catalogue $catalogue)
     {
         $this->catref = $catref;
         $this->catalogue = $catalogue;
+        $this->catalogues = DB::table('catalogues')->orderBy('title', 'asc')->lists('title','id');
         //$this->beforeFilter('auth');
     }
 
@@ -20,7 +22,7 @@ class CatrefsController extends \BaseController {
     public function index()
     {
         //
-        $catrefs = $this->catref->all();
+        $catrefs = $this->catref->orderBy('id', 'desc')->get();
 
         return View::make('catrefs.index', ['catrefs' => $catrefs, 'page_title' => "All the Catrefs"]);
     }
@@ -33,11 +35,10 @@ class CatrefsController extends \BaseController {
      */
     public function create()
     {
-        $catalogues = DB::table('catalogues')->orderBy('title', 'asc')->lists('title','id');
         $catref_newest = Catref::orderBy('id', 'desc')->first();
 
         //
-        return View::make('catrefs.create', ['catalogues' => $catalogues, 'catref_newest' => $catref_newest, 'page_title' => 'Create Catref']);
+        return View::make('catrefs.create', ['catalogues' => $this->catalogues, 'catref_newest' => $catref_newest, 'page_title' => 'Create Catref']);
     }
 
 
@@ -68,7 +69,25 @@ class CatrefsController extends \BaseController {
         $catref->medium      = Input::get('medium');
         $catref->therest      = Input::get('therest');
 
-        $catref->save();
+        $catref->save(); // create/store the record so that its ID can be referenced
+
+        $catref_dir = $this->img_directory_url($catref);
+
+        $catref = Catref::whereId($catref->id)->first();
+
+        // should be an easier way to create if not exists, or at least put in function
+        if ( ! File::isDirectory($catref_dir)) {
+            $result = File::makeDirectory($catref_dir, 0757, true);
+        }
+
+        $avatar = Input::file('catref_img');
+
+        // resizing an uploaded file
+        if ($avatar != null) {
+            $mime_type = $avatar->getClientOriginalExtension(); // unused
+            $image['profile'] = Image::make(Input::file('catref_img')->getRealPath())->resize(CATREF_MAX_WIDTH, null, true, false)->resize(null, CATREF_MAX_HEIGHT, true, false)->save($this->img_url($catref));
+        }
+
 
         Session::flash('message', 'Successfully updated catref!');
         return Redirect::to('catrefs');
@@ -110,12 +129,10 @@ class CatrefsController extends \BaseController {
         //
         $catref = Catref::find($id);
 
-        $catalogues = DB::table('catalogues')->orderBy('title', 'desc')->lists('title','id');
-
         // show the edit form and pass the catref
         return View::make('catrefs.edit')
             ->with('catref', $catref)
-            ->with('catalogues', $catalogues)
+            ->with('catalogues', $this->catalogues)
             ->with('page_title', "Edit: " . $catref->title());
     }
 
