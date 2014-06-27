@@ -70,3 +70,13 @@ needs multiple types of ckeditor, UX sucks when typing in small box
 model should check a-z, no spaces, etc. for things like slug
 
 catrefs catalogue list needs artist like "(PICASSO) Raime edition blah blah" and order by artist last_name
+
+make background a color that matches that artist/artwork/style? like pink at http://www.warhol.org/exhibitions/2012/15minuteseternal/en/index.html
+
+focus cursor on search on homepage?
+
+apostrophes in title for URL should be ignored, not turned into a dash... or should it?
+
+eager loading for artworks->with(artist)
+
+stupid rule where 'unique' also has to be unique in that actual row too. STUPID!!
