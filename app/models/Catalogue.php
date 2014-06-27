@@ -281,6 +281,7 @@ class Catalogue extends Eloquent
         return $this->title;
     }
 
+
     public function artist()
     {
         return $this->belongsTo('Artist');
