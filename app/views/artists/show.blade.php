@@ -47,11 +47,7 @@
         <?php $count = 1; ?>
         @foreach ($artworks as $key => $artwork)
             <div class="item <?= ($key == -1 ? 'active' : '') ?>">
-                @if (file_exists('img/artists/' . $artwork->artist->slug . '/original/' . $artwork->artist->slug . $artwork->id . '.jpg'))
-                    {{ HTML::image('img/artists/' . $artwork->artist->slug . '/original/' . $artwork->artist->slug . $artwork->id . '.jpg') }}
-                @else
-                    {{ HTML::image('img/no-image.jpg', 'Profile of ' . $artist->alias) }}<br />
-                @endif
+                {{ HTML::image($artwork->img_url()) }}
                 <div class="container">
                     <div class="carousel-caption">
                         <h1>{{ $artwork->title_short() }}</h1>
@@ -80,28 +76,7 @@
 </div>
 
 <div class="container">
-    Filters:
-    <?php
-        switch($artist->slug) {
-
-            case 'picasso':
-                $filters = ['ceramics', 'etchings', 'linocuts', 'prints'];
-                break;
-
-            case 'rembrandt':
-                $filters = ['etchings'];
-
-                break;
-            default:
-                $filters = [];
-                break;
-        }
-
-        foreach ($filters as $filter) {
-            echo '<a href="/artists/' . $artist->url_slug . '/' . $filter . '">' . $filter . '</a> | ';
-
-        }
-    ?>
+    {{ $artist->filters() }}
 </div>
 
 <div class="container">
