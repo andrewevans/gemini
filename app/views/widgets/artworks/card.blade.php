@@ -7,11 +7,7 @@
     <div class="col-md-3 card">
         <figure>
             <a href="{{ $artwork->url() }}" class="card-image">
-                @if (file_exists('img/artists/' . $artwork->artist->slug . '/original/' . $artwork->artist->slug . $artwork->id . '.jpg'))
-                {{ HTML::image('img/artists/' . $artwork->artist->slug . '/original/' . $artwork->artist->slug . $artwork->id . '.jpg') }}<br />
-                @else
-                {{ HTML::image('img/no-image.jpg', 'Profile of ' . $artwork->artist->alias) }}<br />
-                @endif
+                {{ HTML::image($artwork->img_url()) }}
             </a>
             <figcaption>
                 <a href="{{ $artwork->url() }}"><i>{{ strip_tags($artwork->title_short()) }}</i></a><br />

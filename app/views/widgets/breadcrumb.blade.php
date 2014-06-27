@@ -15,7 +15,7 @@
     @endif
 
     @if('people.show' == Route::current()->getName() )
-    <li><a href="/artists">PEOPLE</a></li>
+    <li><a href="/people">PEOPLE</a></li>
     <li class="active">{{ $person->alias }}</li>
     @endif
 
