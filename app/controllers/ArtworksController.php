@@ -17,7 +17,13 @@ class ArtworksController extends \BaseController {
      */
     public function index()
     {
-        $artworks = $this->artwork->whereIn('artist_id', array(23, 44, 36, 41))->orderBy('artist_id', 'desc')->get();
+        $artworks = $this->artwork
+            ->whereIn('artist_id', function($query)
+            {
+                $query->select('id')
+                    ->from('artists')
+                    ->whereRaw('id != 0');
+            })->orderBy('id', 'desc')->get();
 
         // load the view and pass the artworks
         return View::make('artworks.index')

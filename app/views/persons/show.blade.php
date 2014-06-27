@@ -5,12 +5,10 @@
 <!-- Carousel
 ================================================== -->
 
-<div class="container">
-<div class="intro-header" style="text-align: center; max-width:450px;"> <i class="sprite-h gtitle-deco above"></i>
-    <h1>{{ $page_title }}</h1>
+<div class="jumbotron text-center">
+    <h1>{{ $person->first_name }} {{ $person->last_name }}</h1>
+    {{ HTML::image($person->img_url()) }}
+
     <p>{{ $person->meta_description }}</p>
 </div>
-</div>
-
-
 @stop
