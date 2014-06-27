@@ -7,19 +7,13 @@
 
 <div class="jumbotron text-center">
     <p>
-        @foreach ((array)$artwork->img_urls as $img_url)
-            @if (file_exists($img_url))
-            {{ HTML::image($img_url, 'Image of ' . $artwork->title) }}<br />
-            @else
-            {{ HTML::image('img/no-image.jpg', 'No image available') }}<br />
-            @endif
-        @endforeach
+        {{ HTML::image($artwork->img_url()) }}
     </p>
 
     <table class="table text-left">
         <tbody>
         <tr>
-            <th>Artist</th><td> <b><a href="{{ URL::to('artists/' . $artwork->artist->url_slug) }}">{{ $artwork->artist->first_name }} {{ $artwork->artist->last_name }}</a></b></td>
+            <th>Artist</th><td> <b><a href="{{ $artwork->artist->url() }}">{{ $artwork->artist->first_name }} {{ $artwork->artist->last_name }}</a></b></td>
         </tr>
         <tr>
             <th>Title</th><td> {{ $artwork->title }}</td>
