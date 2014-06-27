@@ -2,6 +2,7 @@
 /wordpress/wp-content/uploads/
 /vendor
 /public/img/artists
+/public/img/catalogues
 .idea/
 composer.phar
 composer.lock
@@ -23,7 +24,6 @@ access-logs
 etc/
 logs/
 public_ftp/
-public_html/
 tmp/
 www
 /app/config/database.php

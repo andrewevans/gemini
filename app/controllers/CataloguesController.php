@@ -146,21 +146,6 @@ class CataloguesController extends \BaseController {
         $catalogue->url_slug      = Input::get('url_slug');
         $catalogue->meta_description      = Input::get('meta_description');
 
-        $catalogue_dir = 'img/catalogues/' . $catalogue->url_slug . '/profile';
-
-        // should be an easier way to create if not exists, or at least put in function
-        if ( ! File::isDirectory($catalogue_dir)) {
-            $result = File::makeDirectory($catalogue_dir, 0757, true);
-        }
-
-        $avatar = Input::file('avatar');
-
-        // resizing an uploaded file
-        if ($avatar != null) {
-            $mime_type = $avatar->getClientOriginalExtension(); // unused
-            $image['profile'] = Image::make(Input::file('avatar')->getRealPath())->resize(ARTIST_MAX_WIDTH, null, true, false)->resize(null, ARTIST_MAX_HEIGHT, true, false)->save($this->img_url($catalogue));
-        }
-
         $catalogue->save();
 
         // redirect

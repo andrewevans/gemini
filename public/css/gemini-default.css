@@ -1,4 +1,5 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto:100|Roboto+Slab:400,300);
+@import url(http://fonts.googleapis.com/css?family=Ovo);
 
 body {
     padding-top: 0;
@@ -9,6 +10,11 @@ body {
     background-repeat: repeat;
     background-position: top left;
     background-attachment: fixed;
+}
+
+p, td {
+    font-family: 'Ovo', sans-serif;
+    font-size: 1.2em;
 }
 
 .theme-dropdown .dropdown-menu {

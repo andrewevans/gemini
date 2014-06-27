@@ -71,13 +71,11 @@ class CatrefsController extends \BaseController {
 
         $catref->save(); // create/store the record so that its ID can be referenced
 
-        $catref_dir = $this->img_directory_url($catref);
-
         $catref = Catref::whereId($catref->id)->first();
 
         // should be an easier way to create if not exists, or at least put in function
-        if ( ! File::isDirectory($catref_dir)) {
-            $result = File::makeDirectory($catref_dir, 0757, true);
+        if ( ! File::isDirectory($catref->img_directory_url())) {
+            $result = File::makeDirectory($catref->img_directory_url(), 0757, true);
         }
 
         $avatar = Input::file('catref_img');
@@ -85,9 +83,9 @@ class CatrefsController extends \BaseController {
         // resizing an uploaded file
         if ($avatar != null) {
             $mime_type = $avatar->getClientOriginalExtension(); // unused
-            $image['profile'] = Image::make(Input::file('catref_img')->getRealPath())->resize(CATREF_MAX_WIDTH, null, true, false)->resize(null, CATREF_MAX_HEIGHT, true, false)->save($this->img_url($catref));
-        }
+            $image['profile'] = Image::make(Input::file('catref_img')->getRealPath())->resize(CATREF_MAX_WIDTH, null, true, false)->resize(null, CATREF_MAX_HEIGHT, true, false)->save($catref->img_url(true));
 
+        }
 
         Session::flash('message', 'Successfully updated catref!');
         return Redirect::to('catrefs');
@@ -110,8 +108,6 @@ class CatrefsController extends \BaseController {
         //
         $catref = Catref::find($id);
         $artworks = $catref->catalogue->artist->artworks()->where('hidden', '!=', 1)->take(50)->orderBy('id', 'desc')->get();
-
-//        $catref->img_url = $this->img_url($catref); // should be stored in catrefs model
 
         return View::make('catrefs.show', ['catref' => $catref, 'artworks' => $artworks, 'page_title' => $catref->title() . ", " . $catref->catalogue->artist->alias . ", from " . $catref->catalogue->title]);
 
@@ -167,11 +163,9 @@ class CatrefsController extends \BaseController {
         $catref->medium      = Input::get('medium');
         $catref->therest      = Input::get('therest');
 
-        $catref_dir = $this->img_directory_url($catref);
-
         // should be an easier way to create if not exists, or at least put in function
-        if ( ! File::isDirectory($catref_dir)) {
-            $result = File::makeDirectory($catref_dir, 0757, true);
+        if ( ! File::isDirectory($catref->img_directory_url())) {
+            $result = File::makeDirectory($catref->img_directory_url(), 0757, true);
         }
 
         $avatar = Input::file('catref_img');
@@ -179,7 +173,7 @@ class CatrefsController extends \BaseController {
         // resizing an uploaded file
         if ($avatar != null) {
             $mime_type = $avatar->getClientOriginalExtension(); // unused
-            $image['profile'] = Image::make(Input::file('catref_img')->getRealPath())->resize(CATREF_MAX_WIDTH, null, true, false)->resize(null, CATREF_MAX_HEIGHT, true, false)->save($this->img_url($catref));
+            $image['profile'] = Image::make(Input::file('catref_img')->getRealPath())->resize(CATREF_MAX_WIDTH, null, true, false)->resize(null, CATREF_MAX_HEIGHT, true, false)->save($catref->img_url(true));
         }
 
         $catref->save();
@@ -215,17 +209,6 @@ class CatrefsController extends \BaseController {
         Session::flash('message', 'Successfully deleted the catref!');
         return Redirect::to('catrefs');
 
-    }
-
-    public function img_url($catref)
-    {
-        return $this->img_directory_url($catref) . '/' . $catref->catalogue->slug . $catref->id . '.jpg';
-    }
-
-
-    public function img_directory_url($catref)
-    {
-        return 'img/catalogues/' . $catref->catalogue->artist->slug . '/' . $catref->catalogue->slug;
     }
 
 
