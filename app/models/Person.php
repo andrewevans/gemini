@@ -16,9 +16,9 @@ class Person extends Eloquent
 
 
     public static $rules = array(
-        'first_name'       => 'required',
-        'last_name'       => 'required',
         'alias'       => 'required',
+        'slug'       => 'required',
+        'url_slug'       => 'required',
         'year_begin'      => 'required|numeric|min:0',
         'year_end'      => 'required|numeric|min:0',
     );
@@ -30,6 +30,9 @@ class Person extends Eloquent
     public function isValid($id = null)
     {
         $rules_modified = static::$rules;
+        $rules_modified['slug'] .= "|unique:persons,slug," . $id;
+        $rules_modified['url_slug'] .= "|unique:persons,url_slug," . $id;
+
 
         $validation = Validator::make($this->attributes, $rules_modified,  static::$messages);
 
@@ -288,6 +291,30 @@ class Person extends Eloquent
 
         return $this->alias . " Original Prints";
     }
+
+
+    public function img_url($upload = false)
+    {
+        $extension = 'jpg';
+
+        $local_file = $this->img_directory_url() . $this->url_slug . '.' . $extension;
+
+        if (file_exists($local_file) || $upload) return $local_file;
+
+        $remote_file = 'http://www.masterworksfineart.com/images/artists_bio/' . $this->slug . '.jpg';
+
+        if ($this->checkRemoteFile($remote_file)) { return $remote_file; }
+
+        return 'img/no-image.jpg';
+
+    }
+
+
+    public function img_directory_url()
+    {
+        return 'img/artists/' . $this->slug . '/profile/';
+    }
+
 
     public function artworks()
     {
