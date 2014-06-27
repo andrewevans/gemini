@@ -300,6 +300,48 @@ class Artwork extends Eloquent
         return $page_title;
     }
 
+
+    public function img_url($upload = false)
+    {
+        $extension = 'jpg';
+
+        $local_file = $this->img_directory_url() . '/' . $this->artist->slug . $this->id . '.' . $extension;
+
+        if (file_exists($local_file) || $upload) return $local_file;
+
+        $remote_file = 'http://www.masterworksfineart.com/inventory/' . $this->artist->slug . '/original/' . $this->artist->slug . $this->id . '.jpg';
+
+        if ($this->checkRemoteFile($remote_file)) { return $remote_file; }
+
+        return 'img/no-image.jpg';
+    }
+
+
+    public function img_directory_url()
+    {
+        return 'img/artists/' . $this->artist->slug . '/original';
+    }
+
+
+    function checkRemoteFile($url)
+    {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL,$url);
+        // don't download content
+        curl_setopt($ch, CURLOPT_NOBODY, 1);
+        curl_setopt($ch, CURLOPT_FAILONERROR, 1);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        if(curl_exec($ch)!==FALSE)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+
     public function artist()
     {
         return $this->belongsTo('Artist');
