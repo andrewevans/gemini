@@ -32,3 +32,5 @@ www
 .composer/
 .vim/
 
+.gitconfig
+.ssh/known_hosts
