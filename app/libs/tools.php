@@ -1,4 +1,5 @@
 <?php
+
 class Tools {
 
     // My common functions
@@ -41,4 +42,3 @@ class Tools {
     }
 }
 
-?>
