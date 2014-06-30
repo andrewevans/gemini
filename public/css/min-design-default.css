@@ -1,0 +1,13 @@
+body {
+    font-family: 'Ovo', sans-serif;
+    background: #eeeeee;
+}
+
+p, td {
+    font-family: 'Ovo', sans-serif;
+    font-size: 1.2em;
+}
+
+.navbar {
+    display: none;
+}
