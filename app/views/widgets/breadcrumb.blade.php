@@ -61,7 +61,7 @@
     @if('artworks.showOne' == Route::current()->getName() )
     <li><a href="/artists">BUY ORIGINALS</a></li>
     <li><a href="{{ $artwork->artist->url() }}">{{ $artwork->artist->alias }}</a></li>
-    <li class="active">{{ $artwork->mediums() }}</li>
+    <li class="active">{{ $artwork->medium_short() }}</li>
     @endif
 
     @if('search.index' == Route::current()->getName() )
