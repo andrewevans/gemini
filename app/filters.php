@@ -90,7 +90,30 @@ View::composer('widgets.artists.artist', function($view){
 });
 
 View::composer('widgets.artists.bio', function($view){
-    $view->with('artist', $view->artist);
+
+    $filter = '';
+
+    if (isset($view->filter_slug)) {
+        $filter = $view->filter_slug . '-';
+    }
+
+    $args = array(
+        'category_name'    => $filter . $view->artist->url_slug . '-artist-biography',
+        'post_type'        => 'page',
+        'orderby'          => 'post_date',
+        'order'            => 'DESC',
+        'post_status'      => 'publish',
+        'suppress_filters' => true );
+
+    $biographies = get_posts( $args );
+
+    // If no biographies for that filter, then just show all of them for that artist
+    if (sizeof($biographies) < 1) {
+        $args['category_name'] = $view->artist->url_slug . '-artist-biography';
+        $biographies = get_posts( $args );
+    }
+
+    $view->with('artist', $view->artist)->with('biographies', $biographies);
 });
 
 View::composer('widgets.artists.pages', function($view){

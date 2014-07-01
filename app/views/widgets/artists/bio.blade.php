@@ -1,7 +1,12 @@
 <h1>{{ $artist->first_name }} {{ $artist->last_name }}</h1>
 {{ HTML::image($artist->img_url()) }}
 
-<p>{{ $artist->meta_description }}</p>
+@foreach ($biographies as $bio)
+<div>
+    <h2>{{ $bio->post_title }}</h2>
+    {{ apply_filters('the_content',$bio->post_content); }}
+</div>
+@endforeach
 
 <div>
     <a href="{{ $artist->url() }}/bio">Read more about {{ $artist->alias }}</a>
