@@ -80,3 +80,5 @@ apostrophes in title for URL should be ignored, not turned into a dash... or sho
 eager loading for artworks->with(artist)
 
 stupid rule where 'unique' also has to be unique in that actual row too. STUPID!!
+
+need google's recaptcha or something art related
