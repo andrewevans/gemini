@@ -21,7 +21,7 @@
 
     @if('artists.show.filter' == Route::current()->getName() )
     <li><a href="/artists">BUY ORIGINALS</a></li>
-    <li><a href="{{ $artwork->artist->url() }}">{{ $artwork->artist->alias }}</a></li>
+    <li><a href="{{ $artist->url() }}">{{ $artist->alias }}</a></li>
     <li class="active">{{ $filter }}</li>
     @endif
 
