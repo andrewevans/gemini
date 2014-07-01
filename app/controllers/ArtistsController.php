@@ -110,6 +110,7 @@ class ArtistsController extends \BaseController {
         $artist = Artist::whereUrlSlug($data)->first();
 
         $page_title = $artist->title();
+        $artist->artist_bio = $artist->artist_bio()->get();
         $artworks = $artist->artworks()->where('hidden', '!=', 1)->take(50)->orderBy('id', 'desc')->get();
 
         return View::make('artists.show', ['artist' => $artist, 'artworks' => $artworks, 'page_title' => $page_title]);
@@ -146,7 +147,7 @@ class ArtistsController extends \BaseController {
 
         $artworks = $artist->artworks()->whereRaw("(" . $filter_query . ")")->where('sold', '!=', '1')->where('hidden', '=', 0)->orderBy('id', 'desc')->get();
 
-        return View::make('artists.show', ['artist' => $artist, 'artworks' => $artworks, 'page_title' => $artist->title($page_title), 'filter' => $valid_filter]);
+        return View::make('artists.show', ['artist' => $artist, 'artworks' => $artworks, 'page_title' => $artist->title($page_title), 'filter' => $valid_filter, 'filter_slug' => $filter]);
     }
 
 
@@ -200,6 +201,7 @@ class ArtistsController extends \BaseController {
 
         // get the artist
         $artist = Artist::find($id);
+        $artist->artist_bios = ArtistBio::whereArtistId($id)->get();
 
         // show the edit form and pass the artist
         return View::make('artists.edit')
@@ -255,6 +257,17 @@ class ArtistsController extends \BaseController {
         }
 
         $artist->save();
+
+        foreach ($input['artist_bio'] as $key => $input_artist_bio) {
+
+            if (isset($input_artist_bio['id']) && $input_artist_bio['description'] != '') {
+                $artist_bio = ArtistBio::firstOrCreate(array('id' => $input_artist_bio['id'], 'artist_id' => $id, 'filter' => $input_artist_bio['filter']));
+                $artist_bio->filter = $input_artist_bio['filter'];
+                $artist_bio->description = $input_artist_bio['description'];
+                $artist_bio->save();
+            }
+
+        }
 
         // redirect
         Session::flash('message', 'Successfully updated artist!');
