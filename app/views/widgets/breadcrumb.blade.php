@@ -68,4 +68,8 @@
     <li class="active">Fine art search results for <b>{{ $q }}</b></li>
     @endif
 
+    @if('contact.index' == Route::current()->getName())
+    <li class="active">Contact Us</li>
+    @endif
+
 </ol>
