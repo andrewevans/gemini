@@ -76,7 +76,8 @@
 </div>
 
 <div class="container">
-    {{ $artist->filters() }}
+    <div>{{ $artist->filters() }}</div>
+    <div>{{ $artist->series() }}</div>
 </div>
 
 <div class="container">
