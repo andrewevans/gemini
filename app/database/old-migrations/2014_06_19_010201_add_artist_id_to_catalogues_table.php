@@ -15,7 +15,7 @@ class AddArtistIdToCataloguesTable extends Migration {
 		Schema::table('catalogues', function(Blueprint $table)
 		{
 			//
-            $table->integer('artist_id')->unsigned()->after('id');
+            //$table->integer('artist_id')->unsigned()->after('id');
         });
 	}
 
