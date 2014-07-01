@@ -358,6 +358,29 @@ class Artist extends Eloquent
     }
 
 
+    public function series()
+    {
+        switch($this->slug) {
+
+            case 'chagall':
+                $filters = ['bible-series', 'tribes-of-israel', 'daphnis-and-chloe', 'nice-and-the-cote-dazur'];
+                break;
+
+                break;
+            default:
+                $filters = [];
+                break;
+        }
+
+        $filters_nav = '';
+        foreach ($filters as $filter) {
+            $filters_nav .= '<a href="/artists/' . $this->url_slug . '/' . $filter . '">' . $filter . '</a> | ';
+        }
+
+        return "Series: " . $filters_nav;
+    }
+
+
     public function img_url($upload = false)
     {
         $extension = 'jpg';
