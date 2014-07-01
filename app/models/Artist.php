@@ -78,6 +78,29 @@ class Artist extends Eloquent
                 }
                 break;
 
+            case 'miro':
+                switch($medium) {
+                    case 'etchings':
+                        return ['etching', 'engraving'];
+                        break;
+
+                    case 'lithographs':
+                        return ['lithograph', 'litho'];
+                        break;
+
+                    case 'aquatints':
+                        return ['aquatint'];
+                        break;
+
+                    case 'carborundum':
+                        return ['carborundum'];
+                        break;
+
+                    default:
+                        return array($medium);
+                }
+                break;
+
             case 'rembrandt':
                 switch($medium) {
                     case 'etchings':
@@ -193,6 +216,7 @@ class Artist extends Eloquent
 
         switch($this->slug) {
             case 'picasso':
+            case 'miro':
             case 'rembrandt':
                 switch($medium) {
                     case 'ceramics':
@@ -203,12 +227,24 @@ class Artist extends Eloquent
                         return 'Linocuts';
                         break;
 
+                    case 'lithographs':
+                        return 'Lithographs';
+                        break;
+
                     case 'etchings':
                         return 'Etchings';
                         break;
 
                     case 'prints':
                         return 'Works on Paper';
+                        break;
+
+                    case 'aquatints':
+                        return 'Aquatints';
+                        break;
+
+                    case 'carborundum':
+                        return 'Carborundum';
                         break;
 
                     default:
@@ -298,6 +334,10 @@ class Artist extends Eloquent
 
             case 'picasso':
                 $filters = ['ceramics', 'etchings', 'linocuts', 'prints'];
+                break;
+
+            case 'miro':
+                $filters = ['etchings', 'lithographs', 'aquatints', 'carborundum'];
                 break;
 
             case 'rembrandt':
