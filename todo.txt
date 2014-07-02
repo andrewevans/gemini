@@ -82,3 +82,5 @@ eager loading for artworks->with(artist)
 stupid rule where 'unique' also has to be unique in that actual row too. STUPID!!
 
 need google's recaptcha or something art related
+
+have mail to boss man be FROM the customer, needs to send thru server? via php mail()?
