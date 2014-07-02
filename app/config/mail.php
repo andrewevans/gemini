@@ -28,7 +28,8 @@ return array(
 	|
 	*/
 
-	'host' => 'smtp.mailgun.org',
+#    'host' => 'smtp.mailgun.org',
+    'host' => 'smtp.gmail.com',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -54,7 +55,7 @@ return array(
 	|
 	*/
 
-	'from' => array('address' => null, 'name' => null),
+	'from' => array('address' => 'andrew@masterworksfineart.com', 'name' => 'Andrew E'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -80,7 +81,8 @@ return array(
 	|
 	*/
 
-	'username' => null,
+#    'username' => null,
+    'username' => 'andrew@masterworksfineart.com',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -93,7 +95,8 @@ return array(
 	|
 	*/
 
-	'password' => null,
+#    'password' => null,
+    'password' => 'briterail1254!',
 
 	/*
 	|--------------------------------------------------------------------------

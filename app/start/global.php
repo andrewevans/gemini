@@ -15,6 +15,8 @@ define('ARTWORK_MAX_WIDTH', '850');
 define('ARTWORK_MAX_HEIGHT', '800');
 define('ARTIST_MAX_WIDTH', '850');
 define('ARTIST_MAX_HEIGHT', '800');
+define('CATREF_MAX_WIDTH', '450');
+define('CATREF_MAX_HEIGHT', '400');
 define('SITE_NAME', 'Masterworks Fine Art Gallery');
 
 ClassLoader::addDirectories(array(
@@ -22,7 +24,8 @@ ClassLoader::addDirectories(array(
 	app_path().'/commands',
 	app_path().'/controllers',
 	app_path().'/models',
-	app_path().'/database/seeds',
+    app_path().'/libs',
+    app_path().'/database/seeds'
 
 ));
 

@@ -26,6 +26,7 @@
 
     <!-- Custom styles for this template -->
     {{ HTML::style('css/gemini-default.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
+    {{ HTML::style('css/min-design-default.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -118,7 +119,8 @@
     @include('widgets.breadcrumb')
 </div>
 
-<!--<div class="container">-->
+<section>
+    <!--<div class="container">-->
 
     <!-- will be used to show any messages -->
     @if (Session::has('message'))
@@ -127,11 +129,13 @@
 
     @yield('content')
 
-    <footer>
-        <p>&copy; Gemini 2014</p>
-    </footer>
+    <!--</div>--><!-- /.container -->
 
-<!--</div>--><!-- /.container -->
+</section>
+
+<footer>
+    <p>&copy; Gemini 2014</p>
+</footer>
 
 <!-- Bootstrap core JavaScript
 ================================================== -->

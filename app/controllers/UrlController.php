@@ -66,8 +66,14 @@ class UrlController extends \BaseController {
                 foreach ($artists as $artist) {
                     $return_array[] = array(
                         'value' => $artist->alias,
+                        'first_name' => $artist->first_name,
+                        'last_name' => $artist->last_name,
+                        'url_slug' => $artist->url_slug,
+                        'meta_title' => $artist->meta_title,
+                        'meta_description' => $artist->meta_description,
                         'year_begin' => $artist->year_begin,
                         'year_end' => $artist->year_end,
+                        'img_url' => $artist->img_url(),
                         'guid' => 'a-' . $artist->id,
                         'id' => $artist->id);
                 }
@@ -79,7 +85,22 @@ class UrlController extends \BaseController {
                 foreach ($artworks as $artwork) {
                     $return_array[] = array(
                         'value' => $artwork->title_short,
+                        'title' => $artwork->title,
+                        'price' => $artwork->price,
+                        'medium' => $artwork->medium,
                         'medium_short' => $artwork->medium_short,
+                        'series' => $artwork->series,
+                        'series_short' => $artwork->series_short,
+                        'after' => $artwork->after,
+                        'signature' => $artwork->signature,
+                        'condition' => $artwork->condition,
+                        'size_img' => $artwork->size_img,
+                        'size_sheet' => $artwork->size_sheet,
+                        'size_framed' => $artwork->size_framed,
+                        'tagline' => $artwork->tagline,
+                        'reference' => $artwork->reference,
+                        'framing' => $artwork->framing,
+                        'price_on_req' => $artwork->price_on_req,
                         'guid' => 'w-' . $artwork->id,
                         'id' => $artwork->id);
                 }
@@ -91,8 +112,9 @@ class UrlController extends \BaseController {
                 foreach ($catalogues as $catalogue) {
                     $return_array[] = array(
                         'value' => $catalogue->title,
-                        'url_slug' => $catalogue->url_slug,
                         'artist_id' => $catalogue->artist_id,
+                        'url_slug' => $catalogue->url_slug,
+                        'meta_description' => $catalogue->meta_description,
                         'guid' => 'c-' . $catalogue->id,
                         'id' => $catalogue->id);
                 }
@@ -104,6 +126,7 @@ class UrlController extends \BaseController {
                 foreach ($catrefs as $catref) {
                     $return_array[] = array(
                         'value' => $catref->title,
+                        'title_ext' => $catref->title_ext,
                         'size' => $catref->size,
                         'signed' => $catref->signed,
                         'edition' => $catref->edition,

@@ -9,6 +9,8 @@
         <br> All you get is this text and a mostly barebones HTML document.</p>
 </div>
 
+<a class="btn btn-small btn-success" href="/artists/create">Create Artist or Person</a>
+
 <table class="table table-striped table-bordered">
     <thead>
     <tr>
