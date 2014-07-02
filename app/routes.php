@@ -28,6 +28,7 @@ Route::resource('blog', 'BlogController');
 Route::resource('search', 'SearchController');
 Route::resource('contact', 'ContactController');
 Route::resource('purchase', 'PurchaseController');
+Route::resource('offer', 'PurchaseController');
 
 // Route group for API versioning
 Route::group(array('prefix' => 'api/v1'), function()

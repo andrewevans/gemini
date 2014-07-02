@@ -17,13 +17,19 @@ class PurchaseController extends \BaseController {
 	public function index($id = null)
 	{
         $input = Input::all();
+        $route = Route::current()->getName();
 
         $artwork = Artwork::find($input['artwork_id']);
         $artworks = [];
         $artworks[] = $artwork;
-        $page_title = "Purchasing " . $artwork->title_short();
 
-        return View::make('widgets.forms.purchase', ['id' => $input['artwork_id'], 'artworks' => $artworks, 'page_title' => $page_title]);
+        if ('offer.index' == $route) {
+            $page_title = "Your Offer for " . $artwork->title_short();
+            return View::make('widgets.forms.offer', ['id' => $input['artwork_id'], 'artworks' => $artworks, 'route' => $route, 'page_title' => $page_title]);
+        } else {
+            $page_title = "Purchasing " . $artwork->title_short();
+            return View::make('widgets.forms.purchase', ['id' => $input['artwork_id'], 'artworks' => $artworks, 'route' => $route, 'page_title' => $page_title]);
+        }
     }
 
 
