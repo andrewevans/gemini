@@ -2,6 +2,7 @@
 /wordpress/wp-content/uploads/
 /vendor
 /public/img/artists
+/public/img/catalogues
 .idea/
 composer.phar
 composer.lock
