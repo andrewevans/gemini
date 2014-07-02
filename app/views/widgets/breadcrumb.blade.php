@@ -15,13 +15,13 @@
     @endif
 
     @if('people.show' == Route::current()->getName() )
-    <li><a href="/artists">PEOPLE</a></li>
+    <li><a href="/people">PEOPLE</a></li>
     <li class="active">{{ $person->alias }}</li>
     @endif
 
     @if('artists.show.filter' == Route::current()->getName() )
     <li><a href="/artists">BUY ORIGINALS</a></li>
-    <li><a href="{{ $artwork->artist->url() }}">{{ $artwork->artist->alias }}</a></li>
+    <li><a href="{{ $artist->url() }}">{{ $artist->alias }}</a></li>
     <li class="active">{{ $filter }}</li>
     @endif
 
@@ -29,6 +29,12 @@
     <li><a href="/artists">BUY ORIGINALS</a></li>
     <li><a href="{{ $artist->url() }}">{{ $artist->alias }}</a></li>
     <li class="active">{{ $artist->alias }} Biography</li>
+    @endif
+
+    @if('artists.show.bio.page' == Route::current()->getName() )
+    <li><a href="/artists">BUY ORIGINALS</a></li>
+    <li><a href="{{ $artist->url() }}">{{ $artist->alias }}</a></li>
+    <li class="active">{{ $post->post_title }}</li>
     @endif
 
     @if('artists.catalogues.index' == Route::current()->getName() )
@@ -55,11 +61,15 @@
     @if('artworks.showOne' == Route::current()->getName() )
     <li><a href="/artists">BUY ORIGINALS</a></li>
     <li><a href="{{ $artwork->artist->url() }}">{{ $artwork->artist->alias }}</a></li>
-    <li class="active">{{ $artwork->mediums() }}</li>
+    <li class="active">{{ $artwork->medium_short() }}</li>
     @endif
 
     @if('search.index' == Route::current()->getName() )
     <li class="active">Fine art search results for <b>{{ $q }}</b></li>
+    @endif
+
+    @if('contact.index' == Route::current()->getName())
+    <li class="active">Contact Us</li>
     @endif
 
 </ol>

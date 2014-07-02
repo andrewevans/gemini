@@ -16,9 +16,9 @@ class Artist extends Eloquent
 
 
     public static $rules = array(
-        'first_name'       => 'required',
-        'last_name'       => 'required',
         'alias'       => 'required',
+        'slug'       => 'required',
+        'url_slug'       => 'required',
         'year_begin'      => 'required|numeric|min:0',
         'year_end'      => 'required|numeric|min:0',
     );
@@ -30,6 +30,8 @@ class Artist extends Eloquent
     public function isValid($id = null)
     {
         $rules_modified = static::$rules;
+        $rules_modified['slug'] .= "|unique:artists,slug," . $id;
+        $rules_modified['url_slug'] .= "|unique:artists,url_slug," . $id;
 
         $validation = Validator::make($this->attributes, $rules_modified,  static::$messages);
 
@@ -69,6 +71,29 @@ class Artist extends Eloquent
                     // prints are all that are NOT ceramics, so it returns the words to avoid
                     case 'prints':
                         return ['ceramic', 'clay', 'sculpture', 'plate', 'madoura'];
+                        break;
+
+                    default:
+                        return array($medium);
+                }
+                break;
+
+            case 'miro':
+                switch($medium) {
+                    case 'etchings':
+                        return ['etching', 'engraving'];
+                        break;
+
+                    case 'lithographs':
+                        return ['lithograph', 'litho'];
+                        break;
+
+                    case 'aquatints':
+                        return ['aquatint'];
+                        break;
+
+                    case 'carborundum':
+                        return ['carborundum'];
                         break;
 
                     default:
@@ -191,6 +216,7 @@ class Artist extends Eloquent
 
         switch($this->slug) {
             case 'picasso':
+            case 'miro':
             case 'rembrandt':
                 switch($medium) {
                     case 'ceramics':
@@ -201,12 +227,24 @@ class Artist extends Eloquent
                         return 'Linocuts';
                         break;
 
+                    case 'lithographs':
+                        return 'Lithographs';
+                        break;
+
                     case 'etchings':
                         return 'Etchings';
                         break;
 
                     case 'prints':
                         return 'Works on Paper';
+                        break;
+
+                    case 'aquatints':
+                        return 'Aquatints';
+                        break;
+
+                    case 'carborundum':
+                        return 'Carborundum';
                         break;
 
                     default:
@@ -289,9 +327,110 @@ class Artist extends Eloquent
         return $this->alias . " Original Prints";
     }
 
+
+    public function filters()
+    {
+        switch($this->slug) {
+
+            case 'picasso':
+                $filters = ['ceramics', 'etchings', 'linocuts', 'prints'];
+                break;
+
+            case 'miro':
+                $filters = ['etchings', 'lithographs', 'aquatints', 'carborundum'];
+                break;
+
+            case 'rembrandt':
+                $filters = ['etchings'];
+
+                break;
+            default:
+                $filters = [];
+                break;
+        }
+
+        $filters_nav = '';
+        foreach ($filters as $filter) {
+            $filters_nav .= '<a href="/artists/' . $this->url_slug . '/' . $filter . '">' . $filter . '</a> | ';
+        }
+
+        return "Filters: " . $filters_nav;
+    }
+
+
+    public function series()
+    {
+        switch($this->slug) {
+
+            case 'chagall':
+                $filters = ['bible-series', 'tribes-of-israel', 'daphnis-and-chloe', 'nice-and-the-cote-dazur'];
+                break;
+
+                break;
+            default:
+                $filters = [];
+                break;
+        }
+
+        $filters_nav = '';
+        foreach ($filters as $filter) {
+            $filters_nav .= '<a href="/artists/' . $this->url_slug . '/' . $filter . '">' . $filter . '</a> | ';
+        }
+
+        return "Series: " . $filters_nav;
+    }
+
+
+    public function img_url($upload = false)
+    {
+        $extension = 'jpg';
+
+        $local_file = $this->img_directory_url() . $this->url_slug . '.' . $extension;
+
+        if (file_exists($local_file) || $upload) return $local_file;
+
+        $remote_file = 'http://www.masterworksfineart.com/images/artists_bio/' . $this->slug . '.jpg';
+
+        if ($this->checkRemoteFile($remote_file)) { return $remote_file; }
+
+        return 'img/no-image.jpg';
+
+    }
+
+
+    public function img_directory_url()
+    {
+        return 'img/artists/' . $this->slug . '/profile/';
+    }
+
+
+    function checkRemoteFile($url)
+    {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL,$url);
+        // don't download content
+        curl_setopt($ch, CURLOPT_NOBODY, 1);
+        curl_setopt($ch, CURLOPT_FAILONERROR, 1);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        if(curl_exec($ch)!==FALSE)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+
     public function artworks()
     {
         return $this->hasMany('Artwork');
+    }
+
+    public function artist_bio()
+    {
+        return $this->hasMany('ArtistBio');
     }
 
     public function catalogues()

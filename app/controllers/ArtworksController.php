@@ -17,11 +17,18 @@ class ArtworksController extends \BaseController {
      */
     public function index()
     {
-        $artworks = $this->artwork->whereIn('artist_id', array(23, 44, 36, 41))->orderBy('artist_id', 'desc')->get();
+        $artworks = $this->artwork
+            ->whereIn('artist_id', function($query)
+            {
+                $query->select('id')
+                    ->from('artists')
+                    ->whereRaw('id != 0');
+            })->orderBy('id', 'desc')->get();
 
         // load the view and pass the artworks
         return View::make('artworks.index')
-            ->with('artworks', $artworks);
+            ->with('artworks', $artworks)
+            ->with('page_title', "All the Artworks");
     }
 
 
@@ -38,7 +45,8 @@ class ArtworksController extends \BaseController {
 
         return View::make('artworks.create')
             ->with('artists', $artists)
-            ->with('artwork_newest', $artwork_newest);
+            ->with('artwork_newest', $artwork_newest)
+            ->with('page_title', "Create Artwork");
     }
 
 
@@ -80,7 +88,8 @@ class ArtworksController extends \BaseController {
 		//
         $artwork = Artwork::find($id);
         $artwork->img_urls = $this->fetch_images($artwork);
-        return View::make('artworks.show', ['artwork' => $artwork]);
+
+        return View::make('artworks.show', ['artwork' => $artwork, 'page_title' => $artwork->page_title()]);
 
         Session::flash('message', 'You were forwarded here from ' . '<b>artworks/' . $data . '</b>');
         return Redirect::to('artworks/' . $artwork->url_slug);
@@ -105,7 +114,8 @@ class ArtworksController extends \BaseController {
         // show the edit form and pass the artwork
         return View::make('artworks.edit')
             ->with('artwork', $artwork)
-            ->with('artists', $artists);
+            ->with('artists', $artists)
+            ->with('page_title', "Edit: " . $artwork->artist->alias . " -> " . $artwork->title_short());
 
     }
 

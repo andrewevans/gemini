@@ -4,11 +4,13 @@ class CataloguesController extends \BaseController {
 
     protected $catalogue;
     protected $artist;
+    protected $artists;
 
     public function __construct(Catalogue $catalogue, Artist $artist)
     {
         $this->catalogue = $catalogue;
         $this->artist = $artist;
+        $this->artists = DB::table('artists')->orderBy('last_name', 'asc')->lists('alias','id');
         //$this->beforeFilter('auth');
     }
 
@@ -27,7 +29,7 @@ class CataloguesController extends \BaseController {
             $catalogues = $this->catalogue->whereArtistId($artist->id)->get();
         }
 
-        return View::make('catalogues.index', ['catalogues' => $catalogues]);
+        return View::make('catalogues.index', ['catalogues' => $catalogues, 'page_title' => "All the Catalogues"]);
     }
 
 
@@ -39,10 +41,9 @@ class CataloguesController extends \BaseController {
 	public function create()
 	{
 		//
-        $artists = DB::table('artists')->orderBy('alias', 'asc')->lists('alias','id');
         $catalogue_newest = Catalogue::orderBy('id', 'desc')->first();
 
-        return View::make('catalogues.create', ['artists' => $artists, 'catalogue_newest' => $catalogue_newest]);
+        return View::make('catalogues.create', ['artists' => $this->artists, 'catalogue_newest' => $catalogue_newest, 'page_title' => "Create Catalogue"]);
 	}
 
 
@@ -96,7 +97,7 @@ class CataloguesController extends \BaseController {
         $page_title = $catalogue->title();
 //        $catalogue->img_url = $this->img_url($catalogue); // should be stored in catalogues model
 
-        return View::make('catalogues.show', ['catalogue' => $catalogue, 'page_title' => $page_title, 'catrefs' => $catrefs]);
+        return View::make('catalogues.show', ['catalogue' => $catalogue, 'catrefs' => $catrefs, 'page_title' => $page_title]);
 
     }
 
@@ -111,12 +112,12 @@ class CataloguesController extends \BaseController {
 	{
 		//
         $catalogue = Catalogue::find($id);
-        $artists = DB::table('artists')->orderBy('alias', 'desc')->lists('alias','id');
 
         // show the edit form and pass the catalogue
         return View::make('catalogues.edit')
             ->with('catalogue', $catalogue)
-            ->with('artists', $artists);
+            ->with('artists', $this->artists)
+            ->with('page_title', "Edit: " . $catalogue->title);
     }
 
 
@@ -145,21 +146,6 @@ class CataloguesController extends \BaseController {
         $catalogue->url_slug      = Input::get('url_slug');
         $catalogue->meta_description      = Input::get('meta_description');
 
-        $catalogue_dir = 'img/catalogues/' . $catalogue->url_slug . '/profile';
-
-        // should be an easier way to create if not exists, or at least put in function
-        if ( ! File::isDirectory($catalogue_dir)) {
-            $result = File::makeDirectory($catalogue_dir, 0757, true);
-        }
-
-        $avatar = Input::file('avatar');
-
-        // resizing an uploaded file
-        if ($avatar != null) {
-            $mime_type = $avatar->getClientOriginalExtension(); // unused
-            $image['profile'] = Image::make(Input::file('avatar')->getRealPath())->resize(ARTIST_MAX_WIDTH, null, true, false)->resize(null, ARTIST_MAX_HEIGHT, true, false)->save($this->img_url($catalogue));
-        }
-
         $catalogue->save();
 
         // redirect
@@ -187,6 +173,14 @@ class CataloguesController extends \BaseController {
                     File::deleteDirectory($catalogue_dir, false);
                 }
         */
+
+        $catrefs = $catalogue->catrefs()->get();
+
+        foreach ($catrefs as $catref) {
+            $catref->catalogue_id = 0;
+            $catref->save();
+        }
+
         $catalogue->delete();
 
         // redirect

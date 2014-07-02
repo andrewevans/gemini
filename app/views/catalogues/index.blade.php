@@ -5,7 +5,7 @@
 
 <a class="btn btn-small btn-success" href="/catalogues/create">Create new catalogue</a>
 
-<table>
+<table class="table table-striped table-bordered">
     @foreach ($catalogues as $catalogue)
     <tr>
         <td>

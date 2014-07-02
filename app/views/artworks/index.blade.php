@@ -3,6 +3,8 @@
 @section('content')
 <!-- app/views/artworks/index.blade.php -->
 
+<a class="btn btn-small btn-success" href="/artworks/create">Create Artwork</a>
+
 <table class="table table-striped table-bordered">
     <thead>
     <tr>
