@@ -54,6 +54,30 @@
     {{ Form::label('year_end', 'Year End') }}
     {{ Form::text('year_end', null, array('class' => 'form-control')) }}
 </div>
+<?php $key = 0; ?>
+@foreach ($artist->artist_bios as $key => $artist_bio)
+    <div class="form-group">
+        {{ Form::hidden('artist_bio[' . $key . '][id]', $artist_bio->id, array('class' => 'form-control')) }}
+
+        {{ Form::label('artist_bio[' . $key . '][filter]', 'Biography Filter (optional)') }}
+        {{ Form::text('artist_bio[' . $key . '][filter]', $artist_bio->filter, array('class' => 'form-control')) }}
+    </div>
+
+    <div class="form-group">
+        {{ Form::label('artist_bio[' . $key . '][description]', 'Biography') }}
+        {{ Form::textarea('artist_bio[' . $key . '][description]', $artist_bio->description, array('class' => 'form-control')) }}
+    </div>
+@endforeach
+
+<div class="form-group">
+    {{ Form::label('artist_bio[' . ($key+1) . '][filter]', 'Biography Filter (optional)') }}
+    {{ Form::text('artist_bio[' . ($key+1) . '][filter]', null, array('class' => 'form-control')) }}
+</div>
+
+<div class="form-group">
+    {{ Form::label('artist_bio[' . ($key+1) . '][description]', 'Biography') }}
+    {{ Form::textarea('artist_bio[' . ($key+1) . '][description]', null, array('class' => 'form-control')) }}
+</div>
 
 <div class="form-group">
     {{ Form::label('avatar', 'Avatar') }}
