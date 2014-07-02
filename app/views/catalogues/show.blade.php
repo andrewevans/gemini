@@ -10,19 +10,6 @@
     </div>
 </div>
 
-<div class="row">
-    @foreach ($catrefs as $key => $catref)
-    <div class="col-md-4">
-        <a href="{{ $catref->url() }}">
-            {{ HTML::image('img/no-image.jpg') }}<br />
-        </a>
-        {{ $catref->title }}
-
-        <i>{{ strip_tags($catref->meta_description) }}</i><br />
-
-
-    </div>
-    @endforeach
-</div>
+@include('widgets.catrefs.card', array('catrefs' => $catrefs))
 
 @stop

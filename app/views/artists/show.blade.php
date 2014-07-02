@@ -47,11 +47,7 @@
         <?php $count = 1; ?>
         @foreach ($artworks as $key => $artwork)
             <div class="item <?= ($key == -1 ? 'active' : '') ?>">
-                @if (file_exists('img/artists/' . $artwork->artist->slug . '/original/' . $artwork->artist->slug . $artwork->id . '.jpg'))
-                    {{ HTML::image('img/artists/' . $artwork->artist->slug . '/original/' . $artwork->artist->slug . $artwork->id . '.jpg') }}
-                @else
-                    {{ HTML::image('img/no-image.jpg', 'Profile of ' . $artist->alias) }}<br />
-                @endif
+                {{ HTML::image($artwork->img_url()) }}
                 <div class="container">
                     <div class="carousel-caption">
                         <h1>{{ $artwork->title_short() }}</h1>
@@ -79,25 +75,13 @@
 </div>
 </div>
 
-<div class="row">
-    @foreach ($artworks as $key => $artwork)
-        <div class="col-md-4">
-            <a href="{{ $artwork->url() }}">
-                @if (file_exists('img/artists/' . $artwork->artist->slug . '/original/' . $artwork->artist->slug . $artwork->id . '.jpg'))
-                {{ HTML::image('img/artists/' . $artwork->artist->slug . '/original/' . $artwork->artist->slug . $artwork->id . '.jpg') }}<br />
-                @else
-                    {{ HTML::image('img/no-image.jpg', 'Profile of ' . $artist->alias) }}<br />
-                @endif
-            </a>
-            {{ $artwork->title_short }}
+<div class="container">
+    <div>{{ $artist->filters() }}</div>
+    <div>{{ $artist->series() }}</div>
+</div>
 
-            <b>{{ strip_tags($artwork->artist->alias . ' ' . $artwork->medium_short) }} for sale.</b>
-            <i>{{ strip_tags($artwork->title_short()) }}</i><br />
-            ${{ number_format($artwork->price) }}
-
-
-        </div>
-    @endforeach
+<div class="container">
+    @include('widgets.artworks.card', array('artworks' => $artworks))
 </div>
 
 @include('widgets.artists.artist', array('artist' => $artist))

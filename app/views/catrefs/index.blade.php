@@ -5,9 +5,26 @@
 
 <a class="btn btn-small btn-success" href="/catrefs/create">Create new catref</a>
 
-<table>
+<table class="table table-striped table-bordered">
+    <tr>
+        <th>ID</th>
+        <th>(Artist) Catalogue</th>
+        <th>Ref #</th>
+        <th>Title</th>
+        <th>&nbsp;</th>
+    </tr>
     @foreach ($catrefs as $catref)
     <tr>
+
+        <td>
+            {{ $catref->id }}
+        </td>
+        <td>
+            {{ $catref->catalogue->title }} ({{ $catref->catalogue_id }})
+        </td>
+        <td>
+            {{ $catref->reference_num }}
+        </td>
         <td>
             <a href="/catrefs/{{ $catref->id }}">{{ $catref->title }}</a>
         </td>

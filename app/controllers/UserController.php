@@ -19,7 +19,7 @@ class UserController extends \BaseController {
     {
         $users = User::all();
 
-        return View::make('user.index', ['users' => $users]);
+        return View::make('user.index', ['users' => $users, "page_title" => "All the Users"]);
     }
 
     /**

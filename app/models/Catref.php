@@ -18,11 +18,13 @@ class Catref extends Eloquent
     public static $rules = array(
         'catalogue_id'       => 'required',
         'reference_num'       => 'required',
+        'title'     => 'required',
     );
 
     public static $messages = [
-        'catalogue_id.required' => "You need a Catalogue ID.",
+        'catalogue_id.required' => "Your catref needs a Catalogue to belong to.",
         'reference_num.required' => "You need a Reference Number.",
+        'title'                 => "You need a title.",
     ];
 
     public function isValid($id = null)
@@ -404,6 +406,50 @@ class Catref extends Eloquent
 
         return $options['lowercase'] ? mb_strtolower($str, 'UTF-8') : $str;
     }
+
+
+    public function img_url($upload = false)
+    {
+        $extension = 'jpg';
+
+        $local_file = $this->img_directory_url() . '/' . $this->catalogue->slug . $this->id . '.' . $extension;
+
+        if (file_exists($local_file) || $upload) return $local_file;
+
+        $remote_file = 'http://www.masterworksfineart.com/catalogue/' . $this->catalogue->artist->slug . '/' . $this->catalogue->slug . '/original/' . $this->catalogue->slug . $this->reference_num . '.jpg';
+
+        if ($this->checkRemoteFile($remote_file)) {
+            return $remote_file;
+        }
+
+        return 'img/no-image.jpg';
+    }
+
+
+    public function img_directory_url()
+    {
+        return 'img/catalogues/' . $this->catalogue->artist->slug . '/' . $this->catalogue->slug;
+    }
+
+
+    function checkRemoteFile($url)
+    {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL,$url);
+        // don't download content
+        curl_setopt($ch, CURLOPT_NOBODY, 1);
+        curl_setopt($ch, CURLOPT_FAILONERROR, 1);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        if(curl_exec($ch)!==FALSE)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
 
     public function catalogue()
     {

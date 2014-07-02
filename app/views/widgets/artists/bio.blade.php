@@ -1,10 +1,13 @@
 <h1>{{ $artist->first_name }} {{ $artist->last_name }}</h1>
-<p>
-    @if (file_exists($artist->img_url))
-    {{ HTML::image($artist->img_url, 'Profile of ' . $artist->alias) }}<br />
-    @else
-    {{ HTML::image('img/no-image.jpg', 'Profile of ' . $artist->alias) }}<br />
-    @endif
+{{ HTML::image($artist->img_url()) }}
 
-    {{ $artist->meta_description }}
-</p>
+@foreach ($biographies as $bio)
+<div>
+    <h2>{{ $bio->post_title }}</h2>
+    {{ apply_filters('the_content',$bio->post_content); }}
+</div>
+@endforeach
+
+<div>
+    <a href="{{ $artist->url() }}/bio">Read more about {{ $artist->alias }}</a>
+</div>
