@@ -31,7 +31,7 @@
             <th>Condition</th><td> {{ $artwork->condition }}</td>
         </tr>
         <tr>
-            <th>Gallery Price</th><td> ${{ number_format($artwork->price) }}</td>
+            <th>Gallery Price</th><td>{{ $artwork->price_box() }}</td>
         </tr>
         </tbody>
     </table>
