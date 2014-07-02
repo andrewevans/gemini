@@ -1,5 +1,5 @@
 <div class="row">
-    @if (sizeof($artworks) > 0))
+    @if (sizeof($artworks) > 0)
         @foreach ($artworks as $key => $artwork)
         @if ($key % 3 == 0 && $key != 0)
             </div>
