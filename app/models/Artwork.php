@@ -342,6 +342,12 @@ class Artwork extends Eloquent
     }
 
 
+    public function price_box()
+    {
+        return View::make('widgets.artworks.price', ['artwork' => $this]);
+    }
+
+
     public function artist()
     {
         return $this->belongsTo('Artist');
