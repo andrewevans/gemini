@@ -29,8 +29,8 @@ Route::resource('search', 'SearchController');
 Route::resource('contact', 'ContactController');
 Route::resource('purchase', 'PurchaseController');
 Route::resource('offer', 'PurchaseController');
-
-Route::get('{tree_stump}/{tree_branches?}','StaticController@show')->where('tree_branches', '(.*)');
+Route::resource('login', 'HomeController@getLogin');
+Route::resource('user', 'UserController');
 
 // Route group for API versioning
 Route::group(array('prefix' => 'api/v1'), function()
@@ -38,5 +38,5 @@ Route::group(array('prefix' => 'api/v1'), function()
     Route::resource('url', 'UrlController');
 });
 
-Route::resource('/user', 'UserController');
+Route::get('{tree_stump}/{tree_branches?}',['as' => 'static.show', 'uses' => 'StaticController@show'])->where('tree_branches', '(.*)');
 Route::controller('/', 'HomeController');
