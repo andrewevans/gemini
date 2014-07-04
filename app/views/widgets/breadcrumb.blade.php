@@ -1,5 +1,5 @@
 <ol class="breadcrumb">
-    <li><a href="/" title="Fine art original prints"><span class="glyphicon glyphicon-home"></span></a></a></li>
+    <li><a href="/" title="Fine art original prints"><span class="glyphicon glyphicon-home"></span></a></li>
 
     @if('artists.index' == Route::current()->getName() )
     <li class="active">BUY ORIGINALS</li>
@@ -70,6 +70,10 @@
 
     @if('contact.index' == Route::current()->getName())
     <li class="active">Contact Us</li>
+    @endif
+
+    @if('static.show' == Route::current()->getName())
+    {{ $breadcrumb }}
     @endif
 
 </ol>
