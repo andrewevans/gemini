@@ -12,7 +12,7 @@
 </div>
 @endif
 
-{{ Form::model($catref, array('route' => array('catrefs.update', $catref->id), 'files' => true, 'method' => 'PUT')) }}
+{{ Form::model($catref, array('route' => array('gemini.catrefs.update', $catref->id), 'files' => true, 'method' => 'PUT')) }}
 * = Required
 
 <div class="form-group">
