@@ -87,10 +87,13 @@
                     </ul>
 
                 </li>
-                <li><a href="">Art Education</a></li>
-                <li><a href="#">Why Choose Us</a></li>
-                <li><a href="">About</a></li>
-                <li><a href="#">Contact Us</a></li>
+                <li class="dropdown">
+                    <a href="/education" class="dropdown-toggle active" data-toggle="dropdown">Art Education <b class="caret"></b></a>
+                    @include('widgets.nav', ['parent' => 'education'])
+                </li>
+                <li><a href="/buying">Why Choose Us</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact Us</a></li>
             </ul>
         </div><!--/.nav-collapse -->
         <div id="multiple-datasets" class="">
