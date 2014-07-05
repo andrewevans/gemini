@@ -85,7 +85,7 @@ class ArtistsController extends \BaseController {
 
         // redirect
         Session::flash('message', 'Successfully updated artist!');
-        return Redirect::to('artists');
+        return Redirect::to('/gemini/artists');
     }
 
 
@@ -271,7 +271,7 @@ class ArtistsController extends \BaseController {
 
         // redirect
         Session::flash('message', 'Successfully updated artist!');
-        return Redirect::to('artists');
+        return Redirect::to('/gemini/artists');
     }
 
 

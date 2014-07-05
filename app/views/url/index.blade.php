@@ -7,11 +7,10 @@
     <h1>Welcome to API!</h1>
 
     <ul>
-        <li>Artists</li>
-        <li>Artworks</li>
-        <li>Catalogues</li>
-        <li>Catrefs</li>
-        <li>Artists</li>
+        <li><a href="/api/v1/url/artists">Artists</a></li>
+        <li><a href="/api/v1/url/artworks">Artworks</a></li>
+        <li><a href="/api/v1/url/Catalogues">Catalogues</a></li>
+        <li><a href="/api/v1/url/Catrefs">Catrefs</a></li>
     </ul>
 </div>
 @stop

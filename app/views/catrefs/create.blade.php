@@ -12,7 +12,7 @@
 </div>
 @endif
 
-{{ Form::open(array('url' => 'catrefs', 'files' => true)) }}
+{{ Form::open(array('url' => '/gemini/catrefs', 'files' => true)) }}
 * = Required
 
 <div class="form-group">
