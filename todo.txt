@@ -86,3 +86,5 @@ need google's recaptcha or something art related
 have mail to boss man be FROM the customer, needs to send thru server? via php mail()?
 
 remember to add robots.txt and block in robots and on page /purchase, /offer, etc. and NOARCHIVE for artist/artwork pages
+
+admin search needs to use same api as on-site search. Right now it just looks for the string in the title
