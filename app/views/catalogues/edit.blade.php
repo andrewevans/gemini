@@ -12,7 +12,7 @@
 </div>
 @endif
 
-{{ Form::model($catalogue, array('route' => array('catalogues.update', $catalogue->id), 'files' => true, 'method' => 'PUT')) }}
+{{ Form::model($catalogue, array('route' => array('gemini.catalogues.update', $catalogue->id), 'files' => true, 'method' => 'PUT')) }}
 
 * = Required
 <div class="form-group">

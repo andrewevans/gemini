@@ -14,7 +14,7 @@
 
     <h1><i class='fa fa-user'></i> Add User</h1>
 
-    {{ Form::open(['role' => 'form', 'url' => '/user']) }}
+    {{ Form::open(['role' => 'form', 'url' => '/gemini/user']) }}
 
     <div class='form-group'>
         {{ Form::label('first_name', 'First Name') }}

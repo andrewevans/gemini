@@ -19,7 +19,7 @@ class UserController extends \BaseController {
     {
         $users = User::all();
 
-        return View::make('user.index', ['users' => $users, "page_title" => "All the Users"]);
+        return View::make('gemini.users', ['users' => $users, "page_title" => "All the Users"]);
     }
 
     /**
@@ -56,7 +56,7 @@ class UserController extends \BaseController {
 
         $user->save();
 
-        return Redirect::to('/user');
+        return Redirect::to('/gemini/user');
     }
 
     /**
@@ -97,7 +97,7 @@ class UserController extends \BaseController {
 
         $user->save();
 
-        return Redirect::to('/user');
+        return Redirect::to('/gemini/user');
     }
 
     /**
@@ -110,7 +110,7 @@ class UserController extends \BaseController {
     {
         User::destroy($id);
 
-        return Redirect::to('/user');
+        return Redirect::to('/gemini/user');
     }
 
 }

@@ -74,7 +74,7 @@ class UrlController extends \BaseController {
                         'meta_description' => $artist->meta_description,
                         'year_begin' => $artist->year_begin,
                         'year_end' => $artist->year_end,
-                        'img_url' => $artist->img_url(),
+                        //'img_url' => $artist->img_url(),
                         'guid' => 'a-' . $artist->id,
                         'id' => $artist->id);
                 }

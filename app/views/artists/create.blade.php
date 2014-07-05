@@ -8,7 +8,7 @@
 <!-- if there are creation errors, they will show here -->
 {{ HTML::ul($errors->all()) }}
 
-{{ Form::open(array('url' => 'artists')) }}
+{{ Form::open(array('url' => '/gemini/artists')) }}
 
 <div class="form-group">
 

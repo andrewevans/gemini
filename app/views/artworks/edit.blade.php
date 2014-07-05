@@ -8,7 +8,7 @@
 <!-- if there are creation errors, they will show here -->
 {{ HTML::ul($errors->all()) }}
 
-{{ Form::model($artwork, array('route' => array('artworks.update', $artwork->id), 'files' => true, 'method' => 'PUT')) }}
+{{ Form::model($artwork, array('route' => array('gemini.artworks.update', $artwork->id), 'files' => true, 'method' => 'PUT')) }}
 
 <div class="form-group">
     {{ Form::label('artist_id', 'Artist ID') }}
