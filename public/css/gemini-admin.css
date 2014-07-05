@@ -1,0 +1,12 @@
+body {
+    background: #eee;
+}
+
+.list-img {
+    max-width: 100px;
+    max-height: 70px;
+}
+
+.list-price {
+    text-align: right;
+}
