@@ -41,7 +41,7 @@ class Catref extends Eloquent
 
     public function url()
     {
-        return $this->catalogue->url_slug . '/' . $this->friendly_url($this->title) . "/id/" . $this->id;;
+        return $this->catalogue->url() . '/' . $this->friendly_url($this->title) . "/id/" . $this->id;;
     }
 
     public function friendly_url($data)

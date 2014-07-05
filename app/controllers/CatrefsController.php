@@ -88,7 +88,7 @@ class CatrefsController extends \BaseController {
         }
 
         Session::flash('message', 'Successfully updated catref!');
-        return Redirect::to('catrefs');
+        return Redirect::to('/gemini/catrefs');
     }
 
 
@@ -100,14 +100,21 @@ class CatrefsController extends \BaseController {
      */
     public function show($artist_url_slug = null, $catalogue_url_slug = null, $catref_url_slug = null, $id = null)
     {
-        //
+        // if we only get the ID, then set it
+        if (is_numeric($artist_url_slug)) $id = $artist_url_slug;
+
         // attempt to find catalogue url slug in first param
         if('artists.catrefs.show' != Route::current()->getName()) {
             $id = $artist_url_slug;
         }
-        //
+
         $catref = Catref::find($id);
         $artworks = $catref->catalogue->artist->artworks()->where('hidden', '!=', 1)->take(50)->orderBy('id', 'desc')->get();
+
+        if (is_numeric($artist_url_slug)) {
+            Session::flash('message', 'You were forwarded here from ' . '<b>catrefs/' . $artist_url_slug . '</b>');
+            return Redirect::to($catref->url());
+        }
 
         return View::make('catrefs.show', ['catref' => $catref, 'artworks' => $artworks, 'page_title' => $catref->title() . ", " . $catref->catalogue->artist->alias . ", from " . $catref->catalogue->title]);
 
@@ -163,6 +170,8 @@ class CatrefsController extends \BaseController {
         $catref->medium      = Input::get('medium');
         $catref->therest      = Input::get('therest');
 
+        $dir = $catref->img_directory_url();
+
         // should be an easier way to create if not exists, or at least put in function
         if ( ! File::isDirectory($catref->img_directory_url())) {
             $result = File::makeDirectory($catref->img_directory_url(), 0757, true);
@@ -180,7 +189,7 @@ class CatrefsController extends \BaseController {
 
         // redirect
         Session::flash('message', 'Successfully updated catref!');
-        return Redirect::to('catrefs');
+        return Redirect::to('gemini/catrefs');
 
     }
 

@@ -13,7 +13,7 @@
 </div>
 @endif
 
-{{ Form::open(array('url' => 'catalogues')) }}
+{{ Form::open(array('url' => '/gemini/catalogues')) }}
 * = Required
 <div class="form-group">
     {{ Form::label('artist_id', 'Artist *') }}

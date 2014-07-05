@@ -29,7 +29,7 @@ class CataloguesController extends \BaseController {
             $catalogues = $this->catalogue->whereArtistId($artist->id)->get();
         }
 
-        return View::make('catalogues.index', ['catalogues' => $catalogues, 'page_title' => "All the Catalogues"]);
+        return View::make('catalogues.index', ['catalogues' => $catalogues, 'artist' => $artist, 'page_title' => "All the Catalogues"]);
     }
 
 
@@ -73,7 +73,7 @@ class CataloguesController extends \BaseController {
         $catalogue->save();
 
         Session::flash('message', 'Successfully updated catalogue!');
-        return Redirect::to('catalogues');
+        return Redirect::to('/gemini/catalogues');
     }
 
 
@@ -150,7 +150,7 @@ class CataloguesController extends \BaseController {
 
         // redirect
         Session::flash('message', 'Successfully updated catalogue!');
-        return Redirect::to('catalogues');
+        return Redirect::to('/gemini/catalogues');
 
     }
 
