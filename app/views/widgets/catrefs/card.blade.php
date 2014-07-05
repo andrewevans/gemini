@@ -1,5 +1,5 @@
 <div class="row">
-    @if (sizeof($catrefs) > 0))
+    @if (sizeof($catrefs) > 0)
         @foreach ($catrefs as $key => $catref)
             @if ($key % 3 == 0 && $key != 0)
                 </div>
