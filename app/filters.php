@@ -145,3 +145,15 @@ View::composer('widgets.artists.posts', function($view){
     $view->with('artist', $view->artist)
         ->with('posts', $posts);
 });
+
+View::composer('widgets.nav', function($view){
+    $parent = get_page_by_path($view->parent);
+    $posts = get_pages(array(
+        'child_of' => $parent->ID,
+        'hierarchical'=> 0,
+        'parent'=> $parent->ID
+    ));
+
+    $view->with('posts', $posts)
+        ->with('parent', $parent);
+});
