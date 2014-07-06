@@ -4,9 +4,7 @@
 @section('content')
 
 <div class="container">
-    <div class="alert alert-danger" role="alert">
         {{ HTML::ul($errors->all()) }}
-    </div>
 </div>
 
 <div class="container">

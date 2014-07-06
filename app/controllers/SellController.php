@@ -1,23 +1,22 @@
 <?php
 
-class ContactController extends \BaseController {
+class SellController extends \BaseController {
 
-    protected $contact;
+    protected $sell;
 
-    public function __construct(Contact $contact)
+    public function __construct(Sell $sell)
     {
-        $this->contact = $contact;
+        $this->sell = $sell;
     }
 
-	/**
+    /**
 	 * Display a listing of the resource.
 	 *
 	 * @return Response
 	 */
 	public function index()
 	{
-		//
-        return View::make('contact.index');
+        return View::make('sell.index');
     }
 
 
@@ -39,34 +38,34 @@ class ContactController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
         $this->input = Input::all();
 
-        if ( ! $this->contact->fill($this->input)->isValid())
+        if ( ! $this->sell->fill($this->input)->isValid())
         {
-            return Redirect::back()->withInput()->withErrors($this->contact->errors);
+            return Redirect::back()->withInput()->withErrors($this->sell->errors);
         }
 
         // Customer receipt
-        Mail::send('emails.contact.receipt', $this->input, function($message)
+        Mail::send('emails.sell.receipt', $this->input, function($message)
         {
-            $message->to($this->input['cust_email'], $this->input['cust_name'])->subject('Thank you for your inquiry, ' . $this->input['cust_name'] . '!');
+            $message->to($this->input['cust_email'], $this->input['cust_name'])->subject('Thank you for your purchase, ' . $this->input['cust_name'] . '!');
         });
 
         // To the boss man
-        Mail::send('emails.contact.inquiry', $this->input, function($message)
+        Mail::send('emails.sell.inquiry', $this->input, function($message)
         {
-            $message->to('robmasterworks@mailinator.com', $this->input['cust_name'])->subject('Thank you for your inquiry, ' . $this->input['cust_name'] . '!');
+            $message->to('robmasterworks@mailinator.com', $this->input['cust_name'])->subject('Thank you for your purchase, ' . $this->input['cust_name'] . '!');
         });
 
         // To the henchmen
-        Mail::send('emails.contact.inquiry', $this->input, function($message)
+        Mail::send('emails.sell.inquiry', $this->input, function($message)
         {
-            $message->to('apbmasterworks@mailinator.com', $this->input['cust_name'])->subject('Thank you for your inquiry, ' . $this->input['cust_name'] . '!');
+            $message->to('apbmasterworks@mailinator.com', $this->input['cust_name'])->subject('Thank you for your purchase, ' . $this->input['cust_name'] . '!');
         });
 
+
         Session::flash('message', 'Successfully sent inquiry!');
-        return Redirect::to('contact');
+        return Redirect::to('sell');
     }
 
 
@@ -79,8 +78,7 @@ class ContactController extends \BaseController {
 	public function show($id)
 	{
 		//
-        return View::make('emails.contact.inquiry');
-    }
+	}
 
 
 	/**
