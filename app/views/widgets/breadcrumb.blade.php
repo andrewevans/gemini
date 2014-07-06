@@ -76,4 +76,13 @@
     {{ $breadcrumb }}
     @endif
 
+    @if('articles.index' == Route::current()->getName())
+    <li class="active">In-Depth Articles</li>
+    @endif
+
+    @if('articles.show' == Route::current()->getName())
+    <li><a href="/articles">In-Depth Articles</a></li>
+    <li class="active">{{ $breadcrumb }}</li>
+    @endif
+
 </ol>

@@ -117,6 +117,7 @@ View::composer('widgets.artists.bio', function($view){
 });
 
 View::composer('widgets.artists.pages', function($view){
+
     $args = array(
         'category_name'    => $view->artist->url_slug,
         'post_type'        => 'page',
@@ -129,6 +130,30 @@ View::composer('widgets.artists.pages', function($view){
 
     $view->with('artist', $view->artist)
         ->with('posts', $posts);
+});
+
+
+View::composer('widgets.pages', function($view){
+
+    if (isset($view->filter)) {
+        $category_name = $view->filter;
+    } else {
+        $category_name = $view->artist->url_slug;
+    }
+
+    $args = array(
+        'category_name'    => $category_name,
+        'post_type'        => 'page',
+        'orderby'          => 'post_date',
+        'order'            => 'DESC',
+        'post_status'      => 'publish',
+        'suppress_filters' => true );
+
+    $posts = get_posts( $args );
+
+    $view->with('artist', $view->artist)
+        ->with('posts', $posts)
+        ->with('category_name', $category_name);
 });
 
 View::composer('widgets.artists.posts', function($view){

@@ -76,18 +76,14 @@
     @include('widgets.artworks.card', array('artworks' => $artworks))
 </div>
 
-@foreach ($artists as $artist)
-    <div class="jumbotron text-center">
-        @include('widgets.artists.bio', array('artist' => $artist))
-    </div>
+<div class="container">
+    @include('widgets.artists.card', array('artists' => $artists))
+</div>
 
-    <div class="container">
-        @include('widgets.artists.pages', array('artist' => $artist))
-    </div>
 
-    <div class="container">
-        @include('widgets.artists.posts', array('artist' => $artist))
-    </div>
-@endforeach
+<div class="container">
+<h2>Featured Pages</h2>
+    @include('widgets.pages', array('filter' => 'homepage'))
+</div>
 
 @stop

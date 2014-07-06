@@ -24,6 +24,9 @@ Route::get('artists/{artist_url_slug}/{filter}', ['as' => 'artists.show.filter',
 Route::get('artists/{artist_url_slug?}/bio', ['as' => 'artists.show.bio', 'uses' => 'ArtistsController@showBio']);
 Route::get('artists/{artist_url_slug?}/bio/{wp_url_slug}', ['as' => 'artists.show.bio.page', 'uses' => 'ArtistsController@showBio'])->where('wp_url_slug', '^((?!catalogue-raisonne).)*$');
 
+Route::get('articles', ['as' => 'articles.index', 'uses' => 'StaticController@showArticle']);
+Route::get('articles/{wp_url_slug}', ['as' => 'articles.show', 'uses' => 'StaticController@showArticle']);
+
 Route::get('artworks', ['as' => 'artworks.index', 'uses' => 'ArtworksController@index']);
 Route::get('artworks/{id}', ['as' => 'artworks.show', 'uses' => 'ArtworksController@show']);
 
