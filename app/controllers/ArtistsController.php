@@ -4,11 +4,13 @@ class ArtistsController extends \BaseController {
 
     protected $artist;
     protected $person;
+    protected $posts;
 
     public function __construct(Artist $artist, Person $person)
     {
         $this->artist = $artist;
         $this->person = $person;
+        $this->posts = $this->getPosts();
         //$this->beforeFilter('auth');
     }
 
@@ -111,9 +113,9 @@ class ArtistsController extends \BaseController {
 
         $page_title = $artist->title();
         $artist->artist_bio = $artist->artist_bio()->get();
-        $artworks = $artist->artworks()->where('hidden', '!=', 1)->take(50)->orderBy('id', 'desc')->get();
+        $artworks = $artist->artworks()->where('sold', '!=', '1')->where('hidden', '!=', 1)->orderBy('id', 'desc')->get();
 
-        return View::make('artists.show', ['artist' => $artist, 'artworks' => $artworks, 'page_title' => $page_title]);
+        return View::make('artists.show', ['artist' => $artist, 'artworks' => $artworks, 'page_title' => $page_title, 'filter' => null, 'filter_slug' => null, 'posts' => $this->posts]);
     }
 
     /**
@@ -147,7 +149,7 @@ class ArtistsController extends \BaseController {
 
         $artworks = $artist->artworks()->whereRaw("(" . $filter_query . ")")->where('sold', '!=', '1')->where('hidden', '=', 0)->orderBy('id', 'desc')->get();
 
-        return View::make('artists.show', ['artist' => $artist, 'artworks' => $artworks, 'page_title' => $artist->title($page_title), 'filter' => $valid_filter, 'filter_slug' => $filter]);
+        return View::make('artists.show', ['artist' => $artist, 'artworks' => $artworks, 'page_title' => $artist->title($page_title), 'filter' => $valid_filter, 'filter_slug' => $filter, 'posts' => $this->posts]);
     }
 
 
@@ -314,6 +316,21 @@ class ArtistsController extends \BaseController {
         }
 
         return false;
+    }
+
+    public function getPosts()
+    {
+        $args = array(
+            'posts_per_page'   => 10,
+            'post_type'        => 'post',
+            'orderby'          => 'post_date',
+            'order'            => 'DESC',
+            'post_status'      => 'publish',
+            'suppress_filters' => true );
+
+        $posts = get_posts( $args );
+
+        return $posts;
     }
 
 }
