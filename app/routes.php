@@ -36,6 +36,7 @@ Route::get('catrefs/{id}', ['as' => 'catrefs.show', 'uses' => 'CatrefsController
 Route::resource('blog', 'BlogController');
 Route::resource('search', 'SearchController');
 Route::resource('contact', 'ContactController');
+Route::resource('sell', 'SellController');
 Route::resource('purchase', 'PurchaseController');
 Route::resource('offer', 'PurchaseController');
 Route::resource('login', 'HomeController@getLogin');
