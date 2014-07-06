@@ -333,28 +333,22 @@ class Artist extends Eloquent
         switch($this->slug) {
 
             case 'picasso':
-                $filters = ['ceramics', 'etchings', 'linocuts', 'prints'];
+                return ['ceramics', 'etchings', 'linocuts', 'prints'];
                 break;
 
             case 'miro':
-                $filters = ['etchings', 'lithographs', 'aquatints', 'carborundum'];
+                return ['etchings', 'lithographs', 'aquatints', 'carborundum'];
                 break;
 
             case 'rembrandt':
-                $filters = ['etchings'];
+                return ['etchings'];
 
                 break;
             default:
-                $filters = [];
+                return [];
                 break;
         }
 
-        $filters_nav = '';
-        foreach ($filters as $filter) {
-            $filters_nav .= '<a href="/artists/' . $this->url_slug . '/' . $filter . '">' . $filter . '</a> | ';
-        }
-
-        return "Filters: " . $filters_nav;
     }
 
 
@@ -363,21 +357,14 @@ class Artist extends Eloquent
         switch($this->slug) {
 
             case 'chagall':
-                $filters = ['bible-series', 'tribes-of-israel', 'daphnis-and-chloe', 'nice-and-the-cote-dazur'];
+                return ['bible-series', 'tribes-of-israel', 'daphnis-and-chloe', 'nice-and-the-cote-dazur'];
                 break;
 
-                break;
             default:
-                $filters = [];
+                return [];
                 break;
         }
 
-        $filters_nav = '';
-        foreach ($filters as $filter) {
-            $filters_nav .= '<a href="/artists/' . $this->url_slug . '/' . $filter . '">' . $filter . '</a> | ';
-        }
-
-        return "Series: " . $filters_nav;
     }
 
 

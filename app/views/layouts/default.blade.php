@@ -26,7 +26,6 @@
 
     <!-- Custom styles for this template -->
     {{ HTML::style('css/gemini-default.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
-    {{ HTML::style('css/min-design-default.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -36,7 +35,6 @@
 </head>
 
 <body role="document">
-{{ Route::current()->getName() }}
 
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container size-xs">
