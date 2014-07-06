@@ -21,24 +21,28 @@
                     <h2>It is your work in life that is the ultimate seduction.</h2>
                     <p>Picasso revolutionized the art world and to many is THE artist of the 20th century. He is famous for his role in pioneering Cubism with Georges Braque and for his melancholy Blue Period pieces.</p>
                 </div>
-                <a href="#">
+                <a href="/artists/pablo-picasso">
                     <span>
                         View All
                     </span>
                 </a>
-                <a href="#">
+                <a href="/artists/pablo-picasso/ceramics">
                     <span>
                          | Ceramics
                     </span>
                 </a>
-                <a href="#">
+                <a href="/artists/pablo-picasso/linocuts">
                     <span>
                          | Linocuts
                     </span>
                 </a>
             </div>
 
-            <img src="http://placekitten.com/1920/800">                                <div class="container">
+            <a href="/artists/pablo-picasso">
+                <img src="http://www.masterworksfineart.com/images/splashes/picasso-jacqueline-for-sale.jpg">
+            </a>
+
+                <div class="container">
                 <div class="carousel-caption">
                 </div>
             </div>
@@ -71,13 +75,14 @@
 <div class="container">
 <div class="intro-header" style="text-align: center; max-width:450px;"> <i class="sprite-h gtitle-deco above"></i>
     <h1>{{ $page_title }}</h1>
-    <p>{{ $artist->meta_description }}</p>
+    <p>{{ $artist->meta_description }} <a href="{{ $artist->url() }}/bio">Read more about {{ $artist->alias }}</a></p>
 </div>
 </div>
 
 <div class="container">
-    <div>{{ $artist->filters() }}</div>
-    <div>{{ $artist->series() }}</div>
+    @include('widgets.artists.filters', array('artist' => $artist))
+    @include('widgets.artists.series', array('artist' => $artist))
+
 </div>
 
 <div class="container">

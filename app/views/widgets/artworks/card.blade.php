@@ -1,3 +1,4 @@
+<?php $offset = 0; ?>
 <div class="row">
     @if (sizeof($artworks) > 0)
         @foreach ($artworks as $key => $artwork)
@@ -5,18 +6,26 @@
             </div>
             <div class="row">
         @endif
-        <div class="col-md-3 card">
-            <figure>
-                <a href="{{ $artwork->url() }}" class="card-image">
-                    {{ HTML::image($artwork->img_url()) }}
-                </a>
-                <figcaption>
-                    <a href="{{ $artwork->url() }}"><i>{{ strip_tags($artwork->title_short()) }}</i></a><br />
-                    <a href="{{ $artwork->url() }}">{{ strip_tags($artwork->artist->alias) }}</a><br />
-                    <a href="{{ $artwork->url() }}">{{ strip_tags($artwork->medium_short) }}</a><br />
-                    ${{ number_format($artwork->price) }}
-                </figcaption>
-            </figure>
+        <div class="col-md-4">
+            @if ($key % 11 == 0 && $key != 0 && $key != 11)
+                <div class="card blank">
+                    @include('widgets.post', array('posts' => $posts, 'offset' => $offset++))
+                </div>
+            @else
+                <div class="card">
+                <figure>
+                    <a href="{{ $artwork->url() }}" class="card-image">
+                        {{ HTML::image($artwork->img_url()) }}
+                    </a>
+                    <figcaption>
+                        <a href="{{ $artwork->url() }}"><i>{{ strip_tags($artwork->title_short()) }}</i></a><br />
+                        <a href="{{ $artwork->url() }}">{{ strip_tags($artwork->artist->alias) }}</a><br />
+                        <a href="{{ $artwork->url() }}">{{ strip_tags($artwork->medium_short) }}</a><br />
+                        ${{ number_format($artwork->price) }}
+                    </figcaption>
+                </figure>
+                </div>
+            @endif
         </div>
         @endforeach
     @else

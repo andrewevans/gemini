@@ -4,7 +4,7 @@
 body {
     padding-top: 0;
     padding-bottom: 30px;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Ovo', sans-serif;
     background-color: #CC9;
     background-image: url('/img/theme/gemini/background.png');
     background-repeat: repeat;
@@ -106,6 +106,10 @@ body {
     right: -9999px;
     margin: auto;
 
+}
+
+.carousel-inner>.item>a>img {
+    max-width: none;
 }
 
 
@@ -237,11 +241,12 @@ h4 {
 }
 
 .row [class*="col-"] {
-  padding-top: 15px;
-  border: 1px solid #ddd;
+/*
+    padding-top: 15px;
     overflow: hidden;
     padding-bottom: 5em;
     text-align: center;
+*/
 }
 
 hr {
@@ -264,6 +269,7 @@ hr {
     top: 33%;
     width: 420px;
     margin-left: -475px;
+    color: #222222;
 }
 
 .color-text p {
@@ -570,17 +576,23 @@ h3.table-name {
 
 
 .card {
-    float: left;
 /*    width: 280px;*/
+    border: 1px solid #ddd;
     padding: 15px 15px 15px;
-    margin: 15px 15px 0 0;
+    margin: 30px 0 0 0;
     box-shadow: 0 1px 3px rgba(34, 25, 25, 0.4);
     -moz-box-shadow: 0 1px 2px rgba(34,25,25,0.4);
     -webkit-box-shadow: 0 1px 3px rgba(34, 25, 25, 0.4);
-    overflow: hidden;
-    position: relative;
     background: #f2f0f0;
     text-align: center;
+}
+
+.card.blank {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
 }
 
 .card p,
