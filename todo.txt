@@ -2,7 +2,6 @@ workflow of deleting an artist that has belongsTo artworks attached to it. Shoul
 
 downloaded/installed a wp plugin to fetch category_name
 in /Users/vesper/Sites/gemini/wordpress/wp-content/plugins/post-tags-and-categories-for-pages/post-tag.php i edited the function to just return. on update of that plugin it will revert and show all posts AND pages!
-what if article is about more than one artist? needs link at bottom saying 'also available at [url]' for other urls so dont get dinged for duplicate content
 
 there's words like 'lithographs' and 'bio' that CANT be titles of pieces if doing /artists/NAME/TITLE
 
@@ -88,3 +87,8 @@ have mail to boss man be FROM the customer, needs to send thru server? via php m
 remember to add robots.txt and block in robots and on page /purchase, /offer, etc. and NOARCHIVE for artist/artwork pages
 
 admin search needs to use same api as on-site search. Right now it just looks for the string in the title
+
+what if article is about more than one artist? needs link at bottom saying 'also available at [url]' for other urls so dont get dinged for duplicate content
+
+get on in-depth articles https://support.google.com/webmasters/answer/3280182?hl=en
+articles need authorship info!!!!
