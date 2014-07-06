@@ -156,7 +156,7 @@ View::composer('widgets.pages', function($view){
         ->with('category_name', $category_name);
 });
 
-View::composer('widgets.artists.posts', function($view){
+View::composer('widgets.artists.posts', function($view, $offset = null){
     $args = array(
         'category_name'    => $view->artist->url_slug,
         'post_type'        => 'post',
@@ -169,6 +169,31 @@ View::composer('widgets.artists.posts', function($view){
 
     $view->with('artist', $view->artist)
         ->with('posts', $posts);
+});
+
+View::composer('widgets.post', function($view){
+
+    if (isset($view->posts)) {
+        $posts = $view->posts;
+    } else {
+        $args = array(
+            'post_type'        => 'post',
+            'orderby'          => 'post_date',
+            'order'            => 'DESC',
+            'post_status'      => 'publish',
+            'suppress_filters' => true );
+
+        $posts = get_posts( $args );
+    }
+
+    if ($view->offset > sizeof($posts)) {
+        $view->offset = 0;
+    }
+
+    $post = $posts[$view->offset];
+
+    $view->with('artist', $view->artist)
+        ->with('post', $post);
 });
 
 View::composer('widgets.nav', function($view){

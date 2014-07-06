@@ -1,4 +1,5 @@
-<h1>{{ $artist->first_name }} {{ $artist->last_name }}</h1>
+<h1>{{ $artist->first_name }} {{ $artist->last_name }} ({{ $artist->year_begin }} - {{ $artist->year_end }})</h1>
+
 {{ HTML::image($artist->img_url()) }}
 
 @foreach ($biographies as $bio)
