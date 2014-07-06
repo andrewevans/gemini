@@ -228,37 +228,10 @@ Email on Acid - http://www.emailonacid.com/blog/details/C18/doctype_-_the_black_
 
         <table style="width: 90%">
             <tr>
-                <td>
-                    <table>
-                        <tr>
-                            <td style="background: #e7e7c6; text-align: left; padding: 1em">
-                                <p>In response:</p>
-
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="background: #e7e7c6; text-align: left; padding: 1em">
-                                <p>Your name: {{ $cust_name }}<br />
-                                Your email: {{ $cust_email }}<br />
-                                Your phone number: {{ $cust_phone }}<br />
-                                Your address: {{ $cust_address }}<br />
-                                Your country: {{ $cust_country }}</p>
-                            </td>
-                        </tr>
-                    </table>
+                <td style="background: #e7e7c6; text-align: left; padding: 1em">
+                    <h2>Thank you for your submission. We'll be getting back to you shortly! Thanks.</h2>
                 </td>
                 <td>
-                    <figure>
-                        <a href="{{ $artwork->url() }}" class="card-image">
-                            {{ HTML::image($artwork->img_url()) }}
-                        </a>
-                        <figcaption>
-                            <a href="{{ $artwork->url() }}"><i>{{ strip_tags($artwork->title_short()) }}</i></a><br />
-                            <a href="{{ $artwork->url() }}">{{ strip_tags($artwork->artist->alias) }}</a><br />
-                            <a href="{{ $artwork->url() }}">{{ strip_tags($artwork->medium_short) }}</a><br />
-                            ${{ number_format($artwork->price) }}
-                        </figcaption>
-                    </figure>
                 </td>
             </tr>
         </table>
