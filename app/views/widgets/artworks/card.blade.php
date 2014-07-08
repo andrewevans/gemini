@@ -6,7 +6,11 @@
             </div>
             <div class="row">
         @endif
-        <div class="col-md-4">
+        @if ($key == 0)
+            <div class="col-md-4 col-lg-8 featured">
+        @else
+            <div class="col-md-4">
+        @endif
             @if ($key % 11 == 0 && $key != 0 && $key != 11)
                 <div class="card blank">
                     @include('widgets.post', array('posts' => $posts, 'offset' => $offset++))
@@ -15,9 +19,13 @@
                 <div class="card">
                 <figure>
                     <a href="{{ $artwork->url() }}" class="card-image">
-                        <div class="zoom">
+                        @if ($key == 0)
                             {{ HTML::image($artwork->img_url()) }}
-                        </div>
+                        @else
+                            <div class="zoom">
+                                {{ HTML::image($artwork->img_url()) }}
+                            </div>
+                        @endif
                     </a>
                     <figcaption>
                         <a href="{{ $artwork->url() }}"><i>{{ strip_tags($artwork->title_short()) }}</i></a><br />

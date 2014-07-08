@@ -218,6 +218,16 @@ body {
 }
 /* end caurosel */
 
+/* adheres to bootstrap col-lg */
+@media (min-width: 1200px) {
+    .col-lg-8.featured .card a.card-image {
+        height: 764px;
+    }
+
+    .col-lg-8.featured .card figcaption {
+        font-size: 1.3em;
+    }
+}
 
 /* custom styles */
 

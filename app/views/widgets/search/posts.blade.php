@@ -4,7 +4,7 @@
 
     <!-- the loop -->
     <?php while ( $posts->have_posts() ) : $posts->the_post(); ?>
-        <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+        <h3 class="featured"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
     <?php endwhile; ?>
     <!-- end of the loop -->
 
