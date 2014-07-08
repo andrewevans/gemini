@@ -92,3 +92,5 @@ what if article is about more than one artist? needs link at bottom saying 'also
 
 get on in-depth articles https://support.google.com/webmasters/answer/3280182?hl=en
 articles need authorship info!!!!
+
+when there are only two pieces, the featured card looks funny
