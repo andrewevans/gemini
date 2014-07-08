@@ -1,5 +1,17 @@
 <?php
 
+require_once '../vendor/constantcontact/src/Ctct/autoload.php';
+
+use Ctct\ConstantContact;
+use Ctct\Components\Contacts\Contact;
+use Ctct\Components\Contacts\ContactList;
+use Ctct\Components\Contacts\EmailAddress;
+use Ctct\Exceptions\CtctException;
+
+define("APIKEY", "g7rbwgf9xzygfhneax9j3j4w");
+define("ACCESS_TOKEN", "99b48825-3ded-4ccc-b416-0d19502f0751");
+
+
 class UrlController extends \BaseController {
 
     protected $artist;
@@ -13,6 +25,7 @@ class UrlController extends \BaseController {
         $this->artwork = $artwork;
         $this->catalogue = $catalogue;
         $this->catref =$catref;
+        $this->cc = new ConstantContact(APIKEY);
     }
 
     /**
@@ -194,6 +207,61 @@ class UrlController extends \BaseController {
 	{
 		//
 	}
+
+    public function newsletter($email = null, $first_name = null, $last_name = null, $list_id = null)
+    {
+        if ($email == null) return 'Need email please';
+
+        // attempt to fetch lists in the account, catching any exceptions and printing the errors to screen
+        try{
+        $lists = $this->cc->getLists(ACCESS_TOKEN);
+        } catch (CtctException $ex) {
+            foreach ($ex->getErrors() as $error) {
+                print_r($error);
+            }
+        }
+
+        // check if the form was submitted
+        if (isset($email) && strlen($email) > 1) {
+            $action = "Getting Contact By Email Address";
+            try {
+                // check to see if a contact with the email addess already exists in the account
+                $response = $this->cc->getContactByEmail(ACCESS_TOKEN, $email);
+
+                // create a new contact if one does not exist
+                if (empty($response->results)) {
+                    $action = "Creating Contact";
+
+                    $contact = new Contact();
+                    $contact->addEmail($email);
+                    //$contact->addList($_POST['list']);
+                    $contact->addList('2105231740');
+                    $contact->first_name = $first_name;
+                    $contact->last_name = $last_name;
+                    $returnContact = $this->cc->addContact(ACCESS_TOKEN, $contact);
+
+                    // update the existing contact if address already existed
+                } else {
+                    $action = "Updating Contact";
+
+                    $contact = $response->results[0];
+                    //$contact->addList($_POST['list']);
+                    $contact->addList('2105231740');
+                    $contact->first_name = $first_name;
+                    $contact->last_name = $last_name;
+                    $returnContact = $this->cc->updateContact(ACCESS_TOKEN, $contact);
+                }
+
+                // catch any exceptions thrown during the process and print the errors to screen
+            } catch (CtctException $ex) {
+                echo '<span class="label label-important">Error '.$action.'</span>';
+                echo '<div class="container alert-error"><pre class="failure-pre">';
+                print_r($ex->getErrors());
+                echo '</pre></div>';
+                die();
+            }
+        }
+    }
 
 
 }
