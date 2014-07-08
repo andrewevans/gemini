@@ -81,7 +81,13 @@ class UrlController extends \BaseController {
                 break;
 
             case 'artworks':
-                $artworks = $this->artwork->whereSold(0)->whereHidden(0)->orderBy('id', 'DESC')->get();
+                $artworks = $this->artwork
+                    ->whereIn('artist_id', function($query)
+                    {
+                        $query->select('id')
+                            ->from('artists')
+                            ->whereRaw('id != 0');
+                    })->whereSold(0)->whereHidden(0)->orderBy('id', 'DESC')->get();
 
                 foreach ($artworks as $artwork) {
                     $return_array[] = array(
@@ -102,6 +108,8 @@ class UrlController extends \BaseController {
                         'reference' => $artwork->reference,
                         'framing' => $artwork->framing,
                         'price_on_req' => $artwork->price_on_req,
+                        'mfa_img_url' => 'http://www.masterworksfineart.com/inventory/' . $artwork->artist->slug . '/original/' . $artwork->artist->slug . $artwork->id . '.jpg',
+                        'mfa_img_thumb_url' => 'http://www.masterworksfineart.com/inventory/' . $artwork->artist->slug . '/prev_' . $artwork->artist->slug . $artwork->id . '.jpg',
                         'guid' => 'w-' . $artwork->id,
                         'id' => $artwork->id);
                 }
