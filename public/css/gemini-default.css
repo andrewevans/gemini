@@ -730,3 +730,9 @@ h3.table-name {
 .zoom {
     height: 100%;
 }
+
+h3.featured,
+h3.featured a{
+    font-size: 1.5em;
+    font-weight: bold;
+}
