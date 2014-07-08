@@ -45,6 +45,11 @@
                 {{ Form::textarea('cust_inquiry', null, array('class' => 'form-control')) }}
             </div>
 
+            <div class="form-group">
+                {{ Form::checkbox('cust_newsletter', '1', null, array('class' => 'form-control')) }}
+                {{ Form::label('cust_newsletter', 'Get our fabulous, and sometimes controversial, newsletter!') }}
+            </div>
+
             {{ Form::submit('Send message', array('class' => 'btn btn-primary')) }}
 
             {{ Form::close() }}
