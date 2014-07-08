@@ -40,7 +40,11 @@
         @endforeach
     @else
         <div class="row">
-            <p>We don't have works to show by <b>{{ $artist->alias }}</b>, but please feel free to <a href="/contact">contact us</a> about works that you are looking for. We would be happy to look into it for you.</p>
+            @if (isset($artist))
+                <p>We don't have works to show by <b>{{ $artist->alias }}</b>, but please feel free to <a href="/contact">contact us</a> about works that you are looking for. We would be happy to look into it for you.</p>
+            @else
+                <p>We don't have works to show that match your search, but please feel free to <a href="/contact">contact us</a> about works that you are looking for. We would be happy to look into it for you.</p>
+            @endif
         </div>
     @endif
 </div>
