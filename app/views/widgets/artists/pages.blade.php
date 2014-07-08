@@ -1,10 +1,14 @@
 @if (sizeof($posts) > 0)
-    <h2>In-Depth with {{ $artist->alias }}</h2>
+    <h2><span class="fa fa-file-text"></span> In-Depth with {{ $artist->alias }}</h2>
 
-    @foreach ($posts as $post)
-    <div>
-        <h2><a href="/artists/{{ $artist->url_slug }}/bio/{{ $post->post_name }}">{{ $post->post_title }}</a></h2>
-    </div>
+    @foreach ($posts as $key => $post)
+        <div>
+            @if ($key == 0)
+                <h3 class="featured"><a href="/artists/{{ $artist->url_slug }}/bio/{{ $post->post_name }}">{{ $post->post_title }}</a></h3>
+            @else
+                <h3><a href="/artists/{{ $artist->url_slug }}/bio/{{ $post->post_name }}">{{ $post->post_title }}</a></h3>
+            @endif
+        </div>
     @endforeach
 
     <div>

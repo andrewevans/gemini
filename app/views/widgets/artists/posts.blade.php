@@ -1,16 +1,14 @@
 @if (sizeof($posts) > 0)
-    <h2>Blog Posts with {{ $artist->alias }}</h2>
+    <h2><span class="fa fa-rss"></span> Blog Posts with {{ $artist->alias }}</h2>
 
-    @foreach ($posts as $post)
-    <div>
-        <h2>({{ $post->post_type }}) ({{ $post->ID }}) {{ $post->post_title }}</h2>
-        <?php
-        //$dog = preg_replace("/\[caption.*\[\/caption\]/", '', $content);
-        $patterns[0] = '/(\[caption)(.*)(\])(.*)(\[\/caption\])/';
-        $replacements[0] = '<figure$2>$4</figure>';
-        $post->post_content = preg_replace($patterns, $replacements, $post->post_content);
-        ?>
-    </div>
+    @foreach ($posts as $key => $post)
+        <div>
+            @if ($key == 0)
+                <h3 class="featured"><a href="{{ get_permalink($post->ID) }}">{{ $post->post_title }}</a></h3>
+            @else
+                <h3><a href="{{ get_permalink($post->ID) }}">{{ $post->post_title }}</a></h3>
+            @endif
+        </div>
     @endforeach
 
     <div>
