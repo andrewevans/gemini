@@ -46,20 +46,16 @@
 
         <?php $count = 1; ?>
         @foreach ($artworks as $key => $artwork)
-        <div class="item <?= ($key == -1 ? 'active' : '') ?>">
-            @if (file_exists('img/artists/' . $artwork->artist->slug . '/original/' . $artwork->artist->slug . $artwork->id . '.jpg'))
-            {{ HTML::image('img/artists/' . $artwork->artist->slug . '/original/' . $artwork->artist->slug . $artwork->id . '.jpg') }}
-            @else
-            {{ HTML::image('img/no-image.jpg', 'Profile of ' . $artwork->artist->alias) }}<br />
-            @endif
-            <div class="container">
-                <div class="carousel-caption">
-                    <h1>{{ $artwork->title_short() }}</h1>
-                    <p>{{ $artwork->medium_short() }}</p>
-                    <p><a class="btn btn-lg btn-primary" href="/artworks/{{ $artwork->id }}" role="button">View Artwork</a></p>
+            <div class="item <?= ($key == -1 ? 'active' : '') ?>">
+                {{ HTML::image($artwork->img_url()) }}
+                <div class="container">
+                    <div class="carousel-caption">
+                        <h1>{{ $artwork->title_short() }}</h1>
+                        <p>{{ $artwork->medium_short() }}</p>
+                        <p><a class="btn btn-lg btn-primary" href="{{ $artwork->url() }}" role="button">View Artwork</a></p>
+                    </div>
                 </div>
             </div>
-        </div>
         <?php
         $count++;
         if ($count > 3) break;
