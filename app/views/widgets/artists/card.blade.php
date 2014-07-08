@@ -4,7 +4,11 @@
             </div>
             <div class="row">
         @endif
-        <div class="col-md-3">
+            @if ($key == 0)
+                <div class="col-md-4 col-lg-8 featured">
+            @else
+                <div class="col-md-4">
+            @endif
             <div class="card">
             <figure>
                 <a href="{{ $artist->url() }}" class="card-image">
