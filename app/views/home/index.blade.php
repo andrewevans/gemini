@@ -81,9 +81,13 @@
 </div>
 
 
-<div class="container">
-<h2>Featured Pages</h2>
-    @include('widgets.pages', array('filter' => 'homepage'))
+<div class="row">
+    <div class="col-md-5 col-md-offset-1">
+        @include('widgets.pages', array('filter' => 'homepage'))
+    </div>
+    <div class="col-md-5">
+        @include('widgets.posts', array('filter' => 'homepage'))
+    </div>
 </div>
 
 @stop
