@@ -65,6 +65,17 @@ class ContactController extends \BaseController {
             $message->to('apbmasterworks@mailinator.com', $this->input['cust_name'])->subject('Thank you for your inquiry, ' . $this->input['cust_name'] . '!');
         });
 
+        if ($this->input['cust_newsletter'] == '1') {
+            $url = 'http://gemini.andrew.com/api/v1/newsletter/' . $this->input['cust_email'];
+
+            $ch = curl_init( $url );
+            curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1);
+            curl_setopt( $ch, CURLOPT_HEADER, 0);
+            curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
+
+            $response = curl_exec( $ch );
+        }
+
         Session::flash('message', 'Successfully sent inquiry!');
         return Redirect::to('contact');
     }
