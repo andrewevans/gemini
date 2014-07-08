@@ -15,7 +15,9 @@
                 <div class="card">
                 <figure>
                     <a href="{{ $artwork->url() }}" class="card-image">
-                        {{ HTML::image($artwork->img_url()) }}
+                        <div class="zoom">
+                            {{ HTML::image($artwork->img_url()) }}
+                        </div>
                     </a>
                     <figcaption>
                         <a href="{{ $artwork->url() }}"><i>{{ strip_tags($artwork->title_short()) }}</i></a><br />

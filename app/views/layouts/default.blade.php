@@ -154,8 +154,10 @@
 <script src="/vendor/handlebars-v1.3.0.js"></script>
 {{ HTML::script('js/gemini-default.js') }}
 
+<script src="/vendor/zoom-master/jquery.zoom.min.js"></script>
 <script>
     CKEDITOR.replaceAll();
+    $('.zoom').zoom();
 </script>
 
 <script>
