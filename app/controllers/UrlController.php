@@ -18,14 +18,16 @@ class UrlController extends \BaseController {
     protected $artwork;
     protected $catalogue;
     protected $catref;
+    protected $url;
 
-    public function __construct(Artist $artist, Artwork $artwork, Catalogue $catalogue, Catref $catref)
+    public function __construct(Artist $artist, Artwork $artwork, Catalogue $catalogue, Catref $catref, Url $url)
     {
         $this->artist = $artist;
         $this->artwork = $artwork;
         $this->catalogue = $catalogue;
         $this->catref =$catref;
         $this->cc = new ConstantContact(APIKEY);
+        $this->url = $url;
     }
 
     /**
@@ -209,60 +211,35 @@ class UrlController extends \BaseController {
 		//
 	}
 
-    public function newsletter($email = null, $first_name = null, $last_name = null, $list_id = null)
+    public function newsletter($cust_email, $first_name = null, $last_name = null, $lists = null)
     {
-        if ($email == null) return 'Need email please';
+        $cust_info = ['cust_email' => $cust_email,
+            'first_name' => $first_name,
+            'last_name' => $last_name];
 
-        // attempt to fetch lists in the account, catching any exceptions and printing the errors to screen
-        try{
-        $lists = $this->cc->getLists(ACCESS_TOKEN);
-        } catch (CtctException $ex) {
-            foreach ($ex->getErrors() as $error) {
-                print_r($error);
-            }
+        $lists = explode(',', $lists);
+
+        $existing_email = $this->cc->getContactByEmail(ACCESS_TOKEN, $cust_info['cust_email']);
+
+        if (empty($existing_email->results)) {
+            $result[] = $this->addContact($cust_info); // add them, and put them in the general list
+        } else {
+            $result[] = $this->updateContact($cust_info, $existing_email->results[0]); // they already exist, so update their info
         }
 
-        // check if the form was submitted
-        if (isset($email) && strlen($email) > 1) {
-            $action = "Getting Contact By Email Address";
-            try {
-                // check to see if a contact with the email addess already exists in the account
-                $response = $this->cc->getContactByEmail(ACCESS_TOKEN, $email);
-
-                // create a new contact if one does not exist
-                if (empty($response->results)) {
-                    $action = "Creating Contact";
-
-                    $contact = new Contact();
-                    $contact->addEmail($email);
-                    //$contact->addList($_POST['list']);
-                    $contact->addList('2105231740');
-                    $contact->first_name = $first_name;
-                    $contact->last_name = $last_name;
-                    $returnContact = $this->cc->addContact(ACCESS_TOKEN, $contact);
-
-                    // update the existing contact if address already existed
-                } else {
-                    $action = "Updating Contact";
-
-                    $contact = $response->results[0];
-                    //$contact->addList($_POST['list']);
-                    $contact->addList('2105231740');
-                    $contact->first_name = $first_name;
-                    $contact->last_name = $last_name;
-                    $returnContact = $this->cc->updateContact(ACCESS_TOKEN, $contact);
-                }
-
-                // catch any exceptions thrown during the process and print the errors to screen
-            } catch (CtctException $ex) {
-                echo '<span class="label label-important">Error '.$action.'</span>';
-                echo '<div class="container alert-error"><pre class="failure-pre">';
-                print_r($ex->getErrors());
-                echo '</pre></div>';
-                die();
-            }
-        }
+        return $result;
     }
 
+    public function addContact($cust_info)
+    {
+        $contact = $this->url->createContact($cust_info);
+        return $this->cc->addContact(ACCESS_TOKEN, $contact);
+    }
+
+    public function updateContact($cust_info, $existing_email)
+    {
+        $contact = $this->url->editContact($cust_info, $existing_email);
+        return $this->cc->updateContact(ACCESS_TOKEN, $contact);
+    }
 
 }
