@@ -126,6 +126,7 @@ class UrlController extends \BaseController {
                         'price_on_req' => $artwork->price_on_req,
                         'mfa_img_url' => 'http://www.masterworksfineart.com/inventory/' . $artwork->artist->slug . '/original/' . $artwork->artist->slug . $artwork->id . '.jpg',
                         'mfa_img_thumb_url' => 'http://www.masterworksfineart.com/inventory/' . $artwork->artist->slug . '/prev_' . $artwork->artist->slug . $artwork->id . '.jpg',
+                        'artist_id' => $artwork->artist_id,
                         'guid' => 'w-' . $artwork->id,
                         'id' => $artwork->id);
                 }
