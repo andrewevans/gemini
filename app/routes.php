@@ -48,7 +48,7 @@ Route::resource('login', 'HomeController@getLogin');
 Route::group(array('prefix' => 'api/v1'), function()
 {
     Route::resource('url', 'UrlController');
-    Route::get('newsletter/{email?}/{first_name?}/{last_name?}/{list_id?}', ['as' => 'api.newsletter', 'uses' => 'UrlController@newsletter']);
+    Route::get('newsletter/{cust_email}/{first_name?}/{last_name?}/{lists?}', ['as' => 'api.newsletter', 'uses' => 'UrlController@newsletter']);
 });
 
 Route::get('gemini', ['as' => 'gemini.index', 'uses' => 'GeminiController@index'])->before('auth');;
