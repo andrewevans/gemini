@@ -217,7 +217,6 @@ class UrlController extends \BaseController {
             'first_name' => $first_name,
             'last_name' => $last_name];
 
-        $lists = explode(',', $lists);
 
         $existing_email = $this->cc->getContactByEmail(ACCESS_TOKEN, $cust_info['cust_email']);
 
@@ -227,7 +226,10 @@ class UrlController extends \BaseController {
             $contact = $this->updateContact($cust_info, $existing_email->results[0]); // they already exist, so update their info
         }
 
-        $contact = $this->addToList($contact, 'chagall_new');
+        if ($lists != null) {
+            $lists = explode(',', $lists);
+            $contact = $this->addToList($contact, $lists);
+        }
 
         return Response::json($contact, 200);
     }
@@ -244,7 +246,7 @@ class UrlController extends \BaseController {
         return $this->cc->updateContact(ACCESS_TOKEN, $contact);
     }
 
-    public function addToList($contact, $list_name)
+    public function addToList($contact, $list_names)
     {
         // attempt to fetch lists in the account, catching any exceptions and printing the errors to screen
         try{
@@ -255,21 +257,24 @@ class UrlController extends \BaseController {
             }
         }
 
-        $list = null;
+        foreach ($list_names as $list_name) {
+            $list = null;
 
-        foreach ($lists as $l){
-            if ($l->name == $list_name) {
-                $list = $this->cc->getList(ACCESS_TOKEN, $l->id);
+            foreach ($lists as $l){
+                if ($l->name == $list_name) {
+                    $list = $this->cc->getList(ACCESS_TOKEN, $l->id);
+                }
             }
+
+            // list doesn't exist yet, so make it!
+            if ($list == null) {
+                $new_list = $this->url->createList($list_name);
+                $list = $this->cc->addList(ACCESS_TOKEN, $new_list);
+            }
+
+            $contact->addList($list->id);
         }
 
-        // list doesn't exist yet, so make it!
-        if ($list == null) {
-            $new_list = $this->url->createList($list_name);
-            $list = $this->cc->addList(ACCESS_TOKEN, $new_list);
-        }
-
-        $contact->addList($list->id);
         return $this->cc->updateContact(ACCESS_TOKEN, $contact);
     }
 
