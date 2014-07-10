@@ -34,10 +34,8 @@ class Url extends Eloquent
     public function editContact($cust_info, $existing_email)
     {
         $contact = $existing_email;
-        //$contact->addEmail($cust_info['cust_email']);
         $contact->first_name = $cust_info['first_name'];
         $contact->last_name = $cust_info['last_name'];
-        $contact->addList('2105231740'); // add to 'general' list
 
         return $contact;
     }
