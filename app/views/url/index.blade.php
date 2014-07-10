@@ -11,7 +11,14 @@
         <li><a href="/api/v1/url/artworks">Artworks</a></li>
         <li><a href="/api/v1/url/Catalogues">Catalogues</a></li>
         <li><a href="/api/v1/url/Catrefs">Catrefs</a></li>
-        <li><a href="/api/v1/newsletter">Newsletter (requires: email)</a></li>
+        <li><a href="/api/v1/newsletter">Newsletter</a>
+            <ul>
+                <li>email (required)</li>
+                <li>first_name</li>
+                <li>last_name</li>
+                <li>email lists (comma delimited)</li>
+            </ul>
+        </li>
     </ul>
 </div>
 @stop
