@@ -44,6 +44,9 @@ Route::resource('purchase', 'PurchaseController');
 Route::resource('offer', 'PurchaseController');
 Route::resource('login', 'HomeController@getLogin');
 
+Route::get('newsletter', 'ContactController@newsletter');
+Route::post('newsletter', 'ContactController@newsletter');
+
 // Route group for API versioning
 Route::group(array('prefix' => 'api/v1'), function()
 {
