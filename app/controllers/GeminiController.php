@@ -114,7 +114,17 @@ class GeminiController extends \BaseController {
     public function catrefs($id = null)
     {
         if ($id == null) {
-            $catrefs = $this->catref->all();
+            $catrefs = $this->catref->whereIn('catalogue_id', function($query)
+            {
+                $query->select('id')
+                    ->from('catalogues')
+                    ->whereIn('artist_id', function($query)
+                    {
+                        $query->select('id')
+                            ->from('artists')
+                            ->whereRaw('id != 0');
+                    })->orderBy('id', 'desc');
+            })->orderBy('id', 'desc')->get();
         } else {
             $catrefs[] = $this->catref->find($id);
 
