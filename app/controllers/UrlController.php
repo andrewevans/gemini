@@ -248,6 +248,7 @@ class UrlController extends \BaseController {
 
     public function addToList($contact, $list_names)
     {
+        array_map('strtolower', $list_names);
         // attempt to fetch lists in the account, catching any exceptions and printing the errors to screen
         try{
             $lists = $this->cc->getLists(ACCESS_TOKEN);
@@ -258,10 +259,11 @@ class UrlController extends \BaseController {
         }
 
         foreach ($list_names as $list_name) {
+            $list_name .= '-list';
             $list = null;
 
             foreach ($lists as $l){
-                if ($l->name == $list_name) {
+                if (strtolower($l->name) == $list_name) {
                     $list = $this->cc->getList(ACCESS_TOKEN, $l->id);
                 }
             }
