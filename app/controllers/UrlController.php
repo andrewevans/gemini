@@ -1,6 +1,6 @@
 <?php
 
-require_once '../vendor/constantcontact/src/Ctct/autoload.php';
+require_once '../vendor/constantcontact/constantcontact/src/Ctct/autoload.php';
 
 use Ctct\ConstantContact;
 use Ctct\Components\Contacts\Contact;
