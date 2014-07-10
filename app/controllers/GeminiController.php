@@ -85,7 +85,12 @@ class GeminiController extends \BaseController {
     public function catalogues($id = null)
     {
         if ($id == null) {
-            $catalogues = $this->catalogue->all();
+            $catalogues = $this->catalogue->whereIn('artist_id', function($query)
+            {
+                $query->select('id')
+                    ->from('artists')
+                    ->whereRaw('id != 0');
+            })->orderBy('id', 'desc')->get();
         } else {
             $catalogues[] = $this->catalogue->find($id);
 
