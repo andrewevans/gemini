@@ -416,10 +416,21 @@ class Catref extends Eloquent
 
         if (file_exists($local_file) || $upload) return $local_file;
 
-        $remote_file = 'http://www.masterworksfineart.com/catalogue/' . $this->catalogue->artist->slug . '/' . $this->catalogue->slug . '/original/' . $this->catalogue->slug . $this->reference_num . '.jpg';
 
-        if ($this->checkRemoteFile($remote_file)) {
-            return $remote_file;
+        if ($this->catalogue_id == 5) {
+            $remote_file = 'http://www.masterworksfineart.com/catalogue/' . $this->catalogue->artist->slug . '/' . $this->catalogue->slug . '/original/' . $this->catalogue->slug . $this->reference_num . '.jpg';
+
+            if ($this->checkRemoteFile($remote_file)) {
+                return $remote_file;
+            }
+        }
+
+        if ($this->catalogue_id == -1) {
+            $remote_file = 'http://madoura.com/pictures/archive/mad' . $this->reference_num . 'b.jpg';
+
+            if ($this->checkRemoteFile($remote_file)) {
+                return $remote_file;
+            }
         }
 
         return 'img/no-image.jpg';
