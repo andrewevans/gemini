@@ -20,6 +20,43 @@ class ContactController extends \BaseController {
         return View::make('contact.index');
     }
 
+    public function newsletter()
+    {
+        $artists = Artist::all();
+        $submited = false;
+
+        if (! empty($_POST)) {
+
+            $cust_info = array("email" => $_POST['cust_email'],
+                "first_name" => $_POST['cust_first_name'],
+                "last_name" => $_POST['cust_last_name']);
+
+            if (isset($_POST['artists'])) {
+                $lists = $_POST['artists'];
+            } else
+                $lists = [];
+
+            $data_string = json_encode($cust_info);
+
+            $api_call = 'http://www.appelfineart.com/api/v1/newsletter/' . $cust_info['email'] . '/' . $cust_info['first_name'] . '/' . $cust_info['last_name'] . '/' . implode(',', $lists);
+
+            $ch = curl_init($api_call);
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                    'Content-Type: application/json',
+                    'Content-Length: ' . strlen($data_string))
+            );
+
+            $result = curl_exec($ch);
+            $submited = true;
+            return View::make('contact.newsletter', ['artists' => $artists, 'cust_info' => $cust_info, 'submitted' => $submited]);
+        }
+
+        return View::make('contact.newsletter', ['artists' => $artists, 'submitted' => $submited]);
+    }
+
 
 	/**
 	 * Show the form for creating a new resource.
