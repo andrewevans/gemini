@@ -21,15 +21,15 @@
 	},
 	"scripts": {
 		"post-install-cmd": [
-			"php-cli artisan clear-compiled",
-			"php-cli artisan optimize"
+			"php artisan clear-compiled",
+			"php artisan optimize"
 		],
 		"post-update-cmd": [
-			"php-cli artisan clear-compiled",
-			"php-cli artisan optimize"
+			"php artisan clear-compiled",
+			"php artisan optimize"
 		],
 		"post-create-project-cmd": [
-			"php-cli artisan key:generate"
+			"php artisan key:generate"
 		]
 	},
 	"config": {
