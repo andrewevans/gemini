@@ -222,12 +222,14 @@ class UrlController extends \BaseController {
         $existing_email = $this->cc->getContactByEmail(ACCESS_TOKEN, $cust_info['cust_email']);
 
         if (empty($existing_email->results)) {
-            $result[] = $this->addContact($cust_info); // add them, and put them in the general list
+            $contact = $this->addContact($cust_info); // add them, and put them in the general list
         } else {
-            $result[] = $this->updateContact($cust_info, $existing_email->results[0]); // they already exist, so update their info
+            $contact = $this->updateContact($cust_info, $existing_email->results[0]); // they already exist, so update their info
         }
 
-        return $result;
+        $contact = $this->addToList($contact, 'chagall_new');
+
+        return Response::json($contact, 200);
     }
 
     public function addContact($cust_info)
@@ -239,6 +241,35 @@ class UrlController extends \BaseController {
     public function updateContact($cust_info, $existing_email)
     {
         $contact = $this->url->editContact($cust_info, $existing_email);
+        return $this->cc->updateContact(ACCESS_TOKEN, $contact);
+    }
+
+    public function addToList($contact, $list_name)
+    {
+        // attempt to fetch lists in the account, catching any exceptions and printing the errors to screen
+        try{
+            $lists = $this->cc->getLists(ACCESS_TOKEN);
+        } catch (CtctException $ex) {
+            foreach ($ex->getErrors() as $error) {
+                print_r($error);
+            }
+        }
+
+        $list = null;
+
+        foreach ($lists as $l){
+            if ($l->name == $list_name) {
+                $list = $this->cc->getList(ACCESS_TOKEN, $l->id);
+            }
+        }
+
+        // list doesn't exist yet, so make it!
+        if ($list == null) {
+            $new_list = $this->url->createList($list_name);
+            $list = $this->cc->addList(ACCESS_TOKEN, $new_list);
+        }
+
+        $contact->addList($list->id);
         return $this->cc->updateContact(ACCESS_TOKEN, $contact);
     }
 
