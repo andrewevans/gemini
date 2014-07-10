@@ -23,13 +23,19 @@ class CataloguesController extends \BaseController {
 	{
 		//
         if ($artist_url_slug == null) {
-            $catalogues = $this->catalogue->all();
+            $catalogues = $this->catalogue->whereIn('artist_id', function($query)
+            {
+                $query->select('id')
+                    ->from('artists')
+                    ->whereRaw('id != 0');
+            })->orderBy('id', 'desc')->get();
+            return View::make('catalogues.index', ['catalogues' => $catalogues, 'page_title' => "All the Catalogues"]);
         } else {
             $artist = Artist::whereUrlSlug($artist_url_slug)->first();
             $catalogues = $this->catalogue->whereArtistId($artist->id)->get();
+            return View::make('artists.catalogues', ['catalogues' => $catalogues, 'artist' => $artist, 'page_title' => "All the Catalogues"]);
         }
 
-        return View::make('catalogues.index', ['catalogues' => $catalogues, 'artist' => $artist, 'page_title' => "All the Catalogues"]);
     }
 
 
