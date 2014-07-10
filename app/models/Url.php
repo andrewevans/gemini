@@ -64,5 +64,13 @@ class Url extends Eloquent
         return $contact;
     }
 
+    public function createList($list_name)
+    {
+        $new_list = new \Ctct\Components\Contacts\ContactList();
+        $new_list->name = $list_name;
+        $new_list->status = 'ACTIVE';
+
+        return $new_list;
+    }
 
 }
