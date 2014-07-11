@@ -82,6 +82,7 @@
 <div class="container">
     @include('widgets.artists.filters', array('artist' => $artist))
     @include('widgets.artists.series', array('artist' => $artist))
+    @include('widgets.filters.list', array('artist' => $artist))
 
 </div>
 
