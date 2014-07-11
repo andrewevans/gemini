@@ -11,6 +11,11 @@
 </div>
 
 <div class="container">
+    @include('widgets.filters.list', array('artist' => $catalogue->artist))
+</div>
+
+
+<div class="container">
     @include('widgets.catrefs.card', array('catrefs' => $catrefs))
 </div>
 
