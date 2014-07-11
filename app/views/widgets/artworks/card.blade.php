@@ -11,7 +11,7 @@
         @else
             <div class="col-md-4">
         @endif
-            @if ($key % 11 == 0 && $key != 0 && $key != 11 && isset($posts))
+            @if ($key % 11 == 0 && $key != 0 && $key != 11 && isset($posts) && isset($interrupt) && $interrupt)
                 <div class="card blank">
                     @include('widgets.post', array('posts' => $posts, 'offset' => $offset++))
                 </div>
