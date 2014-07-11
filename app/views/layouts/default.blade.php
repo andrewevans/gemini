@@ -192,10 +192,12 @@
                 </ul>
             </div>
         </div>
-        <div class="row">
-            &copy; Masterworks Fine Art Gallery. All rights reserved. <a href="">Privacy Policy</a>. Our gallery is located in the beautiful Oakland Hills of the <b>San Francisco</b> Bay Area, California, USA.
-        </div>
     </footer>
+</div>
+</div>
+
+<div class="container">
+        &copy; Masterworks Fine Art Gallery. All rights reserved. <a href="">Privacy Policy</a>. Our gallery is located in the beautiful Oakland Hills of the <b>San Francisco</b> Bay Area, California, USA.
 </div>
 <!-- Bootstrap core JavaScript
 ================================================== -->
