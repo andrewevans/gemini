@@ -10,6 +10,8 @@
     </div>
 </div>
 
-@include('widgets.catrefs.card', array('catrefs' => $catrefs))
+<div class="container">
+    @include('widgets.catrefs.card', array('catrefs' => $catrefs))
+</div>
 
 @stop
