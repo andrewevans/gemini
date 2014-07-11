@@ -48,30 +48,14 @@
 
         </div>
     </div>
-
-
-    <div class="row">
-        <h2>Currently in our gallery</h2>
-        @foreach ($artworks as $key => $artwork)
-        <div class="col-md-4 card">
-            <a href="{{ $artwork->url() }}">
-                @if (file_exists('img/artists/' . $artwork->artist->slug . '/original/' . $artwork->artist->slug . $artwork->id . '.jpg'))
-                {{ HTML::image('img/artists/' . $artwork->artist->slug . '/original/' . $artwork->artist->slug . $artwork->id . '.jpg') }}<br />
-                @else
-                {{ HTML::image('img/no-image.jpg', 'Profile of ' . $artwork->artist->alias) }}<br />
-                @endif
-            </a>
-
-            <b>{{ strip_tags($artwork->artist->alias . ' ' . $artwork->medium_short) }} for sale.</b>
-            <i>{{ strip_tags($artwork->title_short()) }}</i><br />
-            ${{ number_format($artwork->price) }}
-
-
-        </div>
-        @endforeach
-    </div>
-
-    @include('widgets.artists.artist', array('artist' => $catref->catalogue->artist))
-
 </div>
+
+
+<div class="container">
+    <h2>Currently in our gallery</h2>
+    @include('widgets.artworks.card', array('artworks' => $artworks))
+</div>
+
+@include('widgets.artists.artist', array('artist' => $catref->catalogue->artist))
+
 @stop
