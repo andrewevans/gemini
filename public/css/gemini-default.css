@@ -151,6 +151,9 @@ body {
     letter-spacing: -1px;
 }
 
+.actions a {
+    width: 160px;
+}
 
 
 /* RESPONSIVE CSS
@@ -685,6 +688,11 @@ h3.table-name {
 
 @media (max-width: 767px) {
 
+    body {
+        background: #eee;
+        font-family: inherit;
+    }
+
     .container>.navbar-header{
         display: block;
         position: absolute;
@@ -725,9 +733,29 @@ h3.table-name {
         height: 180px !important;
     }
 
-    .card a.card-image {
-        height: 200px;
-        min-height: 200px;
+    .jumbotron {
+        padding: 0;
+    }
+
+    .table th {
+        display: none;
+    }
+
+    .actions a {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+
+    footer {
+        display: none;
+    }
+
+    .card-details .catref.specs {
+        width: 100%;
+    }
+
+    figcaption {
+        display: none;
     }
 
 }

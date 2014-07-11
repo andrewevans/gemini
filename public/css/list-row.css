@@ -6,10 +6,16 @@
     width: 100%;
 }
 
+.card {
+    margin: 0;
+}
 .card a.card-image {
     float: left;
-    height: 110px;
+    max-height: 110px;
     min-height: 110px;
+    width: 110px;
+    height: 110px;
+    margin-right: 15px;
 }
 
 .col-lg-8.featured .card a.card-image {
