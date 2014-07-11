@@ -4,11 +4,16 @@
 @section('content')
 
 <div class="container">
-    <p style="color: #fff; font-size:2em">Results for "<b>{{ $q }}</b>" found {{ sizeof($artworks) }} artworks from {{ sizeof($artists) }} artists.</p>
-    <h2>Artworks</h2>
-        @include('widgets.artworks.card', array('artworks' => $artworks))
+    <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-10">
+            <p style="color: #fff; font-size:2em">Results for "<b>{{ $q }}</b>" found {{ sizeof($artworks) }} artworks from {{ sizeof($artists) }} artists.</p>
+            <h2>Artworks</h2>
+                @include('widgets.artworks.card', array('artworks' => $artworks))
+        </div>
+    </div>
 </div>
-
 
 <h2>Artists</h2>
 <div class="jumbotron text-center">
