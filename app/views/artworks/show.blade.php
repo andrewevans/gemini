@@ -3,8 +3,11 @@
 
 @section('content')
 
-<h1>{{ $artwork->artist->alias }}, <i>{{ $artwork->title }}</i></h1>
+<div class="container">
+    <h1>{{ $artwork->artist->alias }}, <i>{{ $artwork->title }}</i></h1>
+</div>
 
+<div class="container">
 <div class="jumbotron text-center">
     <p>
         {{ HTML::image($artwork->img_url()) }}
@@ -54,5 +57,5 @@
     </div>
 
 </div>
-
+</div>
 @stop
