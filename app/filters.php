@@ -207,3 +207,17 @@ View::composer('widgets.nav', function($view){
     $view->with('posts', $posts)
         ->with('parent', $parent);
 });
+
+View::composer('widgets.filters.list', function($view){
+    $params = Input::all();
+
+    $params['list'] = 'row';
+    $queryString = http_build_query($params);
+    $current_url['row'] = URL::to(URL::current() . '?' . $queryString);
+
+    $params['list'] = 'card';
+    $queryString = http_build_query($params);
+    $current_url['card'] = URL::to(URL::current() . '?' . $queryString);
+
+    $view->with('current_url', $current_url);
+});
