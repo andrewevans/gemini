@@ -11,7 +11,7 @@ $( window ).resize(function() {
 function resize_carousel()
 {
     carousel_height = $( window ).height() - parseInt($('body').css('padding-top')) - 58;
-    if (carousel_height > 800) carousel_height = 800;
+    if (carousel_height > 650) carousel_height = 650;
     $('.carousel').css('height', carousel_height);
     $('.carousel .item').css('height',carousel_height);
 }
