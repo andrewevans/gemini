@@ -425,10 +425,11 @@ class Catref extends Eloquent
             }
         }
 
-        if ($this->catalogue_id == -1) {
+        if ($this->catalogue_id == 8) {
             $remote_file = 'http://madoura.com/pictures/archive/mad' . $this->reference_num . 'b.jpg';
 
             if ($this->checkRemoteFile($remote_file)) {
+                Image::make($remote_file)->resize(CATREF_MAX_WIDTH, null, true, false)->resize(null, CATREF_MAX_HEIGHT, true, false)->save('img/catalogues/picasso/ramie/ramie' . $this->id . '.jpg');
                 return $remote_file;
             }
         }
