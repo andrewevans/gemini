@@ -1,0 +1,21 @@
+.card {
+    overflow: hidden;
+}
+
+.col-md-4 {
+    width: 100%;
+}
+
+.card a.card-image {
+    width: 200px;
+    float: left;
+}
+
+.card a.card-image {
+    height: 200px;
+    min-height: 200px;
+}
+
+.col-lg-8.featured .card a.card-image {
+    height: inherit;
+}
