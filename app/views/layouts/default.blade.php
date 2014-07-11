@@ -141,10 +141,62 @@
 
 </section>
 
-<footer>
-    <p>&copy; Gemini 2014</p>
-</footer>
-
+<div class="jumbotron">
+<div class="container">
+    <footer>
+        <div class="row">
+            <div class="col-md-4">
+                <h3>Explore the Gallery</h3>
+                <ul class="nav">
+                    <li><a href="">Home</a></li>
+                    <li><a href="">Artists</a></li>
+                    <li><a href="">Art Education</a></li>
+                    <li><a href="">Why Choose Us</a></li>
+                    <li><a href="">About</a></li>
+                    <li><a href="">Contact Us</a></li>
+                    <li><a href="">Blog</a></li>
+                    <li><a href="">Sell your art</a></li>
+                    <li><a href="">Shopping bag</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h3>Our Customer Service</h3>
+                <ul class="nav">
+                    <li><a href="">Always there for you</a></li>
+                    <li><a href="">The Certificate of Authenticity</a></li>
+                    <li><a href="">Historical Documentation</a></li>
+                    <li><a href="">100% Moneyback Guarantee</a></li>
+                    <li><a href="">Museum-Archival Framing</a></li>
+                    <li><a href="">Our Competitive Pricing</a></li>
+                    <li><a href="">Easy Payments</a></li>
+                    <li><a href="">Packaging and Insurance</a></li>
+                    <li><a href="">Free Annual Appraisal!</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h3>Let's Get Social</h3>
+                <ul class="nav navbar-nav">
+                    <li><a href="https://www.facebook.com/masterworksfineartgallery" target="_blank"><img src="http://gemini.andrew.com/img/theme/gemini/fb-icon.png" /></a></li>
+                    <li><a href=""><img src="http://gemini.andrew.com/img/theme/gemini/twitter-icon.png" /></a></li>
+                    <li><a href=""><img src="http://gemini.andrew.com/img/theme/gemini/gplus-32.png" /></a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <ul class="nav">
+                    <li><a href="">What do you think of our website?</a></li>
+                    <li>Email: <a href="">info@masterworksfineart.com</a></li>
+                    <li>Call: <a href="">510-777-9970 / 800-805-7060</a></li>
+                    <li>Mail: <br /> 13470 Campus Drive<br />
+                            Oakland Hills, California USA 94702</li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            &copy; Masterworks Fine Art Gallery. All rights reserved. <a href="">Privacy Policy</a>. Our gallery is located in the beautiful Oakland Hills of the <b>San Francisco</b> Bay Area, California, USA.
+        </div>
+    </footer>
+</div>
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
