@@ -724,6 +724,12 @@ h3.table-name {
     .carousel .item{
         height: 180px !important;
     }
+
+    .card a.card-image {
+        height: 200px;
+        min-height: 200px;
+    }
+
 }
 
 
