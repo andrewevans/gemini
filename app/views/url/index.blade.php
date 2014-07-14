@@ -9,8 +9,8 @@
     <ul>
         <li><a href="/api/v1/url/artists">Artists</a></li>
         <li><a href="/api/v1/url/artworks">Artworks</a></li>
-        <li><a href="/api/v1/url/Catalogues">Catalogues</a></li>
-        <li><a href="/api/v1/url/Catrefs">Catrefs</a></li>
+        <li><a href="/api/v1/url/catalogues">Catalogues</a></li>
+        <li><a href="/api/v1/url/catrefs">Catrefs</a></li>
         <li><a href="/api/v1/newsletter">Newsletter</a>
             <ul>
                 <li>email (required)</li>
