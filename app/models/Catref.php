@@ -421,6 +421,7 @@ class Catref extends Eloquent
             $remote_file = 'http://www.masterworksfineart.com/catalogue/' . $this->catalogue->artist->slug . '/' . $this->catalogue->slug . '/original/' . $this->catalogue->slug . $this->reference_num . '.jpg';
 
             if ($this->checkRemoteFile($remote_file)) {
+                Image::make($remote_file)->resize(CATREF_MAX_WIDTH, null, true, false)->resize(null, CATREF_MAX_HEIGHT, true, false)->save('img/catalogues/chagall/sorlier/sorlier' . $this->id . '.jpg');
                 return $remote_file;
             }
         }

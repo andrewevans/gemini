@@ -135,12 +135,17 @@ class UrlController extends \BaseController {
                 break;
 
             case 'catalogues':
-                $catalogues = $this->catalogue->orderBy('id', 'DESC')->get();
+                $catalogues = $this->catalogue->whereIn('artist_id', function ($query) {
+                    $query->select('id')
+                        ->from('artists')
+                        ->whereRaw('id != 0');
+                })->orderBy('id', 'DESC')->get();;
 
                 foreach ($catalogues as $catalogue) {
                     $return_array[] = array(
                         'value' => $catalogue->title,
                         'artist_id' => $catalogue->artist_id,
+                        'slug' => $catalogue->slug,
                         'url_slug' => $catalogue->url_slug,
                         'meta_description' => $catalogue->meta_description,
                         'guid' => 'c-' . $catalogue->id,
@@ -149,7 +154,18 @@ class UrlController extends \BaseController {
                 break;
 
             case 'catrefs':
-                $catrefs = $this->catref->orderBy('id', 'DESC')->get();
+                $catrefs = $this->catref
+                    ->whereIn('catalogue_id', function($query)
+                    {
+                        $query->select('id')
+                            ->from('catalogues')
+                            ->whereIn('artist_id', function($query)
+                            {
+                                $query->select('id')
+                                    ->from('artists')
+                                    ->whereRaw('id != 0');
+                            });
+                    })->orderBy('id', 'DESC')->get();
 
                 foreach ($catrefs as $catref) {
                     $return_array[] = array(
@@ -160,6 +176,7 @@ class UrlController extends \BaseController {
                         'edition' => $catref->edition,
                         'medium' => $catref->medium,
                         'therest' => $catref->therest,
+                        'img' => $catref->img_url(),
                         'reference_num' => $catref->reference_num,
                         'catalogue_id' => $catref->catalogue_id,
                         'guid' => 'r-' . $catref->id,
