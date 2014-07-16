@@ -72,6 +72,33 @@ body {
     border-bottom: 2px solid #e7e7c6;
 }
 
+.nav-multi-list {
+    display: block;
+    float: left;
+    list-style: none;
+    background-clip: padding-box;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    padding-left: 0;
+}
+
+.nav-multi-list li>a {
+    display: block;
+    padding: 3px 20px 3px 0;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap;
+}
+
+.dropdown-menu li>a:hover,
+.dropdown-menu li>a:focus {
+    background-image: -webkit-linear-gradient(top,#f5f5f5 0,#e8e8e8 100%);
+    background-image: linear-gradient(to bottom,#f5f5f5 0,#e8e8e8 100%);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff5f5f5', endColorstr='#ffe8e8e8', GradientType=0);
+    background-color: #e8e8e8;
+}
 
 /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */
@@ -671,7 +698,7 @@ h3.table-name {
     }
 
     .collapse .navbar-nav a{
-        padding: 15px 10px;
+            /*padding: 15px 10px;*/
     }
 
     .navbar-inverse .navbar-nav>li>a {
@@ -762,7 +789,12 @@ h3.table-name {
 }
 
 h3.featured,
-h3.featured a{
+h3.featured a,
+ul.featured>li>a {
     font-size: 1.5em;
     font-weight: bold;
+}
+
+.uppercase {
+    text-transform: uppercase;
 }
