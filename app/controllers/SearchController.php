@@ -97,7 +97,7 @@ class SearchController extends \BaseController {
             ->whereRaw($query_string_artists)
             ->where('sold', '!=', 1)
             ->where('hidden', '=', 0)
-            ->orderBy('price', 'DESC')
+            ->orderByRaw(Session::get('sortBy.orderBy'))
             ->get();
 
         // add all of the artists whose arwork was found
