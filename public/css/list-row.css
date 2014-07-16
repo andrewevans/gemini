@@ -1,15 +1,16 @@
-.card {
+.artworks .card {
     overflow: hidden;
 }
 
-.col-md-4 {
+.col-md-4.artworks {
     width: 100%;
 }
 
-.card {
+.artworks .card {
     margin: 0;
 }
-.card a.card-image {
+
+.artworks .card a.card-image {
     float: left;
     max-height: 110px;
     min-height: 110px;
@@ -18,6 +19,6 @@
     margin-right: 15px;
 }
 
-.col-lg-8.featured .card a.card-image {
+.col-lg-8.artworks.featured .card a.card-image {
     height: inherit;
 }
