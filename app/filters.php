@@ -80,7 +80,14 @@ Route::filter('csrf', function()
 });
 
 View::composer('layouts.default', function($view){
-    $artists = Artist::all();
+    $artists = Artist::
+        whereRaw('id !=0')
+        ->whereIn('id', function($query)
+        {
+            $query->select('artist_id')
+                ->from('artworks')
+                ->whereRaw('sold = 0 and hidden = 0');
+        })->orderBy('last_name', 'asc')->get();
 
     $view->with('artists', $artists);
 });
