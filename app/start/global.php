@@ -18,6 +18,10 @@ define('ARTIST_MAX_HEIGHT', '800');
 define('CATREF_MAX_WIDTH', '450');
 define('CATREF_MAX_HEIGHT', '400');
 define('SITE_NAME', 'Masterworks Fine Art Gallery');
+define('SORT_FEATURED', 'Featured');
+define('SORT_HIGH', 'Price: Highest first');
+define('SORT_LOW', 'Price: Lowest first');
+define('SORT_NEW', 'Newest first');
 
 ClassLoader::addDirectories(array(
 

@@ -3,8 +3,11 @@
 
 @section('content')
 
-<div class="container">
-    @include('widgets.filters.list')
+<div class="container filters">
+    <div class="pull-right">
+        @include('widgets.filters.sort', array('artist' => null))
+        @include('widgets.filters.list', array('artist' => null))
+    </div>
 
 </div>
 

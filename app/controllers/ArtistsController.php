@@ -113,7 +113,7 @@ class ArtistsController extends \BaseController {
 
         $page_title = $artist->title();
         $artist->artist_bio = $artist->artist_bio()->get();
-        $artworks = $artist->artworks()->where('sold', '!=', '1')->where('hidden', '!=', 1)->orderBy('id', 'desc')->get();
+        $artworks = $artist->artworks()->where('sold', '!=', '1')->where('hidden', '!=', 1)->orderByRaw(Session::get('sortBy.orderBy'))->get();
 
         return View::make('artists.show', ['artist' => $artist, 'artworks' => $artworks, 'page_title' => $page_title, 'filter' => null, 'filter_slug' => null, 'posts' => $this->posts]);
     }
@@ -147,7 +147,7 @@ class ArtistsController extends \BaseController {
             return Redirect::to($artist->url());
         }
 
-        $artworks = $artist->artworks()->whereRaw("(" . $filter_query . ")")->where('sold', '!=', '1')->where('hidden', '=', 0)->orderBy('id', 'desc')->get();
+        $artworks = $artist->artworks()->whereRaw("(" . $filter_query . ")")->where('sold', '!=', '1')->where('hidden', '=', 0)->orderByRaw(Session::get('sortBy.orderBy'))->get();
 
         return View::make('artists.show', ['artist' => $artist, 'artworks' => $artworks, 'page_title' => $artist->title($page_title), 'filter' => $valid_filter, 'filter_slug' => $filter, 'posts' => $this->posts]);
     }
