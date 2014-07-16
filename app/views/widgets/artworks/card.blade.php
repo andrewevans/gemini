@@ -7,9 +7,9 @@
             <div class="row">
         @endif
         @if ($key == 0)
-            <div class="col-md-4 col-lg-8 featured">
+            <div class="col-md-4 col-lg-8 artworks featured">
         @else
-            <div class="col-md-4">
+            <div class="col-md-4 artworks">
         @endif
             @if ($key % 11 == 0 && $key != 0 && $key != 11 && isset($posts) && isset($interrupt) && $interrupt)
                 <div class="card blank">

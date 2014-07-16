@@ -254,6 +254,10 @@ body {
         height: 764px;
     }
 
+    .col-lg-4.featured .card a.card-image {
+        height: 382px;
+    }
+
     .col-lg-8.featured .card figcaption {
         font-size: 1.3em;
     }
@@ -297,6 +301,13 @@ hr {
 [class*="col-"] img {
     max-width:100%;
     max-height: 100%;
+}
+
+[class*="col-"].artists img {
+    min-width: 100%;
+    min-height: 100%;
+    max-width: none;
+    max-height: none;
 }
 
 
@@ -627,6 +638,17 @@ h3.table-name {
     text-align: center;
 }
 
+.artists .card {
+    border: none;
+    padding: 0;
+    margin: 30px 0 0 0;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    background: transparent;
+    text-align: center;
+}
+
 .card.blank {
     background: transparent;
     border: none;
@@ -645,6 +667,14 @@ h3.table-name {
     height: 320px;
     min-height: 320px;
     text-align: center;
+}
+
+.artists .card a.card-image {
+    display: block;
+    height: 150px;
+    min-height: 150px;
+    text-align: center;
+    overflow: hidden;
 }
 
 .card figcaption {

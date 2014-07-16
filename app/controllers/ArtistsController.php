@@ -22,14 +22,14 @@ class ArtistsController extends \BaseController {
     public function index()
     {
         if ($this->isNonartist()) {
-            $persons = $this->person->all();
+            $persons = $this->person->orderBy('last_name', 'asc')->get();
 
             return View::make('persons.index')
                 ->with('persons', $persons)
                 ->with('page_title', "All the People");
         }
 
-        $artists = $this->artist->all();
+        $artists = $this->artist->orderBy('last_name', 'asc')->get();
 
         // load the view and pass the artists
         return View::make('artists.index')
