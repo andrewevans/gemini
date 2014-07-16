@@ -29,7 +29,7 @@
     <!-- Custom styles for this template -->
     {{ HTML::style('css/gemini-default.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
 
-    @if (isset ($_GET['list']) && $_GET['list'] == "row")
+    @if (Session::get('list') == 'row')
         {{ HTML::style('css/list-row.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
     @endif
 
