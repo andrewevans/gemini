@@ -79,11 +79,13 @@
 </div>
 </div>
 
-<div class="container">
+<div class="container filters">
     @include('widgets.artists.filters', array('artist' => $artist))
     @include('widgets.artists.series', array('artist' => $artist))
-    @include('widgets.filters.list', array('artist' => $artist))
-
+    <div class="pull-right">
+        @include('widgets.filters.sort', array('artist' => $artist))
+        @include('widgets.filters.list', array('artist' => $artist))
+    </div>
 </div>
 
 <div class="container">
