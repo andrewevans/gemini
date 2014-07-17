@@ -80,3 +80,4 @@ Route::group(array('prefix' => 'gemini', 'before' => 'auth.basic'), function()
 
 Route::get('{tree_stump}/{tree_branches?}',['as' => 'static.show', 'uses' => 'StaticController@show'])->where('tree_branches', '(.*)');
 Route::controller('/', 'HomeController');
+Route::get('/', ['as' => 'home.index', 'uses' => 'HomeController@index']);
