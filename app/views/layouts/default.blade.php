@@ -166,7 +166,7 @@
             {{ Form::open(array('method' => 'get', 'url' => 'search', 'class' => '', 'role' => 'search')) }}
             <div class="input-group">
                     {{ Form::label('q', 'Search') }}
-                    {{ Form::text('q', null, array('class' => 'typeahead form-control size-s', 'placeholder' => 'Search artists or artworks', 'autocomplete' => 'off')) }}
+                    {{ Form::text('q', null, array('class' => 'typeahead form-control', 'placeholder' => 'Search artists or artworks', 'autocomplete' => 'off')) }}
                     {{ Form::hidden('q_id', null, array('class' => 'q_id', 'id' => 'q_id')) }}
 
                 <div class="input-group-btn">
@@ -184,9 +184,11 @@
 
 </div>
 
-<div class="container size-xs">
-    @include('widgets.breadcrumb')
-</div>
+@if('home.index' != Route::current()->getName() )
+    <div class="container size-xs">
+        @include('widgets.breadcrumb')
+    </div>
+@endif
 
 <section>
     <!--<div class="container">-->
