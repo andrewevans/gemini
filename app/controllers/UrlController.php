@@ -106,11 +106,11 @@ class UrlController extends Controller {
 
                 foreach ($artworks as $artwork) {
                     $return_array[] = array(
-                        'value' => $artwork->title_short,
+                        'value' => html_entity_decode($artwork->title_short),
                         'title' => $artwork->title,
                         'price' => $artwork->price,
                         'medium' => $artwork->medium,
-                        'medium_short' => $artwork->medium_short,
+                        'medium_short' => $artwork->medium_short(),
                         'series' => $artwork->series,
                         'series_short' => $artwork->series_short,
                         'after' => $artwork->after,
@@ -126,6 +126,7 @@ class UrlController extends Controller {
                         'hidden' => $artwork->hidden,
                         'on_hold' => $artwork->on_hold,
                         'price_on_req' => $artwork->price_on_req,
+                        'url' => 'http://' . $_SERVER['HTTP_HOST'] . $artwork->url(),
                         'mfa_img_url' => 'http://www.masterworksfineart.com/inventory/' . $artwork->artist->slug . '/original/' . $artwork->artist->slug . $artwork->id . '.jpg',
                         'mfa_img_thumb_url' => 'http://www.masterworksfineart.com/inventory/' . $artwork->artist->slug . '/prev_' . $artwork->artist->slug . $artwork->id . '.jpg',
                         'artist_id' => $artwork->artist_id,
