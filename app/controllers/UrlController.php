@@ -12,7 +12,7 @@ define("APIKEY", "g7rbwgf9xzygfhneax9j3j4w");
 define("ACCESS_TOKEN", "99b48825-3ded-4ccc-b416-0d19502f0751");
 
 
-class UrlController extends \BaseController {
+class UrlController extends Controller {
 
     protected $artist;
     protected $artwork;
