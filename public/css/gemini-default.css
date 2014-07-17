@@ -489,6 +489,8 @@ p + p {
 }
 
 .tt-dropdown-menu {
+    right: 5px !important;
+    left: inherit !important;
     width: 300px;
     margin-top: 12px;
     padding: 8px 0;
@@ -660,6 +662,7 @@ h3.table-name {
 .card p,
 .card a {
     text-align: left;
+    word-break:
 }
 
 .card a.card-image {
