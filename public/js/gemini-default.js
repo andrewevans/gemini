@@ -33,23 +33,6 @@ var queryTokenizer = function(q) {
     return Bloodhound.tokenizers.whitespace(normalized);
 };
 
-var artists_list = new Bloodhound({
-    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
-    queryTokenizer: Bloodhound.tokenizers.whitespace,
-    prefetch: {
-        ttl: 0,
-        url: '/api/v1/url/artists'
-    }
-});
-
-var artists_id_list = new Bloodhound({
-    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('guid'),
-    queryTokenizer: Bloodhound.tokenizers.whitespace,
-    prefetch: {
-        ttl: 0,
-        url: '/api/v1/url/artists'
-    }
-});
 
 var artworks_list = new Bloodhound({
     datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
@@ -69,13 +52,45 @@ var artworks_id_list = new Bloodhound({
     }
 });
 
-artists_list.initialize();
-artists_id_list.initialize();
+var artists_list = new Bloodhound({
+    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    prefetch: {
+        ttl: 0,
+        url: '/api/v1/url/artists'
+    }
+});
+
+var artists_id_list = new Bloodhound({
+    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('guid'),
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    prefetch: {
+        ttl: 0,
+        url: '/api/v1/url/artists'
+    }
+});
+
 artworks_list.initialize();
 artworks_id_list.initialize();
+artists_list.initialize();
+artists_id_list.initialize();
 
 $('#multiple-datasets .typeahead').typeahead({
         highlight: true
+    },
+    {
+        name: 'artworks-list',
+        displayKey: 'value',
+        source: artworks_list.ttAdapter(),
+        templates: {
+            header: '<h3 class="table-name">Artworks</h3>',
+            empty: [
+                '<div class="empty-message">',
+                '<p>No artwork found.</p>',
+                '</div>'
+            ].join('\n'),
+            suggestion: Handlebars.compile('<a href="\{\{url\}\}" style="display: block"><table><tr><td style="80px"><img src="\{\{mfa_img_thumb_url\}\}" style="width: 80px; min-width:80px; overflow: hidden;"></td><td style="vertical-align: top"><p style="margin-left:5px; font-family: arial, sans-serif; font-size: 16px; color: #222;"><strong>\{\{value\}\}</strong><br />\{\{medium_short\}\}<br />\$\{\{\price}\}</p></td></tr></table></a>')
+        }
     },
     {
         name: 'artists-list',
@@ -93,36 +108,16 @@ $('#multiple-datasets .typeahead').typeahead({
 
     },
     {
-        name: 'artworks-list',
-        displayKey: 'value',
-        source: artworks_list.ttAdapter(),
-        templates: {
-            header: '<h3 class="table-name">Artworks</h3>',
-            empty: [
-                '<div class="empty-message">',
-                '<p>No artwork found.</p>',
-                '</div>'
-            ].join('\n'),
-            suggestion: Handlebars.compile('<p><strong>\{\{value\}\}</strong>  (\{\{medium_short\}\})</p>')
-        }
+        name: 'artworks-id-list',
+        displayKey: 'guid',
+        source: artworks_id_list.ttAdapter()
     },
     {
         name: 'artists-id-list',
         displayKey: 'guid',
         source: artworks_id_list.ttAdapter()
-    },
-    {
-        name: 'artworks-id-list',
-        displayKey: 'guid',
-        source: artworks_id_list.ttAdapter()
-    });
-
-var artistItemSelectedHandler = function (eventObject, suggestionObject, suggestionDataset) {
-    /* According to the documentation the following should work https://github.com/twitter/typeahead.js/blob/master/doc/jquery_typeahead.md#jquerytypeaheadval-val.
-     However it causes the suggestion to appear which is not wanted */
-    //employeeIdTypeahead.typeahead('val', suggestionObject.id);
-    $('#q_id').val(suggestionObject.guid);
-};
+    }
+);
 
 var artworkItemSelectedHandler = function (eventObject, suggestionObject, suggestionDataset) {
     /* According to the documentation the following should work https://github.com/twitter/typeahead.js/blob/master/doc/jquery_typeahead.md#jquerytypeaheadval-val.
@@ -131,9 +126,16 @@ var artworkItemSelectedHandler = function (eventObject, suggestionObject, sugges
     $('#q_id').val(suggestionObject.guid);
 };
 
+var artistItemSelectedHandler = function (eventObject, suggestionObject, suggestionDataset) {
+    /* According to the documentation the following should work https://github.com/twitter/typeahead.js/blob/master/doc/jquery_typeahead.md#jquerytypeaheadval-val.
+     However it causes the suggestion to appear which is not wanted */
+    //employeeIdTypeahead.typeahead('val', suggestionObject.id);
+    $('#q_id').val(suggestionObject.guid);
+};
 
-$('#multiple-datasets .typeahead').on('typeahead:selected', artistItemSelectedHandler);
+
 $('#multiple-datasets .typeahead').on('typeahead:selected', artworkItemSelectedHandler);
+$('#multiple-datasets .typeahead').on('typeahead:selected', artistItemSelectedHandler);
 /* END search typeahead */
 
 $(function () {
