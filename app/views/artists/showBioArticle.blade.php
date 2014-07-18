@@ -3,10 +3,14 @@
 
 @section('content')
 
-<h1>{{ $post->post_title }}</h1>
 
-{{ apply_filters('the_content',$post->post_content); }}
+<div class="container">
+    <h1>{{ $post->post_title }}</h1>
+    {{ apply_filters('the_content',$post->post_content); }}
+</div>
 
-@include('widgets.artists.artist', array('artist' => $artist))
+<div class="container">
+    @include('widgets.artists.artist', array('artist' => $artist))
+</div>
 
 @stop
