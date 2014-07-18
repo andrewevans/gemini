@@ -75,7 +75,8 @@
 <div class="container">
 <div class="intro-header" style="text-align: center; max-width:450px;"> <i class="sprite-h gtitle-deco above"></i>
     <h1>{{ $page_title }}</h1>
-    <p>{{ $artist->meta_description }} <a href="{{ $artist->url() }}/bio">Read more about {{ $artist->alias }}</a></p>
+    <p>{{ $artist->meta_description }}</p>
+    <div class="read-more"><a href="{{ $artist->url() }}/bio">Read more about {{ $artist->alias }} &thinsp;&raquo;</a></div>
 </div>
 </div>
 
@@ -92,6 +93,8 @@
     @include('widgets.artworks.card', array('artworks' => $artworks))
 </div>
 
-@include('widgets.artists.artist', array('artist' => $artist))
+<div class="container">
+    @include('widgets.artists.artist', array('artist' => $artist))
+</div>
 
 @stop

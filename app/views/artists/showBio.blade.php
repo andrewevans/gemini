@@ -3,6 +3,8 @@
 
 @section('content')
 
-@include('widgets.artists.artist', array('artist' => $artist))
+<div class="container">
+    @include('widgets.artists.artist', array('artist' => $artist))
+</div>
 
 @stop

@@ -6,7 +6,7 @@
             </div>
             <div class="row">
         @endif
-        @if ($key == 0)
+        @if ($key == 0 && sizeof($artworks) >= 6)
             <div class="col-md-4 col-lg-8 artworks featured">
         @else
             <div class="col-md-4 artworks">
@@ -19,7 +19,7 @@
                 <div class="card">
                 <figure>
                     <a href="{{ $artwork->url() }}" class="card-image">
-                        @if ($key == 0)
+                        @if ($key == 0 && sizeof($artworks) >= 6)
                             {{ HTML::image($artwork->img_url()) }}
                         @else
                             <div class="zoom">

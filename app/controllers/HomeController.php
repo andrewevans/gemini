@@ -17,7 +17,7 @@ class HomeController extends BaseController {
 
         if (Auth::check())
         {
-            $artworks = $this->artwork->whereIn('artist_id', array(23, 44))->whereSold(0)->whereHidden(0)->take(15)->orderBy('price', 'desc')->get();
+            $artworks = $this->artwork->where('artist_id', '!=', 0)->whereSold(0)->whereHidden(0)->take(15)->orderBy('price', 'desc')->get();
             $artists = $this->artist->whereIn('id', array(23, 44))->orderBy('id', 'desc')->get();
 
             // The user is logged in...

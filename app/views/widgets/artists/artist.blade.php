@@ -1,14 +1,24 @@
 <div class="row">
-    <div class="col-md-5 col-md-offset-1">
-        @include('widgets.artists.bio', array('artist' => $artist, 'var' => 'mydata'))
+
+    <div class="col-md-6 pull-right">
+        <div class="paper">
+            @include('widgets.artists.bio', array('artist' => $artist, 'var' => 'mydata'))
+        </div>
     </div>
-    <div class="col-md-5">
-        @include('widgets.artists.pages', array('artist' => $artist, 'var' => 'mydata'))
+    <div class="col-md-6">
+        <div class="paper">
+            @include('widgets.artists.pages', array('artist' => $artist, 'var' => 'mydata'))
+        </div>
     </div>
-    <div class="col-md-5">
-        @include('widgets.artists.posts', array('artist' => $artist, 'var' => 'mydata'))
+    <div class="col-md-6">
+        <div class="paper">
+            @include('widgets.artists.posts', array('artist' => $artist, 'var' => 'mydata'))
+        </div>
     </div>
-    <div class="col-md-5">
-        @include('widgets.artists.catalogues', array('artist' => $artist, 'var' => 'mydata'))
+    <div class="col-md-6">
+        <div class="paper">
+            @include('widgets.artists.catalogues', array('artist' => $artist, 'var' => 'mydata'))
+        </div>
     </div>
+
 </div>
