@@ -9,6 +9,6 @@
 </div>
 @endforeach
 
-<div>
-    <a href="{{ $artist->url() }}/bio">Read more about {{ $artist->alias }}</a>
+<div class="read-more">
+    <a href="{{ $artist->url() }}/bio">Read more about {{ $artist->alias }} &thinsp;&raquo;</a>
 </div>
