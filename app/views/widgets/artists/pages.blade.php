@@ -2,16 +2,16 @@
     <h2><span class="fa fa-file-text"></span> In-Depth with {{ $artist->alias }}</h2>
 
     @foreach ($posts as $key => $post)
-        <div>
+        <ul>
             @if ($key == 0)
-                <h3 class="featured"><a href="/artists/{{ $artist->url_slug }}/bio/{{ $post->post_name }}">{{ $post->post_title }}</a></h3>
+                <li class="featured"><a href="/artists/{{ $artist->url_slug }}/bio/{{ $post->post_name }}">{{ $post->post_title }}</a></li>
             @else
-                <h3><a href="/artists/{{ $artist->url_slug }}/bio/{{ $post->post_name }}">{{ $post->post_title }}</a></h3>
+                <li><a href="/artists/{{ $artist->url_slug }}/bio/{{ $post->post_name }}">{{ $post->post_title }}</a></li>
             @endif
-        </div>
+        </ul>
     @endforeach
 
-    <div>
-        <a href="{{ $artist->url() }}/bio">Read more about {{ $artist->alias }}</a>
+    <div class="read-more">
+        <a href="{{ $artist->url() }}/bio">Read more about {{ $artist->alias }} &thinsp;&raquo;</a>
     </div>
 @endif

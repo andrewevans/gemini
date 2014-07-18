@@ -2,16 +2,16 @@
     <h2><span class="fa fa-rss"></span> Blog Posts with {{ $artist->alias }}</h2>
 
     @foreach ($posts as $key => $post)
-        <div>
+        <ul>
             @if ($key == 0)
-                <h3 class="featured"><a href="{{ get_permalink($post->ID) }}">{{ $post->post_title }}</a></h3>
+                <li class="featured"><a href="{{ get_permalink($post->ID) }}">{{ $post->post_title }}</a></li>
             @else
-                <h3><a href="{{ get_permalink($post->ID) }}">{{ $post->post_title }}</a></h3>
+                <li><a href="{{ get_permalink($post->ID) }}">{{ $post->post_title }}</a></li>
             @endif
-        </div>
+        </ul>
     @endforeach
 
-    <div>
-        <a href="{{ $artist->url() }}/bio">Read more about {{ $artist->alias }}</a>
+    <div class="read-more">
+        <a href="http://wp.{{ $_SERVER['HTTP_HOST'] }}">Up-to-date art news on our blog &thinsp;&raquo;</a>
     </div>
 @endif
