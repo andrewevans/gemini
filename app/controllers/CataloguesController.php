@@ -11,7 +11,7 @@ class CataloguesController extends \BaseController {
         $this->catalogue = $catalogue;
         $this->artist = $artist;
         $this->artists = DB::table('artists')->orderBy('last_name', 'asc')->lists('alias','id');
-        //$this->beforeFilter('auth');
+        $this->beforeFilter('auth');
     }
 
     /**

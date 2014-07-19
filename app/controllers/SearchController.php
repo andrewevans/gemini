@@ -9,6 +9,7 @@ class SearchController extends \BaseController {
     {
         $this->artist = $artist;
         $this->artwork = $artwork;
+        $this->beforeFilter('auth');
     }
 
 	/**

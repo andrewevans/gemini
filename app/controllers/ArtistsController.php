@@ -11,7 +11,7 @@ class ArtistsController extends \BaseController {
         $this->artist = $artist;
         $this->person = $person;
         $this->posts = $this->getPosts();
-        //$this->beforeFilter('auth');
+        $this->beforeFilter('auth');
     }
 
     /**
