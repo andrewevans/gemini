@@ -44,9 +44,15 @@ class Person extends Eloquent
 
     public function url()
     {
-        return '/artists/' . $this->url_slug;
+        return '/people/' . $this->url_slug;
     }
 
+    public function inverted_alias() {
+
+        if ($this->first_name == '') return '<span class="uppercase">' . $this->alias . '</span>';
+
+        return '<span class="uppercase">' . $this->last_name . '</span>, ' . $this->first_name;
+    }
 
     function filterMediumSearch($medium) {
 
