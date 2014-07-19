@@ -11,7 +11,7 @@ class CatrefsController extends \BaseController {
         $this->catref = $catref;
         $this->catalogue = $catalogue;
         $this->catalogues = DB::table('catalogues')->orderBy('title', 'asc')->lists('title','id');
-        //$this->beforeFilter('auth');
+        $this->beforeFilter('auth');
     }
 
     /**

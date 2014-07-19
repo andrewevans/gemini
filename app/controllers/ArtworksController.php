@@ -7,7 +7,7 @@ class ArtworksController extends \BaseController {
     public function __construct(Artwork $artwork)
     {
         $this->artwork = $artwork;
-        //$this->beforeFilter('auth');
+        $this->beforeFilter('auth');
     }
 
     /**
