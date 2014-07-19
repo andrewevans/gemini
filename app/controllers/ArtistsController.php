@@ -260,15 +260,17 @@ class ArtistsController extends \BaseController {
 
         $artist->save();
 
-        foreach ($input['artist_bio'] as $key => $input_artist_bio) {
+        if (! $this->isNonartist()) {
+            foreach ($input['artist_bio'] as $key => $input_artist_bio) {
 
-            if (isset($input_artist_bio['id']) && $input_artist_bio['description'] != '') {
-                $artist_bio = ArtistBio::firstOrCreate(array('id' => $input_artist_bio['id'], 'artist_id' => $id, 'filter' => $input_artist_bio['filter']));
-                $artist_bio->filter = $input_artist_bio['filter'];
-                $artist_bio->description = $input_artist_bio['description'];
-                $artist_bio->save();
+                if (isset($input_artist_bio['id']) && $input_artist_bio['description'] != '') {
+                    $artist_bio = ArtistBio::firstOrCreate(array('id' => $input_artist_bio['id'], 'artist_id' => $id, 'filter' => $input_artist_bio['filter']));
+                    $artist_bio->filter = $input_artist_bio['filter'];
+                    $artist_bio->description = $input_artist_bio['description'];
+                    $artist_bio->save();
+                }
+
             }
-
         }
 
         // redirect
