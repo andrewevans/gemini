@@ -43,6 +43,7 @@ Route::resource('sell', 'SellController');
 Route::resource('purchase', 'PurchaseController');
 Route::resource('offer', 'PurchaseController');
 Route::resource('login', 'HomeController@getLogin');
+Route::get('logout', 'HomeController@getLogout');
 
 Route::get('newsletter', 'ContactController@newsletter');
 Route::post('newsletter', 'ContactController@newsletter');

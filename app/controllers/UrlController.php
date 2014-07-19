@@ -28,6 +28,7 @@ class UrlController extends Controller {
         $this->catref =$catref;
         $this->cc = new ConstantContact(APIKEY);
         $this->url = $url;
+        $this->beforeFilter('auth');
     }
 
     /**
