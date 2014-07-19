@@ -2,10 +2,11 @@
 
 class GeminiController extends \BaseController {
 
-    public function __construct(Artwork $artwork, Artist $artist, Catalogue $catalogue, Catref $catref, User $user)
+    public function __construct(Artwork $artwork, Artist $artist, Person $person, Catalogue $catalogue, Catref $catref, User $user)
     {
         $this->artwork = $artwork;
         $this->artist = $artist;
+        $this->person = $person;
         $this->catalogue = $catalogue;
         $this->catref = $catref;
         $this->user = $user;
