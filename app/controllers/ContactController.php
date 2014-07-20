@@ -103,7 +103,7 @@ class ContactController extends \BaseController {
         });
 
         if ($this->input['cust_newsletter'] == '1') {
-            $url = 'http://gemini.andrew.com/api/v1/newsletter/' . $this->input['cust_email'];
+            $url = '/api/v1/newsletter/' . $this->input['cust_email'];
 
             $ch = curl_init( $url );
             curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1);
