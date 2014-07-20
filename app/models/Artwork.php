@@ -301,19 +301,23 @@ class Artwork extends Eloquent
     }
 
 
-    public function img_url($upload = false)
+    public function img_url($upload = false, $key = null)
     {
         $extension = 'jpg';
 
-        $local_file = $this->img_directory_url() . '/' . $this->artist->slug . $this->id . '.' . $extension;
+        $img_num_av = '';
 
-        if (file_exists($local_file) || $upload) return $local_file;
+        if ($key != null) $img_num_av = '_' . $key;
 
-        $remote_file = 'http://www.masterworksfineart.com/inventory/' . $this->artist->slug . '/original/' . $this->artist->slug . $this->id . '.jpg';
+        $local_file = $this->img_directory_url() . '/' . $this->artist->slug . $this->id . $img_num_av . '.' . $extension;
+
+        if (file_exists($local_file) || $upload) return '/' . $local_file;
+
+        $remote_file = 'http://www.masterworksfineart.com/inventory/' . $this->artist->slug . '/original/' . $this->artist->slug . $this->id . $img_num_av . '.' . $extension;
 
         if ($this->checkRemoteFile($remote_file)) { return $remote_file; }
 
-        return 'img/no-image.jpg';
+        return '/img/no-image.jpg';
     }
 
 

@@ -860,3 +860,22 @@ ul.featured>li>a {
     font-family: arial, sans-serif;
     font-weight: bold;
 }
+
+a.img-av {
+    display: inline-block;
+    padding: 3px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #d8dde6;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+a.img-av:hover {
+    border-color: #e47911;
+}
+
+a.img-av img {
+    height: 120px;
+}
