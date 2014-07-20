@@ -13,7 +13,7 @@
     @endif
 
     <h1><i class='fa fa-lock'></i> Login</h1>
-    {{ Form::open(array('role' => 'form', 'action' => 'HomeController@getIndex')) }}
+    {{ Form::open(array('role' => 'form', 'action' => 'HomeController@index')) }}
 
     <div class='form-group'>
         {{ Form::label('username', 'Username') }}
