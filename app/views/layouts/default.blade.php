@@ -62,7 +62,7 @@
     <div class="container">
 
         <div class="logo size-xs">
-            <a href="http://gemini.andrew.com"><img src="/img/masterworks-fine-art.gif" alt="Masterworks Fine Art Gallery"></a>
+            <a href="{{ Request::root() }}"><img src="/img/masterworks-fine-art.gif" alt="Masterworks Fine Art Gallery"></a>
         </div>
         <div class="logo-xs"><img src="http://placehold.it/200x50/cccc99/111&text=Masterworks+Fine+Art+Gallery" /></div>
 
@@ -239,9 +239,9 @@
             <div class="col-md-4">
                 <h3>Let's Get Social</h3>
                 <ul class="nav navbar-nav">
-                    <li><a href="https://www.facebook.com/masterworksfineartgallery" target="_blank"><img src="http://gemini.andrew.com/img/theme/gemini/fb-icon.png" /></a></li>
-                    <li><a href=""><img src="http://gemini.andrew.com/img/theme/gemini/twitter-icon.png" /></a></li>
-                    <li><a href=""><img src="http://gemini.andrew.com/img/theme/gemini/gplus-32.png" /></a></li>
+                    <li><a href="https://www.facebook.com/masterworksfineartgallery" target="_blank"><img src="/img/theme/gemini/fb-icon.png" /></a></li>
+                    <li><a href=""><img src="/img/theme/gemini/twitter-icon.png" /></a></li>
+                    <li><a href=""><img src="/img/theme/gemini/gplus-32.png" /></a></li>
                 </ul>
             </div>
             <div class="col-md-4">
