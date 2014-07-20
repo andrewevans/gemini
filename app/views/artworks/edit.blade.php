@@ -96,6 +96,8 @@
 
         {{ Form::label('img_' . $count, 'Image ' . $count) }}
         {{ Form::file('img_' . $count, null, array('class' => 'form-control')) }}
+
+        <a href="/gemini/artworks/{{ $artwork->id }}/delete_img/{{ $count }}">Delete image # {{ $count }}</a>
     </div>
 @endforeach
 
@@ -106,6 +108,11 @@
         {{ Form::label('img_' . $count, 'Image ' . $count) }}
         {{ Form::file('img_' . $count, null, array('class' => 'form-control')) }}
     </div>
+
+@for ($count = 1; $count < 10; $count++)
+{{ Form::label('img_' . $count . '_hardcount', 'HARD COUNT Image ' . $count) }}
+{{ Form::file('img_' . $count . '_hardcount', null, array('class' => 'form-control')) }}<br />
+@endfor
 
 {{ Form::submit('Edit the Artwork!', array('class' => 'btn btn-primary')) }}
 
