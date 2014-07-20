@@ -28,7 +28,7 @@ class UrlController extends Controller {
         $this->catref =$catref;
         $this->cc = new ConstantContact(APIKEY);
         $this->url = $url;
-        $this->beforeFilter('auth');
+        //$this->beforeFilter('auth');
     }
 
     /**
@@ -72,7 +72,10 @@ class UrlController extends Controller {
 	 */
 	public function show($data)
 	{
-		//
+        if (! Auth::check()) {
+            return Response::json([], 200);
+        }
+
         $term = Str::lower(Input::get('term'));
         $return_array = array();
 
