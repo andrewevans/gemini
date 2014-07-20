@@ -68,6 +68,27 @@ Route::group(array('prefix' => 'gemini', 'before' => 'auth.basic'), function()
     Route::resource('artworks', 'ArtworksController');
     Route::get('artworks', ['as' => 'gemini.artworks', 'uses' => 'GeminiController@artworks']);
 
+
+    Route::get('artworks/{artwork_id}/delete_img/{img_num}', function($artwork_id, $img_num) {
+
+        $artwork = Artwork::find($artwork_id);
+
+        $artist_slug = $artwork->artist->slug;
+
+        if ($img_num == 1) $img_num_ext = ''; else $img_num_ext = '_' . $img_num;
+
+        $delete_flag = File::delete('img/artists/' . $artist_slug . '/original/' . $artist_slug . $artwork->id . $img_num_ext . '.jpg');
+
+        if ($delete_flag) {
+            Session::flash('message', 'Successfully deleted image # ' . $img_num . '!');
+        } else {
+            Session::flash('message', 'Failed to delete image # ' . $img_num . '!');
+        }
+
+        return Redirect::back();
+
+    });
+
     Route::resource('catalogues', 'CataloguesController');
     Route::get('catalogues', ['as' => 'gemini.catalogues', 'uses' => 'GeminiController@catalogues']);
 
