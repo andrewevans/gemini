@@ -97,12 +97,22 @@ class ArtworksController extends \BaseController {
         $artwork = Artwork::find($id);
         $artwork->img_urls = $this->fetch_images($artwork);
 
+        $container_height = 0;
+        foreach ($artwork->img_urls as $img_url) {
+
+            if ( strpos($img_url, 'http') === false) $img_url = public_path() . $img_url;
+
+            $height = getimagesize($img_url)[1];
+
+            if ($height > $container_height) $container_height = $height;
+        }
+
         if (is_numeric($artist_url_slug)) {
             Session::flash('message', 'You were forwarded here from ' . '<b>artworks/' . $artist_url_slug . '</b>');
             return Redirect::to($artwork->url());
         }
 
-        return View::make('artworks.show', ['artwork' => $artwork, 'page_title' => $artwork->page_title()]);
+        return View::make('artworks.show', ['artwork' => $artwork, 'container_height' => $container_height, 'page_title' => $artwork->page_title()]);
 
 
     }
@@ -221,6 +231,22 @@ class ArtworksController extends \BaseController {
             $this->make_image($artwork, $img_3, 3);
         }
 
+        $img_1 = Input::file('img_1_hardcount');
+        $img_2 = Input::file('img_2_hardcount');
+        $img_3 = Input::file('img_3_hardcount');
+
+        if ($img_1 != null) {
+            $this->make_image($artwork, $img_1);
+        }
+
+        if ($img_2 != null) {
+            $this->make_image($artwork, $img_2, 2);
+        }
+
+        if ($img_3 != null) {
+            $this->make_image($artwork, $img_3, 3);
+        }
+
     }
 
     public function make_image($artwork, $image, $key = null)
@@ -231,25 +257,15 @@ class ArtworksController extends \BaseController {
 
     public function fetch_images($artwork)
     {
-        $img_dir = $this->img_directory_url($artwork);
-
-        if( ! is_dir($img_dir)) return false;
-
-        $list_of_user_files = scandir($img_dir);
-
         $artwork_images = array();
 
-        foreach ($list_of_user_files as $file) {
-            $pos = strpos($file, $artwork->artist->slug .  $artwork->id);
-            //$pos = strpos($file, $artwork->artist->slug);
+        $artwork_images[] = $artwork->img_url();
 
-            if ($pos !== false) {
-                $artwork_images[] = $img_dir . '/' . $file;
-            }
+        for ($img_count = 2; $artwork->img_url(null, $img_count) != '/img/no-image.jpg'; $img_count++) {
+            $artwork_images[] = $artwork->img_url(null, $img_count);
         }
 
         return $artwork_images;
-
     }
 
 
