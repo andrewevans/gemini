@@ -116,27 +116,7 @@ class ArtworksController extends \BaseController {
 
         //Session::forget('artworks_previous');
 
-        $artworks_previous_session = unserialize(Session::get('artworks_previous', ''));
-
-        if (! is_array($artworks_previous_session)) $artworks_previous_session = [];
-
-        if (! in_array($artwork->id, $artworks_previous_session)) {
-            $artworks_previous_session = serialize(array_merge( $artworks_previous_session, (array) $artwork->id));
-            Session::put('artworks_previous', $artworks_previous_session);
-        }
-
-
-        $artworks_previous_array = unserialize(Session::get('artworks_previous'));
-
-        $artworks_previous = [];
-
-        foreach ($artworks_previous_array as $artwork_previous) {
-            $artwork_previous = Artwork::whereId($artwork_previous)->whereSold(0)->whereHidden(0)->take(3)->first();
-
-            if ($artwork_previous != null) $artworks_previous[] = $artwork_previous;
-        }
-
-        $artworks_previous = array_slice(array_reverse($artworks_previous), 1, 3);
+        $artworks_previous = $artwork->artworks_previous();
 
         return View::make('artworks.show', ['artwork' => $artwork, 'artworks_related' => $artworks_related, 'artworks_previous' => $artworks_previous, 'container_height' => $container_height, 'page_title' => $artwork->page_title()]);
 
