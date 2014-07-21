@@ -97,4 +97,10 @@
     @include('widgets.artists.artist', array('artist' => $artist))
 </div>
 
+<div class="container">
+    <h3>Previously viewed Artists</h3>
+
+    @include('widgets.artists.card', array('artists' => $artists_previous))
+</div>
+
 @stop
