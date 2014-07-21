@@ -357,5 +357,13 @@ class Artwork extends Eloquent
         return $this->belongsTo('Artist');
     }
 
+    public function artworks_related()
+    {
+        $artist = $this->artist;
+        $artworks_related = $artist->artworks()->where('sold', '!=', '1')->where('hidden', '!=', 1)->take(5)->orderBy('id', 'DESC')->get();
+
+        return $artworks_related;
+    }
+
 
 }
