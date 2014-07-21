@@ -97,6 +97,8 @@ class ArtworksController extends \BaseController {
         $artwork = Artwork::find($id);
         $artwork->img_urls = $this->fetch_images($artwork);
 
+        $artworks_related = $artwork->artworks_related();
+
         $container_height = 0;
         foreach ($artwork->img_urls as $img_url) {
 
@@ -112,7 +114,7 @@ class ArtworksController extends \BaseController {
             return Redirect::to($artwork->url());
         }
 
-        return View::make('artworks.show', ['artwork' => $artwork, 'container_height' => $container_height, 'page_title' => $artwork->page_title()]);
+        return View::make('artworks.show', ['artwork' => $artwork, 'artworks_related' => $artworks_related, 'container_height' => $container_height, 'page_title' => $artwork->page_title()]);
 
 
     }
