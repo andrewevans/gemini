@@ -432,4 +432,31 @@ class Artist extends Eloquent
     }
 
 
+    public function artists_previous()
+    {
+
+        $artists_previous_session = unserialize(Session::get('artists_previous', ''));
+
+        if (! is_array($artists_previous_session)) $artists_previous_session = [];
+
+        if (! in_array($this->id, $artists_previous_session)) {
+            $artists_previous_session = serialize(array_merge( $artists_previous_session, (array) $this->id));
+            Session::put('artists_previous', $artists_previous_session);
+        }
+
+        $artists_previous_array = unserialize(Session::get('artists_previous'));
+
+        $artists_previous = [];
+
+        foreach ($artists_previous_array as $artist_previous) {
+            $artist_previous = Artist::whereId($artist_previous)->first();
+
+            if ($artist_previous != null) $artists_previous[] = $artist_previous;
+        }
+
+        return array_slice(array_reverse($artists_previous), 1, 3);
+
+    }
+
+
 }
