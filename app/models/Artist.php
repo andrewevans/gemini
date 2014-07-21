@@ -442,6 +442,13 @@ class Artist extends Eloquent
         if (! in_array($this->id, $artists_previous_session)) {
             $artists_previous_session = serialize(array_merge( $artists_previous_session, (array) $this->id));
             Session::put('artists_previous', $artists_previous_session);
+        } else {
+            // it is in the array, so unset it and reassign it to the beginning
+            $key = array_search($this->id, $artists_previous_session);
+            unset($artists_previous_session[$key]);
+            $artists_previous_session = array_values($artists_previous_session);
+            $artists_previous_session = serialize(array_merge( $artists_previous_session, (array) $this->id));
+            Session::put('artists_previous', $artists_previous_session);
         }
 
         $artists_previous_array = unserialize(Session::get('artists_previous'));

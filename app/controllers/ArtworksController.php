@@ -117,6 +117,7 @@ class ArtworksController extends \BaseController {
         //Session::forget('artworks_previous');
 
         $artworks_previous = $artwork->artworks_previous();
+        $artists_previous = $artwork->artist->artists_previous();
 
         return View::make('artworks.show', ['artwork' => $artwork, 'artworks_related' => $artworks_related, 'artworks_previous' => $artworks_previous, 'container_height' => $container_height, 'page_title' => $artwork->page_title()]);
 
