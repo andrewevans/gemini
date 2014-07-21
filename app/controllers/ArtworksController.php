@@ -114,7 +114,18 @@ class ArtworksController extends \BaseController {
             return Redirect::to($artwork->url());
         }
 
-        return View::make('artworks.show', ['artwork' => $artwork, 'artworks_related' => $artworks_related, 'container_height' => $container_height, 'page_title' => $artwork->page_title()]);
+        $artworks_previous = unserialize(Session::get('artworks_previous', ''));
+
+        if (! is_array($artworks_previous)) $artworks_previous = [];
+
+        $artworks_previous_session = serialize(array_merge( $artworks_previous, (array) $artwork->id));
+        Session::put('artworks_previous', $artworks_previous_session);
+
+        $artworks_previous_array = unserialize(Session::get('artworks_previous'));
+
+        $artworks_previous = Artwork::whereIn('id', $artworks_previous_array)->whereSold(0)->whereHidden(0)->take(3)->get();
+
+        return View::make('artworks.show', ['artwork' => $artwork, 'artworks_related' => $artworks_related, 'artworks_previous' => $artworks_previous, 'container_height' => $container_height, 'page_title' => $artwork->page_title()]);
 
 
     }
