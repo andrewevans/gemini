@@ -134,7 +134,7 @@ class ArtworksController extends \BaseController {
             $artworks_previous[] = Artwork::whereId($artwork_previous)->whereSold(0)->whereHidden(0)->take(3)->first();
         }
 
-        return View::make('artworks.show', ['artwork' => $artwork, 'artworks_related' => $artworks_related, 'artworks_previous' => $artworks_previous, 'container_height' => $container_height, 'page_title' => $artwork->page_title()]);
+        return View::make('artworks.show', ['artwork' => $artwork, 'artworks_related' => $artworks_related, 'artworks_previous' => array_reverse($artworks_previous), 'container_height' => $container_height, 'page_title' => $artwork->page_title()]);
 
 
     }
