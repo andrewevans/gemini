@@ -87,4 +87,12 @@
 
 </div>
 </div>
+
+<div class="container">
+    <h3>Related Artworks</h3>
+
+    @include('widgets.artworks.card', array('artworks' => $artworks_related))
+</div>
+
+
 @stop
