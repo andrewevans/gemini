@@ -94,5 +94,11 @@
     @include('widgets.artworks.card', array('artworks' => $artworks_related))
 </div>
 
+<div class="container">
+    <h3>Previously viewed Artworks</h3>
+
+    @include('widgets.artworks.card', array('artworks' => $artworks_previous))
+</div>
+
 
 @stop
