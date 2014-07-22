@@ -20,10 +20,15 @@ class HomeController extends BaseController {
             $artworks = $this->artwork->where('artist_id', '!=', 0)->whereSold(0)->whereHidden(0)->take(15)->orderBy('price', 'desc')->get();
             $artists = $this->artist->whereIn('id', array(23, 44))->orderBy('id', 'desc')->get();
 
+            $artworks_previous = Tools::artworks_previous();
+            $artists_previous = Tools::artists_previous();
+
             // The user is logged in...
             return View::make('home.index')
                 ->with('artworks', $artworks)
                 ->with('artists', $artists)
+                ->with('artworks_previous', $artworks_previous)
+                ->with('artists_previous', $artists_previous)
                 ->with('pages', $this->pages)
                 ->with('posts', $this->posts)
                 ->with('page_title', "Original Lithographs, Drawings, Etchings, Sculptures, Prints, Masterworks Fine Art Gallery");
