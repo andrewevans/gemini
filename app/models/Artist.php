@@ -451,18 +451,7 @@ class Artist extends Eloquent
             Session::put('artists_previous', $artists_previous_session);
         }
 
-        $artists_previous_array = unserialize(Session::get('artists_previous'));
-
-        $artists_previous = [];
-
-        foreach ($artists_previous_array as $artist_previous) {
-            $artist_previous = Artist::whereId($artist_previous)->first();
-
-            if ($artist_previous != null) $artists_previous[] = $artist_previous;
-        }
-
-        return array_slice(array_reverse($artists_previous), 1, 3);
-
+        return Tools::artists_previous();
     }
 
 

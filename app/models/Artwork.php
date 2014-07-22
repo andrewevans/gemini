@@ -384,18 +384,7 @@ class Artwork extends Eloquent
             Session::put('artworks_previous', $artworks_previous_session);
         }
 
-        $artworks_previous_array = unserialize(Session::get('artworks_previous'));
-
-        $artworks_previous = [];
-
-        foreach ($artworks_previous_array as $artwork_previous) {
-            $artwork_previous = Artwork::whereId($artwork_previous)->whereSold(0)->whereHidden(0)->take(3)->first();
-
-            if ($artwork_previous != null) $artworks_previous[] = $artwork_previous;
-        }
-
-        return array_slice(array_reverse($artworks_previous), 1, 3);
-
+        return Tools::artworks_previous();
     }
 
 
