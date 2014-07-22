@@ -40,5 +40,38 @@ class Tools {
 
         return $result;
     }
+
+    public static function artworks_previous()
+    {
+        $artworks_previous_array = unserialize(Session::get('artworks_previous', ''));
+        if (! is_array($artworks_previous_array)) $artworks_previous_array = [];
+
+        $artworks_previous = [];
+
+        foreach ($artworks_previous_array as $artwork_previous) {
+            $artwork_previous = Artwork::whereId($artwork_previous)->whereSold(0)->whereHidden(0)->first();
+
+            if ($artwork_previous != null) $artworks_previous[] = $artwork_previous;
+        }
+
+        return array_slice(array_reverse($artworks_previous), 0, 3);
+    }
+
+    public static function artists_previous()
+    {
+        $artists_previous_array = unserialize(Session::get('artists_previous'));
+        if (! is_array($artists_previous_array)) $artists_previous_array = [];
+
+        $artists_previous = [];
+
+        foreach ($artists_previous_array as $artist_previous) {
+            $artist_previous = Artist::whereId($artist_previous)->first();
+
+            if ($artist_previous != null) $artists_previous[] = $artist_previous;
+        }
+
+        return array_slice(array_reverse($artists_previous), 0, 3);
+    }
+
 }
 
