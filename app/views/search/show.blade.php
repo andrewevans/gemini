@@ -18,7 +18,12 @@
         <div class="col-md-10">
             <p style="color: #fff; font-size:2em">Results for "<b>{{ $q }}</b>" found {{ sizeof($artworks) }} artworks from {{ sizeof($artists) }} artists.</p>
             <h2>Artworks</h2>
+            @if (sizeof($artworks) > 0)
                 @include('widgets.artworks.card', array('artworks' => $artworks))
+            @else
+                <p>We don't have works to show that match your search, but please feel free to <a href="/contact">contact us</a> about works that you are looking for. We would be happy to look into it for you.</p>
+            @endif
+
         </div>
     </div>
 </div>
