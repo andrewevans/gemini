@@ -7,9 +7,9 @@
             <div class="row">
         @endif
         @if ($key == 0 && sizeof($artworks) >= 6)
-            <div class="col-md-4 col-lg-8 artworks featured">
+            <div class="col-md-4 col-lg-8 artworks featured <?= ($artwork->magnitude > 0 ? 'mag' : '') ?>">
         @else
-            <div class="col-md-4 artworks">
+            <div class="col-md-4 artworks <?= ($artwork->magnitude > 0 ? 'mag' : '') ?>">
         @endif
             @if ($key % 11 == 0 && $key != 0 && $key != 11 && isset($posts) && isset($interrupt) && $interrupt)
                 <div class="card blank">
