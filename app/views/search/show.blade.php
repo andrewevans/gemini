@@ -11,7 +11,7 @@
 
 </div>
 
-<div class="container">
+<div class="container listable">
     <div class="row">
         <div class="col-md-2">
         </div>
