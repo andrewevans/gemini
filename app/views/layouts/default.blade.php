@@ -279,6 +279,7 @@
 
 <script src="/vendor/zoom-master/jquery.zoom.min.js"></script>
 <script>
+    $('.zoom').zoom();
 
     config1 = CKEDITOR.tools;
     config1.height = 800;
@@ -287,8 +288,6 @@
 
     CKEDITOR.replace('artwork_description', config1);
     CKEDITOR.replaceAll();
-
-    $('.zoom').zoom();
 </script>
 
 <script>
