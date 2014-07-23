@@ -94,7 +94,7 @@
                                 <li><a href="/artists/pablo-picasso">Pablo Picasso</a></li>
                                 <li><a href="/artists/pablo-picasso/ceramics">Picasso Ceramics</a></li>
                                 <li><a href="/artists/rembrandt">Rembramdt</a></li>
-                                <li><a href="/artists/renoir">Renoir</a></li>
+                                <li><a href="/artists/pierre-auguste-renoir">Renoir</a></li>
                                 <li><a href="/artists/andy-warhol">Andy Warhol</a></li>
                                 <li><a href="/artists/victor-vasarely">Victor Vasarely</a></li>
                                 <li><a href="/artists/yvaral">Yvaral</a></li>
