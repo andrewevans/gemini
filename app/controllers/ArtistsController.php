@@ -113,7 +113,28 @@ class ArtistsController extends \BaseController {
 
         $page_title = $artist->title();
         $artist->artist_bio = $artist->artist_bio()->get();
-        $artworks = $artist->artworks()->where('sold', '!=', '1')->where('hidden', '!=', 1)->orderByRaw(Session::get('sortBy.orderBy'))->get();
+
+        if (Session::get('sortBy.value') == 'featured') {
+
+            // get all artworks from this artist that are NOT in object_importance
+            $artworks_without_mags = $artist->artworks()->whereNotExists(function($query)
+            {
+                $query->select(DB::raw(1))
+                    ->from('object_importance')
+                    ->whereRaw('artworks.id = object_importance.object_id');
+            })->where('sold', '!=', '1')->where('hidden', '!=', 1)->orderByRaw(Session::get('sortBy.orderBy'))->get();
+
+            $artworks_mags = $artist->artworks()->leftJoin('object_importance', 'object_importance.object_id', '=', 'artworks.id')
+                ->where('object_importance.object_type', '=', 'w') // get only artworks
+                ->where('sold', '!=', '1')->where('hidden', '!=', 1) // only show available artworks
+                ->select('*', 'artworks.id as id') // use artworks ID
+                ->orderBy('magnitude', 'DESC') // order by magnitude, if available, because the whole point is to put higher mags up higher
+                ->get();
+
+            $artworks = $artworks_mags->merge($artworks_without_mags);
+        } else {
+            $artworks = $artist->artworks()->where('sold', '!=', '1')->where('hidden', '!=', 1)->orderByRaw(Session::get('sortBy.orderBy'))->get();
+        }
 
         $artists_previous = $artist->artists_previous();
 

@@ -23,7 +23,7 @@ class Filterby {
             case 'featured':
             default:
                 $sortBy['value'] = 'featured';
-                $sortBy['orderBy'] = 'RAND()';
+                $sortBy['orderBy'] = 'price DESC';
                 $sortBy['name'] = SORT_FEATURED;
                 break;
         }
