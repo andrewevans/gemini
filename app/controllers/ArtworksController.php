@@ -10,8 +10,6 @@ class ArtworksController extends \BaseController {
     {
         $this->artwork = $artwork;
         $this->beforeFilter('auth');
-        $this->artists_previous = Tools::artists_previous();
-        $this->artworks_previous = Tools::artworks_previous();
     }
 
     /**
@@ -117,6 +115,8 @@ class ArtworksController extends \BaseController {
             Session::flash('message', 'You were forwarded here from ' . '<b>artworks/' . $artist_url_slug . '</b>');
             return Redirect::to($artwork->url());
         }
+
+        $this->artworks_previous = $artwork->artworks_previous();
 
         return View::make('artworks.show', ['artwork' => $artwork, 'artworks_related' => $artworks_related, 'artworks_previous' => $this->artworks_previous, 'container_height' => $container_height, 'page_title' => $artwork->page_title()]);
 

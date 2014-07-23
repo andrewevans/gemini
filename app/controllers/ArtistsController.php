@@ -13,7 +13,6 @@ class ArtistsController extends \BaseController {
         $this->person = $person;
         $this->posts = $this->getPosts();
         $this->beforeFilter('auth');
-        $this->artists_previous = Tools::artists_previous();
     }
 
     /**
@@ -138,6 +137,7 @@ class ArtistsController extends \BaseController {
             $artworks = $artist->artworks()->where('sold', '!=', '1')->where('hidden', '!=', 1)->orderByRaw(Session::get('sortBy.orderBy'))->get();
         }
 
+        $this->artists_previous = $artist->artists_previous();
 
         return View::make('artists.show', ['artist' => $artist, 'artworks' => $artworks, 'artists_previous' => $this->artists_previous, 'page_title' => $page_title, 'filter' => null, 'filter_slug' => null, 'posts' => $this->posts]);
     }
