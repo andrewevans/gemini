@@ -5,6 +5,7 @@ class ArtistsController extends \BaseController {
     protected $artist;
     protected $person;
     protected $posts;
+    protected $artists_previous;
 
     public function __construct(Artist $artist, Person $person)
     {
@@ -12,6 +13,7 @@ class ArtistsController extends \BaseController {
         $this->person = $person;
         $this->posts = $this->getPosts();
         $this->beforeFilter('auth');
+        $this->artists_previous = Tools::artists_previous();
     }
 
     /**
@@ -136,9 +138,8 @@ class ArtistsController extends \BaseController {
             $artworks = $artist->artworks()->where('sold', '!=', '1')->where('hidden', '!=', 1)->orderByRaw(Session::get('sortBy.orderBy'))->get();
         }
 
-        $artists_previous = $artist->artists_previous();
 
-        return View::make('artists.show', ['artist' => $artist, 'artworks' => $artworks, 'artists_previous' => $artists_previous, 'page_title' => $page_title, 'filter' => null, 'filter_slug' => null, 'posts' => $this->posts]);
+        return View::make('artists.show', ['artist' => $artist, 'artworks' => $artworks, 'artists_previous' => $this->artists_previous, 'page_title' => $page_title, 'filter' => null, 'filter_slug' => null, 'posts' => $this->posts]);
     }
 
     /**
@@ -172,7 +173,7 @@ class ArtistsController extends \BaseController {
 
         $artworks = $artist->artworks()->whereRaw("(" . $filter_query . ")")->where('sold', '!=', '1')->where('hidden', '=', 0)->orderByRaw(Session::get('sortBy.orderBy'))->get();
 
-        return View::make('artists.show', ['artist' => $artist, 'artworks' => $artworks, 'page_title' => $artist->title($page_title), 'filter' => $valid_filter, 'filter_slug' => $filter, 'posts' => $this->posts]);
+        return View::make('artists.show', ['artist' => $artist, 'artworks' => $artworks, 'artists_previous' => $this->artists_previous, 'page_title' => $artist->title($page_title), 'filter' => $valid_filter, 'filter_slug' => $filter, 'posts' => $this->posts]);
     }
 
 
