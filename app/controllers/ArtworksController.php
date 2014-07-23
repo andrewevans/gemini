@@ -5,11 +5,13 @@ class ArtworksController extends \BaseController {
     protected $artwork;
     protected $artists_previous;
     protected $artworks_previous;
+    protected $artwork_description;
 
-    public function __construct(Artwork $artwork)
+    public function __construct(Artwork $artwork, ArtworkDescription $artwork_description)
     {
         $this->artwork = $artwork;
         $this->beforeFilter('auth');
+        $this->artwork_description = $artwork_description;
     }
 
     /**
@@ -138,6 +140,8 @@ class ArtworksController extends \BaseController {
         $artwork = Artwork::find($id);
         $artwork->img_urls = $this->fetch_images($artwork);
 
+        $artwork->artwork_description = ArtworkDescription::whereArtworkId($id)->first()->description;
+
         $artists = DB::table('artists')->orderBy('alias', 'desc')->lists('alias','id');
 
         // show the edit form and pass the artwork
@@ -159,7 +163,9 @@ class ArtworksController extends \BaseController {
 	{
         $artwork = Artwork::whereId($id)->first();
 
-        $input = Input::except('img_main', 'img[1]');
+        $input_all = Input::all();
+
+        $input = Input::except('img_main', 'img[1]', 'artwork_description');
 
         if ( ! $this->artwork->fill($input)->isValid($id))
         {
@@ -167,6 +173,10 @@ class ArtworksController extends \BaseController {
         }
 
         $this->update_images($artwork);
+
+        $artwork_description = ArtworkDescription::firstOrCreate(array('artwork_id' => $id));
+        $artwork_description->description = $input_all['artwork_description'];
+        $artwork_description->save();
 
         $artwork->update($input);
 
