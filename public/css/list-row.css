@@ -1,8 +1,8 @@
-.artworks .card {
+.listable .artworks .card {
     overflow: hidden;
 }
 
-.card {
+.listable .card {
     border: none;
     border-bottom: 1px solid #ddd;
     padding: 15px 5px;
@@ -15,15 +15,15 @@
 }
 
 
-.col-md-4.artworks {
+.listable .col-md-4.artworks {
     width: 100%;
 }
 
-.artworks .card {
+.listable .artworks .card {
     margin: 0;
 }
 
-.artworks .card a.card-image {
+.listable .artworks .card a.card-image {
     float: left;
     max-height: 150px;
     min-height: inherit;
@@ -31,6 +31,6 @@
     margin-right: 15px;
 }
 
-.col-lg-8.artworks.featured .card a.card-image {
+.listable .col-lg-8.artworks.featured .card a.card-image {
     height: inherit;
 }
