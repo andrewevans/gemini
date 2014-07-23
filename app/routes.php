@@ -59,6 +59,8 @@ Route::get('gemini', ['as' => 'gemini.index', 'uses' => 'GeminiController@index'
 
 Route::group(array('prefix' => 'gemini', 'before' => 'auth.basic'), function()
 {
+    Route::resource('magnitude', 'MagnitudeController');
+    Route::get('magnitude', ['as' => 'gemini.magnitude', 'uses' => 'GeminiController@magnitudes']);
 
     Route::resource('artists', 'ArtistsController');
     Route::get('artists', ['as' => 'gemini.artists', 'uses' => 'GeminiController@artists']);
