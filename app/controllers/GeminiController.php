@@ -165,6 +165,21 @@ class GeminiController extends \BaseController {
     }
 
 
+    public function magnitudes()
+    {
+        $artworks_mags = Artwork::
+            join('object_importance', 'object_importance.object_id', '=', 'artworks.id')
+            ->orderBy('magnitude', 'DESC')
+            ->get();
+
+
+        return View::make('gemini.magnitude')
+            ->with('artworks', $artworks_mags)
+            ->with('page_title', "Magnitudes");
+
+    }
+
+
     /**
 	 * Show the form for creating a new resource.
 	 *

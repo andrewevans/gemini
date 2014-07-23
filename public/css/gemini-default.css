@@ -879,3 +879,7 @@ a.img-av:hover {
 a.img-av img {
     height: 120px;
 }
+
+.mag .card{
+    background: #E5CDE5;
+}
