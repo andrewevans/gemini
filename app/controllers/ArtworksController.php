@@ -101,7 +101,9 @@ class ArtworksController extends \BaseController {
         $artwork = Artwork::find($id);
         $artwork->img_urls = $this->fetch_images($artwork);
 
-        $artwork->artwork_description = ArtworkDescription::whereArtworkId($id)->first()->description;
+        $artwork->artwork_description = ArtworkDescription::whereArtworkId($id)->first();
+
+        if ($artwork->artwork_description != null) $artwork->artwork_description = $artwork->artwork_description->description;
 
         $artworks_related = $artwork->artworks_related();
 
