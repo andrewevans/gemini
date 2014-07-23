@@ -132,7 +132,14 @@ class ArtistsController extends \BaseController {
                 ->orderBy('magnitude', 'DESC') // order by magnitude, if available, because the whole point is to put higher mags up higher
                 ->get();
 
-            $artworks = $artworks_mags->merge($artworks_without_mags);
+            $artworks_mags_showcaser = $artist->artworks()->leftJoin('object_importance', 'object_importance.object_id', '=', 'artworks.id')
+                ->where('object_importance.object_type', '=', 'w-' . $artist->slug) // get only artworks
+                ->where('sold', '!=', '1')->where('hidden', '!=', 1) // only show available artworks
+                ->select('*', 'artworks.id as id') // use artworks ID
+                ->orderBy('magnitude', 'ASC') // order by magnitude, where lower is best, like 1 is 1st to show
+                ->get();
+
+            $artworks = $artworks_mags_showcaser->merge($artworks_mags->merge($artworks_without_mags));
         } else {
             $artworks = $artist->artworks()->where('sold', '!=', '1')->where('hidden', '!=', 1)->orderByRaw(Session::get('sortBy.orderBy'))->get();
         }
