@@ -17,8 +17,27 @@ class HomeController extends BaseController {
 
         if (Auth::check())
         {
-            $artworks = $this->artwork->where('artist_id', '!=', 0)->whereSold(0)->whereHidden(0)->take(15)->orderBy('price', 'desc')->get();
+            $artworks_mags_showcaser = Artwork::leftJoin('object_importance', 'object_importance.object_id', '=', 'artworks.id')
+                ->where('object_importance.object_type', '=', 'w-home') // get only artworks for homepage
+                ->where('sold', '!=', '1')->where('hidden', '!=', 1) // only show available artworks
+                ->select('*', 'artworks.id as id') // use artworks ID
+                ->orderBy('magnitude', 'ASC') // order by magnitude, where lower is best, like 1 is 1st to show
+                ->get();
+
+            $artworks = $this->artwork->where('artist_id', '!=', 0)->whereSold(0)->whereHidden(0)->take(15)->orderBy('id', 'desc')->get();
+
+            $artworks = $artworks_mags_showcaser->merge($artworks);
+
+            $artists_mags_showcaser = Artist::leftJoin('object_importance', 'object_importance.object_id', '=', 'artists.id')
+                ->where('object_importance.object_type', '=', 'a-home') // get only artworks for homepage
+                ->select('*', 'artists.id as id') // use artworks ID
+                ->orderBy('magnitude', 'ASC') // order by magnitude, where lower is best, like 1 is 1st to show
+                ->get();
+
+
             $artists = $this->artist->whereIn('id', array(23, 44))->orderBy('id', 'desc')->get();
+
+            $artists = $artists_mags_showcaser->merge($artists);
 
             $artworks_previous = Tools::artworks_previous();
             $artists_previous = Tools::artists_previous();
