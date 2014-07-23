@@ -89,7 +89,7 @@
     </div>
 </div>
 
-<div class="container">
+<div class="container listable">
     @include('widgets.artworks.card', array('artworks' => $artworks))
 </div>
 
