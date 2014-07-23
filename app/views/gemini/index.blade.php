@@ -83,4 +83,27 @@
 </div>
 
 
+
+<div class="row">
+    <div class="col-lg-10 col-lg-offset-1">
+
+        <h1><i class="fa fa-trophy"></i> Showcaser</h1>
+        <a href="/gemini/magnitude" type="button" class="btn btn-default btn-lag">
+            <span class="glyphicon glyphicon-pencil"></span> Edit a Showcaser
+        </a>
+
+        <a href="#" type="button" class="btn btn-default btn-lag">
+            <span class="glyphicon glyphicon-pencil"></span> Edit Newsletter
+        </a>
+
+        <a href="#" type="button" class="btn btn-default btn-lag">
+            <span class="glyphicon glyphicon-pencil"></span> Edit Presentation
+        </a>
+
+
+
+    </div>
+</div>
+
+
 @stop
