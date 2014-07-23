@@ -883,3 +883,10 @@ a.img-av img {
 .mag .card{
     background: #E5CDE5;
 }
+
+.share {
+    display: inline-block;
+    height: 45px;
+    vertical-align: middle;
+    margin: 0.5em;
+}
