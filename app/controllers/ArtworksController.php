@@ -3,11 +3,15 @@
 class ArtworksController extends \BaseController {
 
     protected $artwork;
+    protected $artists_previous;
+    protected $artworks_previous;
 
     public function __construct(Artwork $artwork)
     {
         $this->artwork = $artwork;
         $this->beforeFilter('auth');
+        $this->artists_previous = Tools::artists_previous();
+        $this->artworks_previous = Tools::artworks_previous();
     }
 
     /**
@@ -114,12 +118,7 @@ class ArtworksController extends \BaseController {
             return Redirect::to($artwork->url());
         }
 
-        //Session::forget('artworks_previous');
-
-        $artworks_previous = $artwork->artworks_previous();
-        $artists_previous = $artwork->artist->artists_previous();
-
-        return View::make('artworks.show', ['artwork' => $artwork, 'artworks_related' => $artworks_related, 'artworks_previous' => $artworks_previous, 'container_height' => $container_height, 'page_title' => $artwork->page_title()]);
+        return View::make('artworks.show', ['artwork' => $artwork, 'artworks_related' => $artworks_related, 'artworks_previous' => $this->artworks_previous, 'container_height' => $container_height, 'page_title' => $artwork->page_title()]);
 
 
     }
