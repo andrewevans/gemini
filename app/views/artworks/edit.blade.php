@@ -66,6 +66,11 @@
 </div>
 
 <div class="form-group">
+    {{ Form::label('artwork_description', 'Description') }}
+    {{ Form::textarea('artwork_description', null, array('class' => 'form-control-rich', 'id' => 'artwork_description')) }}
+</div>
+
+<div class="form-group">
     {{ Form::label('price_on_req', 'Price on Request') }}
     {{ Form::text('price_on_req', null, array('class' => 'form-control')) }}
 </div>

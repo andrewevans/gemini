@@ -78,8 +78,6 @@
         </tbody>
     </table>
 
-        {{ $artwork->artwork_description }}
-
         <strong>After:</strong> {{ $artwork->after }}<br />
         <strong>Price on Request:</strong> {{ $artwork->price_on_req }}<br />
         <strong>Sold:</strong> {{ $artwork->sold }}<br />
@@ -88,6 +86,10 @@
     </div>
 
 </div>
+
+    <div class="container paper">
+        {{ $artwork->artwork_description }}
+    </div>
 
     <div class="share-btns">
         @include('widgets.share', array('artwork' => $artwork))
