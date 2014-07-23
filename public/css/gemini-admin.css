@@ -10,3 +10,7 @@ body {
 .list-price {
     text-align: right;
 }
+
+.fa.fa-sort:hover {
+    cursor: pointer;
+}
