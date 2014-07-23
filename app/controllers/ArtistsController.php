@@ -129,7 +129,7 @@ class ArtistsController extends \BaseController {
                 ->where('object_importance.object_type', '=', 'w') // get only artworks
                 ->where('sold', '!=', '1')->where('hidden', '!=', 1) // only show available artworks
                 ->select('*', 'artworks.id as id') // use artworks ID
-                ->orderBy('magnitude', 'DESC') // order by magnitude, if available, because the whole point is to put higher mags up higher
+                ->orderBy('magnitude', 'ASC') // order by magnitude, if available, because the whole point is to put higher mags up higher
                 ->get();
 
             $artworks_mags_showcaser = $artist->artworks()->leftJoin('object_importance', 'object_importance.object_id', '=', 'artworks.id')
