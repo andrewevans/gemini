@@ -51,15 +51,14 @@ CKEDITOR.editorConfig = function( config ) {
     config.enterMode = CKEDITOR.ENTER_BR;
 
     config.language = 'en';
-    config.uiColor = '#aaaa77';
 
-    config.forcePasteAsPlainText = true;
+    //config.forcePasteAsPlainText = true;
 
-    config.removeFormatTags = 'b,big,code,del,dfn,em,font,i,ins,kbd,br';
+    //config.removeFormatTags = 'b,big,code,del,dfn,em,font,i,ins,kbd,br';
     config.allowedContent = 'sup sub';
 
-    config.width = "auto";
-    config.height = "6em";
+    config.width = "50%";
+    config.height = "7em";
     config.font_style =
     {
         element		: 'span',
