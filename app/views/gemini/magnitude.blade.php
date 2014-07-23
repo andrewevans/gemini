@@ -20,11 +20,15 @@
         {{ Form::select('artist_id', $artists, $artist->id, array('class' => 'form-control')) }}
     </div>
 
-    {{ Form::submit('Show this showcaser', array('class' => 'btn btn-primary')) }}
+    {{ Form::submit('Show this artist', array('class' => 'btn btn-primary')) }}
+    <a href="/gemini/magnitude"><div class="btn btn-secondary">Reset</div></a>
 
     {{ Form::close() }}
 
 
+
+    <h2>Selected Mags for: {{ $artist->alias }}</h2>
+    {{ Form::open(array('route' => array('gemini.magnitude'), 'method' => 'POST')) }}
 
     <table class="table table-striped table-bordered">
     <thead>
@@ -42,7 +46,11 @@
     <tr>
         <td style="background: #aa0000; color: #eeeeee;">{{ $artwork->magnitude }}</td>
         <td></td>
-        <td>{{ $artwork->id }}</td>
+        <td>{{ $artwork->artwork_id }}<br />
+            (Mag id #: {{ $artwork->id }})
+            {{ Form::hidden('piece[]', $artwork->id, array('class' => 'form-control')) }}
+
+        </td>
         <td>{{ $artwork->title }}</td>
         <td>
             <pre>{{ $artwork->artist->last_name }}</pre>
@@ -53,6 +61,14 @@
     @endforeach
     </tbody>
 </table>
+    @if (sizeof($artworks) > 0)
+    {{ Form::submit('Reorder these!', array('class' => 'btn btn-primary')) }}
+    @else
+    <p>Nothing to reorder.</p>
+    @endif
+
+    {{ Form::close() }}
+
 
 </div>
 
