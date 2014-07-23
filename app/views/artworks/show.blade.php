@@ -87,13 +87,28 @@
 
 </div>
 
-    <div class="container paper">
-        {{ $artwork->artwork_description }}
+    <div class="container">
+        <div class="col-md-8">
+            <div class="paper">
+                <div class="share-btns">
+                    @include('widgets.share', array('artwork' => $artwork))
+                </div>
+
+                @if ($artwork->artwork_description != null)
+                    {{ $artwork->artwork_description }}
+                @else
+                    <p>We do not currently have a description for this work.</p>
+                @endif
+
+                <div class="share-btns">
+                    @include('widgets.share', array('artwork' => $artwork))
+                </div>
+            </div>
+        </div>
+
+            @include('widgets.artworks.card', array('artworks' => $artworks_previous))
     </div>
 
-    <div class="share-btns">
-        @include('widgets.share', array('artwork' => $artwork))
-    </div>
 </div>
 
 <div class="container">
