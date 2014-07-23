@@ -11,10 +11,14 @@
     <!-- Latest compiled and minified CSS -->
     <!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"> -->
 
+    {{ HTML::script('js/jquery-2.1.1.min.js') }}
+
     <!-- Optional theme -->
     <!-- Bootstrap theme -->
     {{ HTML::style('vendor/bootstrap/css/bootstrap-theme.min.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
     <!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css"> -->
+
+    {{ HTML::style('vendor/font-awesome-4.1.0/css/font-awesome.min.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
 
     <!-- Latest compiled and minified JavaScript -->
     <!--<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script> -->
@@ -29,6 +33,16 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <link href="/vendor/jquery-ui/css/ui-lightness/jquery-ui-1.10.4.css" rel="stylesheet">
+    <script src="/vendor/jquery-ui/js/jquery-ui-1.10.4.js"></script>
+
+    <script>
+        $(function() {
+            $( "#sortable tbody" ).sortable();
+            $( "#sortable tbody" ).disableSelection();
+        });
+    </script>
 </head>
 <body>
 <div class='container-fluid'>
