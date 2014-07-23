@@ -49,8 +49,8 @@
         <td style="background: #aa0000; color: #eeeeee;">{{ $artwork->magnitude }}</td>
         <td></td>
         <td>{{ $artwork->artwork_id }}<br />
-            (Mag id #: {{ $artwork->id }})
-            {{ Form::hidden('piece[]', $artwork->id, array('class' => 'form-control')) }}
+            (Mag id #: {{ $artwork->object_importance_id }})
+            {{ Form::hidden('piece[]', $artwork->object_importance_id, array('class' => 'form-control')) }}
 
         </td>
         <td>{{ $artwork->title }}</td>
