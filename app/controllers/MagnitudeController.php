@@ -31,7 +31,16 @@ class MagnitudeController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+        $input = Input::all();
+
+        foreach ($input['piece'] as $key => $piece) {
+            $mag = Magnitude::find($piece);
+            $mag->magnitude = $key+1;
+            $mag->save();
+        }
+
+        Session::flash('message', 'Magnitudes stored.');
+        return Redirect::to('/gemini/magnitude');
 	}
 
 

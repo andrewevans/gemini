@@ -176,16 +176,20 @@ class GeminiController extends \BaseController {
             $artworks_mags = $artist->artworks()
                 ->join('object_importance', 'object_importance.object_id', '=', 'artworks.id')
                 ->where('object_importance.object_type', '=', 'w-' . $artist->slug) // get only artworks
+                ->select('*', 'artworks.id as artwork_id')
                 ->orderBy('magnitude', 'ASC')
                 ->get();
         } else {
-            $artworks_mags = Artwork::
-                join('object_importance', 'object_importance.object_id', '=', 'artworks.id')
-                ->orderBy('magnitude', 'DESC')
-                ->get();
-
             $artist = new Artist;
             $artist->id = null;
+            $artist->alias = "Global Features (not artist specific)";
+
+            $artworks_mags = Artwork::
+                join('object_importance', 'object_importance.object_id', '=', 'artworks.id')
+                ->where('object_importance.object_type', '=', 'w') // get only artworks
+                ->select('*', 'artworks.id as artwork_id')
+                ->orderBy('magnitude', 'ASC')
+                ->get();
         }
 
         return View::make('gemini.magnitude')
