@@ -30,9 +30,10 @@
     <h2>Selected Mags for: {{ $artist->alias }}</h2>
     {{ Form::open(array('route' => array('gemini.magnitude'), 'method' => 'POST')) }}
 
-    <table class="table table-striped table-bordered">
+    <table id="sortable" class="table table-striped table-bordered">
     <thead>
     <tr>
+        <th>&nbsp;</th>
         <th style="background: #aa0000; color: #eeeeee;">Magnitude</th>
         <th>Img</th>
         <th>ID</th>
@@ -43,7 +44,8 @@
     </thead>
     <tbody>
     @foreach($artworks as $key => $artwork)
-    <tr>
+    <tr class="ui-state-default">
+        <td style="vertical-align: middle; font-size:2em"><span class="fa fa-sort"></span></td>
         <td style="background: #aa0000; color: #eeeeee;">{{ $artwork->magnitude }}</td>
         <td></td>
         <td>{{ $artwork->artwork_id }}<br />
