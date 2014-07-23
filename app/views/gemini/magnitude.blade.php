@@ -5,9 +5,28 @@
 
 <div class="container">
 
-<a class="btn btn-small btn-success" href="/gemini/artworks/create">Create Artwork</a>
+<a class="btn btn-small btn-success" href="/gemini/magnitude/create">Create Magnitude/Showcaser</a>
 
-<table class="table table-striped table-bordered">
+
+
+<h2>Mags</h2>
+    <!-- if there are creation errors, they will show here -->
+    {{ HTML::ul($errors->all()) }}
+
+    {{ Form::open(array('route' => array('gemini.magnitude'), 'method' => 'GET')) }}
+
+    <div class="form-group">
+        {{ Form::label('artist_id', 'Artist ID') }}
+        {{ Form::select('artist_id', $artists, $artist->id, array('class' => 'form-control')) }}
+    </div>
+
+    {{ Form::submit('Show this showcaser', array('class' => 'btn btn-primary')) }}
+
+    {{ Form::close() }}
+
+
+
+    <table class="table table-striped table-bordered">
     <thead>
     <tr>
         <th style="background: #aa0000; color: #eeeeee;">Magnitude</th>
@@ -16,7 +35,6 @@
         <th>Title</th>
         <th>Artist</th>
         <th>Price</th>
-        <th style="width: 500px">&nbsp;</th>
     </tr>
     </thead>
     <tbody>
@@ -31,23 +49,6 @@
         </td>
         <td class="list-price">{{ '$' . number_format($artwork->price) }}</td>
 
-        <!-- we will also add show, edit, and delete buttons -->
-        <td>
-
-            <!-- delete the artwork (uses the destroy method DESTROY /artworks/{id} -->
-            <!-- we will add this later since its a little more complicated than the other two buttons -->
-            {{ Form::open(array('url' => '/gemini/artworks/' . $artwork->id, 'class' => 'pull-right')) }}
-            {{ Form::hidden('_method', 'DELETE') }}
-            {{ Form::submit('Delete this artwork', array('class' => 'btn btn-warning')) }}
-            {{ Form::close() }}
-
-            <!-- show the artwork (uses the show method found at GET /artworks/{id} -->
-            <a class="btn btn-small btn-success" href="/artworks/{{ $artwork->id }}">Show this artwork</a>
-
-            <!-- edit this artwork (uses the edit method found at GET /artworks/{id}/edit -->
-            <a class="btn btn-small btn-info" href="/gemini/artworks/{{ $artwork->id }}/edit">Edit this artwork</a>
-
-        </td>
     </tr>
     @endforeach
     </tbody>
