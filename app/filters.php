@@ -228,3 +228,25 @@ View::composer('widgets.filters.list', function($view){
 
     $view->with('current_url', $current_url);
 });
+
+View::composer('widgets.share', function($view){
+
+    $page_info['message'] = 'Somewhere...';
+
+    switch (Route::current()->getName()) {
+
+        case 'artworks.showOne':
+            $page_info['message'] = $view->artwork->artist->alias . ', ' . $view->artwork->medium_short() . ' | ' . $view->artwork->title_short();
+            break;
+
+        case 'artists.show.bio.page':
+            $page_info['message'] = $view->post->post_title;
+            break;
+
+        default:
+            break;
+
+    }
+
+    $view->with('page_info', $page_info);
+});

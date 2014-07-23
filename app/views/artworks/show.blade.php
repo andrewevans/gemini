@@ -86,6 +86,10 @@
     </div>
 
 </div>
+
+    <div class="share-btns">
+        @include('widgets.share', array('artwork' => $artwork))
+    </div>
 </div>
 
 <div class="container">
