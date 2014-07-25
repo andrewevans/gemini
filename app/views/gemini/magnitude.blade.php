@@ -68,13 +68,12 @@
                 </tr>
                 <?php $key_connected++; ?>
                 @endforeach
+                <tr><td>&nbsp;</td></tr>
+                <tr><td>&nbsp;</td></tr>
+
                 </tbody>
             </table>
-            @if (sizeof($artworks) > 0)
             {{ Form::submit('Reorder these!', array('class' => 'btn btn-primary')) }}
-            @else
-            <p>Nothing to reorder.</p>
-            @endif
 
             {{ Form::close() }}
 
@@ -119,6 +118,9 @@
                 </tr>
                 <?php $key_connected++; ?>
                 @endforeach
+                <tr><td>&nbsp;</td></tr>
+                <tr><td>&nbsp;</td></tr>
+
                 </tbody>
             </table>
         </div>
