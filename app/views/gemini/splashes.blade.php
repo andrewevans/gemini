@@ -64,6 +64,9 @@
                 </tr>
                 <?php $key_connected++; ?>
                 @endforeach
+
+                <tr><td>&nbsp;</td></tr>
+                <tr><td>&nbsp;</td></tr>
                 </tbody>
             </table>
             {{ Form::submit('Reorder these!', array('class' => 'btn btn-primary')) }}
@@ -103,6 +106,9 @@
                 </tr>
                 <?php $key_connected++; ?>
                 @endforeach
+                <tr><td>&nbsp;</td></tr>
+                <tr><td>&nbsp;</td></tr>
+
                 </tbody>
             </table>
         </div>
