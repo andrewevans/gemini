@@ -92,6 +92,10 @@
             <span class="glyphicon glyphicon-pencil"></span> Edit a Showcaser
         </a>
 
+        <a href="/gemini/splashes" type="button" class="btn btn-default btn-lag">
+            <span class="glyphicon glyphicon-pencil"></span> Edit Splashes
+        </a>
+
         <a href="#" type="button" class="btn btn-default btn-lag">
             <span class="glyphicon glyphicon-pencil"></span> Edit Newsletter
         </a>
