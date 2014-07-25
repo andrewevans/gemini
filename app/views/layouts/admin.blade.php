@@ -39,9 +39,22 @@
 
     <script>
         $(function() {
-            $( "#sortable tbody" ).sortable();
-            $( "#sortable tbody" ).disableSelection();
-        });
+// Format the table headers and table rows using classes
+// from the CSS framework.
+            $( "td" ).addClass( "ui-widget-content" );
+            $( "th" ).addClass( "ui-widget-header" );
+
+// Create the first sortable, connecting it to the second
+// sortable.
+            $( "table:first tbody" ).sortable({
+                connectWith: "table:last tbody"
+            });
+
+// Create the second sortable, connecting it to the first
+// sortable.
+            $( "table:last tbody" ).sortable({
+                connectWith: "table:first tbody"
+            });        });
     </script>
 </head>
 <body>

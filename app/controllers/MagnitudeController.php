@@ -33,8 +33,17 @@ class MagnitudeController extends \BaseController {
 	{
         $input = Input::all();
 
-        foreach ($input['piece'] as $key => $piece) {
-            $mag = Magnitude::find($piece);
+        $pieces = array_values($input['piece']);
+
+        foreach ($pieces as $key => $piece) {
+            $mag = Magnitude::find($piece['object_importance_id']);
+
+            if ($mag == null) {
+                $mag = new Magnitude;
+                $mag->object_type = $piece['object_type'];
+                $mag->object_id = $piece['artwork_id'];
+            }
+
             $mag->magnitude = $key+1;
             $mag->save();
         }
