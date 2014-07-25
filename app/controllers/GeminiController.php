@@ -209,6 +209,32 @@ class GeminiController extends \BaseController {
 
     }
 
+    public function splashes()
+    {
+        $input = Input::all();
+
+        $artists = DB::table('artists')->orderBy('alias', 'desc')->lists('alias','id');
+
+        if (isset($input['artist_id'])) {
+            $artist = Artist::find($input['artist_id']);
+            $splashes_from_artist = Splash::where('location_slug', '=', $artist->slug)->orderBy('location_slug', 'ASC')->orderBy('position', 'ASC')->get();
+            $splashes_not_from_artist = Splash::where('location_slug', '!=', $artist->slug)->orderBy('location_slug', 'ASC')->orderBy('position', 'ASC')->get();
+        } else {
+            $artist = new Artist;
+            $artist->id = null;
+            $artist->alias = "Homepage!";
+            $splashes_from_artist = Splash::where('location_slug', '=', 'home')->orderBy('location_slug', 'ASC')->orderBy('position', 'ASC')->get();
+            $splashes_not_from_artist = Splash::where('location_slug', '!=', 'home')->orderBy('location_slug', 'ASC')->orderBy('position', 'ASC')->get();
+        }
+
+        return View::make('gemini.splashes',
+        ['artists' => $artists,
+        'artist' => $artist,
+        'splashes_not_from_artist' => $splashes_not_from_artist,
+        'splashes_from_artist' => $splashes_from_artist
+        ]);
+    }
+
 
     /**
 	 * Show the form for creating a new resource.
