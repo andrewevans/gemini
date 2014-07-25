@@ -229,6 +229,34 @@ View::composer('widgets.filters.list', function($view){
     $view->with('current_url', $current_url);
 });
 
+View::composer('widgets.splashes', function($view){
+
+    switch(Route::current()->getName()) {
+        case 'artists.show':
+            $slug = $view->artist->slug;
+            break;
+
+        case 'home.index':
+            $slug = 'home';
+            break;
+
+        default:
+            $slug = null;
+            break;
+    }
+
+    if ($slug != null) {
+        $splashes = DB::table('splashes')
+            ->where('location_slug', '=', $slug)
+            ->orderBy('position', 'ASC')
+            ->get();
+    } else {
+        $splashes = null;
+    }
+
+    $view->with('splashes', $splashes);
+});
+
 View::composer('widgets.share', function($view){
 
     $page_info['message'] = 'Somewhere...';
