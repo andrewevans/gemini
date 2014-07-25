@@ -198,6 +198,8 @@
     <div class="alert alert-info">{{ Session::get('message') }}</div>
     @endif
 
+        @include('widgets.splashes')
+
     @yield('content')
 
     <!--</div>--><!-- /.container -->

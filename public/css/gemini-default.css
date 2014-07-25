@@ -122,7 +122,8 @@ body {
     height: 500px;
         text-align: center;
 }
-.carousel-inner > .item > img {
+.carousel-inner > .item > img,
+.carousel-inner > .item > a img {
 /*
     position: absolute;
     top: 0;
