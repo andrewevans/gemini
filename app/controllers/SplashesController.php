@@ -33,6 +33,8 @@ class SplashesController extends \BaseController {
 	{
         $input = Input::all();
 
+        if (! isset($input['piece'])) return Redirect::to('/gemini/splashes');
+
         $pieces = array_values($input['piece']);
 
         foreach ($pieces as $key => $piece) {
