@@ -62,17 +62,17 @@ class SellController extends \BaseController {
         // resizing an uploaded file
         if ($img_1 != null) {
             $mime_type = $img_1->getClientOriginalExtension(); // unused
-            $image['profile'] = Image::make($img_1->getRealPath())->resize(ARTIST_MAX_WIDTH, null, true, false)->resize(null, ARTIST_MAX_HEIGHT, true, false)->save($this->sell->img_1_name);
+            $image['profile'] = Image::make($img_1->getRealPath())->resize(UPLOAD_ARTWORK_MAX_WIDTH, null, true, false)->resize(null, UPLOAD_ARTWORK_MAX_HEIGHT, true, false)->save($this->sell->img_1_name);
         }
 
         if ($img_2 != null) {
             $mime_type = $img_2->getClientOriginalExtension(); // unused
-            $image['profile'] = Image::make($img_2->getRealPath())->resize(ARTIST_MAX_WIDTH, null, true, false)->resize(null, ARTIST_MAX_HEIGHT, true, false)->save($this->sell->img_2_name);
+            $image['profile'] = Image::make($img_2->getRealPath())->resize(UPLOAD_ARTWORK_MAX_WIDTH, null, true, false)->resize(null, UPLOAD_ARTWORK_MAX_HEIGHT, true, false)->save($this->sell->img_2_name);
         }
 
         if ($img_3 != null) {
             $mime_type = $img_3->getClientOriginalExtension(); // unused
-            $image['profile'] = Image::make($img_3->getRealPath())->resize(ARTIST_MAX_WIDTH, null, true, false)->resize(null, ARTIST_MAX_HEIGHT, true, false)->save($this->sell->img_3_name);
+            $image['profile'] = Image::make($img_3->getRealPath())->resize(UPLOAD_ARTWORK_MAX_WIDTH, null, true, false)->resize(null, UPLOAD_ARTWORK_MAX_HEIGHT, true, false)->save($this->sell->img_3_name);
         }
 
         // Customer receipt
