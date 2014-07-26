@@ -179,6 +179,7 @@ class ArtistsController extends \BaseController {
         }
 
         $artworks = $artist->artworks()->whereRaw("(" . $filter_query . ")")->where('sold', '!=', '1')->where('hidden', '=', 0)->orderByRaw(Session::get('sortBy.orderBy'))->get();
+        $this->artists_previous = $artist->artists_previous();
 
         return View::make('artists.show', ['artist' => $artist, 'artworks' => $artworks, 'artists_previous' => $this->artists_previous, 'page_title' => $artist->title($page_title), 'filter' => $valid_filter, 'filter_slug' => $filter, 'posts' => $this->posts]);
     }
