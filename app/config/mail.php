@@ -55,7 +55,7 @@ return array(
 	|
 	*/
 
-	'from' => array('address' => 'andrew@masterworksfineart.com', 'name' => 'Andrew E'),
+	'from' => array('address' => 'andrew@masterworksfineart.com', 'name' => 'Masterworks Fine Art'),
 
 	/*
 	|--------------------------------------------------------------------------

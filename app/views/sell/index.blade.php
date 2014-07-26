@@ -23,7 +23,7 @@
 <div class="container">
     <h3>Form Submission</h3>
 
-            {{ Form::open(array('url' => 'sell')) }}
+            {{ Form::open(array('url' => 'sell', 'files' => true, 'method' => 'POST')) }}
 
             <div class="form-group">
                 {{ Form::label('cust_name', 'Your name') }}
@@ -40,11 +40,15 @@
                 {{ Form::textarea('cust_inquiry', null, array('class' => 'form-control')) }}
             </div>
 
-            {{ Form::submit('Send message', array('class' => 'btn btn-primary')) }}
+    @for ($count = 1; $count < 4; $count++)
+            <div class="form-group">
+                {{ Form::label('img_' . $count . '_hardcount', 'Image #' . $count) }}
+                {{ Form::file('img_' . $count . '_hardcount', null, array('class' => 'form-control')) }}<br />
+            </div>
+    @endfor
 
-            {{ Form::close() }}
-
-
+    {{ Form::submit('Send message', array('class' => 'btn btn-primary')) }}
+    {{ Form::close() }}
 </div>
 
 <div class="container">
