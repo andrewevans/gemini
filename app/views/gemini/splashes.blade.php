@@ -29,13 +29,40 @@
 
         </div>
         <div class="col-md-6">
+            <h2>Create new splash</h2>
+
+            {{ Form::open(array('route' => array('gemini.splashes.store'), 'method' => 'POST')) }}
+
+            <div class="form-group">
+                {{ Form::label('destination_url', 'Destination URL') }}
+                {{ Form::text('destination_url', null, array('class' => 'form-control')) }}
+            </div>
+
+            <div class="form-group">
+                {{ Form::label('asset_url', 'Asset URL') }}
+                {{ Form::text('asset_url', null, array('class' => 'form-control')) }}
+            </div>
+
+            <div class="form-group">
+                {{ Form::label('title', 'Title') }}
+                {{ Form::text('title', null, array('class' => 'form-control')) }}
+            </div>
+
+            {{ Form::submit('Create splash!', array('class' => 'btn btn-primary')) }}
+            {{ Form::close() }}
+
+
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
             <?php $key_connected = 0; ?>
             @if ($splashes_from_artist != null)
-            <h2>Selected Splashes for: {{ $artist->alias }}</h2>
-            {{ Form::open(array('route' => array('gemini.splashes'), 'method' => 'POST')) }}
+            <h3>Selected Splashes for: {{ $artist->alias }}</h3>
+            {{ Form::open(array('route' => array('gemini.splashes.update'), 'method' => 'PUT')) }}
             {{ Form::hidden('artist_slug', $artist->slug, array('class' => 'form-control')) }}
 
-            <h1 class="ui-widget">Customers</h1>
             <table id="table1" class="ui-widget connectedSortable table table-striped table-bordered">
                 <thead>
                 <tr>
