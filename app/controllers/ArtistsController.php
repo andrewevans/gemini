@@ -122,7 +122,8 @@ class ArtistsController extends \BaseController {
             {
                 $query->select(DB::raw(1))
                     ->from('object_importance')
-                    ->whereRaw('artworks.id = object_importance.object_id');
+                    ->whereRaw('artworks.id = object_importance.object_id')
+                    ->where('object_importance.object_type', '=', 'w');
             })->where('sold', '!=', '1')->where('hidden', '!=', 1)->orderByRaw(Session::get('sortBy.orderBy'))->get();
 
             $artworks_mags = $artist->artworks()->leftJoin('object_importance', 'object_importance.object_id', '=', 'artworks.id')
