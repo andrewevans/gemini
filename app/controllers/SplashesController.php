@@ -2,6 +2,14 @@
 
 class SplashesController extends \BaseController {
 
+    protected $splash;
+
+    public function __construct(Splash $splash)
+    {
+        $this->splash = $splash;
+        $this->beforeFilter('auth');
+    }
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -33,20 +41,20 @@ class SplashesController extends \BaseController {
 	{
         $input = Input::all();
 
-        if (! isset($input['piece'])) return Redirect::to('/gemini/splashes');
-
-        $pieces = array_values($input['piece']);
-
-        foreach ($pieces as $key => $piece) {
-
-            $splash = Splash::find($piece['id']);
-
-            $splash->position = $key+1;
-            $splash->location_slug = $input['artist_slug'];
-            $splash->save();
+        if ( ! $this->splash->fill($input)->isValid())
+        {
+            return Redirect::back()->withInput()->withErrors($this->splash->errors);
         }
 
-        Session::flash('message', 'Splashes reordered.');
+        $splash = new Splash;
+        $splash->position = 0;
+        $splash->location_slug = '';
+        $splash->destination_url = $input['destination_url'];
+        $splash->asset_url = $input['asset_url'];
+        $splash->title = $input['title'];
+        $splash->save();
+
+        Session::flash('message', 'Splash created!.');
         return Redirect::to('/gemini/splashes');
     }
 
@@ -83,7 +91,23 @@ class SplashesController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+        $input = Input::all();
+
+        if (! isset($input['piece'])) return Redirect::to('/gemini/splashes');
+
+        $pieces = array_values($input['piece']);
+
+        foreach ($pieces as $key => $piece) {
+
+            $splash = Splash::find($piece['id']);
+
+            $splash->position = $key+1;
+            $splash->location_slug = $input['artist_slug'];
+            $splash->save();
+        }
+
+        Session::flash('message', 'Splashes reordered.');
+        return Redirect::to('/gemini/splashes');
 	}
 
 

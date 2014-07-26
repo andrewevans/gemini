@@ -16,12 +16,10 @@ class Splash extends Eloquent
 
 
     public static $rules = array(
-        'location_slug'       => 'required',
         'asset_url'       => 'required',
     );
 
     public static $messages = [
-        'location_slug.required' => "Where to show?",
         'asset_url.required' => "What image to show?",
     ];
 
