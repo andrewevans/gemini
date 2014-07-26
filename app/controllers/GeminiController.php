@@ -223,6 +223,7 @@ class GeminiController extends \BaseController {
             $artist = new Artist;
             $artist->id = null;
             $artist->alias = "Homepage!";
+            $artist->slug = 'home';
             $splashes_from_artist = Splash::where('location_slug', '=', 'home')->orderBy('location_slug', 'ASC')->orderBy('position', 'ASC')->get();
             $splashes_not_from_artist = Splash::where('location_slug', '!=', 'home')->orderBy('location_slug', 'ASC')->orderBy('position', 'ASC')->get();
         }
