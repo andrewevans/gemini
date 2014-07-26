@@ -3,15 +3,19 @@
 @section('content')
 <!-- app/views/splashes/index.blade.php -->
 
-<div class="container">
+<div class="jumbotron">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- if there are creation errors, they will show here -->
+            {{ HTML::ul($errors->all()) }}
+        </div>
+    </div>
 
     <div class="row">
 
-        <div class="col-md-12">
+        <div class="col-md-6">
 
             <h2>Splashes</h2>
-            <!-- if there are creation errors, they will show here -->
-            {{ HTML::ul($errors->all()) }}
 
             {{ Form::open(array('route' => array('gemini.splashes'), 'method' => 'GET')) }}
 
@@ -104,7 +108,6 @@
         <div class="col-md-6">
             <h3>Available Splashes</h3>
 
-            <h1 class="ui-widget">Administrators</h1>
             <table id="table1" class="ui-widget connectedSortable table table-striped table-bordered">
                 <thead>
                 <tr>
@@ -140,7 +143,6 @@
             </table>
         </div>
     </div>
-<a class="btn btn-small btn-success" href="/gemini/splashes/create">Create Splash</a>
 
 
 
