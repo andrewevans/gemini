@@ -17,6 +17,8 @@ define('ARTIST_MAX_WIDTH', '850');
 define('ARTIST_MAX_HEIGHT', '800');
 define('CATREF_MAX_WIDTH', '450');
 define('CATREF_MAX_HEIGHT', '400');
+define('UPLOAD_ARTWORK_MAX_WIDTH', '1850');
+define('UPLOAD_ARTWORK_MAX_HEIGHT', '1800');
 define('SITE_NAME', 'Masterworks Fine Art Gallery');
 define('SORT_FEATURED', 'Featured');
 define('SORT_HIGH', 'Price: Highest first');
