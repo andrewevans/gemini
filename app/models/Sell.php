@@ -37,4 +37,21 @@ class Sell extends Eloquent
         return false;
     }
 
+    public function img_url($img_name, $key = null)
+    {
+        $extension = 'jpg';
+        $img_num_av = '';
+
+        if ($key != null) $img_num_av = '_' . $key;
+
+        return $local_file = $this->img_directory_url() . '/' . $img_name . $img_num_av . '.' . $extension;
+    }
+
+
+    public function img_directory_url()
+    {
+        return 'uploads';
+    }
+
+
 }
