@@ -101,6 +101,10 @@
         </a>
 
         <a href="#" type="button" class="btn btn-default btn-lag">
+            <span class="glyphicon glyphicon-pencil"></span> Edit Sale page (custom collection page)
+        </a>
+
+        <a href="#" type="button" class="btn btn-default btn-lag">
             <span class="glyphicon glyphicon-pencil"></span> Edit Presentation
         </a>
 
