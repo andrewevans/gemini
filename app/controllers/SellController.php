@@ -45,22 +45,40 @@ class SellController extends \BaseController {
             return Redirect::back()->withInput()->withErrors($this->sell->errors);
         }
 
+        $img_1 = Input::file('img_1_hardcount');
+        $img_2 = Input::file('img_2_hardcount');
+        $img_3 = Input::file('img_3_hardcount');
+
+        $date_stamp = date("Y-m-d H:i:s");
+
+        //$sell = new Sell;
+        $this->sell->cust_email = Input::get('cust_email');
+        $this->sell->cust_name = Input::get('cust_name');
+
+        $this->sell->img_1_name = $this->sell->img_url($this->sell->cust_email . $date_stamp, 1);
+
+        // resizing an uploaded file
+        if ($img_1 != null) {
+            $mime_type = $img_1->getClientOriginalExtension(); // unused
+            $image['profile'] = Image::make($img_1->getRealPath())->resize(ARTIST_MAX_WIDTH, null, true, false)->resize(null, ARTIST_MAX_HEIGHT, true, false)->save($this->sell->img_1_name);
+        }
+
         // Customer receipt
-        Mail::send('emails.sell.receipt', $this->input, function($message)
+        Mail::send('emails.sell.receipt', $this->sell->toArray(), function($message)
         {
-            $message->to($this->input['cust_email'], $this->input['cust_name'])->subject('Thank you for your purchase, ' . $this->input['cust_name'] . '!');
+            $message->to($this->sell->cust_email, $this->sell['cust_name'])->replyTo('sell@masterworksfineart.com', 'Masterworks Fine Art Gallery Sales')->subject('Thank you for sending us your images, ' . $this->sell['cust_name'] . '!');
         });
 
         // To the boss man
-        Mail::send('emails.sell.inquiry', $this->input, function($message)
+        Mail::send('emails.sell.inquiry', $this->sell->toArray(), function($message)
         {
-            $message->to('robmasterworks@mailinator.com', $this->input['cust_name'])->subject('Thank you for your purchase, ' . $this->input['cust_name'] . '!');
+            $message->to('sell@masterworksfineart.com', $this->sell['cust_name'])->attach($this->sell['img_1_name'])->replyTo($this->sell['cust_email'], $this->sell['cust_name'])->subject('In response to the images you sent us, ' . $this->sell['cust_name'] . '!');
         });
 
         // To the henchmen
-        Mail::send('emails.sell.inquiry', $this->input, function($message)
+        Mail::send('emails.sell.inquiry', $this->sell->toArray(), function($message)
         {
-            $message->to('apbmasterworks@mailinator.com', $this->input['cust_name'])->subject('Thank you for your purchase, ' . $this->input['cust_name'] . '!');
+            $message->to('aupusher@gmail.com', 'Records: sell inquiry')->attach($this->sell['img_1_name'])->subject('Inquiry, looking to sell from, ' . $this->sell['cust_name'] . '!');
         });
 
 
