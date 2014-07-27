@@ -200,12 +200,6 @@
     <div class="alert alert-info">{{ Session::get('message') }}</div>
     @endif
 
-    <div class="container">
-        <div class="row">
-                @include('widgets.splashes_netty')
-        </div>
-    </div>
-
     @yield('content')
 
     <!--</div>--><!-- /.container -->
