@@ -52,6 +52,11 @@
                 {{ Form::text('title', null, array('class' => 'form-control')) }}
             </div>
 
+            <div class="form-group">
+                {{ Form::label('description', 'Description') }}
+                {{ Form::text('description', null, array('class' => 'form-control')) }}
+            </div>
+
             {{ Form::submit('Create splash!', array('class' => 'btn btn-primary')) }}
             {{ Form::close() }}
 
@@ -73,7 +78,7 @@
                     <th>&nbsp;</th>
                     <th style="background: #aa0000; color: #eeeeee;">Position</th>
                     <th style="width:200px">asset url</th>
-                    <th>Title</th>
+                    <th>Title/desc</th>
                     <th>destination</th>
                 </tr>
                 </thead>
@@ -85,10 +90,13 @@
                     <br />@ {{ $splash->location_slug }}</td>
                     <td><img src="{{ $splash->asset_url }}" style="width:100px" /></td>
                     <td>{{ $splash->title }}<br />
+                        {{ $splash->description }}<br />
                         (Splash id #: {{ $splash->id }})
                         {{ Form::hidden('piece['. $key_connected . '][id]', $splash->id, array('class' => 'form-control')) }}
                         {{ Form::hidden('piece['. $key_connected . '][position]', null, array('class' => 'form-control')) }}
                         {{ Form::hidden('piece['. $key_connected . '][location_slug]', $splash->location_slug, array('class' => 'form-control')) }}
+                        {{ Form::hidden('piece['. $key_connected . '][title]', $splash->title, array('class' => 'form-control')) }}
+                        {{ Form::hidden('piece['. $key_connected . '][description]', $splash->description, array('class' => 'form-control')) }}
                     </td>
                     <td>{{ $splash->destination_url }}</td>
 
@@ -130,6 +138,8 @@
                         {{ Form::hidden('piece['. $key_connected . '][id]', $splash->id, array('class' => 'form-control')) }}
                         {{ Form::hidden('piece['. $key_connected . '][position]', null, array('class' => 'form-control')) }}
                         {{ Form::hidden('piece['. $key_connected . '][location_slug]', $splash->location_slug, array('class' => 'form-control')) }}
+                        {{ Form::hidden('piece['. $key_connected . '][title]', $splash->title, array('class' => 'form-control')) }}
+                        {{ Form::hidden('piece['. $key_connected . '][description]', $splash->description, array('class' => 'form-control')) }}
                     </td>
                     <td>{{ $splash->destination_url }}</td>
 

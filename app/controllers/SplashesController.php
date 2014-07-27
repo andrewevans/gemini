@@ -52,6 +52,7 @@ class SplashesController extends \BaseController {
         $splash->destination_url = $input['destination_url'];
         $splash->asset_url = $input['asset_url'];
         $splash->title = $input['title'];
+        $splash->description = $input['description'];
         $splash->save();
 
         Session::flash('message', 'Splash created!.');
