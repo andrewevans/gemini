@@ -55,24 +55,24 @@ class SellController extends \BaseController {
         $this->sell->cust_email = Input::get('cust_email');
         $this->sell->cust_name = Input::get('cust_name');
 
-        $this->sell->img_1_name = $this->sell->img_url($this->sell->cust_email . $date_stamp, 1);
-        $this->sell->img_2_name = $this->sell->img_url($this->sell->cust_email . $date_stamp, 2);
-        $this->sell->img_3_name = $this->sell->img_url($this->sell->cust_email . $date_stamp, 3);
 
         // resizing an uploaded file
         if ($img_1 != null) {
+            $this->sell->img[] = $this->sell->img_url(Tools::url_slug($this->sell->cust_email . $date_stamp), 1);
             $mime_type = $img_1->getClientOriginalExtension(); // unused
-            $image['profile'] = Image::make($img_1->getRealPath())->resize(UPLOAD_ARTWORK_MAX_WIDTH, null, true, false)->resize(null, UPLOAD_ARTWORK_MAX_HEIGHT, true, false)->save($this->sell->img_1_name);
+            $image['profile'] = Image::make($img_1->getRealPath())->resize(UPLOAD_ARTWORK_MAX_WIDTH, null, true, false)->resize(null, UPLOAD_ARTWORK_MAX_HEIGHT, true, false)->save($this->sell->img[0]);
         }
 
         if ($img_2 != null) {
+            $this->sell->img[] = $this->sell->img_url(Tools::url_slug($this->sell->cust_email . $date_stamp), 2);
             $mime_type = $img_2->getClientOriginalExtension(); // unused
-            $image['profile'] = Image::make($img_2->getRealPath())->resize(UPLOAD_ARTWORK_MAX_WIDTH, null, true, false)->resize(null, UPLOAD_ARTWORK_MAX_HEIGHT, true, false)->save($this->sell->img_2_name);
+            $image['profile'] = Image::make($img_2->getRealPath())->resize(UPLOAD_ARTWORK_MAX_WIDTH, null, true, false)->resize(null, UPLOAD_ARTWORK_MAX_HEIGHT, true, false)->save($this->sell->img[1]);
         }
 
         if ($img_3 != null) {
+            $this->sell->img[] = $this->sell->img_url(Tools::url_slug($this->sell->cust_email . $date_stamp), 3);
             $mime_type = $img_3->getClientOriginalExtension(); // unused
-            $image['profile'] = Image::make($img_3->getRealPath())->resize(UPLOAD_ARTWORK_MAX_WIDTH, null, true, false)->resize(null, UPLOAD_ARTWORK_MAX_HEIGHT, true, false)->save($this->sell->img_3_name);
+            $image['profile'] = Image::make($img_3->getRealPath())->resize(UPLOAD_ARTWORK_MAX_WIDTH, null, true, false)->resize(null, UPLOAD_ARTWORK_MAX_HEIGHT, true, false)->save($this->sell->img[2]);
         }
 
         // Customer receipt
@@ -84,13 +84,17 @@ class SellController extends \BaseController {
         // To the boss man
         Mail::send('emails.sell.inquiry', $this->sell->toArray(), function($message)
         {
-            $message->to('sell@masterworksfineart.com', $this->sell['cust_name'])->attach($this->sell['img_1_name'])->attach($this->sell['img_2_name'])->attach($this->sell['img_3_name'])->replyTo($this->sell['cust_email'], $this->sell['cust_name'])->subject('In response to the images you sent us, ' . $this->sell['cust_name'] . '!');
+            $message->to('sell@masterworksfineart.com', $this->sell['cust_name']);
+            foreach ($this->sell['img'] as $img) $message->attach($img);
+            $message->replyTo($this->sell['cust_email'], $this->sell['cust_name'])->subject('In response to the images you sent us, ' . $this->sell['cust_name'] . '!');
         });
 
         // To the henchmen
         Mail::send('emails.sell.inquiry', $this->sell->toArray(), function($message)
         {
-            $message->to('aupusher@gmail.com', 'Records: sell inquiry')->attach($this->sell['img_1_name'])->attach($this->sell['img_2_name'])->attach($this->sell['img_3_name'])->subject('Inquiry, looking to sell from, ' . $this->sell['cust_name'] . '!');
+            $message->to('aupusher@gmail.com', 'Records: sell inquiry');
+            foreach ($this->sell['img'] as $img) $message->attach($img);
+            $message->subject('Inquiry, looking to sell from, ' . $this->sell['cust_name'] . '!');
         });
 
 
