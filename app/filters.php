@@ -278,3 +278,16 @@ View::composer('widgets.share', function($view){
 
     $view->with('page_info', $page_info);
 });
+
+View::composer('widgets.splashes*', function($view) {
+
+    if (isset($view->artist)) {
+        $location_slug = $view->artist->slug;
+    } else {
+        $location_slug = 'home';
+    }
+
+    $splashes = Splash::where('location_slug', '=', $location_slug)->get();
+
+    $view->with('splashes', $splashes);
+});

@@ -37,6 +37,8 @@ function resize_carousel()
     if (carousel_height > 600) carousel_height = 600;
     $('.carousel').css('height', carousel_height);
     $('.carousel .item').css('height',carousel_height);
+    $('.carousel .item > div').css('height',carousel_height);
+    $('.carousel .item .item-img img').css('max-height',carousel_height);
 }
 
 /* search typeahead functionality */

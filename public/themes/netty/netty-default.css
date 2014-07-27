@@ -10,7 +10,35 @@ a.carousel-thumb-3 {
 
 a.carousel-thumb h4 {
     padding-top: 70px;
+    padding-bottom: 70px;
     display: table-cell;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     text-align: center;
+}
+
+.carousel .item {
+    text-align: left;
+}
+
+.carousel .item > div {
+    display: table;
+    height: 600px;
+    text-align: center;
+}
+
+.carousel .item a {
+    display: block;
+}
+
+.carousel .item .item-copy {
+    display: table-cell;
+    vertical-align: middle;
+    padding-left: 30px;
+    font-size: 0.8em;
+    text-align: left;
+}
+
+.carousel .item .item-img img{
+    display: inline;
+    max-height: 600px;
 }
