@@ -29,6 +29,8 @@
     <!-- Custom styles for this template -->
     {{ HTML::style('css/gemini-default.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
 
+    {{ HTML::style('themes/netty/netty-default.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
+
     @if (Session::get('list') == 'row')
         {{ HTML::style('css/list-row.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
     @endif
@@ -198,7 +200,11 @@
     <div class="alert alert-info">{{ Session::get('message') }}</div>
     @endif
 
-        @include('widgets.splashes')
+    <div class="container">
+        <div class="row">
+                @include('widgets.splashes_netty')
+        </div>
+    </div>
 
     @yield('content')
 
