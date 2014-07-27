@@ -14,6 +14,7 @@ class Sell extends Eloquent
 
     protected $fillable = ['cust_email', 'cust_name', 'cust_inquiry'];
 
+    public $img = [];
 
     public static $rules = array(
         'cust_email'       => 'required|email',
