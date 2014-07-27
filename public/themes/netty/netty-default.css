@@ -1,0 +1,16 @@
+body {
+    background:#eee;
+}
+
+a.carousel-thumb-3 {
+    display: block;
+    height: 199px;
+    border-top: 1px solid #ccc;
+}
+
+a.carousel-thumb h4 {
+    padding-top: 70px;
+    display: table-cell;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    text-align: center;
+}

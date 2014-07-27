@@ -2,6 +2,29 @@
  * Created by vesper on 5/31/14.
  */
 
+$('#myCarousel').carousel({
+    interval: 4000
+});
+
+// handles the carousel thumbnails
+$('[id^=carousel-selector-]').click( function(){
+    var id_selector = $(this).attr("id");
+    var id = id_selector.substr(id_selector.length -1);
+    id = parseInt(id);
+    $('#myCarousel').carousel(id);
+    $('[id^=carousel-selector-]').removeClass('selected');
+    $(this).addClass('selected');
+});
+
+// when the carousel slides, auto update
+$('#myCarousel').on('slid', function (e) {
+    var id = $('.item.active').data('slide-number');
+    id = parseInt(id);
+    $('[id^=carousel-selector-]').removeClass('selected');
+    $('[id^=carousel-selector-'+id+']').addClass('selected');
+});
+
+
 resize_carousel();
 
 $( window ).resize(function() {
@@ -11,7 +34,7 @@ $( window ).resize(function() {
 function resize_carousel()
 {
     carousel_height = $( window ).height() - parseInt($('body').css('padding-top')) - 58;
-    if (carousel_height > 650) carousel_height = 650;
+    if (carousel_height > 600) carousel_height = 600;
     $('.carousel').css('height', carousel_height);
     $('.carousel .item').css('height',carousel_height);
 }
