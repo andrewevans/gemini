@@ -4,6 +4,12 @@
 
 @section('content')
 
+<div class="container" style="margin-top: 3em">
+    <div class="row">
+        @include('widgets.splashes_netty')
+    </div>
+</div>
+
 <div class="container">
     @include('widgets.artworks.card', array('artworks' => $artworks))
 </div>

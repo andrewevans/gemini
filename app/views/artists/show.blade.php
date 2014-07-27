@@ -3,6 +3,12 @@
 
 @section('content')
 
+<div class="container" style="margin-top: 3em">
+    <div class="row">
+        @include('widgets.splashes_netty')
+    </div>
+</div>
+
 <div class="container">
 <div class="intro-header" style="text-align: center; max-width:450px;"> <i class="sprite-h gtitle-deco above"></i>
     <h1>{{ $page_title }}</h1>
