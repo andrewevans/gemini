@@ -2,16 +2,25 @@ body {
     background:#eee;
 }
 
-a.carousel-thumb-3 {
-    display: block;
-    height: 199px;
+#slider-thumbs ul {
+    height: 600px;
+}
+
+#slider-thumbs ul li {
+    height: 32%;
+}
+
+#slider-thumbs a.carousel-thumb-3 {
+    display: table;
+    width: 100%;
+    height: 100%;
     border-top: 1px solid #ccc;
 }
 
-a.carousel-thumb h4 {
-    padding-top: 70px;
-    padding-bottom: 70px;
+#slider-thumbs a.carousel-thumb h4 {
     display: table-cell;
+    vertical-align: middle;
+    margin: 0;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     text-align: center;
 }

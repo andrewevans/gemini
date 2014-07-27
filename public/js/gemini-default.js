@@ -39,6 +39,7 @@ function resize_carousel()
     $('.carousel .item').css('height',carousel_height);
     $('.carousel .item > div').css('height',carousel_height);
     $('.carousel .item .item-img img').css('max-height',carousel_height);
+    $('#slider-thumbs ul').css('height', carousel_height);
 }
 
 /* search typeahead functionality */

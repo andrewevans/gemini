@@ -287,7 +287,7 @@ View::composer('widgets.splashes*', function($view) {
         $location_slug = 'home';
     }
 
-    $splashes = Splash::where('location_slug', '=', $location_slug)->get();
+    $splashes = Splash::where('location_slug', '=', $location_slug)->orderBy('position', 'ASC')->get();
 
     $view->with('splashes', $splashes);
 });
