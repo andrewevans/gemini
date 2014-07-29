@@ -49,7 +49,7 @@ class Tools {
         $artworks_previous = [];
 
         foreach ($artworks_previous_array as $artwork_previous) {
-            $artwork_previous = Artwork::whereId($artwork_previous)->whereSold(0)->whereHidden(0)->first();
+            $artwork_previous = Artwork::whereId($artwork_previous)->whereHidden(0)->first();
 
             if ($artwork_previous != null) $artworks_previous[] = $artwork_previous;
         }
