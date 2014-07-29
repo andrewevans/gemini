@@ -99,6 +99,12 @@ class ArtworksController extends \BaseController {
 
 		//
         $artwork = Artwork::find($id);
+
+        if ($artwork->hidden == 1) {
+            Session::flash('message', 'You were forwarded here from item #' . $artwork->id . ' because it is currently not available.');
+            return Redirect::to($artwork->artist->url());
+        }
+
         $artwork->img_urls = $this->fetch_images($artwork);
 
         $artwork->artwork_description = ArtworkDescription::whereArtworkId($id)->first();

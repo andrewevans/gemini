@@ -372,21 +372,24 @@ class Artwork extends Eloquent
 
     public function artworks_previous()
     {
+        if ($this->attributes['hidden'] != 1) {
 
-        $artworks_previous_session = unserialize(Session::get('artworks_previous', ''));
+            $artworks_previous_session = unserialize(Session::get('artworks_previous', ''));
 
-        if (! is_array($artworks_previous_session)) $artworks_previous_session = [];
+            if (! is_array($artworks_previous_session)) $artworks_previous_session = [];
 
-        if (! in_array($this->id, $artworks_previous_session)) {
-            $artworks_previous_session = serialize(array_merge( $artworks_previous_session, (array) $this->id));
-            Session::put('artworks_previous', $artworks_previous_session);
-        } else {
-            // it is in the array, so unset it and reassign it to the beginning
-            $key = array_search($this->id, $artworks_previous_session);
-            unset($artworks_previous_session[$key]);
-            $artworks_previous_session = array_values($artworks_previous_session);
-            $artworks_previous_session = serialize(array_merge( $artworks_previous_session, (array) $this->id));
-            Session::put('artworks_previous', $artworks_previous_session);
+            if (! in_array($this->id, $artworks_previous_session)) {
+                $artworks_previous_session = serialize(array_merge( $artworks_previous_session, (array) $this->id));
+                Session::put('artworks_previous', $artworks_previous_session);
+            } else {
+                // it is in the array, so unset it and reassign it to the beginning
+                $key = array_search($this->id, $artworks_previous_session);
+                unset($artworks_previous_session[$key]);
+                $artworks_previous_session = array_values($artworks_previous_session);
+                $artworks_previous_session = serialize(array_merge( $artworks_previous_session, (array) $this->id));
+                Session::put('artworks_previous', $artworks_previous_session);
+            }
+
         }
 
         return Tools::artworks_previous();
