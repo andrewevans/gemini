@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" href="">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
 
     <title>{{ $page_title }}</title>
     <!--    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"> -->
@@ -80,7 +81,7 @@
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="dropdown">
-                    <a href="/artists" class="dropdown-toggle active" data-toggle="dropdown">Artists <b class="caret"></b></a>
+                    <a href="/artists" class="dropdown-toggle active disabled" data-toggle="dropdown">Artists <b class="caret"></b></a>
                     <div class="dropdown-menu container" style="margin-left:-90px">
                         <div class="col-md-3"><ul class="nav-multi-list featured">
                                 <li class="divider"></li>
@@ -156,7 +157,7 @@
                     </div>
                 </li>
                 <li class="dropdown">
-                    <a href="/education" class="dropdown-toggle active" data-toggle="dropdown">Art Education <b class="caret"></b></a>
+                    <a href="/education" class="dropdown-toggle active disabled" data-toggle="dropdown">Art Education <b class="caret"></b></a>
                     @include('widgets.nav', ['parent' => 'education'])
                 </li>
                 <li><a href="/buying">Why Choose Us</a></li>
