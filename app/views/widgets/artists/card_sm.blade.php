@@ -1,24 +1,10 @@
-<div class="row">
-        @foreach ($artists as $key => $artist)
-        @if ($key % 4 == 0 && $key != 0)
-            </div>
-            <div class="row">
-        @endif
-            @if ($key < 4)
-                <div class="col-md-3 artists col-lg-3 featured">
-            @else
-                <div class="col-md-3 artists">
-            @endif
-            <div class="card plain card-sm">
-            <figure>
-                <a href="{{ $artist->url() }}" class="card-image">
-                    {{ HTML::image($artist->img_url()) }}
-                </a>
-                <figcaption>
-                    <a href="{{ $artist->url() }}">{{ $artist->inverted_alias() }}</a><br />
-                </figcaption>
-            </figure>
-            </div>
+@if (sizeof($artists) > 0)
+    @foreach ($artists as $key => $artist)
+    <div class="col-md-4 post">
+        <div class="post-img">
+            {{ HTML::image($artist->img_url()) }}
         </div>
-        @endforeach
-</div>
+        <h4><a href="{{ $artist->url() }}">{{ $artist->alias }}</a></h4>
+    </div>
+    @endforeach
+@endif
