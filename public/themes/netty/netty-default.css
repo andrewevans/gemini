@@ -38,6 +38,10 @@ body {
     text-align: center;
 }
 
+.carousel .item > .item-img {
+    display: block;
+}
+
 .carousel .item a {
     display: block;
 }
