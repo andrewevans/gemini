@@ -31,13 +31,13 @@
 <div class="container">
     <h3>Previously viewed Artworks</h3>
 
-    @include('widgets.artworks.card', array('artworks' => $artworks_previous))
+    @include('widgets.artworks.card_sm', array('artworks' => $artworks_previous))
 </div>
 
 <div class="container">
     <h3>Previously viewed Artists</h3>
 
-    @include('widgets.artists.card', array('artists' => $artists_previous))
+    @include('widgets.artists.card_sm', array('artists' => $artists_previous))
 </div>
 
 @stop
