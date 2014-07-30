@@ -94,9 +94,8 @@ p {
 }
 
 .card.card-sm a.card-image {
-    height: 520px;
-    min-height: 520px;
-    width: 75%;
+    height: 220px;
+    min-height: 220px;
     text-align: center;
 }
 
@@ -112,6 +111,25 @@ p {
 }
 
 .post-img img {
+    min-height: 250px;
+    min-width: 100%;
+    max-width: inherit;
+    max-height: inherit;
+}
+
+
+.artist {
+    text-align: center;
+}
+
+.artist-img {
+    height: 250px;
+    width: 75%;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.artist-img img {
     min-height: 250px;
     min-width: 100%;
     max-width: inherit;

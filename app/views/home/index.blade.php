@@ -18,7 +18,6 @@
     <div class="read-more">
         <a href="/artists">Browse All Artists</a>
     </div>
-
 </div>
 
 <div class="container spacy">

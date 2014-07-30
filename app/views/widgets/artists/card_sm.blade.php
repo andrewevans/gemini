@@ -1,7 +1,7 @@
 @if (sizeof($artists) > 0)
     @foreach ($artists as $key => $artist)
-    <div class="col-md-4 post">
-        <div class="post-img">
+    <div class="col-md-4 artist">
+        <div class="artist-img">
             {{ HTML::image($artist->img_url()) }}
         </div>
         <h4><a href="{{ $artist->url() }}">{{ $artist->alias }}</a></h4>
