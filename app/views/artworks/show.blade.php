@@ -106,7 +106,10 @@
             </div>
         </div>
 
-            @include('widgets.artworks.card', array('artworks' => $artworks_previous))
+        <div class="col-md-4">
+            @include('widgets.about')
+        </div>
+
     </div>
 
 </div>
