@@ -34,10 +34,14 @@
     @include('widgets.artists.artist', array('artist' => $artist))
 </div>
 
-<div class="container">
-    <h3>Previously viewed Artists</h3>
-
-    @include('widgets.artists.card', array('artists' => $artists_previous))
+<div class="container spacy">
+    <h3>Previously Viewed Artists</h3>
+    <div class="row">
+        @include('widgets.artists.card_sm', array('artists' => $artists_previous))
+    </div>
+    <div class="read-more">
+        <a href="/artists">Browse All Artists</a>
+    </div>
 </div>
 
 @stop
