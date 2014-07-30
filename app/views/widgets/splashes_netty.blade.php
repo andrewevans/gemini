@@ -24,7 +24,7 @@
                             <div class="col-md-4">
                                 <div class="item-copy">
                                     <h4>{{ $splash->title }}</h4>
-                                    <p>We like this one because of something or other and it is a piece of art stuff this is. Yes you read that correctly.</p>
+                                    <p>{{ $splash->description }}</p>
                                     <div class="read-more"><a href="{{ $splash->destination_url }}">Read more &thinsp;&raquo;</a></div>
                                 </div>
                             </div>
