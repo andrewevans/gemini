@@ -1,5 +1,4 @@
 body {
-    background:#eee;
 }
 
 #slider-thumbs ul {
@@ -23,6 +22,10 @@ body {
     margin: 0;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     text-align: center;
+}
+
+.carousel {
+    margin-bottom: 0;
 }
 
 .carousel .item {
@@ -91,8 +94,10 @@ p {
 }
 
 .card.card-sm a.card-image {
-    height: 120px;
-    min-height: 120px;
+    height: 520px;
+    min-height: 520px;
+    width: 75%;
+    text-align: center;
 }
 
 .post {
@@ -100,14 +105,15 @@ p {
 }
 
 .post-img {
+    height: 250px;
     width: 75%;
-    height: 200px;
     overflow: hidden;
     margin: 0 auto;
 }
 
 .post-img img {
-    min-height: 200px;
+    min-height: 250px;
+    min-width: 100%;
     max-width: inherit;
     max-height: inherit;
 }

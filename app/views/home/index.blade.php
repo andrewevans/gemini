@@ -11,8 +11,14 @@
 </div>
 
 <div class="container spacy">
-    <h2>Featured Artists</h2>
-    @include('widgets.artists.card', array('artists' => $artists_featured))
+    <h3>Featured Artists</h3>
+    <div class="row">
+        @include('widgets.artists.card_sm', array('artists' => $artists_featured))
+    </div>
+    <div class="read-more">
+        <a href="/artists">Browse All Artists</a>
+    </div>
+
 </div>
 
 <div class="container spacy">
@@ -41,9 +47,11 @@
 
 </div>
 
-<div class="container">
-    <h3>Previously viewed Artworks</h3>
-    @include('widgets.artworks.card_sm', array('artworks' => $artworks_previous))
-</div>
+@if (sizeof($artworks_previous) > 0)
+    <div class="container">
+        <h3>Previously viewed Artworks</h3>
+        @include('widgets.artworks.card_sm', array('artworks' => $artworks_previous))
+    </div>
+@endif
 
 @stop
