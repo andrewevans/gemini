@@ -24,7 +24,7 @@ class HomeController extends BaseController {
                 ->orderBy('magnitude', 'ASC') // order by magnitude, where lower is best, like 1 is 1st to show
                 ->get();
 
-            $artworks = $this->artwork->where('artist_id', '!=', 0)->whereSold(0)->whereHidden(0)->take(15)->orderBy('id', 'desc')->get();
+            $artworks = $this->artwork->where('artist_id', '!=', 0)->whereSold(0)->whereHidden(0)->take(7)->orderBy('id', 'desc')->get();
 
             $artworks = $artworks_mags_showcaser->merge($artworks);
 
@@ -46,6 +46,7 @@ class HomeController extends BaseController {
             return View::make('home.index')
                 ->with('artworks', $artworks)
                 ->with('artists', $artists)
+                ->with('artists_featured', $artists_mags_showcaser)
                 ->with('artworks_previous', $artworks_previous)
                 ->with('artists_previous', $artists_previous)
                 ->with('pages', $this->pages)
@@ -115,7 +116,7 @@ class HomeController extends BaseController {
             'child_of' => 0,
             'parent' => 0,
             'exclude_tree' => '',
-            'number' => 5,
+            'number' => 3,
             'offset' => 0,
             'post_type' => 'page',
             'post_status' => 'publish'
@@ -129,7 +130,7 @@ class HomeController extends BaseController {
     public function getPosts()
     {
         $args = array(
-            'posts_per_page'   => 5,
+            'posts_per_page'   => 3,
             'post_type'        => 'post',
             'orderby'          => 'post_date',
             'order'            => 'DESC',
