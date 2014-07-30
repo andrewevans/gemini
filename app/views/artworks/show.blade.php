@@ -117,13 +117,13 @@
 <div class="container">
     <h3>Related Artworks</h3>
 
-    @include('widgets.artworks.card', array('artworks' => $artworks_related))
+    @include('widgets.artworks.card_sm', array('artworks' => $artworks_related))
 </div>
 
 <div class="container">
     <h3>Previously viewed Artworks</h3>
 
-    @include('widgets.artworks.card', array('artworks' => $artworks_previous))
+    @include('widgets.artworks.card_sm', array('artworks' => $artworks_previous))
 </div>
 
 
