@@ -31,7 +31,7 @@
         @include('widgets.posts', array('filter' => 'homepage'))
     </div>
     <div class="read-more">
-        <a href="http://wp.andrew.com">Read more Blog posts</a>
+        <a href="http://wp.appelfineart.com">Read more Blog posts</a>
     </div>
 </div>
 
