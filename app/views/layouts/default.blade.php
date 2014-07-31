@@ -207,7 +207,7 @@
 
 </section>
 
-<div class="jumbotron spacy">
+<div class="jumbotron">
 <div class="container">
     <footer>
         <div class="row">
@@ -283,14 +283,6 @@
 <script src="/vendor/zoom-master/jquery.zoom.min.js"></script>
 <script>
     $('.zoom').zoom();
-
-    config1 = CKEDITOR.tools;
-    config1.height = 800;
-    config1.enterMode = CKEDITOR.ENTER_P;
-    config1.allowedContent = 'p i b blockquote u del em a ul ol li sup sub br caption cite figure figcaption embed img noscript object strong';
-
-    //CKEDITOR.replace('artwork_description', config1);
-    CKEDITOR.replaceAll();
 </script>
 
 <script>
