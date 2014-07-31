@@ -289,7 +289,7 @@
     config1.enterMode = CKEDITOR.ENTER_P;
     config1.allowedContent = 'p i b blockquote u del em a ul ol li sup sub br caption cite figure figcaption embed img noscript object strong';
 
-    CKEDITOR.replace('artwork_description', config1);
+    //CKEDITOR.replace('artwork_description', config1);
     CKEDITOR.replaceAll();
 </script>
 
