@@ -54,7 +54,7 @@
 
         <div class="collapse navbar-collapse" style="float: right;">
             <ul class="nav navbar-nav navbar-secondary" style="border-top: 2px solid #6383a1; margin-left: 0">
-                <li><a href="http://wp.andrew.com">Blog</a></li>
+                <li><a href="http://wp.appelfineart.com">Blog</a></li>
                 <li><a href="/sell"><i>Sell Your Fine Art</i></a></li>
                 <!--<li><a href="/login"><span class="size-l">Sign in</span> <span class="glyphicon glyphicon-log-in"></span></a></li>-->
                 <li><a href=""><span class="size-l">Shopping Bag</span> <span class="glyphicon glyphicon-shopping-cart"></span> <span class="badge">2</span></a></li>
