@@ -54,11 +54,7 @@ CKEDITOR.editorConfig = function( config ) {
 
     //config.forcePasteAsPlainText = true;
 
-    config.removeFormatTags = 'b,big,code,del,dfn,em,font,i,ins,kbd,br';
-
-    config1.enterMode = CKEDITOR.ENTER_P;
-    config1.allowedContent = 'p i b blockquote u del em a ul ol li sup sub br caption cite figure figcaption embed img noscript object strong';
-
+    //config.removeFormatTags = 'b,big,code,del,dfn,em,font,i,ins,kbd,br';
     config.allowedContent = 'sup sub';
 
     config.width = "50%";
