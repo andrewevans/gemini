@@ -19,7 +19,7 @@
                     @foreach ($splashes as $key => $splash)
                         <div class="<?= ($key == 0 ? 'active ' : '' ) ?>item" data-slide-to="{{ $key }}">
                             <div class="col-md-8 item-img">
-                                <a href=""><img src="{{ $splash->asset_url }}" class="img-responsive"></a>
+                                <a href="{{ $splash->destination_url }}"><img src="{{ $splash->asset_url }}" class="img-responsive"></a>
                             </div>
                             <div class="col-md-4">
                                 <div class="item-copy">
