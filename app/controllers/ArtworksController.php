@@ -148,7 +148,13 @@ class ArtworksController extends \BaseController {
         $artwork = Artwork::find($id);
         $artwork->img_urls = $this->fetch_images($artwork);
 
-        $artwork->artwork_description = ArtworkDescription::whereArtworkId($id)->first()->description;
+        $artwork_description = ArtworkDescription::whereArtworkId($id)->first();
+
+        if ($artwork_description != null) {
+            $artwork->artwork_description = $artwork_description->description;
+        } else {
+            $artwork->artwork_description = null;
+        }
 
         $artists = DB::table('artists')->orderBy('alias', 'desc')->lists('alias','id');
 
