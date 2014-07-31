@@ -77,12 +77,13 @@
         </tr>
         </tbody>
     </table>
-
+<!--
         <strong>After:</strong> {{ $artwork->after }}<br />
         <strong>Price on Request:</strong> {{ $artwork->price_on_req }}<br />
         <strong>Sold:</strong> {{ $artwork->sold }}<br />
         <strong>On Hold:</strong> {{ $artwork->onhold }}<br />
         <strong>Hidden:</strong> {{ $artwork->hidden }}<br />
+-->
     </div>
 
 </div>
