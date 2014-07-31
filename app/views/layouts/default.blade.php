@@ -207,7 +207,7 @@
 
 </section>
 
-<div class="jumbotron">
+<div class="jumbotron spacy">
 <div class="container">
     <footer>
         <div class="row">
