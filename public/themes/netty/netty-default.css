@@ -117,8 +117,8 @@ p {
 .post-img img {
     min-height: 250px;
     min-width: 100%;
-    max-width: inherit;
-    max-height: inherit;
+    max-width: 150%;
+    max-height: 150%;
 }
 
 
