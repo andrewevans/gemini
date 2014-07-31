@@ -4,6 +4,7 @@
 
 @section('content')
 
+<div class="container">
 <div class='col-lg-4 col-lg-offset-4'>
 
     @if ($errors->has())
@@ -31,6 +32,7 @@
 
     {{ Form::close() }}
 
+</div>
 </div>
 
 @stop

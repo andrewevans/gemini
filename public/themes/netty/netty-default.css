@@ -164,3 +164,7 @@ p {
 .container h3 a {
     color: #333333;
 }
+
+footer {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
