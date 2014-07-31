@@ -12,8 +12,6 @@
     <tr>
         <td>ID</td>
         <td>Name</td>
-        <td>Alias</td>
-        <td>Artworks</td>
         <td>&nbsp;</td>
     </tr>
     </thead>
@@ -21,11 +19,7 @@
     @foreach($artists as $key => $artist)
     <tr>
         <td>{{ $artist->id }}</td>
-        <td>{{ $artist->last_name }}, {{ $artist->last_name }}</td>
-        <td>{{ $artist->alias }}</td>
-        <td>
-            {{ sizeof($artist->artworks) }}
-        </td>
+        <td>{{ $artist->last_name }}, {{ $artist->first_name }}</td>
 
         <!-- we will also add show, edit, and delete buttons -->
         <td>
