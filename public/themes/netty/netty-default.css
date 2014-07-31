@@ -1,6 +1,10 @@
 body {
 }
 
+td, p {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
 #slider-thumbs ul {
     height: 600px;
 }
@@ -167,4 +171,13 @@ p {
 
 footer {
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.table>tbody {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.table>tbody>tr>th {
+    font-weight: normal;
+    color: #999;
 }
