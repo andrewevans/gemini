@@ -10,8 +10,10 @@
 
     <!-- Latest compiled and minified CSS -->
     <!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"> -->
-
+    {{ HTML::script('js/ckeditor/ckeditor.js?2') }}
     {{ HTML::script('js/jquery-2.1.1.min.js') }}
+    {{ HTML::script('vendor/bootstrap/docs.min.js') }}
+    {{ HTML::script('vendor/bootstrap/js/bootstrap.min.js') }}
 
     <!-- Optional theme -->
     <!-- Bootstrap theme -->
@@ -65,8 +67,26 @@
         <div class="alert alert-info">{{ Session::get('message') }}</div>
         @endif
 
-        @yield('content')
+        <div class="container">
+            <h3><a href="/gemini">&laquo; Back</a></h3>
+        </div>
+
+        <div class="container">
+            @yield('content')
+        </div>
+
     </div>
 </div>
+
+<script>
+    config1 = CKEDITOR.tools;
+    config1.height = 800;
+    config1.enterMode = CKEDITOR.ENTER_P;
+    config1.allowedContent = 'p i b blockquote u del em a ul ol li sup sub br caption cite figure figcaption embed img noscript object strong';
+
+    //CKEDITOR.replace('artwork_description', config1);
+    CKEDITOR.replaceAll();
+
+</script>
 </body>
 </html>

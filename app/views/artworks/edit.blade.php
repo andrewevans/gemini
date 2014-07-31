@@ -1,4 +1,4 @@
-@extends('layouts.default')
+@extends('layouts.admin')
 <!-- app/views/artworks/edit.blade.php -->
 
 @section('content')

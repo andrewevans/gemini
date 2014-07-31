@@ -1,4 +1,4 @@
-@extends('layouts.default')
+@extends('layouts.admin')
 <!-- app/views/catrefs/create.blade.php -->
 
 @section('content')
