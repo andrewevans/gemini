@@ -35,16 +35,6 @@
     </div>
 </div>
 
-<div class="container spacy">
-    <h3><a href="/articles"><span class="fa fa-file-text"></span> Featured In-Depth Articles</a></h3>
-    <div class="row">
-        @include('widgets.pages', array('filter' => 'homepage'))
-    </div>
-    <div class="read-more">
-        <a href="/articles">Read more In-Depth Articles</a>
-    </div>
-</div>
-
 @if (sizeof($artworks_previous) > 0)
     <div class="container">
         <h3>Previously viewed Artworks</h3>
