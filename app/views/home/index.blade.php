@@ -26,16 +26,6 @@
 </div>
 
 <div class="container spacy">
-    <h3><a href="/articles"><span class="fa fa-file-text"></span> Featured In-Depth Articles</a></h3>
-    <div class="row">
-        @include('widgets.pages', array('filter' => 'homepage'))
-    </div>
-    <div class="read-more">
-        <a href="/articles">Read more In-Depth Articles</a>
-    </div>
-</div>
-
-<div class="container spacy">
     <h3><a href=""><span class="fa fa-rss"></span> Featured Posts</a></h3>
     <div class="row">
         @include('widgets.posts', array('filter' => 'homepage'))
@@ -43,7 +33,16 @@
     <div class="read-more">
         <a href="http://wp.andrew.com">Read more Blog posts</a>
     </div>
+</div>
 
+<div class="container spacy">
+    <h3><a href="/articles"><span class="fa fa-file-text"></span> Featured In-Depth Articles</a></h3>
+    <div class="row">
+        @include('widgets.pages', array('filter' => 'homepage'))
+    </div>
+    <div class="read-more">
+        <a href="/articles">Read more In-Depth Articles</a>
+    </div>
 </div>
 
 @if (sizeof($artworks_previous) > 0)
