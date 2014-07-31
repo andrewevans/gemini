@@ -177,3 +177,46 @@ footer {
     font-weight: normal;
     color: #999;
 }
+
+
+@media (max-width: 768px) {
+
+    .listable .artworks .card {
+        overflow: hidden;
+    }
+
+    .listable .card {
+        border: none;
+        border-bottom: 1px solid #ddd;
+        padding: 15px 5px;
+        margin: 30px 0 0 0;
+        box-shadow: none;
+        -moz-box-shadow: none;
+        -webkit-box-shadow: none;
+        background: #f2f0f0;
+        text-align: center;
+    }
+
+
+    .listable .col-md-4.artworks {
+        width: 100%;
+    }
+
+    .listable .artworks .card {
+        margin: 0;
+    }
+
+    .listable .artworks .card a.card-image {
+        float: left;
+        max-height: 150px;
+        min-height: inherit;
+        width: 150px;
+        margin-right: 15px;
+    }
+
+    .listable .col-lg-8.artworks.featured .card a.card-image {
+        height: inherit;
+    }
+
+
+}
