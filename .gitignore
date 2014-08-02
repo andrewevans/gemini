@@ -28,6 +28,7 @@ tmp/
 www
 /app/config/database.php
 /wordpress/wp-config.php
+/wordpress/wp-config-sample.php
 /wordpress/wp-admin/error_log
 .composer/
 .vim/
