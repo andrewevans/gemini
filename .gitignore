@@ -31,6 +31,8 @@ www
 /wordpress/wp-admin/error_log
 .composer/
 .vim/
+/public/magento/
+/public/magento-sample-data-1.9.0.0/
 
 .ssh/known_hosts
 .gitconfig

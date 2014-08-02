@@ -8,9 +8,11 @@
       <library name="PHARS">
         <CLASSES>
           <root url="phar://$MODULE_DIR$/composer.phar" />
+          <root url="phar://$MODULE_DIR$/public/magento/lib/Zend/Service/WindowsAzure/CommandLine/Scaffolders/DefaultScaffolder.phar" />
         </CLASSES>
         <SOURCES>
           <root url="phar://$MODULE_DIR$/composer.phar" />
+          <root url="phar://$MODULE_DIR$/public/magento/lib/Zend/Service/WindowsAzure/CommandLine/Scaffolders/DefaultScaffolder.phar" />
         </SOURCES>
       </library>
     </orderEntry>
