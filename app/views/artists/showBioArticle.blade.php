@@ -5,12 +5,17 @@
 
 
 <div class="container">
-    <h1>{{ $post->post_title }}</h1>
-    @include('widgets.share', ['post' => $post])
+    <div class="col-md-3">
+        @include('widgets.artists.ribbon', ['artist' => $artist, 'filter_slug' => null])
+    </div>
+    <div class="col-md-8">
+        <h1>{{ $post->post_title }}</h1>
+        @include('widgets.share', ['post' => $post])
 
-    {{ apply_filters('the_content',$post->post_content); }}
+        {{ apply_filters('the_content',$post->post_content); }}
 
-    @include('widgets.share')
+        @include('widgets.share')
+    </div>
 
 </div>
 

@@ -1,0 +1,102 @@
+body {
+    -webkit-font-smoothing: antialiased;
+}
+
+.collapse .navbar-nav {
+    margin-left: 15px;
+}
+
+.collapse .navbar-nav li.artists {
+    margin-right: 100px;
+}
+
+.logo {
+    margin-left: 130px;
+}
+
+ol.breadcrumb {
+    margin-left: 250px;
+}
+
+.ribbon {
+    width: 250px;
+    margin-top: -36px;
+    box-shadow: 0 1px 3px rgba(34, 25, 25, 0.4);
+    -moz-box-shadow: 0 1px 2px rgba(34,25,25,0.4);
+    -webkit-box-shadow: 0 1px 3px rgba(34, 25, 25, 0.4);
+    background-color: #333;
+    color: #ffffff;
+    text-align: left;
+    font-family: Arial, Helvetica, sans-serif;
+    opacity: 0.88;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha"(Opacity=88);
+}
+
+.ribbon .ribbon-content {
+
+}
+
+.ribbon .ribbon-profile {
+    height: 200px;
+    overflow: hidden;
+}
+
+.ribbon .ribbon-profile img {
+    width: 100%;
+    max-width: none;
+    max-height: none;
+}
+
+.ribbon h3 {
+    margin: -1em 5px 5px 5px;
+    font-size: 18px;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+.ribbon p {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.9em;
+    margin: 5px;
+    color: #eeeeee;
+    letter-spacing: 0.1em;
+}
+
+.ribbon ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.ribbon ul li {
+    display: block;
+    overflow: hidden;
+    line-height: 2em;
+}
+
+.ribbon ul li a {
+    display: block;
+    text-transform: capitalize;
+    text-decoration: none;
+    padding: 5px 20px;
+    font-size: 13px;
+    background: none;
+    color: #ffffff;
+    border-bottom: 1px solid #7D8CA9;
+}
+
+.ribbon ul li a:hover {
+    background: #6f92b3;
+}
+
+.triangle {
+    width: 0px;
+    height: 0px;
+    border-left: 125px solid transparent;
+    border-right: 125px solid transparent;
+    border-top: 125px solid #333;
+}
+
+.ribbon.affix {
+    top: 0;
+    margin: 0;
+}
