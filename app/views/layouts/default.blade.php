@@ -28,6 +28,12 @@
     <!--<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script> -->
 
     <!-- Custom styles for this template -->
+    {{ HTML::style('css/gemini-global.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
+    {{ HTML::style('css/gemini-nav.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
+    {{ HTML::style('css/gemini-individuals.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
+    {{ HTML::style('css/gemini-search.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
+    {{ HTML::style('css/gemini-widgets.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
+    {{ HTML::style('css/gemini-responsive.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
     {{ HTML::style('css/gemini-default.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
 
     {{ HTML::style('themes/netty/netty-default.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
@@ -45,7 +51,7 @@
 
 <body role="document">
 
-<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<div class="navbar" role="navigation">
     <div class="container size-xs">
         <div class="contact-us-info">
             <span class="phone-number">510-777-9970</span> / <span id="phone_number_800">800-805-7060</span>
