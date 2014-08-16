@@ -1,0 +1,57 @@
+/* CUSTOMIZE THE CAROUSEL
+-------------------------------------------------- */
+
+/* Carousel base class */
+.carousel {
+    height: 500px;
+    margin-bottom: 60px;
+}
+/* Since positioning the image, we need to help out the caption */
+.carousel-caption {
+    z-index: 10;
+}
+
+/* Declare heights because of positioning of img element */
+.carousel .item {
+    height: 500px;
+    text-align: center;
+}
+.carousel-inner > .item > img,
+.carousel-inner > .item > a img {
+    /*
+        position: absolute;
+        top: 0;
+        left: 0;
+        min-width: 100%;
+    */
+    display: inline-block;
+    max-width: none;
+    max-height: 100%;
+    position: absolute;
+    left: -9999px;
+    right: -9999px;
+    margin: auto;
+
+}
+
+.carousel-inner>.item>a>img {
+    max-width: none;
+}
+
+/* Filters */
+.filters .dropdown {
+    display: inline-block;
+}
+
+.filters .btn-group>.btn {
+    position: inherit;
+    float: none;
+}
+/**********/
+
+.share {
+    display: inline-block;
+    height: 45px;
+    vertical-align: middle;
+    margin: 0.5em;
+}
