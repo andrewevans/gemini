@@ -119,4 +119,21 @@ a.img-av:hover {
 a.img-av img {
     height: 120px;
 }
+
+span.size-l {
+    display: none;
+}
+
+.card figcaption {
+    height: 7em;
+}
+
+.card figcaption {
+    height: 7em;
+}
+
+.card.card-sm figcaption {
+    height: 8em; /* needs more height because there is less width */
+}
+
 /*****/
