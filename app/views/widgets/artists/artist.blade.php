@@ -1,6 +1,6 @@
 <div class="row">
 
-    <div class="col-md-6 pull-right">
+    <div class="col-md-6">
         <div class="paper">
             @include('widgets.artists.bio', array('artist' => $artist, 'var' => 'mydata'))
         </div>
