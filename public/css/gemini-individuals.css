@@ -1,0 +1,104 @@
+[class*="col-"] img {
+    max-width:100%;
+    max-height: 100%;
+}
+
+[class*="col-"].artists img {
+    min-width: 100%;
+    min-height: 100%;
+    max-width: none;
+    max-height: none;
+}
+
+.card {
+    /*    width: 280px;*/
+    border: 1px solid #ddd;
+    padding: 15px 15px 15px;
+    margin: 15px 0 0 0;
+    box-shadow: 0 1px 3px rgba(34, 25, 25, 0.4);
+    -moz-box-shadow: 0 1px 2px rgba(34,25,25,0.4);
+    -webkit-box-shadow: 0 1px 3px rgba(34, 25, 25, 0.4);
+    background: #f2f0f0;
+    text-align: center;
+}
+
+.artists .card {
+    border: none;
+    padding: 0;
+    margin: 15px 0 0 0;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    background: transparent;
+    text-align: center;
+}
+
+.card.blank {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
+.card p,
+.card a {
+    text-align: left;
+    word-break:
+}
+
+.card a.card-image {
+    display: block;
+    height: 320px;
+    min-height: 320px;
+    text-align: center;
+}
+
+.artists .card a.card-image {
+    display: block;
+    height: 150px;
+    min-height: 150px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.card figcaption {
+    text-align: left;
+    margin-top: 2em;
+}
+
+.card-details {
+    background: transparent;
+    overflow: hidden;
+}
+
+.card-details figure {
+    max-width: 450px;
+    float: left;
+}
+
+.card-details .catref.specs {
+    width: 450px;
+    float: left;
+}
+
+.zoom {
+    height: 100%;
+}
+
+h3.featured,
+h3.featured a,
+ul.featured>li>a {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+/* Paper */
+.paper {
+    border: 1px solid #ddd;
+    padding: 15px 15px 15px;
+    margin: 15px 0 0 0;
+    background: #f2f0f0;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+/**********/
