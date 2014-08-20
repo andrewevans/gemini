@@ -34,6 +34,10 @@ www
 .vim/
 /public/magento/
 /public/magento-sample-data-1.9.0.0/
+/public/uploads/
+/public/.htaccess
+/mail/
+/public/error_log
 
 .ssh/known_hosts
 .gitconfig

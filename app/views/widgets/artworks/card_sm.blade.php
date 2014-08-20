@@ -2,11 +2,7 @@
 <div class="row">
     @if (sizeof($artworks) > 0)
         @foreach ($artworks as $key => $artwork)
-        @if ($key % 4 == 0 && $key != 0)
-            </div>
-            <div class="row">
-        @endif
-            <div class="col-md-3 artworks <?= ($artwork->magnitude > 0 ? 'mag' : '') ?>">
+            <div class="col-md-3 col-sm-4 artworks <?= ($artwork->magnitude > 0 ? 'mag' : '') ?>">
                 <div class="card plain card-sm">
                 <figure>
                     <a href="{{ $artwork->url() }}" class="card-image">
@@ -19,9 +15,9 @@
                         @endif
                     </a>
                     <figcaption>
-                        <a href="{{ $artwork->url() }}"><i>{{ strip_tags($artwork->title_short()) }}</i></a><br />
-                        <a href="{{ $artwork->url() }}">{{ strip_tags($artwork->artist->alias) }}</a><br />
-                        <a href="{{ $artwork->url() }}">{{ strip_tags($artwork->medium_short) }}</a><br />
+                        <a href="{{ $artwork->url() }}"><i>{{ substr(strip_tags($artwork->title_short()), 0, 65) }}</i></a><br />
+                        <a href="{{ $artwork->url() }}">{{ substr(strip_tags($artwork->artist->alias), 0, 65) }}</a><br />
+                        <a href="{{ $artwork->url() }}">{{ substr(strip_tags($artwork->medium_short), 0, 65) }}</a><br />
                         ${{ number_format($artwork->price) }}
                     </figcaption>
                 </figure>
