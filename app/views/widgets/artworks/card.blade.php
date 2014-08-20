@@ -2,14 +2,10 @@
 <div class="row">
     @if (sizeof($artworks) > 0)
         @foreach ($artworks as $key => $artwork)
-        @if ($key % 3 == 0 && $key != 0)
-            </div>
-            <div class="row">
-        @endif
         @if ($key == 0 && sizeof($artworks) >= 6)
             <div class="col-md-4 col-lg-8 artworks featured <?= ($artwork->magnitude > 0 ? 'mag' : '') ?>">
         @else
-            <div class="col-md-4 artworks <?= ($artwork->magnitude > 0 ? 'mag' : '') ?>">
+            <div class="col-md-4 col-sm-6 artworks <?= ($artwork->magnitude > 0 ? 'mag' : '') ?>">
         @endif
             @if ($key % 11 == 0 && $key != 0 && $key != 11 && isset($posts) && isset($interrupt) && $interrupt)
                 <div class="card blank">
@@ -28,9 +24,9 @@
                         @endif
                     </a>
                     <figcaption>
-                        <a href="{{ $artwork->url() }}"><i>{{ strip_tags($artwork->title_short()) }}</i></a><br />
-                        <a href="{{ $artwork->url() }}">{{ strip_tags($artwork->artist->alias) }}</a><br />
-                        <a href="{{ $artwork->url() }}">{{ strip_tags($artwork->medium_short) }}</a><br />
+                        <a href="{{ $artwork->url() }}"><i>{{ substr(strip_tags($artwork->title_short()), 0, 65) }}</i></a><br />
+                        <a href="{{ $artwork->url() }}">{{ substr(strip_tags($artwork->artist->alias), 0, 65) }}</a><br />
+                        <a href="{{ $artwork->url() }}">{{ substr(strip_tags($artwork->medium_short), 0, 65) }}</a><br />
                         ${{ number_format($artwork->price) }}
                     </figcaption>
                 </figure>
