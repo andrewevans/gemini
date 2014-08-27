@@ -357,6 +357,11 @@ class Artwork extends Eloquent
         return $this->belongsTo('Artist');
     }
 
+    public function catref()
+    {
+        return $this->belongsTo('Catref');
+    }
+
     public function artwork_description()
     {
         return $this->hasOne('ArtworkDescription');
