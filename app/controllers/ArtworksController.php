@@ -157,11 +157,13 @@ class ArtworksController extends \BaseController {
         }
 
         $artists = DB::table('artists')->orderBy('alias', 'desc')->lists('alias','id');
+        $catrefs = DB::table('catrefs')->orderBy('title', 'asc')->lists('title','id');
 
         // show the edit form and pass the artwork
         return View::make('artworks.edit')
             ->with('artwork', $artwork)
             ->with('artists', $artists)
+            ->with('catrefs', $catrefs)
             ->with('page_title', "Edit: " . $artwork->artist->alias . " -> " . $artwork->title_short());
 
     }
