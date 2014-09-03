@@ -12,6 +12,7 @@
 */
 
 Route::resource('people', 'ArtistsController');
+Route::resource('offline', 'OfflineController');
 
 Route::get('artists',  ['as' => 'artists.index', 'uses' => 'ArtistsController@index']);
 Route::get('artists/{artist_url_slug}',  ['as' => 'artists.show', 'uses' => 'ArtistsController@show']);
