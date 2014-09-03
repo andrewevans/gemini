@@ -99,6 +99,29 @@ class UrlController extends Controller {
                 }
                 break;
 
+            case 'manifest':
+                $artworks = $this->artwork
+                    ->whereIn('artist_id', function($query)
+                    {
+                        $query->select('id')
+                            ->from('artists')
+                            ->whereRaw('id != 0');
+                    })->whereSold(0)->whereHidden(0)->orderBy('id', 'DESC')->get();
+
+                foreach ($artworks as $artwork) {
+                    $return_array[] = array(
+                        'mfa_img_url' => 'http://www.masterworksfineart.com/inventory/' . $artwork->artist->slug . '/original/' . $artwork->artist->slug . $artwork->id . '.jpg');
+                }
+
+                $response = Response::make(View::make('artworks.manifest')->with('return_array', $return_array), 200);
+
+                $response->header('Content-Type', 'text/cache-manifest');
+
+                return $response;
+
+                // show the edit form and pass the artwork
+                return Response::make(View::make(), 200, array('Content-Type' => 'text/plain'));
+                break;
             case 'artworks':
                 $artworks = $this->artwork
                     ->whereIn('artist_id', function($query)
