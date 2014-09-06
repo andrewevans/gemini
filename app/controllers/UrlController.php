@@ -115,6 +115,7 @@ class UrlController extends Controller {
 
                 foreach ($artworks as $artwork) {
                     $return_array[] = array(
+                        'img_url' => $artwork->img_url(),
                         'mfa_img_url' => 'http://www.masterworksfineart.com/inventory/' . $artwork->artist->slug . '/original/' . $artwork->artist->slug . $artwork->id . '.jpg',
                         'artwork_url' => '/offline' . $artwork->url(),
                         'artist_url' => '/offline' . $artwork->artist->url()
