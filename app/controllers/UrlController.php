@@ -111,7 +111,7 @@ class UrlController extends Controller {
                     $query->select('id')
                         ->from('artists')
                         ->whereRaw($artist_id_query);
-                })->whereSold(0)->whereHidden(0)->take(10)->orderBy('id', 'DESC')->get();
+                })->whereSold(0)->whereHidden(0)->orderBy('id', 'DESC')->get();
 
                 foreach ($artworks as $artwork) {
                     $return_array[] = array(
