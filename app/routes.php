@@ -12,7 +12,18 @@
 */
 
 Route::resource('people', 'ArtistsController');
-Route::resource('offline', 'OfflineController');
+
+Route::group(array('prefix' => 'offline'), function()
+{
+    Route::get('/',  ['as' => 'offline.index', 'uses' => 'OfflineController@index']);
+    Route::get('artists',  ['as' => 'offline.artistsList', 'uses' => 'OfflineController@artistsList']);
+    Route::get('artists/{artist_url_slug}',  ['as' => 'offline.artists', 'uses' => 'OfflineController@artists']);
+    Route::get('artists/id/{artwork_id}', 'OfflineController@artworks');
+    Route::get('artists/{artist_url_slug}/{artwork_url_slug?}/id/{id}', array('as' => 'artworks.showOne', 'uses' => 'OfflineController@artworks'))->where('artwork_url_slug', '(.*)');
+    Route::get('artists/{artist_url_slug}/{filter}', ['as' => 'artists.show.filter', 'uses' =>'ArtistsController@filtered'])->where('filter', '^(?!bio).*$');
+
+});
+
 
 Route::get('artists',  ['as' => 'artists.index', 'uses' => 'ArtistsController@index']);
 Route::get('artists/{artist_url_slug}',  ['as' => 'artists.show', 'uses' => 'ArtistsController@show']);

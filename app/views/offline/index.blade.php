@@ -6,7 +6,11 @@
 
 @foreach ($artworks as $artwork)
 
-    <img src="{{ $artwork->img_url() }}" />
+<div>
+    <a href="/offline{{ $artwork->url() }}"><img src="{{ $artwork->img_url() }}" /></a>
+<p>{{ $artwork->title }}<br />
+{{ $artwork->artist->alias }}</p>
+</div>
 
 @endforeach
 

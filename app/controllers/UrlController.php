@@ -115,7 +115,10 @@ class UrlController extends Controller {
 
                 foreach ($artworks as $artwork) {
                     $return_array[] = array(
-                        'mfa_img_url' => 'http://www.masterworksfineart.com/inventory/' . $artwork->artist->slug . '/original/' . $artwork->artist->slug . $artwork->id . '.jpg');
+                        'mfa_img_url' => 'http://www.masterworksfineart.com/inventory/' . $artwork->artist->slug . '/original/' . $artwork->artist->slug . $artwork->id . '.jpg',
+                        'artwork_url' => '/offline' . $artwork->url(),
+                        'artist_url' => '/offline' . $artwork->artist->url()
+                    );
                 }
 
                 $response = Response::make(View::make('artworks.manifest')->with('return_array', $return_array), 200);

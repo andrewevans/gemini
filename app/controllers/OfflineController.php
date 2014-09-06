@@ -2,34 +2,74 @@
 
 class OfflineController extends \BaseController {
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-        if (null !==Input::get('artist_id')) {
-            $artist_id_query = "id = " . Str::lower(Input::get('artist_id'));
-        } else {
-            $artist_id_query = "id != 0";
-        }
-
-        $artworks = Artwork::whereIn('artist_id', function($query) use ($artist_id_query)
-            {
-                $query->select('id')
-                    ->from('artists')
-                    ->whereRaw($artist_id_query);
-            })->whereSold(0)->whereHidden(0)->orderBy('id', 'DESC')->get();
-
-        return View::make('offline.index')
-            ->with('artworks', $artworks)
-            ->with('artist_id_query', $artist_id_query)
-            ->with('page_title', "Offline app");
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function index()
+    {
+        return 'This if Offline homepage';
     }
 
 
-	/**
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function artists($data)
+    {
+        $artist = Artist::whereUrlSlug($data)->first();
+
+        $artworks = $artist->artworks()->whereSold(0)->whereHidden(0)->orderBy('id', 'DESC')->get();
+
+        return View::make('offline.index')
+            ->with('artworks', $artworks)
+            ->with('manifest_artist_id', $artist->id)
+            ->with('page_title', "Artist");
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function artistsList()
+    {
+        $artists = Artist::
+            whereRaw('id !=0')
+            ->whereIn('id', function($query)
+            {
+                $query->select('artist_id')
+                    ->from('artworks')
+                    ->whereRaw('sold = 0 and hidden = 0');
+            })->orderBy('last_name', 'asc')->get();
+
+        return View::make('offline.artistList')
+            ->with('artists', $artists)
+            ->with('manifest_artist_id', 0)
+            ->with('page_title', "Artist List");
+    }
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function artworks($artist_url_slug = null, $artwork_url_slug = null, $id = null)
+    {
+        $artwork = Artwork::find($id);
+
+        return View::make('offline.artwork')
+            ->with('artwork', $artwork)
+            ->with('manifest_artist_id', $artwork->artist->id)
+            ->with('page_title', "Artwork");
+    }
+
+
+    /**
 	 * Show the form for creating a new resource.
 	 *
 	 * @return Response
