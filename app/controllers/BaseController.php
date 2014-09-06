@@ -11,6 +11,12 @@ class BaseController extends Controller {
 	{
         View::share('page_title', SITE_NAME);
 
+        if (null !== Input::get('artist_id')) {
+            View::share('manifest_artist_id', Str::lower(Input::get('artist_id')));
+        } else {
+            View::share('manifest_artist_id', 0);
+        }
+
         if (Input::get('list')) {
             Session::put('list', $_GET['list']);
         } else {

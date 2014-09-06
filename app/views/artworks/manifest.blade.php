@@ -9,5 +9,4 @@ CACHE:
 @endforeach
 
 NETWORK:
-http://*
-https://*
+*

@@ -1,4 +1,4 @@
-@extends('layouts.default')
+@extends('layouts.offline')
 
 @section('title') Login @stop
 

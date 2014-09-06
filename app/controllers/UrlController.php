@@ -100,13 +100,18 @@ class UrlController extends Controller {
                 break;
 
             case 'manifest':
-                $artworks = $this->artwork
-                    ->whereIn('artist_id', function($query)
-                    {
-                        $query->select('id')
-                            ->from('artists')
-                            ->whereRaw('id != 0');
-                    })->whereSold(0)->whereHidden(0)->orderBy('id', 'DESC')->get();
+                if (null !== Input::get('artist_id')) {
+                    $artist_id_query = "id = " . Str::lower(Input::get('artist_id'));
+                } else {
+                    $artist_id_query = "id != 0";
+                }
+
+                $artworks = Artwork::whereIn('artist_id', function($query) use ($artist_id_query)
+                {
+                    $query->select('id')
+                        ->from('artists')
+                        ->whereRaw($artist_id_query);
+                })->whereSold(0)->whereHidden(0)->take(10)->orderBy('id', 'DESC')->get();
 
                 foreach ($artworks as $artwork) {
                     $return_array[] = array(
