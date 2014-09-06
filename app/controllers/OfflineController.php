@@ -44,7 +44,7 @@ class OfflineController extends \BaseController {
                 $query->select('artist_id')
                     ->from('artworks')
                     ->whereRaw('sold = 0 and hidden = 0');
-            })->orderBy('last_name', 'asc')->get();
+            })->orderBy('id', 'asc')->get();
 
         return View::make('offline.artistList')
             ->with('artists', $artists)

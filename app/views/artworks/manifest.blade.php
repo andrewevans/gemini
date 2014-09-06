@@ -8,8 +8,6 @@ CACHE:
 
 {{ $artwork_img['artwork_url'] }}
 
-{{ $artwork_img['artist_url'] }}
-
 @endforeach
 
 NETWORK:

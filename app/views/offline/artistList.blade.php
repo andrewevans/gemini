@@ -7,7 +7,7 @@
 @foreach ($artists as $artist)
 
 <div>
-    <a href="/offline{{ $artist->url() }}">{{ $artist->alias }}</a>
+    <a href="/offline{{ $artist->url() }}">{{ $artist->inverted_alias() }}</a>
 </div>
 
 @endforeach
