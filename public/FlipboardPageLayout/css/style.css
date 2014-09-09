@@ -245,11 +245,14 @@ a.f-ref{
 	background-position: top center;
 	background-size: cover;
 }
+
+.img-cont img{
+    width: 90%;
+}
+
 .img-1{
-	background-image: url(../images/1.jpg);
 }
 .img-2{
-	background-image: url(../images/2.jpg);
 	height: 60%;
 }
 .img-3{
