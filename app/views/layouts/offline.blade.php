@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" manifest="/api/v1/url/manifest?artist_id={{ $manifest_artist_id }}">
+<html lang="en" manifest="/api/v1/url/manifest?secret=dog&artist_id={{ $manifest_artist_id }}">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <head>
 
@@ -42,7 +42,7 @@
 </head>
 
 <body role="document">
-
+<a href="/offline/artists">Back to list</a><br />
     @yield('content')
 
 </body>
