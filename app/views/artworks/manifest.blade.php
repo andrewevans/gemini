@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-# Build 2014-09-02
+# Build 2014-09-08 003 {{ time() }}
 
 CACHE:
 @foreach ($return_array as $artwork_img)
