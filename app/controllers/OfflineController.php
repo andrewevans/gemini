@@ -70,7 +70,10 @@ class OfflineController extends \BaseController {
 
     public function flipboard()
     {
-        return View::make('flipboard.index');
+        $artworks = Artwork::whereSold(0)->whereHidden(0)->orderBy('id', 'DESC')->take(50)->get();
+
+        return View::make('flipboard.index')
+            ->with('artworks', $artworks);
     }
 
 
