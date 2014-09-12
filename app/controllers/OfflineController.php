@@ -68,6 +68,11 @@ class OfflineController extends \BaseController {
             ->with('page_title', "Artwork");
     }
 
+    public function flipboard()
+    {
+        return View::make('flipboard.index');
+    }
+
 
     /**
 	 * Show the form for creating a new resource.

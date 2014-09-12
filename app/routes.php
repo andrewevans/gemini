@@ -21,6 +21,7 @@ Route::group(array('prefix' => 'offline'), function()
     Route::get('artists/id/{artwork_id}', 'OfflineController@artworks');
     Route::get('artists/{artist_url_slug}/{artwork_url_slug?}/id/{id}', array('as' => 'artworks.showOne', 'uses' => 'OfflineController@artworks'))->where('artwork_url_slug', '(.*)');
     Route::get('artists/{artist_url_slug}/{filter}', ['as' => 'artists.show.filter', 'uses' =>'ArtistsController@filtered'])->where('filter', '^(?!bio).*$');
+    Route::get('flipboard', ['as' => 'flipboard.index', 'uses' =>'OfflineController@flipboard']);
 
 });
 
