@@ -20,6 +20,7 @@
 
 </head>
 <body>
+<div id="dog" style="z-index: 100000; position: absolute; top: 10px; left: 10px; height: 100px; width: 100px; background: #f00">DOG</div>
 
 <header class="main-title">
     <h1>Masterworks<br /><strong>Fine Art Gallery</strong></h1>
@@ -59,10 +60,14 @@
                 $pages.show();
             }
             else if( url === '/vendor/flipboard/js/jquery.flips.js' ) {
-                $container.flips();
             }
 
         }
+    });
+
+    $('#dog').click(function () {
+        console.log('clicked');
+        $container.flips();
     });
 
 </script>

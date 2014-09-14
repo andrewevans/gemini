@@ -4,7 +4,7 @@
 
 @section('content')
 
-@foreach ($artworks as $artwork)
+@foreach ($artworks as $key => $artwork)
 
     <div class="f-page">
         <div class="f-title">
@@ -13,7 +13,7 @@
             <a href="">Contact us!</a>
         </div>
         <div class="box w-100 h-100">
-            <div class="img-cont"><img src="{{ $artwork->img_url() }}" /> </div>
+            <div class="img-cont"><img src="http://placehold.it/300x250&text={{ $key }}" data-src="{{ $artwork->img_url() }}" /> </div>
 
             <div class="img-text">
                 <h3>{{ strtoupper($artwork->artist->alias) }}<br /> {{ $artwork->title }} <span>{{ $artwork->medium_short() }}</span></h3>
