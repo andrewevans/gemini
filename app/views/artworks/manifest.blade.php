@@ -4,7 +4,6 @@ CACHE MANIFEST
 
 CACHE:
 /offline/flipboard?skip=15&page=1
-/offline/flipboard/?skip=15&page=1
 /vendor/flipboard/js/jquery.tmpl.min.js
 /vendor/flipboard/js/jquery.history.js
 /vendor/flipboard/js/core.string.js

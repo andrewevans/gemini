@@ -28,7 +28,7 @@
 
 <div class="f-page f-cover-back">
     <div id="codrops-ad-wrapper">
-        <a href="?skip={{ $skip+15 }}&page=1">Show more</a>
+        <a href="/offline/flipboard?skip={{ $skip+15 }}&page=1">Show more</a>
     </div>
 </div>
 </div>
