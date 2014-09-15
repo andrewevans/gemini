@@ -76,7 +76,7 @@ class OfflineController extends \BaseController {
             $skip = 0;
         }
 
-        $artworks = Artwork::whereSold(0)->whereHidden(0)->orderBy('id', 'DESC')->skip($skip)->take(15)->get();
+        $artworks = Artwork::whereArtistId(41)->whereSold(0)->whereHidden(0)->orderBy('id', 'DESC')->skip($skip)->take(15)->get();
 
         return View::make('flipboard.index')
             ->with('artworks', $artworks)
