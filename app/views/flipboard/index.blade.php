@@ -8,7 +8,7 @@
 
     <div class="f-page">
         <div class="f-title">
-            <a href="">Back to cover</a>
+            <a href="/offline/flipboard">Back to cover</a>
             <h2>Masterworks Fine Art Gallery</h2>
             <a href="">Contact us!</a>
         </div>
@@ -28,17 +28,7 @@
 
 <div class="f-page f-cover-back">
     <div id="codrops-ad-wrapper">
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <a href="?skip={{ $skip+4 }}">skip = {{ $skip+4 }}</a>
-
-        We hope you have enjoyed our collection. Please ask us about our newest arrivals!
+        <a href="?skip={{ $skip+15 }}&page=1">Show more</a>
     </div>
 </div>
 </div>

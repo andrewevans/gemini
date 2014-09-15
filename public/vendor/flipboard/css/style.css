@@ -201,13 +201,14 @@ a.f-ref{
 	height: 50px;
 	text-align:center;
 	width: 100%;
+    background: url('http://www.masterworksfineart.com/foxy/public/skins/blues/images/background.png');;
 }
 .f-title h2{
 	line-height: 50px;
 	margin: 0;
 	font-weight: 300;
 	font-size: 28px;
-	color: #aaa;
+	color: #333;
 	float: left;
 	width: 33%;
 }
@@ -493,4 +494,22 @@ a.f-ref{
 		display: none;
 	}
 	
+}
+
+#codrops-ad-wrapper {
+    background: #d3222a;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    display: block;
+    font-family: "ff-din-round-web-pro",sans-serif;
+    font-size: 20px;
+    margin: 15px 9px;
+    padding: 15px 0;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+#codrops-ad-wrapper a {
+    color: #fff;
 }
