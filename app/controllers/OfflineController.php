@@ -70,10 +70,17 @@ class OfflineController extends \BaseController {
 
     public function flipboard()
     {
-        $artworks = Artwork::whereSold(0)->whereHidden(0)->orderBy('id', 'DESC')->take(50)->get();
+        if ( null !== Input::get('skip') ) {
+            $skip = Str::lower(Input::get('skip')) - 1;
+        } else {
+            $skip = 0;
+        }
+
+        $artworks = Artwork::whereSold(0)->whereHidden(0)->orderBy('id', 'DESC')->skip($skip)->take(4)->get();
 
         return View::make('flipboard.index')
-            ->with('artworks', $artworks);
+            ->with('artworks', $artworks)
+            ->with('skip', $skip);
     }
 
 
