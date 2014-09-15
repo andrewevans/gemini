@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" manifest="/api/v1/url/manifest?secret=dog&artist_id=41">
 <head>
     <meta name="apple-mobile-web-app-capable" content="yes">
 
