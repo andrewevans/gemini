@@ -1,8 +1,9 @@
 CACHE MANIFEST
 
-# Build 2014-09-08 003 001
+# Build 2014-09-08 003 002
 
 CACHE:
+/offline/flipboard?skip=15&page=1
 /vendor/flipboard/js/jquery.tmpl.min.js
 /vendor/flipboard/js/jquery.history.js
 /vendor/flipboard/js/core.string.js
