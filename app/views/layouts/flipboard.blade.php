@@ -71,7 +71,8 @@
                 Oh Art!
                 <a class="f-ref" href=""></a>
             </div>
-            <h1></h1>
+            <h1><a href="http://www.arpfineart.com/offline/flipboard/mary-cassatt">ARP: cassatt</a></h1>
+            <h1><a href="http://www.appelfineart.com/offline/flipboard/georges-braque">APPEL: braque</a></h1>
             <div class="f-cover-story"><span>September 17 - 21, 2014</span>New York Art, Antique & Jewelry Show</div>
         </div>
         <div class="f-cover-flip">&lt; Flip</div>

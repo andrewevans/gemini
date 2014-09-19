@@ -16,6 +16,7 @@ http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js
 /vendor/flipboard/js/modernizr.custom.08464.js
 http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700,300,300italic
 /offline/artists
+/offline/flipboard
 /offline/flipboard/marc-chagall
 /offline/flipboard/marc-chagall/14?page=1
 /offline/artists/yaacov-agam
