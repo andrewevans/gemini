@@ -80,10 +80,8 @@ class OfflineController extends \BaseController {
             $artists = null;
 
             switch ($artist_url_slug) {
-                case 'pablo-picasso':
                 case 'marc-chagall':
                 case 'joan-miro':
-                case 'georges-braque':
                     $chapter = 1;
                     break;
 
@@ -99,7 +97,7 @@ class OfflineController extends \BaseController {
             $artworks = null;
 
             $chapter = 1;
-            $artists_filter = "slug = 'picasso' or slug = 'chagall' or slug = 'miro' or slug = 'braque'";
+            $artists_filter = "slug = 'chagall' or slug = 'miro'";
 
             $artists = Artist::
                 whereRaw('id !=0')

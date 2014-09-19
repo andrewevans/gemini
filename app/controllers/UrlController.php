@@ -111,12 +111,12 @@ class UrlController extends Controller {
                 switch ((int)Input::get('chapter')) {
                     case 1:
                         $chapter = 1;
-                        $artists_filter = "slug = 'picasso' or slug = 'chagall' or slug = 'miro' or slug = 'braque'";
+                        $artists_filter = "slug = 'chagall' or slug = 'miro'";
                         break;
 
                     default:
                         $chapter = 2;
-                        $artists_filter = "slug != 'picasso' and slug != 'chagall' and slug != 'miro' and slug != 'braque'";
+                        $artists_filter = "slug = 'warhol' or slug = 'arman'";
                         break;
                 }
 
