@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" manifest="/api/v1/url/manifest?secret=dog">
+<html lang="en" manifest="/api/v1/url/manifest?secret=dog&chapter={{ $chapter }}">
 <head>
     <meta name="apple-mobile-web-app-capable" content="yes">
 

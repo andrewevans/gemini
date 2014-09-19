@@ -23,10 +23,7 @@ http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700,300,300italic
 /offline/artists/yaacov-agam/hand-signed-color-agamograph/meridia-from-mexico-suite-1985/id/3983
 @if($artist_url_slug == "0" || true)
 @foreach ($artists as $artist)
-
 {{ $artist->artist_offline_url }}
-
-{{ $artist->manifest_url }}
 
 @endforeach
 @endif

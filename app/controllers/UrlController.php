@@ -108,6 +108,18 @@ class UrlController extends Controller {
                     $artist_url_slug = null;
                 }
 
+                switch ((int)Input::get('chapter')) {
+                    case 1:
+                        $chapter = 1;
+                        $artists_filter = "slug = 'picasso' or slug = 'chagall' or slug = 'miro' or slug = 'braque'";
+                        break;
+
+                    default:
+                        $chapter = 2;
+                        $artists_filter = "slug != 'picasso' and slug != 'chagall' and slug != 'miro' and slug != 'braque'";
+                        break;
+                }
+
                 $artists = Artist::
                     whereRaw('id !=0')
                     ->whereIn('id', function($query)
@@ -115,27 +127,26 @@ class UrlController extends Controller {
                         $query->select('artist_id')
                             ->from('artworks')
                             ->whereRaw('sold = 0 and hidden = 0');
-                    })->orderBy('last_name', 'asc')->get();
+                    })->whereRaw($artists_filter)->orderBy('last_name', 'asc')->get();
 
                 foreach ($artists as $artist) {
                     $artist->artist_offline_url = '/offline/flipboard/' . $artist->url_slug;
                     $artist->manifest_url = '/api/v1/url/manifest?secret=dog&artist_url_slug='. $artist->url_slug;
                 }
 
-                $artworks = Artwork::whereIn('artist_id', function($query) use ($artist_url_slug_query)
-                {
-                    $query->select('id')
-                        ->from('artists')
-                        ->whereRaw($artist_url_slug_query);
-                })->whereSold(0)->whereHidden(0)->orderBy('id', 'DESC')->get();
+                foreach ($artists as $artist) {
+                    $artworks[] = $artist->artworks()->whereSold(0)->whereHidden(0)->orderBy('artist_id', 'asc')->get();
+                }
 
-                foreach ($artworks as $artwork) {
-                    $return_array[] = array(
-                        'img_url' => $artwork->img_url(),
-                        'mfa_img_url' => 'http://www.masterworksfineart.com/inventory/' . $artwork->artist->slug . '/original/' . $artwork->artist->slug . $artwork->id . '.jpg',
-                        'artwork_url' => '/offline' . $artwork->url(),
-                        'artist_url' => '/offline' . $artwork->artist->url()
-                    );
+                foreach ($artworks as $artwork_artist) {
+                    foreach ($artwork_artist as $artwork) {
+                        $return_array[] = array(
+                            'img_url' => $artwork->img_url(),
+                            'mfa_img_url' => 'http://www.masterworksfineart.com/inventory/' . $artwork->artist->slug . '/original/' . $artwork->artist->slug . $artwork->id . '.jpg',
+                            'artwork_url' => '/offline' . $artwork->url(),
+                            'artist_url' => '/offline' . $artwork->artist->url()
+                        );
+                    }
                 }
 
                 $response = Response::make(View::make('artworks.manifest')

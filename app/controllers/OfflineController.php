@@ -78,12 +78,28 @@ class OfflineController extends \BaseController {
             $artworks_size = sizeof(Artwork::whereArtistId($artist->id)->whereSold(0)->whereHidden(0)->get());
             $artworks = Artwork::whereArtistId($artist->id)->whereSold(0)->whereHidden(0)->orderBy('id', 'DESC')->skip($skip)->take(PAGINATION_NUM)->get();
             $artists = null;
+
+            switch ($artist_url_slug) {
+                case 'pablo-picasso':
+                case 'marc-chagall':
+                case 'joan-miro':
+                case 'georges-braque':
+                    $chapter = 1;
+                    break;
+
+                default:
+                    $chapter = 2;
+                    break;
+            }
         } else {
             // no artist, so list all artists but no artworks
             $artist = null;
             $artist_url_slug = 0;
             $artworks_size = 0;
             $artworks = null;
+
+            $chapter = 1;
+            $artists_filter = "slug = 'picasso' or slug = 'chagall' or slug = 'miro' or slug = 'braque'";
 
             $artists = Artist::
                 whereRaw('id !=0')
@@ -92,12 +108,13 @@ class OfflineController extends \BaseController {
                     $query->select('artist_id')
                         ->from('artworks')
                         ->whereRaw('sold = 0 and hidden = 0');
-                })->orderBy('last_name', 'asc')->get();
+                })->whereRaw($artists_filter)->orderBy('last_name', 'asc')->get();
 
         }
 
 
         return View::make('flipboard.index')
+            ->with('chapter', $chapter)
             ->with('artists', $artists)
             ->with('artist', $artist)
             ->with('artworks', $artworks)
