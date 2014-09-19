@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" manifest="/api/v1/url/manifest?secret=dog&artist_id=41">
+<html lang="en" manifest="/api/v1/url/manifest?secret=dog">
 <head>
     <meta name="apple-mobile-web-app-capable" content="yes">
 
@@ -46,7 +46,7 @@
     <meta name="description" content="Experimental Page Layout Inspired by Flipboard" />
     <meta name="keywords" content="flip, pages, flipboard, layout, responsive, web, web design, grid, ipad, jquery, css3, 3d, perspective, transitions, transform" />
     <meta name="author" content="" />
-    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="shortcut icon" href="/favicon.ico">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700,300,300italic' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="/vendor/flipboard/css/demo.css" />
     <link rel="stylesheet" type="text/css" href="/vendor/flipboard/css/style.css" />

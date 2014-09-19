@@ -68,18 +68,41 @@ class OfflineController extends \BaseController {
             ->with('page_title', "Artwork");
     }
 
-    public function flipboard()
+    public function flipboard($artist_url_slug = null, $skip = 0)
     {
-        if ( null !== Input::get('skip') ) {
-            $skip = Str::lower(Input::get('skip')) - 1;
+        $skip = (int)$skip;
+
+        if ( $artist_url_slug !=  null ) {
+            // one artist with artworks
+            $artist = Artist::whereUrlSlug($artist_url_slug)->first();
+            $artworks_size = sizeof(Artwork::whereArtistId($artist->id)->whereSold(0)->whereHidden(0)->get());
+            $artworks = Artwork::whereArtistId($artist->id)->whereSold(0)->whereHidden(0)->orderBy('id', 'DESC')->skip($skip)->take(PAGINATION_NUM)->get();
+            $artists = null;
         } else {
-            $skip = 0;
+            // no artist, so list all artists but no artworks
+            $artist = null;
+            $artist_url_slug = 0;
+            $artworks_size = 0;
+            $artworks = null;
+
+            $artists = Artist::
+                whereRaw('id !=0')
+                ->whereIn('id', function($query)
+                {
+                    $query->select('artist_id')
+                        ->from('artworks')
+                        ->whereRaw('sold = 0 and hidden = 0');
+                })->orderBy('last_name', 'asc')->get();
+
         }
 
-        $artworks = Artwork::whereArtistId(41)->whereSold(0)->whereHidden(0)->orderBy('id', 'DESC')->skip($skip)->take(15)->get();
 
         return View::make('flipboard.index')
+            ->with('artists', $artists)
+            ->with('artist', $artist)
             ->with('artworks', $artworks)
+            ->with('artist_url_slug', $artist_url_slug)
+            ->with('artworks_size', $artworks_size)
             ->with('skip', $skip);
     }
 

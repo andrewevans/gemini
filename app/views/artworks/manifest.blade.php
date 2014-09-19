@@ -3,9 +3,7 @@ CACHE MANIFEST
 # Build 2014-09-08 003 002
 
 CACHE:
-/offline/flipboard?skip=15&page=1
-/offline/flipboard?skip=29&page=1
-/offline/flipboard?skip=43&page=1
+/favicon.ico
 /vendor/flipboard/js/jquery.tmpl.min.js
 /vendor/flipboard/js/jquery.history.js
 /vendor/flipboard/js/core.string.js
@@ -17,6 +15,21 @@ http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js
 /vendor/flipboard/css/fallback.css
 /vendor/flipboard/js/modernizr.custom.08464.js
 http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700,300,300italic
+/offline/artists
+/offline/flipboard/marc-chagall
+/offline/flipboard/marc-chagall/14?page=1
+/offline/artists/yaacov-agam
+/offline/flipboard/yaacov-agam
+/offline/artists/yaacov-agam/hand-signed-color-agamograph/meridia-from-mexico-suite-1985/id/3983
+@if($artist_url_slug == "0" || true)
+@foreach ($artists as $artist)
+
+{{ $artist->artist_offline_url }}
+
+{{ $artist->manifest_url }}
+
+@endforeach
+@endif
 @foreach ($return_array as $artwork_img)
 {{ $artwork_img['img_url'] }}
 

@@ -4,6 +4,7 @@
 
 @section('content')
 
+@if ($artist != null && sizeof($artworks) > 0)
 @foreach ($artworks as $key => $artwork)
 
     <div class="f-page">
@@ -25,12 +26,41 @@
 
 @endforeach
 
-
+@if (($artworks_size - $skip - PAGINATION_NUM) > 0)
 <div class="f-page f-cover-back">
     <div id="codrops-ad-wrapper">
-        <a href="/offline/flipboard?skip={{ $skip+15 }}&page=1">Show more</a>
+        <a href="/offline/flipboard/{{ $artist->url_slug }}/{{ $skip+PAGINATION_NUM-1 }}?page=1">Show more</a>
     </div>
 </div>
+@else
+<div class="f-page f-cover-back">
+    <div id="codrops-ad-wrapper">
+        <a href="/offline/flipboard">Back to Artist List</a>
+    </div>
+</div>
+
+@endif
+
+@else
+
+<div class="f-page">
+    <div class="f-title">
+        <a href="/offline/flipboard">Back to cover</a>
+        <h2>Masterworks Fine Art Gallery</h2>
+        <a href="">Contact us!</a>
+    </div>
+    <div class="box w-100 h-100">
+
+
+        <ul>
+            @foreach ($artists as $artist_each)
+            <li><a href="/offline/flipboard/{{ $artist_each->url_slug }}">{{ $artist_each->alias }}</a></li>
+            @endforeach
+        </ul>
+    </div>
+</div>
+@endif
+
 </div>
 
 @stop

@@ -100,17 +100,33 @@ class UrlController extends Controller {
                 break;
 
             case 'manifest':
-                if (null !== Input::get('artist_id')) {
-                    $artist_id_query = "id = " . Str::lower(Input::get('artist_id'));
+                if (null !== Input::get('artist_url_slug')) {
+                    $artist_url_slug_query = "url_slug = '" . Str::lower(Input::get('artist_url_slug')) . "'";
+                    $artist_url_slug = Str::lower(Input::get('artist_url_slug'));
                 } else {
-                    $artist_id_query = "id != 0";
+                    $artist_url_slug_query = "url_slug != '0'";
+                    $artist_url_slug = null;
                 }
 
-                $artworks = Artwork::whereIn('artist_id', function($query) use ($artist_id_query)
+                $artists = Artist::
+                    whereRaw('id !=0')
+                    ->whereIn('id', function($query)
+                    {
+                        $query->select('artist_id')
+                            ->from('artworks')
+                            ->whereRaw('sold = 0 and hidden = 0');
+                    })->orderBy('last_name', 'asc')->get();
+
+                foreach ($artists as $artist) {
+                    $artist->artist_offline_url = '/offline/flipboard/' . $artist->url_slug;
+                    $artist->manifest_url = '/api/v1/url/manifest?secret=dog&artist_url_slug='. $artist->url_slug;
+                }
+
+                $artworks = Artwork::whereIn('artist_id', function($query) use ($artist_url_slug_query)
                 {
                     $query->select('id')
                         ->from('artists')
-                        ->whereRaw($artist_id_query);
+                        ->whereRaw($artist_url_slug_query);
                 })->whereSold(0)->whereHidden(0)->orderBy('id', 'DESC')->get();
 
                 foreach ($artworks as $artwork) {
@@ -122,7 +138,10 @@ class UrlController extends Controller {
                     );
                 }
 
-                $response = Response::make(View::make('artworks.manifest')->with('return_array', $return_array), 200);
+                $response = Response::make(View::make('artworks.manifest')
+                    ->with('return_array', $return_array)
+                    ->with('artists', $artists)
+                    ->with('artist_url_slug', $artist_url_slug));
 
                 $response->header('Content-Type', 'text/cache-manifest');
 
