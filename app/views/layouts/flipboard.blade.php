@@ -71,8 +71,6 @@
                 Oh Art!
                 <a class="f-ref" href=""></a>
             </div>
-            <h1><a href="http://www.arpfineart.com/offline/flipboard/andy-warhol">ARP: warhol</a></h1>
-            <h1><a href="http://www.appelfineart.com/offline/flipboard/marc-chagall">APPEL: chagall</a></h1>
             <div class="f-cover-story"><span>September 17 - 21, 2014</span>New York Art, Antique & Jewelry Show</div>
         </div>
         <div class="f-cover-flip">&lt; Flip</div>
