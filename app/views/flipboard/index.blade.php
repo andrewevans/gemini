@@ -43,6 +43,10 @@
 
 @else
 
+@for ($page_num = 0; $page_num * 21 < (sizeof($artists)); $page_num++)
+    @include('partial/flipboard/page-artists', ['artists' => $artists, 'page_num' => $page_num])
+@endfor
+
 <div class="f-page">
     <div class="f-title">
         <a href="/offline/flipboard">Back to cover</a>
@@ -52,11 +56,6 @@
     <div class="box w-100 h-100">
 
 
-        <ul>
-            @foreach ($artists as $artist_each)
-            <li><a href="/offline/flipboard/{{ $artist_each->url_slug }}">{{ $artist_each->alias }}</a></li>
-            @endforeach
-        </ul>
     </div>
 </div>
 @endif

@@ -517,3 +517,21 @@ a.f-ref{
     display: block;
     line-height: 3em;
 }
+
+ul.artist-list li {
+    display: block;
+    float: left;
+    margin: 1em;
+    background: #6f92b3;
+}
+
+ul.artist-list li a{
+    width: 200px;
+    height: 200px;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid silver;
+    font-size: 2em;
+    color: #ffffff;
+}
