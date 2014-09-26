@@ -1,6 +1,6 @@
 <div class="f-page">
     <div class="f-title">
-        <a href="/offline/flipboard">Back to cover</a>
+        <a href="/offline/flipboard{{ $get_vars }}">Back to cover</a>
         <h2>Masterworks Fine Art Gallery</h2>
         <a href="">Contact us!</a>
     </div>

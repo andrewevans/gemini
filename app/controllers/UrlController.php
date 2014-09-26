@@ -78,6 +78,7 @@ class UrlController extends Controller {
 
         $term = Str::lower(Input::get('term'));
         $return_array = array();
+        $get_vars = '';
 
         switch ($data) {
             case 'artists':
@@ -111,6 +112,7 @@ class UrlController extends Controller {
                 switch ((int)Input::get('chapter')) {
                     case 1:
                         $chapter = 1;
+                        $get_vars = '?chapter=1';
                         $artists_filter = "slug = 'chagall' or slug = 'miro' or slug = 'picasso' or slug = 'braque'";
                         break;
 
@@ -150,6 +152,7 @@ class UrlController extends Controller {
                 }
 
                 $response = Response::make(View::make('artworks.manifest')
+                    ->with('get_vars', $get_vars)
                     ->with('return_array', $return_array)
                     ->with('artists', $artists)
                     ->with('artist_url_slug', $artist_url_slug));

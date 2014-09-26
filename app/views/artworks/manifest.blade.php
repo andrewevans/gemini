@@ -15,7 +15,8 @@ http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js
 /vendor/flipboard/css/fallback.css
 /vendor/flipboard/js/modernizr.custom.08464.js
 http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700,300,300italic
-/offline/artists
+/offline/flipboard{{ $get_vars }}
+
 /offline/flipboard/marc-chagall
 /offline/flipboard/marc-chagall/14?page=1
 /vendor/flipboard/images/young5038.jpg

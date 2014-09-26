@@ -71,6 +71,7 @@ class OfflineController extends \BaseController {
     public function flipboard($artist_url_slug = null, $skip = 0)
     {
         $skip = (int)$skip;
+        $get_vars = '';
 
         if ( $artist_url_slug !=  null ) {
             // one artist with artworks
@@ -85,6 +86,7 @@ class OfflineController extends \BaseController {
                 case 'pablo-picasso':
                 case 'georges-braque':
                     $chapter = 1;
+                    $get_vars = '?chapter=1';
                     break;
 
                 default:
@@ -101,6 +103,7 @@ class OfflineController extends \BaseController {
             switch ((int)Input::get('chapter')) {
                 case 1:
                     $chapter = 1;
+                    $get_vars = '?chapter=1';
                     $artists_filter = "slug = 'chagall' or slug = 'miro' or slug = 'picasso' or slug = 'braque'";
                     break;
 
@@ -124,6 +127,7 @@ class OfflineController extends \BaseController {
 
         return View::make('flipboard.index')
             ->with('chapter', $chapter)
+            ->with('get_vars', $get_vars)
             ->with('artists', $artists)
             ->with('artist', $artist)
             ->with('artworks', $artworks)

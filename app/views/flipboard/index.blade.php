@@ -9,7 +9,7 @@
 
     <div class="f-page">
         <div class="f-title">
-            <a href="/offline/flipboard">Back to cover</a>
+            <a href="/offline/flipboard{{ $get_vars }}">Back to cover</a>
             <h2>Masterworks Fine Art Gallery</h2>
             <a href="">Contact us!</a>
         </div>
@@ -35,7 +35,7 @@
 @else
 <div class="f-page f-cover-back">
     <div id="codrops-ad-wrapper">
-        <a href="/offline/flipboard">Back to Artist List</a>
+        <a href="/offline/flipboard{{ $get_vars }}">Back to Artist List</a>
     </div>
 </div>
 
@@ -49,7 +49,7 @@
 
 <div class="f-page">
     <div class="f-title">
-        <a href="/offline/flipboard">Back to cover</a>
+        <a href="/offline/flipboard{{ $get_vars }}">Back to cover</a>
         <h2>Masterworks Fine Art Gallery</h2>
         <a href="">Contact us!</a>
     </div>
