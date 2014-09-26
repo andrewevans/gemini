@@ -94,7 +94,7 @@
 	padding-top: 20px;
 }
 .page.cover .front .content{
-	background: #ddd url(http://www.masterworksfineart.com/inventory/young/original/young5038.jpg) no-repeat center center;
+	background: #ddd url(/vendor/flipboard/images/young5038.jpg) no-repeat center center;
 	background-size: cover;
 }
 .page.cover-back .back .content{
@@ -201,7 +201,7 @@ a.f-ref{
 	height: 50px;
 	text-align:center;
 	width: 100%;
-    background: url('http://www.masterworksfineart.com/foxy/public/skins/blues/images/background.png');;
+    background: url('/vendor/flipboard/images/background.png');
 }
 .f-title h2{
 	line-height: 50px;
@@ -282,27 +282,7 @@ a.f-ref{
 .img-2{
 	height: 60%;
 }
-.img-3{
-	background-image: url(../images/3.jpg);
-}
-.img-4{
-	background-image: url(../images/4.jpg);
-}
-.img-5{
-	background-image: url(../images/5.jpg);
-}
-.img-6{
-	background-image: url(../images/6.jpg);
-}
-.img-7{
-	background-image: url(../images/7.jpg);
-}
-.img-8{
-	background-image: url(../images/8.jpg);
-}
-.img-9{
-	background-image: url(../images/9.jpg);
-}
+
 .box h3{
 	padding: 10px 0px;
 	margin: 0;

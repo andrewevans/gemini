@@ -82,6 +82,8 @@ class OfflineController extends \BaseController {
             switch ($artist_url_slug) {
                 case 'marc-chagall':
                 case 'joan-miro':
+                case 'pablo-picasso':
+                case 'georges-braque':
                     $chapter = 1;
                     break;
 
