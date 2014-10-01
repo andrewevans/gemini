@@ -26,6 +26,10 @@ http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700,300,300italic
 @foreach ($artists as $artist)
 {{ $artist->artist_offline_url }}
 
+{{ $artist->artist_offline_url }}?page=1
+@for ($pagination_count = 1; $pagination_count * (PAGINATION_NUM - 1) < $artist->sizeof_artworks; $pagination_count++)
+{{ $artist->artist_offline_url }}/{{ $pagination_count * (PAGINATION_NUM - 1) }}?page=1
+@endfor
 @endforeach
 @endif
 @foreach ($return_array as $artwork_img)

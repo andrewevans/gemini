@@ -137,7 +137,8 @@ class UrlController extends Controller {
                 }
 
                 foreach ($artists as $artist) {
-                    $artworks[] = $artist->artworks()->whereSold(0)->whereHidden(0)->orderBy('artist_id', 'asc')->get();
+                    $artworks[$artist->slug] = $artist->artworks()->whereSold(0)->whereHidden(0)->orderBy('artist_id', 'asc')->get();
+                    $artist->sizeof_artworks = $artworks[$artist->slug]->count();
                 }
 
                 foreach ($artworks as $artwork_artist) {

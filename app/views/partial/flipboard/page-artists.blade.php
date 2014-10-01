@@ -11,7 +11,7 @@
             if (($key) < ($page_num * 21)) continue;
             if ($key > (($page_num + 1) * 21) - 1) break;
             ?>
-            <li><a href="/offline/flipboard/{{ $artist_each->url_slug }}">{{ $artist_each->alias }}</a></li>
+            <li><a href="/offline/flipboard/{{ $artist_each->url_slug }}?page=1">{{ $artist_each->alias }}</a></li>
             @endforeach
         </ul>
     </div>
