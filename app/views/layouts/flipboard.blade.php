@@ -63,6 +63,10 @@
     <p><strong>Best viewed with a glass of 20 year port</strong></p>
 </header>
 
+<div id="warning-message">
+    <p>Please return to landscape mode, thaaaanks!</p>
+</div>
+
 <div id="flip" class="container">
 
     <div class="f-page f-cover">
