@@ -116,6 +116,12 @@ class UrlController extends Controller {
                         $artists_filter = "slug = 'chagall' or slug = 'miro' or slug = 'picasso' or slug = 'braque'";
                         break;
 
+                    case 3:
+                        $chapter = 3;
+                        $get_vars = '?chapter=3';
+                        $artists_filter = "slug = 'vasarely'";
+                        break;
+
                     default:
                         $chapter = 2;
                         $artists_filter = "slug != 'chagall' and slug != 'miro' and slug != 'picasso' and slug != 'braque'";

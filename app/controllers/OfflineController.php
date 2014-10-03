@@ -89,6 +89,10 @@ class OfflineController extends \BaseController {
                     $get_vars = '?chapter=1';
                     break;
 
+                case 'victor-vasarely':
+                    $chapter = 3;
+                    $get_vars = '?chapter=3';
+                    break;
                 default:
                     $chapter = 2;
                     break;
@@ -105,6 +109,12 @@ class OfflineController extends \BaseController {
                     $chapter = 1;
                     $get_vars = '?chapter=1';
                     $artists_filter = "slug = 'chagall' or slug = 'miro' or slug = 'picasso' or slug = 'braque'";
+                    break;
+
+                case 3:
+                    $chapter = 3;
+                    $get_vars = '?chapter=3';
+                    $artists_filter = "slug = 'vasarely'";
                     break;
 
                 default:
