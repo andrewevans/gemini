@@ -27,6 +27,7 @@
             }
         })(document,window.navigator,'standalone');
 
+        /*
         function logEvent(event) {
             console.log(event.type);
             if (event.type == 'cached' || event.type == 'noupdate')
@@ -39,6 +40,7 @@
         window.applicationCache.addEventListener('updateready', logEvent, false);
         window.applicationCache.addEventListener('obsolete', logEvent, false);
         window.applicationCache.addEventListener('error', logEvent, false);
+        */
     </script>
 
     <title>Experimental Page Layout Inspired by Flipboard</title>
