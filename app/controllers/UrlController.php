@@ -109,22 +109,51 @@ class UrlController extends Controller {
                     $artist_url_slug = null;
                 }
 
+                $masters[1] = ['chagall','miro','picasso','braque'];
+                $masters[3] = ['agam','arman','calder','chia','close','francis','haring','lichtenstein','nierman','noland','stella','vasarely','warhol','young', 'yvaral'];
+                $masters[4] = ['appel','archipenko','cocteau','dechirico','fantinlatour','hundertwasser','johns','kollwiz','leger','magritte','manray','mtisse','minne','moore','rouault','villon','vlaminck'];
+                $masters[5] = ['callot','castiglione','durer','rembrandt','schongauer','vandyck'];
+                $masters[6] = ['cassatt','monet','renoir','rodin','toulouse'];
+
                 switch ((int)Input::get('chapter')) {
                     case 1:
+                        // featured
                         $chapter = 1;
                         $get_vars = '?chapter=1';
-                        $artists_filter = "slug = 'chagall' or slug = 'miro' or slug = 'picasso' or slug = 'braque'";
+                        $artists_filter = "slug in ('" . implode('\',\'', $masters[$chapter]) . "')";
                         break;
 
                     case 3:
+                        // contemporary
                         $chapter = 3;
                         $get_vars = '?chapter=3';
-                        $artists_filter = "slug = 'vasarely'";
+                        $artists_filter = "slug in ('" . implode('\',\'', $masters[$chapter]) . "')";
+                        break;
+
+                    case 4:
+                        // modern
+                        $chapter = 4;
+                        $get_vars = '?chapter=4';
+                        $artists_filter = "slug in ('" . implode('\',\'', $masters[$chapter]) . "')";
+                        break;
+
+                    case 5:
+                        // old
+                        $chapter = 5;
+                        $get_vars = '?chapter=5';
+                        $artists_filter = "slug in ('" . implode('\',\'', $masters[$chapter]) . "')";
+                        break;
+
+                    case 6:
+                        // impressionist
+                        $chapter = 6;
+                        $get_vars = '?chapter=6';
+                        $artists_filter = "slug in ('" . implode('\',\'', $masters[$chapter]) . "')";
                         break;
 
                     default:
                         $chapter = 2;
-                        $artists_filter = "slug != 'chagall' and slug != 'miro' and slug != 'picasso' and slug != 'braque'";
+                        $artists_filter = "slug not in ('chagall','miro','picasso','braque')";
                         break;
                 }
 

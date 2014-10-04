@@ -80,23 +80,33 @@ class OfflineController extends \BaseController {
             $artworks = Artwork::whereArtistId($artist->id)->whereSold(0)->whereHidden(0)->orderBy('id', 'DESC')->skip($skip)->take(PAGINATION_NUM)->get();
             $artists = null;
 
-            switch ($artist_url_slug) {
-                case 'marc-chagall':
-                case 'joan-miro':
-                case 'pablo-picasso':
-                case 'georges-braque':
-                    $chapter = 1;
-                    $get_vars = '?chapter=1';
-                    break;
+            $masters[1] = ['chagall','miro','picasso','braque'];
+            $masters[3] = ['agam','arman','calder','chia','close','francis','haring','lichtenstein','nierman','noland','stella','vasarely','warhol','young', 'yvaral'];
+            $masters[4] = ['appel','archipenko','cocteau','dechirico','fantinlatour','hundertwasser','johns','kollwiz','leger','magritte','manray','mtisse','minne','moore','rouault','villon','vlaminck'];
+            $masters[5] = ['callot','castiglione','durer','rembrandt','schongauer','vandyck'];
+            $masters[6] = ['cassatt','monet','renoir','rodin','toulouse'];
 
-                case 'victor-vasarely':
-                    $chapter = 3;
-                    $get_vars = '?chapter=3';
-                    break;
-                default:
-                    $chapter = 2;
-                    break;
+            if ( in_array($artist->slug, $masters[1])) {
+                $chapter = 1;
+
+            } else if ( in_array($artist->slug, $masters[3])) {
+                $chapter = 3;
+
+            } else if ( in_array($artist->slug, $masters[4])) {
+                $chapter = 4;
+
+            } else if ( in_array($artist->slug, $masters[5])) {
+                $chapter = 5;
+
+            } else if ( in_array($artist->slug, $masters[6])) {
+                $chapter = 6;
+
+            } else {
+                exit();
             }
+
+            $get_vars = '?chapter=' .$chapter;
+
         } else {
             // no artist, so list all artists but no artworks
             $artist = null;
@@ -106,20 +116,43 @@ class OfflineController extends \BaseController {
 
             switch ((int)Input::get('chapter')) {
                 case 1:
+                    // featured
                     $chapter = 1;
                     $get_vars = '?chapter=1';
-                    $artists_filter = "slug = 'chagall' or slug = 'miro' or slug = 'picasso' or slug = 'braque'";
+                    $artists_filter = "slug in ('chagall','miro','picasso','braque')";
                     break;
 
                 case 3:
+                    // contemporary
                     $chapter = 3;
                     $get_vars = '?chapter=3';
-                    $artists_filter = "slug = 'vasarely'";
+                    $artists_filter = "slug in ('agam','arman','calder','chia','close','francis','haring','lichtenstein','nierman','noland','vasarely','warhol','young', 'yvaral')";
+                    break;
+
+                case 4:
+                    // modern
+                    $chapter = 4;
+                    $get_vars = '?chapter=4';
+                    $artists_filter = "slug in ('appel','archipenko','cocteau','dechirico','fantinlatour','hundertwasser','johns','kollwiz','leger','magritte','manray','mtisse','minne','moore','rouault','villon','vlaminck')";
+                    break;
+
+                case 5:
+                    // old
+                    $chapter = 5;
+                    $get_vars = '?chapter=5';
+                    $artists_filter = "slug in ('callot','castiglione','durer','rembrandt','schongauer','vandyck')";
+                    break;
+
+                case 6:
+                    // impressionist
+                    $chapter = 6;
+                    $get_vars = '?chapter=6';
+                    $artists_filter = "slug in ('cassatt','monet','renoir','rodin','toulouse')";
                     break;
 
                 default:
                     $chapter = 2;
-                    $artists_filter = "slug != 'chagall' and slug != 'miro' and slug != 'picasso' and slug != 'braque'";
+                    $artists_filter = "slug not in ('chagall','miro','picasso','braque')";
                     break;
             }
 
