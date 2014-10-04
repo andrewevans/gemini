@@ -237,7 +237,7 @@ a.f-ref{
 	padding: 20px;
 	overflow: hidden;
 	position: relative;
-	background: #cccc99;
+	background: #013846;
 	cursor: pointer;
 }
 
@@ -258,7 +258,7 @@ a.f-ref{
     bottom: 0;
     right: 0;
     background:#cccc99;
-    background:rgba(204,204,153,0.5);
+    background:rgba(0,0,0,0.9);
     border: 1px solid #e7e7c6;
     padding: 20px;
 }
@@ -518,19 +518,27 @@ a.f-ref{
 }
 
 ul.artist-list li {
-    display: block;
+    display: table;
     float: left;
-    margin: 1em;
-    background: #6f92b3;
+    width: 47%;
+    height: 275px;
+    margin: 5px;
+    background: #1e5799; /* Old browsers */
+    background: -moz-linear-gradient(left,  #1e5799 0%, #2989d8 94%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,#1e5799), color-stop(94%,#2989d8)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(left,  #1e5799 0%,#2989d8 94%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(left,  #1e5799 0%,#2989d8 94%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(left,  #1e5799 0%,#2989d8 94%); /* IE10+ */
+    background: linear-gradient(to right,  #1e5799 0%,#2989d8 94%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#7db9e8',GradientType=1 ); /* IE6-9 */
 }
 
 ul.artist-list li a{
     width: 200px;
-    height: 200px;
+    height: 123px;
     display: table-cell;
     text-align: center;
     vertical-align: middle;
-    border: 1px solid silver;
     font-size: 2em;
     color: #ffffff;
 }

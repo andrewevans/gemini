@@ -52,7 +52,7 @@
 
 @else
 
-@for ($page_num = 0; $page_num * 21 < (sizeof($artists)); $page_num++)
+@for ($page_num = 0; $page_num * PAGINATION_NUM_ARTISTS < (sizeof($artists)); $page_num++)
     @include('partial/flipboard/page-artists', ['artists' => $artists, 'page_num' => $page_num])
 @endfor
 

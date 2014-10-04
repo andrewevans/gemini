@@ -73,6 +73,12 @@ class OfflineController extends \BaseController {
         $skip = (int)$skip;
         $get_vars = '';
 
+        $masters[1] = ['chagall','miro','picasso','braque'];
+        $masters[3] = ['agam','arman','calder','chia','close','francis','haring','lichtenstein','nierman','noland','stella','vasarely','warhol','young', 'yvaral'];
+        $masters[4] = ['appel','archipenko','cocteau','dechirico','fantinlatour','hundertwasser','johns','kollwiz','leger','magritte','manray','mtisse','minne','moore','rouault','villon','vlaminck'];
+        $masters[5] = ['callot','castiglione','durer','rembrandt','schongauer','vandyck'];
+        $masters[6] = ['cassatt','monet','renoir','rodin','toulouse'];
+
         if ( $artist_url_slug !=  null ) {
             // one artist with artworks
             $artist = Artist::whereUrlSlug($artist_url_slug)->first();
@@ -80,11 +86,6 @@ class OfflineController extends \BaseController {
             $artworks = Artwork::whereArtistId($artist->id)->whereSold(0)->whereHidden(0)->orderBy('id', 'DESC')->skip($skip)->take(PAGINATION_NUM)->get();
             $artists = null;
 
-            $masters[1] = ['chagall','miro','picasso','braque'];
-            $masters[3] = ['agam','arman','calder','chia','close','francis','haring','lichtenstein','nierman','noland','stella','vasarely','warhol','young', 'yvaral'];
-            $masters[4] = ['appel','archipenko','cocteau','dechirico','fantinlatour','hundertwasser','johns','kollwiz','leger','magritte','manray','mtisse','minne','moore','rouault','villon','vlaminck'];
-            $masters[5] = ['callot','castiglione','durer','rembrandt','schongauer','vandyck'];
-            $masters[6] = ['cassatt','monet','renoir','rodin','toulouse'];
 
             if ( in_array($artist->slug, $masters[1])) {
                 $chapter = 1;
@@ -119,35 +120,35 @@ class OfflineController extends \BaseController {
                     // featured
                     $chapter = 1;
                     $get_vars = '?chapter=1';
-                    $artists_filter = "slug in ('chagall','miro','picasso','braque')";
+                    $artists_filter = "slug in ('" . implode('\',\'', $masters[$chapter]) . "')";
                     break;
 
                 case 3:
                     // contemporary
                     $chapter = 3;
                     $get_vars = '?chapter=3';
-                    $artists_filter = "slug in ('agam','arman','calder','chia','close','francis','haring','lichtenstein','nierman','noland','vasarely','warhol','young', 'yvaral')";
+                    $artists_filter = "slug in ('" . implode('\',\'', $masters[$chapter]) . "')";
                     break;
 
                 case 4:
                     // modern
                     $chapter = 4;
                     $get_vars = '?chapter=4';
-                    $artists_filter = "slug in ('appel','archipenko','cocteau','dechirico','fantinlatour','hundertwasser','johns','kollwiz','leger','magritte','manray','mtisse','minne','moore','rouault','villon','vlaminck')";
+                    $artists_filter = "slug in ('" . implode('\',\'', $masters[$chapter]) . "')";
                     break;
 
                 case 5:
                     // old
                     $chapter = 5;
                     $get_vars = '?chapter=5';
-                    $artists_filter = "slug in ('callot','castiglione','durer','rembrandt','schongauer','vandyck')";
+                    $artists_filter = "slug in ('" . implode('\',\'', $masters[$chapter]) . "')";
                     break;
 
                 case 6:
                     // impressionist
                     $chapter = 6;
                     $get_vars = '?chapter=6';
-                    $artists_filter = "slug in ('cassatt','monet','renoir','rodin','toulouse')";
+                    $artists_filter = "slug in ('" . implode('\',\'', $masters[$chapter]) . "')";
                     break;
 
                 default:

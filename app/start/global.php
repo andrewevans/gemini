@@ -25,6 +25,7 @@ define('SORT_HIGH', 'Price: Highest first');
 define('SORT_LOW', 'Price: Lowest first');
 define('SORT_NEW', 'Newest first');
 define('PAGINATION_NUM', 15);
+define('PAGINATION_NUM_ARTISTS', 4);
 
 ClassLoader::addDirectories(array(
 
