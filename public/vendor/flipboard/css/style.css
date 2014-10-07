@@ -287,6 +287,7 @@ a.f-ref{
 	padding: 10px 0px;
 	margin: 0;
 	font-size: 18px;
+    color: #eeeeee;
 }
 .box h3 span{
 	display: block;
@@ -294,6 +295,7 @@ a.f-ref{
 	font-weight: 300;
 	text-transform: uppercase;
 	letter-spacing: 2px;
+    line-height: 2em;
 	color: #eeeeee;
 }
 .box:after{
@@ -319,6 +321,7 @@ a.f-ref{
 	text-align: justify;
 	font-family: Georgia;
 	font-size: 13px;
+    color: #dddddd;
 	line-height: 20px;
 	display: block;
 	position: relative;
@@ -365,7 +368,7 @@ a.f-ref{
 .box-expanded .img-text .img-desc>p {
     font-size: 14px;
     line-height: 1.4em;
-    color: #000000;
+    color: #eeeeee;
 }
 
 .box-img-left:after{

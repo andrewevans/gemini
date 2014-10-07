@@ -18,8 +18,8 @@
 
             <div class="img-text">
                 <h3>{{ strtoupper($artwork->artist->alias) }}<br /> {{ $artwork->title }} <span>{{ $artwork->medium_short() }}</span></h3>
-                <p>{{ $artwork->signature }}<br />
-                    This is from an edition.</p>
+                <p>{{ $artwork->signature }}
+                    {{ $artwork->edition }}</p>
                 <p>item #{{ $artwork->id }}</p>
 
                 <div class="img-desc">

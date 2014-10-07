@@ -61,8 +61,8 @@
 
 <header class="main-title">
     <h1>Masterworks<br /><strong>Fine Art Gallery</strong></h1>
-    <p>Browse our inventory of thousands of beautiful works</p>
-    <p><strong>Best viewed with a glass of 20 year port</strong></p>
+    <p>Flip through our inventory of thousands of beautiful works.</p>
+    <p><strong>www.MasterworksFineArt.com</strong></p>
 </header>
 
 <div id="warning-message">
@@ -74,10 +74,9 @@
     <div class="f-page f-cover">
         <div class="cover-elements">
             <div class="logo">
-                Oh Art!
                 <a class="f-ref" href=""></a>
             </div>
-            <div class="f-cover-story"><span>September 17 - 21, 2014</span>New York Art, Antique & Jewelry Show</div>
+            <div class="f-cover-story"><span>October 9 - 12, 2014</span>Art Silicon Valley</div>
         </div>
         <div class="f-cover-flip">&lt; Flip</div>
     </div>
