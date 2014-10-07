@@ -355,6 +355,7 @@ a.f-ref{
 
 .box-expanded .img-text {
     width: 50%;
+    overflow: scroll;
 }
 
 .box-expanded .img-text .img-desc{

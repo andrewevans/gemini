@@ -23,11 +23,7 @@
                 <p>item #{{ $artwork->id }}</p>
 
                 <div class="img-desc">
-                    <p>Pug freegan DIY, bicycle rights kogi cardigan biodiesel flannel keffiyeh sustainable 8-bit small batch twee flexitarian Schlitz. Bespoke chambray keytar Bushwick seitan 3 wolf moon selvage hella stumptown, Tonx synth quinoa locavore. Letterpress sartorial beard, Brooklyn gluten-free deep v Wes Anderson viral. Blog chambray freegan put a bird on it Portland cred, Shoreditch you probably haven't heard of them flexitarian quinoa Etsy. Occupy farm-to-table Odd Future pickled, viral fingerstache DIY gastropub craft beer art party Echo Park before they sold out. Polaroid sartorial Pitchfork banh mi McSweeney's. You probably haven't heard of them artisan Neutra plaid, jean shorts fixie Schlitz raw denim umami iPhone gentrify.</p>
-                    <p>Banh mi actually Intelligentsia crucifix pickled literally. +1 Tumblr flannel, Pitchfork wayfarers pop-up trust fund aesthetic cred vinyl Godard tousled. Quinoa PBR church-key, occupy locavore bespoke salvia. Next level fap mustache, organic art party chambray slow-carb. Marfa chia Brooklyn wayfarers fixie. Carles cred PBR&B Pinterest, Intelligentsia Pitchfork pork belly cliche brunch Vice occupy. Semiotics vegan fashion axe heirloom occupy cornhole.</p>
-
-                    <p><b>Catalogue Raisonné & COA:</b></p>
-                    <p>A Certificate of Authenticity will accompany this work.</p>
+                    {{ $artwork->description }}
                 </div>
             </div>
         </div>

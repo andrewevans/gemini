@@ -84,6 +84,11 @@ class OfflineController extends \BaseController {
             $artist = Artist::whereUrlSlug($artist_url_slug)->first();
             $artworks_size = sizeof(Artwork::whereArtistId($artist->id)->whereSold(0)->whereHidden(0)->get());
             $artworks = Artwork::whereArtistId($artist->id)->whereSold(0)->whereHidden(0)->orderBy('id', 'DESC')->skip($skip)->take(PAGINATION_NUM)->get();
+
+            foreach ($artworks as $artwork) {
+                $artwork->description = ArtworkDescription::whereArtworkId($artwork->id)->first()->description;
+            }
+
             $artists = null;
 
 
