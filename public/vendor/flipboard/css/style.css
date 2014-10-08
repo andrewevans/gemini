@@ -380,8 +380,10 @@ a.f-ref{
     display: none;
 }
 
-.box-expanded .img-text .img-desc>p {
-    font-size: 14px;
+.box-expanded .img-desc,
+.box-expanded .img-desc>p {
+    font-family: "Open Sans";
+    font-size: 20px;
     line-height: 1.4em;
     color: #eeeeee;
 }

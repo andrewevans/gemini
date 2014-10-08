@@ -26,6 +26,7 @@
 
                 <div class="img-desc">
                     <img src="{{ $artwork->img_url() }}" data-src="{{ $artwork->img_url() }}" />
+                    <div>&nbsp;</div>
                     {{ $artwork->description }}
                 </div>
             </div>
