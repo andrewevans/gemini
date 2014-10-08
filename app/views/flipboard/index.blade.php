@@ -9,7 +9,9 @@
 
     <div class="f-page">
         <div class="f-title">
-            <a href="/offline/flipboard{{ $get_vars }}">Back to cover</a>
+            <a href="/offline/flipboard{{ $get_vars }}">
+                <div class="f-cover-back">&lt; Back to Artists</div>
+            </a>
             <h2>Masterworks Fine Art Gallery</h2>
             <a href="">Contact us!</a>
         </div>
@@ -23,10 +25,12 @@
                 <p>item #{{ $artwork->id }}</p>
 
                 <div class="img-desc">
+                    <img src="{{ $artwork->img_url() }}" data-src="{{ $artwork->img_url() }}" />
                     {{ $artwork->description }}
                 </div>
             </div>
         </div>
+        <div class="f-cover-flip">&lt; Flip</div>
     </div>
 
 @endforeach
@@ -54,7 +58,9 @@
 
 <div class="f-page">
     <div class="f-title">
-        <a href="/offline/flipboard{{ $get_vars }}">Back to cover</a>
+        <a href="/offline/flipboard{{ $get_vars }}">
+            <div class="f-cover-back">&lt; Back to Artists</div>
+        </a>
         <h2>Masterworks Fine Art Gallery</h2>
         <a href="">Contact us!</a>
     </div>
