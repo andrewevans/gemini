@@ -311,7 +311,7 @@ class Artwork extends Eloquent
 
         $local_file = $this->img_directory_url() . '/' . $this->artist->slug . $this->id . $img_num_av . '.' . $extension;
 
-        if (file_exists($local_file) || $upload) return '/' . $local_file;
+        //if (file_exists($local_file) || $upload) return '/' . $local_file;
 
         $remote_file = 'http://www.masterworksfineart.com/inventory/' . $this->artist->slug . '/original/' . $this->artist->slug . $this->id . $img_num_av . '.' . $extension;
 
