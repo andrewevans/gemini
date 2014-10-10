@@ -13,7 +13,7 @@
             if (($key) < ($page_num * PAGINATION_NUM_ARTISTS)) continue;
             if ($key > (($page_num + 1) * PAGINATION_NUM_ARTISTS) - 1) break;
             ?>
-            <li><a href="/offline/flipboard/{{ $artist_each->url_slug }}?page=1">{{ $artist_each->alias }}</a></li>
+            <li><a href="/offline/flipboard/{{ $artist_each->url_slug }}?page=1" style="background-image: url({{ $artist_each->cover_img_url() }}); background-size: cover; background-position-y: 0%; background-position: center center; box-shadow: inset 0 0 0 1000px rgba(0,0,0,.3);"><div>{{ $artist_each->alias }}</div></a></li>
             @endforeach
         </ul>
     </div>

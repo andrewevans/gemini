@@ -426,6 +426,14 @@ class Artist extends Eloquent
         return $this->hasMany('ArtistBio');
     }
 
+    public function cover_img_url()
+    {
+        $artist = Artist::find($this->id)->first();
+
+        $artwork_cover = Artwork::whereArtistId($this->id)->whereSold(0)->whereHidden(0)->orderBy('id','desc')->first();
+        return $artwork_cover->img_url();
+    }
+
     public function catalogues()
     {
         return $this->hasMany('Catalogue');

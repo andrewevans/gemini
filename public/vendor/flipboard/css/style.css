@@ -251,7 +251,7 @@ a.f-ref{
 	padding: 20px;
 	overflow: hidden;
 	position: relative;
-	background: #013846;
+	background: #6D6D37;
 	cursor: pointer;
 }
 
@@ -564,12 +564,29 @@ ul.artist-list li {
 
 ul.artist-list li a{
     display: block;
+    position: relative;
     height: 100%;
     width: 100%;
     text-align: center;
     vertical-align: middle;
     font-size: 2em;
     color: #ffffff;
+    overflow: hidden;
+}
+
+ul.artist-list li a img{
+    min-height: 100%;
+    min-width: 100%;
+    margin-top: -30%;
+    opacity: 0.7;
+}
+
+ul.artist-list li a div{
+    position: absolute;
+    top: 0;
+    margin: 0.5em;
+    text-shadow: 0 1px 0 rgba(0,0,0,-0.7);
+    font-weight: bold;
 }
 
 #warning-message {
