@@ -380,6 +380,10 @@ a.f-ref{
     display: none;
 }
 
+.box-expanded .f-cover-click {
+    visibility: hidden;
+}
+
 .box-expanded .img-desc,
 .box-expanded .img-desc>p {
     font-family: "Open Sans";
