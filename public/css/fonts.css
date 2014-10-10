@@ -1,0 +1,15 @@
+/* latin */
+@font-face {
+  font-family: 'Open Sans Condensed';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Open Sans Cond Light'), local('OpenSans-CondensedLight'), url(/css/Open_Sans_Condensed/OpenSans-CondLight.ttf);
+}
+
+/* latin */
+@font-face {
+    font-family: 'Open Sans Condensed';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Open Sans Condensed Bold'), local('OpenSans-CondensedBold'), url(/css/Open_Sans_Condensed/OpenSans-CondBold.ttf);
+}
