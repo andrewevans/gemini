@@ -163,7 +163,7 @@ a.f-ref{
 }
 
 .f-cover-back {
-    font-family: 'Open Sans Condensed','Arial Narrow', serif;
+    font-family: 'Open Sans Condensed','Arial Narrow', arial, serif;
     font-size: 30px;
     font-style: normal;
     background: #000;
@@ -237,7 +237,7 @@ a.f-ref{
 	line-height: 50px;
 	color: #777;
 	font-style: italic;
-	font-family: "Calisto MT", "Bookman Old Style", Bookman, "Goudy Old Style", Garamond, "Hoefler Text", "Bitstream Charter", Georgia, serif;
+	font-family: "Calisto MT", "Bookman Old Style", Bookman, "Goudy Old Style", Garamond, "Hoefler Text", "Bitstream Charter", Georgia, arial, serif;
 }
 .f-title a:first-child{
 	text-align: left;
@@ -391,7 +391,7 @@ a.f-ref{
 
 .box-expanded .img-desc,
 .box-expanded .img-desc>p {
-    font-family: "Open Sans";
+    font-family: "Open Sans", arial;
     font-size: 20px;
     line-height: 1.4em;
     color: #eeeeee;
