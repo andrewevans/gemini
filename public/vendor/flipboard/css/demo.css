@@ -6,7 +6,7 @@
 	box-sizing: border-box;
 }
 body{
-	font-family: 'Open Sans Condensed','Arial Narrow', serif;
+	font-family: 'Open Sans Condensed','Arial Narrow', Arial, serif;
 	background: #ddd url(../images/fabric_plaid.png) repeat top left;
 	font-weight: 400;
 	font-size: 15px;
