@@ -24,12 +24,12 @@
                     {{ $artwork->edition }}</p>
                 <p>item #{{ $artwork->id }}</p>
 
-                <div class="f-cover-back f-cover-click" style="width: 350px">&star; Click to Read More&hellip;</div>
                 <div class="img-desc">
                     <img src="{{ $artwork->img_url() }}" data-src="{{ $artwork->img_url() }}" />
                     <div>&nbsp;</div>
                     {{ $artwork->description }}
                 </div>
+                <div class="f-cover-back f-cover-click" style="width: 200px">&star; Click to <br />Read More&hellip;</div>
             </div>
         </div>
         <div class="f-cover-flip">&lt; Flip</div>
