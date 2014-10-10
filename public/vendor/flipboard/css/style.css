@@ -384,7 +384,7 @@ a.f-ref{
     visibility: hidden;
 }
 
-.box-expanded .f-cover-click {
+.f-cover-click {
     position: absolute;
     bottom: 10px;
 }
