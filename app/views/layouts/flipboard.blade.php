@@ -76,7 +76,7 @@
             <div class="logo">
                 <a class="f-ref" href=""></a>
             </div>
-            <div class="f-cover-story"><span>October 9 - 12, 2014</span>Art Silicon Valley</div>
+            <div class="f-cover-story"><span>November 6 - 9, 2014</span>Art San Diego 2014</div>
         </div>
         <div class="f-cover-flip">&lt; Flip</div>
     </div>
