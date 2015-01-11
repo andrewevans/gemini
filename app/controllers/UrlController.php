@@ -235,6 +235,14 @@ class UrlController extends Controller {
 
     public function newsletter($cust_email, $first_name = null, $last_name = null, $lists = null)
     {
+        if ($first_name == "null") {
+            $first_name = null;
+        }
+
+        if ($last_name == "null") {
+            $last_name = null;
+        }
+
         $cust_info = ['cust_email' => $cust_email,
             'first_name' => $first_name,
             'last_name' => $last_name];
