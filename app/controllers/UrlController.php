@@ -99,6 +99,19 @@ class UrlController extends Controller {
                 }
                 break;
 
+            case 'artworks_descriptions':
+
+                $artworks_descriptions = ArtworkDescription::get();
+
+                foreach ($artworks_descriptions as $artwork_description) {
+                    $return_array[] = array(
+                        'id' => $artwork_description->artwork_id,
+                        '$artwork_description' => $artwork_description->description
+                    );
+                }
+
+                break;
+
             case 'artworks':
                 $artworks = $this->artwork
                     ->whereIn('artist_id', function($query)
@@ -109,7 +122,7 @@ class UrlController extends Controller {
                     })->whereSold(0)->whereHidden(0)->orderBy('id', 'DESC')->get();
 
                 foreach ($artworks as $artwork) {
-                    $return_array[] = array(
+                    $artwork_json = array(
                         'value' => html_entity_decode($artwork->title_short),
                         'title' => $artwork->title,
                         'price' => $artwork->price,
@@ -136,6 +149,22 @@ class UrlController extends Controller {
                         'artist_id' => $artwork->artist_id,
                         'guid' => 'w-' . $artwork->id,
                         'id' => $artwork->id);
+
+                    if (Input::get('params')) {
+                        $params = explode(',', Input::get('params'));
+
+                        if (in_array('desc', $params)) {
+                            $artwork_description = ArtworkDescription::whereArtworkId($artwork->id)->first();
+
+                            if ($artwork_description) {
+                                $artwork_json['artwork_description'] = $artwork_description->description;
+                            } else {
+                                $artwork_json['artwork_description'] = '';
+                            }
+                        }
+                    }
+
+                    $return_array[] = $artwork_json;
                 }
                 break;
 
