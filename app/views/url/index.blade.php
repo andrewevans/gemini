@@ -8,6 +8,7 @@
 
     <ul>
         <li><a href="/api/v1/url/artists">Artists</a></li>
+        <li><a href="/api/v1/url/artists_descriptions">Artists' Descriptions</a></li>
         <li><a href="/api/v1/url/artworks">Artworks</a></li>
         <li><a href="/api/v1/url/catalogues">Catalogues</a></li>
         <li><a href="/api/v1/url/catrefs">Catrefs</a></li>
