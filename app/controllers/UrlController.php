@@ -99,6 +99,56 @@ class UrlController extends Controller {
                 }
                 break;
 
+            case 'artists_descriptions':
+
+                $artists = Artist::all();
+
+                foreach ($artists as $artist) {
+
+                    $args = array(
+                        'category_name'    => $artist->url_slug . '-artist-biography',
+                        'post_type'        => 'page',
+                        'orderby'          => 'post_date',
+                        'order'            => 'DESC',
+                        'post_status'      => 'publish',
+                        'suppress_filters' => true );
+
+                    $biographies = get_posts( $args );
+
+                    $artist->artist_id = $artist->id;
+
+                    $artist_biographies = array();
+
+                    if (sizeof($biographies)) {
+
+                        foreach ($biographies as $key => $biography) {
+                            $artist_biographies[$key]['title'] = $biography->post_title;
+                            $artist_biographies[$key]['content'] = apply_filters('the_content',$biography->post_content);
+
+                            $post_categories = wp_get_post_categories($biography->ID);
+
+                            foreach ($post_categories as $post_category) {
+                                $post_category = get_category($post_category);
+
+                                if ($post_category->slug == $artist->url_slug . '-artist-biography') {
+                                    $post_category->slug = 'artist-biography';
+                                }
+
+                                $artist_biographies[$key]['categories'][] = str_replace('-' . $artist->url_slug . '-artist-biography', '', $post_category->slug);
+                            }
+                        }
+
+                        $artist->biographies = $artist_biographies;
+                    }
+
+                    $return_array[] = array(
+                        'id' => $artist->id,
+                        'biography' => $artist->biographies,
+                    );
+                }
+
+                break;
+
             case 'artworks_descriptions':
 
                 $artworks_descriptions = ArtworkDescription::get();
