@@ -80,6 +80,10 @@ class UrlController extends Controller {
         $return_array = array();
 
         switch ($data) {
+            case 'amazon':
+                $return_array[] = array();
+                break;
+
             case 'artists':
                 $artists = $this->artist->orderBy('last_name', 'asc')->get();
 
