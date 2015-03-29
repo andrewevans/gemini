@@ -454,5 +454,39 @@ class Artist extends Eloquent
         return Tools::artists_previous();
     }
 
+    public static function findByKey($key)
+    {
+        $db = Config::get('app.db_source');
+
+        switch ($db) {
+            case 'gemini':
+                $artist = Artist::whereUrlSlug($key)->first();
+                break;
+
+            case 'calder_masterworksnew':
+                $artist = new Artist;
+                $artist->setConnection('mysql_calder');
+
+                $artist_external = $artist->whereFoldername('picasso')->first();
+                $artist->id = $artist_external->aName;
+                $artist->slug = $artist_external->folderName;
+                $artist->alias = $artist_external->fName . ' ' . $artist_external->lName;
+                $artist->first_name = $artist_external->fName;
+                $artist->last_name = $artist_external->lName;
+                $artist->url_slug = $artist_external->folderName;
+                $artist->genre = $artist_external->genre;
+                $artist->meta_title = $artist_external->metatitle;
+                $artist->meta_description = $artist_external->metadesc;
+                $artist->year_begin = $artist_external->yearBegin;
+                $artist->year_end = $artist_external->yearEnd;
+                break;
+
+            default:
+                break;
+        }
+
+        return $artist;
+    }
+
 
 }

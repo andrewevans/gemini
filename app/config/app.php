@@ -190,4 +190,6 @@ return array(
 
 	),
 
+    'db_source' => 'calder_masterworksnew',
+
 );
