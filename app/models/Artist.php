@@ -467,7 +467,13 @@ class Artist extends Eloquent
                 $artist = new Artist;
                 $artist->setConnection('mysql_calder');
 
-                $artist_external = $artist->whereFoldername('picasso')->first();
+                $mapping = DictionaryKey::select('source_key')
+                    ->whereSource('calder')
+                    ->whereDestination('gemini')
+                    ->whereDestinationKey($key)
+                    ->first();
+
+                $artist_external = $artist->whereFoldername($mapping->source_key)->first();
                 $artist->id = $artist_external->aName;
                 $artist->slug = $artist_external->folderName;
                 $artist->alias = $artist_external->fName . ' ' . $artist_external->lName;
