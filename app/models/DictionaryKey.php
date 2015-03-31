@@ -24,7 +24,7 @@ class DictionaryKey extends Eloquent
      * @param  string $key
      * @return Artist
      */
-    public static function getArtist($source, $key)
+    public static function get_artist($source, $key)
     {
         $artist = new Artist;
         $artist->setConnection('mysql_calder');

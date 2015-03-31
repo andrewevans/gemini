@@ -26,6 +26,7 @@ define('SORT_LOW', 'Price: Lowest first');
 define('SORT_NEW', 'Newest first');
 
 define('DB_CALDER', 'calder_masterworksnew');
+define('DB_GEMINI', 'gemini');
 
 ClassLoader::addDirectories(array(
 

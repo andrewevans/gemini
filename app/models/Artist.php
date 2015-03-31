@@ -454,7 +454,7 @@ class Artist extends Eloquent
         return Tools::artists_previous();
     }
 
-    public static function findByKey($key)
+    public static function find_by_key($key)
     {
         $db = Config::get('app.db_source');
 
@@ -470,7 +470,7 @@ class Artist extends Eloquent
                     ->whereDestinationKey($key)
                     ->first();
 
-                $artist = DictionaryKey::getArtist('calder_masterworksnew', $mapping->source_key);
+                $artist = DictionaryKey::get_artist(DB_CALDER, $mapping->source_key);
                 break;
 
             default:

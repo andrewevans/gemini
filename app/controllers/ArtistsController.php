@@ -110,7 +110,7 @@ class ArtistsController extends \BaseController {
             return View::make('persons.show', ['person' => $person, 'page_title' => $page_title]);
         }
 
-        $artist = Artist::findByKey($data);
+        $artist = Artist::find_by_key($data);
 
         $page_title = $artist->title();
         $artist->artist_bio = $artist->artist_bio()->get();
