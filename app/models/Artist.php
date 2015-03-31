@@ -464,27 +464,13 @@ class Artist extends Eloquent
                 break;
 
             case 'calder_masterworksnew':
-                $artist = new Artist;
-                $artist->setConnection('mysql_calder');
-
                 $mapping = DictionaryKey::select('source_key')
                     ->whereSource('calder')
                     ->whereDestination('gemini')
                     ->whereDestinationKey($key)
                     ->first();
 
-                $artist_external = $artist->whereFoldername($mapping->source_key)->first();
-                $artist->id = $artist_external->aName;
-                $artist->slug = $artist_external->folderName;
-                $artist->alias = $artist_external->fName . ' ' . $artist_external->lName;
-                $artist->first_name = $artist_external->fName;
-                $artist->last_name = $artist_external->lName;
-                $artist->url_slug = $artist_external->folderName;
-                $artist->genre = $artist_external->genre;
-                $artist->meta_title = $artist_external->metatitle;
-                $artist->meta_description = $artist_external->metadesc;
-                $artist->year_begin = $artist_external->yearBegin;
-                $artist->year_end = $artist_external->yearEnd;
+                $artist = DictionaryKey::getArtist('calder_masterworksnew', $mapping->source_key);
                 break;
 
             default:
