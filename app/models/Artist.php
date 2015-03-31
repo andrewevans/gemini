@@ -463,9 +463,9 @@ class Artist extends Eloquent
                 $artist = Artist::whereUrlSlug($key)->first();
                 break;
 
-            case 'calder_masterworksnew':
+            case DB_CALDER:
                 $mapping = DictionaryKey::select('source_key')
-                    ->whereSource('calder')
+                    ->whereSource(DB_CALDER)
                     ->whereDestination('gemini')
                     ->whereDestinationKey($key)
                     ->first();

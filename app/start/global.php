@@ -25,6 +25,8 @@ define('SORT_HIGH', 'Price: Highest first');
 define('SORT_LOW', 'Price: Lowest first');
 define('SORT_NEW', 'Newest first');
 
+define('DB_CALDER', 'calder_masterworksnew');
+
 ClassLoader::addDirectories(array(
 
 	app_path().'/commands',

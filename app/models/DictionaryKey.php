@@ -30,7 +30,7 @@ class DictionaryKey extends Eloquent
         $artist->setConnection('mysql_calder');
 
         switch ($source) {
-            case 'calder_masterworksnew':
+            case DB_CALDER:
                 $artist_external = $artist->whereFoldername($key)->first();
                 $artist->id = $artist_external->aName;
                 $artist->slug = $artist_external->folderName;
