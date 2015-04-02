@@ -75,33 +75,7 @@ class DictionaryKey extends Eloquent
                 $artworks = [];
 
                 foreach ($artworks_external as $artwork_external) {
-                    $artwork = new Artwork;
-                    $artwork->id = $artwork_external->id;
-                    $artwork->artist_id = $artwork_external->aId;
-                    $artwork->catref_id = null;
-                    $artwork->price = $artwork_external->price;
-                    $artwork->title = $artwork_external->title;
-                    $artwork->title_short = $artwork_external->title_short;
-                    $artwork->series = $artwork_external->series;
-                    $artwork->series_short = $artwork_external->series;
-                    $artwork->medium = $artwork_external->medium;
-                    $artwork->medium_short = $artwork_external->medium_short;
-                    $artwork->edition = $artwork_external->edition;
-                    $artwork->edition_short = $artwork_external->edition_short;
-                    $artwork->after = $artwork_external->after;
-                    $artwork->signature = $artwork_external->signature;
-                    $artwork->condition = $artwork_external->external;
-                    $artwork->size_img = $artwork_external->imgsize;
-                    $artwork->size_sheet = $artwork_external->sheetsize;
-                    $artwork->size_framed = $artwork_external->framedsize;
-                    $artwork->tagline = $artwork_external->tagline;
-                    $artwork->reference = null;
-                    $artwork->price_on_req = $artwork_external->priceonrequest;
-                    $artwork->sold = $artwork_external->sold;
-                    $artwork->hidden = $artwork_external->hidden;
-                    $artwork->onhold = $artwork_external->onhold;
-
-                    $artworks[] = $artwork;
+                    $artworks[] = DictionaryKey::get_artwork(DB_CALDER, $artwork_external->id);
                 }
                 break;
 
@@ -110,6 +84,55 @@ class DictionaryKey extends Eloquent
         }
 
         return $artworks;
+    }
+
+    /**
+     * Map a single foreign Artwork key to create destination Artwork property.
+     * (Currently assumes destination is Gemini)
+     *
+     * @param  string $source
+     * @param  int $id
+     * @return Array Artwork
+     */
+    public static function get_artwork($source, $id)
+    {
+        $artwork = new Artwork;
+        $artwork->setConnection('mysql_calder');
+
+        switch ($source) {
+            case DB_CALDER:
+                $artwork_external = $artwork->whereRaw('id = ' . $id)->first();
+                $artwork->id = $artwork_external->id;
+                $artwork->artist_id = $artwork_external->aId;
+                $artwork->catref_id = null;
+                $artwork->price = $artwork_external->price;
+                $artwork->title = $artwork_external->title;
+                $artwork->title_short = $artwork_external->title_short;
+                $artwork->series = $artwork_external->series;
+                $artwork->series_short = $artwork_external->series;
+                $artwork->medium = $artwork_external->medium;
+                $artwork->medium_short = $artwork_external->medium_short;
+                $artwork->edition = $artwork_external->edition;
+                $artwork->edition_short = $artwork_external->edition_short;
+                $artwork->after = $artwork_external->after;
+                $artwork->signature = $artwork_external->signature;
+                $artwork->condition = $artwork_external->external;
+                $artwork->size_img = $artwork_external->imgsize;
+                $artwork->size_sheet = $artwork_external->sheetsize;
+                $artwork->size_framed = $artwork_external->framedsize;
+                $artwork->tagline = $artwork_external->tagline;
+                $artwork->reference = null;
+                $artwork->price_on_req = $artwork_external->priceonrequest;
+                $artwork->sold = $artwork_external->sold;
+                $artwork->hidden = $artwork_external->hidden;
+                $artwork->onhold = $artwork_external->onhold;
+                break;
+
+            default:
+                break;
+        }
+
+        return $artwork;
     }
 }
 

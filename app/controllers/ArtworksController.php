@@ -98,7 +98,7 @@ class ArtworksController extends \BaseController {
         if (is_numeric($artist_url_slug)) $id = $artist_url_slug;
 
 		//
-        $artwork = Artwork::find($id);
+        $artwork = Artwork::find_by_key($id);
 
         if ($artwork->hidden == 1) {
             Session::flash('message', 'You were forwarded here from item #' . $artwork->id . ' because it is currently not available.');
