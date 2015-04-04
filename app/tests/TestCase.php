@@ -1,4 +1,5 @@
 <?php
+require __DIR__.'/../../wordpress/wp-blog-header.php';
 
 class TestCase extends Illuminate\Foundation\Testing\TestCase {
 
