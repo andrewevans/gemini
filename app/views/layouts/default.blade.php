@@ -24,13 +24,11 @@
     <!--<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script> -->
 
     <!-- Custom styles for this template -->
-    {{ HTML::style('vendor/bootstrap/css/bootstrap.min.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
-    {{ HTML::style('/vendor/bootstrap/css/bootstrap-theme.min.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
-    {{ HTML::style('http://fonts.googleapis.com/css?family=Roboto:100|Roboto+Slab:400,300', array('media' => 'screen', 'rel' => 'stylesheet')) }}
-    {{ HTML::style('http://fonts.googleapis.com/css?family=Ovo', array('media' => 'screen', 'rel' => 'stylesheet')) }}
 
     {{ Minify::stylesheet(array(
+    '/vendor/bootstrap/css/bootstrap.css',
     '/vendor/font-awesome-4.1.0/css/font-awesome.min.css',
+    '/vendor/bootstrap/css/bootstrap-theme.css',
     '/css/gemini-global.css',
     '/css/gemini-nav.css',
     '/css/gemini-individuals.css',
@@ -39,6 +37,9 @@
     '/css/gemini-responsive.css',
     '/css/gemini-default.css',
     '/themes/netty/netty-default.css',
+    '/vendor/google-fonts/roboto.css',
+    '/vendor/google-fonts/ovo.css',
+
     ), array('media' => 'screen', 'rel' => 'stylesheet')) }}
 
     @if (Session::get('list') == 'row')
