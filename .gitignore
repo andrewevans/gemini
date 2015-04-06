@@ -38,6 +38,8 @@ www
 /public/.htaccess
 /mail/
 /public/error_log
+/public/css/builds
+/public/js/builds
 
 .ssh/known_hosts
 .gitconfig
