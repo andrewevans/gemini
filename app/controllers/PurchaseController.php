@@ -19,6 +19,9 @@ class PurchaseController extends \BaseController {
         $input = Input::all();
         $route = Route::current()->getName();
 
+        $redirect = Purchase::checkRedirect($route);
+        if ($redirect) return $redirect;
+
         $artwork = Artwork::find($input['artwork_id']);
         $artworks = [];
         $artworks[] = $artwork;
