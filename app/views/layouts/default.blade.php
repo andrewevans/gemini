@@ -11,35 +11,35 @@
 
     <title>{{ $page_title }}</title>
     <!--    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"> -->
-    {{ HTML::style('vendor/bootstrap/css/bootstrap.min.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
-
 
     <!-- Latest compiled and minified CSS -->
     <!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"> -->
 
     <!-- Optional theme -->
     <!-- Bootstrap theme -->
-    {{ HTML::style('vendor/bootstrap/css/bootstrap-theme.min.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
     <!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css"> -->
 
-    {{ HTML::style('vendor/font-awesome-4.1.0/css/font-awesome.min.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
 
     <!-- Latest compiled and minified JavaScript -->
     <!--<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script> -->
 
     <!-- Custom styles for this template -->
-    {{ HTML::style('css/gemini-global.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
-    {{ HTML::style('css/gemini-nav.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
-    {{ HTML::style('css/gemini-individuals.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
-    {{ HTML::style('css/gemini-search.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
-    {{ HTML::style('css/gemini-widgets.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
-    {{ HTML::style('css/gemini-responsive.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
-    {{ HTML::style('css/gemini-default.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
-
-    {{ HTML::style('themes/netty/netty-default.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
+    {{ Minify::stylesheet(array(
+    '/vendor/bootstrap/css/bootstrap.min.css',
+    '/vendor/bootstrap/css/bootstrap-theme.min.css',
+    '/vendor/font-awesome-4.1.0/css/font-awesome.min.css',
+    '/css/gemini-global.css',
+    '/css/gemini-nav.css',
+    '/css/gemini-individuals.css',
+    '/css/gemini-search.css',
+    '/css/gemini-widgets.css',
+    '/css/gemini-responsive.css',
+    '/css/gemini-default.css',
+    '/themes/netty/netty-default.css',
+    ), array('media' => 'screen', 'rel' => 'stylesheet')) }}
 
     @if (Session::get('list') == 'row')
-        {{ HTML::style('css/list-row.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
+        {{ Minify::stylesheet('/css/list-row.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
     @endif
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -275,18 +275,20 @@
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> -->
-{{ HTML::script('js/ckeditor/ckeditor.js?2') }}
-{{ HTML::script('js/jquery-2.1.1.min.js') }}
-{{ HTML::script('vendor/bootstrap/docs.min.js') }}
-{{ HTML::script('vendor/bootstrap/js/bootstrap.min.js') }}
+{{ Minify::javascript(array(
+'/js/ckeditor/ckeditor.js',
+'/js/jquery-2.1.1.min.js',
+'/vendor/bootstrap/docs.min.js',
+'/vendor/bootstrap/js/bootstrap.min.js',
+'/vendor/typeahead.js-master/dist/bloodhound.js',
+'/vendor/typeahead.js-master/dist/typeahead.bundle.js',
+'/vendor/handlebars-v1.3.0.js',
+'/js/gemini-default.js',
+'/js/gemini-default.js',
+'/vendor/zoom-master/jquery.zoom.min.js',
+)) }}
 <!--<link href="/vendor/jquery-ui/css/ui-lightness/jquery-ui-1.10.4.css" rel="stylesheet">-->
 <!--<script src="/vendor/jquery-ui/js/jquery-ui-1.10.4.js"></script>-->
-<script src="/vendor/typeahead.js-master/dist/bloodhound.js"></script>
-<script src="/vendor/typeahead.js-master/dist/typeahead.bundle.js"></script>
-<script src="/vendor/handlebars-v1.3.0.js"></script>
-{{ HTML::script('js/gemini-default.js') }}
-
-<script src="/vendor/zoom-master/jquery.zoom.min.js"></script>
 <script>
     $('.zoom').zoom();
 </script>
