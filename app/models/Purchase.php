@@ -43,4 +43,25 @@ class Purchase extends Eloquent
         return false;
     }
 
+    public static function checkRedirect($routeName)
+    {
+        switch (Config::get('app.db_source')) {
+            case DB_CALDER:
+                switch ($routeName) {
+                    case 'offer.index':
+                        return Redirect::to('http://www.masterworksfineart.com/inventory/best-offer-large.php?i=' . Input::get('artwork_id'), 302);
+                        break;
+
+                    case 'purchase.index':
+                        return Redirect::to('http://www.masterworksfineart.com/inventory/purchase-large.php?i=' . Input::get('artwork_id'), 302);
+                        break;
+                }
+                break;
+
+            default:
+                break;
+        }
+
+        return false;
+    }
 }
