@@ -40,6 +40,7 @@ www
 /public/error_log
 /public/css/builds
 /public/js/builds
+app/config/packages
 
 .ssh/known_hosts
 .gitconfig
