@@ -12,7 +12,9 @@
 <div class="container">
 <div class="intro-header" style="text-align: center; max-width:450px;"> <i class="sprite-h gtitle-deco above"></i>
     <h1>{{ $page_title }}</h1>
+    @if (! Config::get('app.gemini_lite'))
     <p>{{ $artist->meta_description }}</p>
+    @endif
     <div class="read-more"><a href="{{ $artist->url() }}/bio">Read more about {{ $artist->alias }} &thinsp;&raquo;</a></div>
 </div>
 </div>
@@ -24,7 +26,10 @@
     </div>
     <div class="pull-right">
         @include('widgets.filters.sort', array('artist' => $artist))
+
+        @if (! Config::get('app.gemini_lite'))
         @include('widgets.filters.list', array('artist' => $artist))
+        @endif
     </div>
 </div>
 
@@ -36,6 +41,7 @@
     @include('widgets.artists.artist', array('artist' => $artist))
 </div>
 
+@if (! Config::get('app.gemini_lite'))
 <div class="container spacy">
     <h3>Previously Viewed Artists</h3>
     <div class="row">
@@ -45,5 +51,6 @@
         <a href="/artists">Browse All Artists</a>
     </div>
 </div>
+@endif
 
 @stop
