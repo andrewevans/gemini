@@ -19,6 +19,7 @@
     <!-- Bootstrap theme -->
     <!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css"> -->
 
+    {{ HTML::style('vendor/font-awesome-4.1.0/css/font-awesome.min.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
 
     <!-- Latest compiled and minified JavaScript -->
     <!--<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script> -->
@@ -27,7 +28,6 @@
 
     {{ Minify::stylesheet(array(
     '/vendor/bootstrap/css/bootstrap.css',
-    '/vendor/font-awesome-4.1.0/css/font-awesome.min.css',
     '/vendor/bootstrap/css/bootstrap-theme.css',
     '/css/gemini-global.css',
     '/css/gemini-nav.css',
@@ -55,7 +55,7 @@
 
 <body role="document">
 
-<div class="navbar" role="navigation">
+<div class="navbar navbar-default" role="navigation">
     <div class="container size-xs">
         <div class="contact-us-info">
             <span class="phone-number">510-777-9970</span> / <span id="phone_number_800">800-805-7060</span>
@@ -91,8 +91,8 @@
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="dropdown">
-                    <a href="/artists" class="dropdown-toggle active disabled" data-toggle="dropdown">Artists <b class="caret"></b></a>
-                    <div class="dropdown-menu container" style="margin-left:-90px">
+                    <a href="/artists" class="dropdown-toggle" data-toggle="dropdown">Artists <b class="caret"></b></a>
+                    <div class="dropdown-menu container">
                         <div class="col-md-3"><ul class="nav-multi-list featured">
                                 <li class="divider"></li>
                                 <li class="dropdown-header">Featured Artists</li>
@@ -275,24 +275,23 @@
 <div class="container">
         &copy; Masterworks Fine Art Gallery. All rights reserved. <a href="#">Privacy Policy</a>. Our gallery is located in the beautiful Oakland Hills of the <b>San Francisco</b> Bay Area, California, USA.
 </div>
+{{ HTML::script('js/jquery-2.1.1.min.js') }}
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> -->
-{{ Minify::javascript(array(
-'/js/ckeditor/ckeditor.js',
-'/js/jquery-2.1.1.min.js',
-'/vendor/bootstrap/docs.min.js',
-'/vendor/bootstrap/js/bootstrap.min.js',
-'/vendor/typeahead.js-master/dist/bloodhound.js',
-'/vendor/typeahead.js-master/dist/typeahead.bundle.js',
-'/vendor/handlebars-v1.3.0.js',
-'/js/gemini-default.js',
-'/js/gemini-default.js',
-'/vendor/zoom-master/jquery.zoom.min.js',
-)) }}
+{{ HTML::script('js/ckeditor/ckeditor.js?2') }}
+{{ HTML::script('js/jquery-2.1.1.min.js') }}
+{{ HTML::script('vendor/bootstrap/docs.min.js') }}
+{{ HTML::script('vendor/bootstrap/js/bootstrap.min.js') }}
 <!--<link href="/vendor/jquery-ui/css/ui-lightness/jquery-ui-1.10.4.css" rel="stylesheet">-->
 <!--<script src="/vendor/jquery-ui/js/jquery-ui-1.10.4.js"></script>-->
+<script src="/vendor/typeahead.js-master/dist/bloodhound.js"></script>
+<script src="/vendor/typeahead.js-master/dist/typeahead.bundle.js"></script>
+<script src="/vendor/handlebars-v1.3.0.js"></script>
+{{ HTML::script('js/gemini-default.js') }}
+
+<script src="/vendor/zoom-master/jquery.zoom.min.js"></script>
 <script>
     $('.zoom').zoom();
 </script>
