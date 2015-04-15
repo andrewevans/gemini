@@ -77,7 +77,7 @@
         <div class="logo size-xs">
             <a href="{{ Request::root() }}"><img src="/img/masterworks-fine-art.gif" alt="Masterworks Fine Art Gallery"></a>
         </div>
-        <div class="logo-xs"><img src="http://placehold.it/200x50/cccc99/111&text=Masterworks+Fine+Art+Gallery" /></div>
+        <div class="logo-xs"><a href="http://www.masterworksfineart.com"><img src="/img/masterworks-fine-art-logo-small.gif" alt="Masterworks Fine Art Gallery" /></a></div>
 
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
