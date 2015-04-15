@@ -34,11 +34,13 @@
     @endfor
 
     <style type="text/css">
+        @media (min-width: 768px) {
         .eachDetailBig .picContainer {
             height: {{ $container_height + 15 }}px;
             max-height: {{ $container_height + 15 }}px;
         }
         .eachDetailBig .picContainer table {}
+        }
     </style>
 
 
@@ -115,17 +117,21 @@
 
 </div>
 
+@if (! Config::get('app.gemini_lite'))
 <div class="container">
     <h3>Related Artworks</h3>
 
     @include('widgets.artworks.card_sm', array('artworks' => $artworks_related))
 </div>
+@endif
 
+@if (! Config::get('app.gemini_lite'))
 <div class="container">
     <h3>Previously viewed Artworks</h3>
 
     @include('widgets.artworks.card_sm', array('artworks' => $artworks_previous))
 </div>
 
+@endif
 
 @stop
