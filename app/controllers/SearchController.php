@@ -22,6 +22,10 @@ class SearchController extends \BaseController {
 		//
         $q = Str::lower(Input::get('q'));
 
+        if (Config::get('app.legacy_search')) {
+            return Redirect::to('http://www.masterworksfineart.com/search/searchresults.php?theString=' . str_replace(' ', '+', $q), 301);
+        }
+
         if ($q == '') {
             Session::flash('message', 'Redirected from blank search');
             return Redirect::to('/');

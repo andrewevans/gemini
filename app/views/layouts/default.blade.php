@@ -179,8 +179,13 @@
             {{ Form::open(array('method' => 'get', 'url' => 'search', 'class' => '', 'role' => 'search')) }}
             <div class="input-group">
                     {{ Form::label('q', 'Search') }}
+
+                    @if (! Config::get('app.legacy_search'))
                     {{ Form::text('q', null, array('class' => 'typeahead form-control', 'placeholder' => 'Search artists or artworks', 'autocomplete' => 'off')) }}
                     {{ Form::hidden('q_id', null, array('class' => 'q_id', 'id' => 'q_id')) }}
+                    @else
+                    {{ Form::text('q', null, array('class' => 'form-control', 'placeholder' => 'Search artists or artworks', 'autocomplete' => 'off')) }}
+                    @endif
 
                 <div class="input-group-btn">
                     <button class="btn btn-default">
