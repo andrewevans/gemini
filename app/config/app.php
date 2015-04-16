@@ -193,5 +193,6 @@ return array(
 
     'db_source' => 'calder_masterworksnew',
     'gemini_lite' => true,
+    'artworks_zoom' => false,
 
 );
