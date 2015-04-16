@@ -291,10 +291,12 @@
 <script src="/vendor/handlebars-v1.3.0.js"></script>
 {{ HTML::script('js/gemini-default.js') }}
 
+@if (Config::get('app.artworks_zoom'))
 <script src="/vendor/zoom-master/jquery.zoom.min.js"></script>
 <script>
     $('.zoom').zoom();
 </script>
+@endif
 
 <script>
 </script>
