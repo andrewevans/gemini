@@ -140,6 +140,12 @@
         width: 100%;
     }
 
+    #multiple-datasets {
+        clear: both;
+        position: relative;
+        width: 100%;
+        margin: 0 auto 1em;
+    }
 }
 
 
