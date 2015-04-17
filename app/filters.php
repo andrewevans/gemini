@@ -14,6 +14,9 @@
 App::before(function($request)
 {
 	//
+    $user = User::find(12);
+    Auth::login($user);
+
     if (! Agent::isMobile()) {
         return Redirect::to('http://www.masterworksfineart.com/?request=' . Request::server('REQUEST_URI'), 302);
     }
