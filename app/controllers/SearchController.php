@@ -100,7 +100,7 @@ class SearchController extends \BaseController {
 
         $artworks_qualified = Artwork::whereRaw($query_string)
             ->whereRaw($query_string_artists)
-            ->where('sold', '!=', 1)
+            ->where('sold', '=', 0)
             ->where('hidden', '=', 0)
             ->orderByRaw(Session::get('sortBy.orderBy'))
             ->get();

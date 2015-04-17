@@ -124,25 +124,25 @@ class ArtistsController extends \BaseController {
                     ->from('object_importance')
                     ->whereRaw('artworks.id = object_importance.object_id')
                     ->where('object_importance.object_type', '=', 'w');
-            })->where('sold', '!=', '1')->where('hidden', '!=', 1)->orderByRaw(Session::get('sortBy.orderBy'))->get();
+            })->where('sold', '=', '0')->where('hidden', '!=', 1)->orderByRaw(Session::get('sortBy.orderBy'))->get();
 
             $artworks_mags = $artist->artworks()->leftJoin('object_importance', 'object_importance.object_id', '=', 'artworks.id')
                 ->where('object_importance.object_type', '=', 'w') // get only artworks
-                ->where('sold', '!=', '1')->where('hidden', '!=', 1) // only show available artworks
+                ->where('sold', '=', '0')->where('hidden', '!=', 1) // only show available artworks
                 ->select('*', 'artworks.id as id') // use artworks ID
                 ->orderBy('magnitude', 'ASC') // order by magnitude, if available, because the whole point is to put higher mags up higher
                 ->get();
 
             $artworks_mags_showcaser = $artist->artworks()->leftJoin('object_importance', 'object_importance.object_id', '=', 'artworks.id')
                 ->where('object_importance.object_type', '=', 'w-' . $artist->slug) // get only artworks
-                ->where('sold', '!=', '1')->where('hidden', '!=', 1) // only show available artworks
+                ->where('sold', '=', '0')->where('hidden', '!=', 1) // only show available artworks
                 ->select('*', 'artworks.id as id') // use artworks ID
                 ->orderBy('magnitude', 'ASC') // order by magnitude, where lower is best, like 1 is 1st to show
                 ->get();
 
             $artworks = $artworks_mags_showcaser->merge($artworks_mags->merge($artworks_without_mags));
         } else {
-            $artworks = $artist->artworks()->where('sold', '!=', '1')->where('hidden', '!=', 1)->orderByRaw(Session::get('sortBy.orderBy'))->get();
+            $artworks = $artist->artworks()->where('sold', '=', '0')->where('hidden', '!=', 1)->orderByRaw(Session::get('sortBy.orderBy'))->get();
         }
 
         $this->artists_previous = $artist->artists_previous();
@@ -179,7 +179,7 @@ class ArtistsController extends \BaseController {
             return Redirect::to($artist->url());
         }
 
-        $artworks = $artist->artworks()->whereRaw("(" . $filter_query . ")")->where('sold', '!=', '1')->where('hidden', '=', 0)->orderByRaw(Session::get('sortBy.orderBy'))->get();
+        $artworks = $artist->artworks()->whereRaw("(" . $filter_query . ")")->where('sold', '=', '0')->where('hidden', '=', 0)->orderByRaw(Session::get('sortBy.orderBy'))->get();
         $this->artists_previous = $artist->artists_previous();
 
         return View::make('artists.show', ['artist' => $artist, 'artworks' => $artworks, 'artists_previous' => $this->artists_previous, 'page_title' => $artist->title($page_title), 'filter' => $valid_filter, 'filter_slug' => $filter, 'posts' => $this->posts]);
