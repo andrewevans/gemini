@@ -42,6 +42,7 @@ www
 /public/js/builds
 /public/inventory
 app/config/packages
+/public/robots.txt
 
 .ssh/known_hosts
 .gitconfig
