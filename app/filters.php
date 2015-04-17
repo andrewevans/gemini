@@ -14,6 +14,9 @@
 App::before(function($request)
 {
 	//
+    if (! Agent::isMobile()) {
+        return Redirect::to('http://www.masterworksfineart.com/?request=' . Request::server('REQUEST_URI'), 302);
+    }
 });
 
 
