@@ -166,13 +166,21 @@
                         </div>
                     </div>
                 </li>
+                @if (! Config::get('app.gemini_lite'))
                 <li class="dropdown">
                     <a href="/education" class="dropdown-toggle active disabled" data-toggle="dropdown">Art Education <b class="caret"></b></a>
                     @include('widgets.nav', ['parent' => 'education'])
                 </li>
+                @endif
+                @if (Config::get('app.gemini_lite'))
+                <li><a href="http://www.masterworksfineart.com/buying/">Why Choose Us</a></li>
+                <li><a href="http://www.masterworksfineart.com/about/">About</a></li>
+                <li><a href="http://www.masterworksfineart.com/contact/">Contact Us</a></li>
+                @else
                 <li><a href="/buying">Why Choose Us</a></li>
                 <li><a href="/about">About</a></li>
                 <li><a href="/contact">Contact Us</a></li>
+                @endif
             </ul>
         </div><!--/.nav-collapse -->
         <div id="multiple-datasets" class="">
