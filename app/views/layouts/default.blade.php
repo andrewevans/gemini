@@ -353,5 +353,52 @@
                                                            src="http://c.statcounter.com/9912918/0/c128aeee/1/"
                                                            alt="hit counter"></a></div></noscript>
 <!-- End of StatCounter Code for Default Guide -->
+
+<script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-3116235-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+</script>
+
+<!-- Start of StatCounter Code -->
+<script type="text/javascript">
+    sc_project=3759295;
+    sc_invisible=1;
+    sc_partition=40;
+    sc_security="ab715bd5";
+</script>
+
+<script type="text/javascript" src="http://www.statcounter.com/counter/counter_xhtml.js"></script><noscript><div class="statcounter"><a href="http://www.statcounter.com/free_hit_counter.html" target="_blank"><img class="statcounter" src="http://c41.statcounter.com/3759295/0/ab715bd5/1/" alt="site hit counter" ></a></div></noscript>
+<!-- End of StatCounter Code -->
+
+
+<!-- Google Code for Remarketing Tag -->
+<script type="text/javascript">
+    var google_tag_params = {
+    };
+</script>
+<script type="text/javascript">
+    /* <![CDATA[ */
+    var google_conversion_id = 1072257179;
+    var google_custom_params = window.google_tag_params;
+    var google_remarketing_only = true;
+    /* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+    <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1072257179/?value=0&amp;guid=ON&amp;script=0"/>
+    </div>
+</noscript>
+
 </body>
 </html>
