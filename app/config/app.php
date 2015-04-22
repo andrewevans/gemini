@@ -193,6 +193,8 @@ return array(
 
 	),
 
+    'root_mobile' => 'm.andrew.com',
+    'root_desktop' => 'gemini.andrew.com',
     'db_source' => 'calder_masterworksnew',
     'gemini_lite' => true,
     'artworks_zoom' => false,
