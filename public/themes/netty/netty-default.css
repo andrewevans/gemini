@@ -274,4 +274,12 @@ footer {
     span.artist-alias a {
         font-weight: bold;
     }
+
+    span.artwork-after {
+        font-style: italic;
+    }
+
+    span.artwork-tagline {
+        font-style: italic;
+    }
 }

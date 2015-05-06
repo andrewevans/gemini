@@ -17,6 +17,12 @@ class ContactController extends \BaseController {
 	public function index()
 	{
 		//
+        $route = Route::current()->getName();
+
+        // @TODO: Create service for all objects to checkRedirect
+        $redirect = Purchase::checkRedirect($route);
+        if ($redirect) return $redirect;
+
         return View::make('contact.index');
     }
 
