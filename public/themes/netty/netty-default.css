@@ -218,5 +218,34 @@ footer {
         height: inherit;
     }
 
+    .container h2,
+    .container h3 {
+        margin: 0;
+        font-size: 14px;
+        text-align: center;
+    }
+
+    .card a.card-image {
+        display: block;
+        height: inherit;
+        min-height: inherit;
+        text-align: center;
+    }
+
+    .container.spacy {
+        padding: 1em 0;
+    }
+
+    .collapse .navbar-nav {
+        margin-left: inherit;
+    }
+
+    .dropdown-menu .divider {
+        margin: 0;
+    }
+
+    .navbar-collapse {
+        max-height: none;
+    }
 
 }
