@@ -112,3 +112,7 @@ cd ~/scripts/ && sudo ./calder_db_backup.sh && sudo ./gemini_db_backup.sh && sud
     @if (Session::get('list') == 'row')
         {{ HTML::style('css/list-row.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
     @endif
+
+get rid of artworks field 'framing'?
+
+currency converter needed
