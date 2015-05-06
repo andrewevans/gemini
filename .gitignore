@@ -43,6 +43,7 @@ www
 /public/inventory
 app/config/packages
 /public/robots.txt
+app/config/remote.php
 
 .ssh/known_hosts
 .gitconfig
