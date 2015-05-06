@@ -94,3 +94,7 @@ get on in-depth articles https://support.google.com/webmasters/answer/3280182?hl
 articles need authorship info!!!!
 
 when there are only two pieces, the featured card looks funny
+
+find a place to store the db backup commands:
+cd ~/scripts/ && sudo ./calder_db_backup.sh && sudo ./gemini_db_backup.sh && sudo ./gemini_db_import.sh
+
