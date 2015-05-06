@@ -3,11 +3,13 @@
 
 @section('content')
 
+@if (! Config::get('app.gemini_lite'))
 <div class="container" style="margin-top: 3em">
     <div class="row">
         @include('widgets.splashes_netty')
     </div>
 </div>
+@endif
 
 <div class="container">
 <div class="intro-header" style="text-align: center; max-width:450px;"> <i class="sprite-h gtitle-deco above"></i>
