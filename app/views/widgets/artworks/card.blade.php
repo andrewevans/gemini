@@ -25,7 +25,7 @@
                     </a>
                     <figcaption>
                         <a href="{{ $artwork->url() }}"><i>{{ substr(strip_tags($artwork->title_short()), 0, 65) }}</i></a><br />
-                        <a href="{{ $artwork->url() }}">{{ substr(strip_tags($artwork->artist->alias), 0, 65) }}</a><br />
+                        <span class="artist-alias"><a href="{{ $artwork->url() }}">{{ substr(strip_tags($artwork->artist->alias), 0, 65) }}</a></span><br />
                         <a href="{{ $artwork->url() }}">{{ substr(strip_tags($artwork->medium_short), 0, 65) }}</a><br />
                         ${{ number_format($artwork->price) }}
                     </figcaption>
