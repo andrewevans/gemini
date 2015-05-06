@@ -225,6 +225,15 @@ footer {
         text-align: center;
     }
 
+    .container .paper h2,
+    .container .paper h3 {
+        margin: 15px 0;
+    }
+
+    .card p, .paper p {
+        font-size: 15px;
+    }
+
     .card a.card-image {
         display: block;
         height: inherit;
@@ -248,4 +257,21 @@ footer {
         max-height: none;
     }
 
+    h1, .h1 {
+        font-size: 18px;
+    }
+
+    .intro-header {
+        padding: 0;
+    }
+
+    .dropdown-menu {
+        position: absolute;
+        right: 0;
+        left: inherit;
+    }
+
+    span.artist-alias a {
+        font-weight: bold;
+    }
 }
