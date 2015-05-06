@@ -44,7 +44,7 @@ www
 app/config/packages
 /public/robots.txt
 app/config/remote.php
-
+scripts/
 .ssh/known_hosts
 .gitconfig
 public/img/favicon.ico
