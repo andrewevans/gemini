@@ -106,7 +106,7 @@
                                 <li><a href="/artists/claude-monet">Claude Monet</a></li>
                                 <li><a href="/artists/pablo-picasso">Pablo Picasso</a></li>
                                 <li><a href="/artists/pablo-picasso/ceramics">Picasso Ceramics</a></li>
-                                <li><a href="/artists/rembrandt">Rembramdt</a></li>
+                                <li><a href="/artists/rembrandt">Rembrandt</a></li>
                                 <li><a href="/artists/pierre-auguste-renoir">Renoir</a></li>
                                 <li><a href="/artists/andy-warhol">Andy Warhol</a></li>
                                 <li><a href="/artists/victor-vasarely">Victor Vasarely</a></li>
