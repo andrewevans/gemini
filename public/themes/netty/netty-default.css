@@ -282,4 +282,13 @@ footer {
     span.artwork-tagline {
         font-style: italic;
     }
+
+    .artists .card a.card-image {
+        display: none;
+    }
+
+    .card figcaption {
+        height: inherit;
+        margin-top: 0;
+    }
 }
