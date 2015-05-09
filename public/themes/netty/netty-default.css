@@ -291,4 +291,8 @@ footer {
         height: inherit;
         margin-top: 0;
     }
+
+    .dropdown.open h3.featured, .dropdown.open h3.featured a, .dropdown.open ul.featured>li>a {
+        font-size: 1.5em;
+    }
 }
