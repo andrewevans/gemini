@@ -26,6 +26,8 @@ define('SORT_LOW', 'Price: Lowest first');
 define('SORT_NEW', 'Newest first');
 define('DB_CALDER', 'calder_masterworksnew');
 define('DB_GEMINI', 'gemini');
+define('HOST_PROD', 'masterworksfineart.com');
+define('HOST_LOCAL', 'andrew.com');
 
 ClassLoader::addDirectories(array(
 

@@ -6,7 +6,8 @@
 	"require": {
 		"laravel/framework": "4.1.*",
         "intervention/image": "1.*",
-        "constantcontact/constantcontact": "1.0.*"
+        "constantcontact/constantcontact": "1.0.*",
+		"jenssegers/agent": "~2.1"
 	},
 	"autoload": {
 		"classmap": [
@@ -37,6 +38,7 @@
 	},
 	"minimum-stability": "stable",
 	"require-dev": {
-		"fzaninotto/faker": "1.3"
+		"fzaninotto/faker": "1.3",
+        "ceesvanegmond/minify": "2.0.*"
 	}
 }

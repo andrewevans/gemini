@@ -16,6 +16,10 @@ class StaticController extends \BaseController {
 	 */
 	public function show()
     {
+        // @TODO: Create service for all objects to checkRedirect
+        $redirect = Purchase::checkRedirect(Request::server('REQUEST_URI'));
+        if ($redirect) return $redirect;
+
         $post = get_page_by_path(Request::server('REQUEST_URI'));
 
         if ($post == null) App::abort(404);

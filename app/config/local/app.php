@@ -14,5 +14,7 @@ return array(
 	*/
 
 	'debug' => true,
+    'root_mobile' => 'm.andrew.com',
+    'root_desktop' => 'gemini.andrew.com',
 
 );

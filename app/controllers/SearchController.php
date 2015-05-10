@@ -22,6 +22,10 @@ class SearchController extends \BaseController {
 		//
         $q = Str::lower(Input::get('q'));
 
+        if (Config::get('app.legacy_search')) {
+            return Redirect::to('http://www.masterworksfineart.com/search/searchresults.php?theString=' . str_replace(' ', '+', $q), 301);
+        }
+
         if ($q == '') {
             Session::flash('message', 'Redirected from blank search');
             return Redirect::to('/');
@@ -96,7 +100,7 @@ class SearchController extends \BaseController {
 
         $artworks_qualified = Artwork::whereRaw($query_string)
             ->whereRaw($query_string_artists)
-            ->where('sold', '!=', 1)
+            ->where('sold', '=', 0)
             ->where('hidden', '=', 0)
             ->orderByRaw(Session::get('sortBy.orderBy'))
             ->get();

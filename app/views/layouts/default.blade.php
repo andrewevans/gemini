@@ -11,15 +11,12 @@
 
     <title>{{ $page_title }}</title>
     <!--    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"> -->
-    {{ HTML::style('vendor/bootstrap/css/bootstrap.min.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
-
 
     <!-- Latest compiled and minified CSS -->
     <!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"> -->
 
     <!-- Optional theme -->
     <!-- Bootstrap theme -->
-    {{ HTML::style('vendor/bootstrap/css/bootstrap-theme.min.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
     <!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css"> -->
 
     {{ HTML::style('vendor/font-awesome-4.1.0/css/font-awesome.min.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
@@ -28,18 +25,25 @@
     <!--<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script> -->
 
     <!-- Custom styles for this template -->
-    {{ HTML::style('css/gemini-global.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
-    {{ HTML::style('css/gemini-nav.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
-    {{ HTML::style('css/gemini-individuals.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
-    {{ HTML::style('css/gemini-search.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
-    {{ HTML::style('css/gemini-widgets.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
-    {{ HTML::style('css/gemini-responsive.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
-    {{ HTML::style('css/gemini-default.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
 
-    {{ HTML::style('themes/netty/netty-default.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
+    {{ Minify::stylesheet(array(
+    '/vendor/bootstrap/css/bootstrap.css',
+    '/vendor/bootstrap/css/bootstrap-theme.css',
+    '/css/gemini-global.css',
+    '/css/gemini-nav.css',
+    '/css/gemini-individuals.css',
+    '/css/gemini-search.css',
+    '/css/gemini-widgets.css',
+    '/css/gemini-responsive.css',
+    '/css/gemini-default.css',
+    '/themes/netty/netty-default.css',
+    '/vendor/google-fonts/roboto.css',
+    '/vendor/google-fonts/ovo.css',
+
+    ), array('media' => 'screen', 'rel' => 'stylesheet')) }}
 
     @if (Session::get('list') == 'row')
-        {{ HTML::style('css/list-row.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
+        {{ Minify::stylesheet('/css/list-row.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
     @endif
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -51,7 +55,7 @@
 
 <body role="document">
 
-<div class="navbar" role="navigation">
+<div class="navbar navbar-default" role="navigation">
     <div class="container size-xs">
         <div class="contact-us-info">
             <span class="phone-number">510-777-9970</span> / <span id="phone_number_800">800-805-7060</span>
@@ -73,7 +77,7 @@
         <div class="logo size-xs">
             <a href="{{ Request::root() }}"><img src="/img/masterworks-fine-art.gif" alt="Masterworks Fine Art Gallery"></a>
         </div>
-        <div class="logo-xs"><img src="http://placehold.it/200x50/cccc99/111&text=Masterworks+Fine+Art+Gallery" /></div>
+        <div class="logo-xs"><a href="{{ Request::root() }}"><img src="/img/masterworks-fine-art-logo-small.gif" alt="Masterworks Fine Art Gallery" /></a></div>
 
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -87,8 +91,8 @@
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="dropdown">
-                    <a href="/artists" class="dropdown-toggle active disabled" data-toggle="dropdown">Artists <b class="caret"></b></a>
-                    <div class="dropdown-menu container" style="margin-left:-90px">
+                    <a href="/artists" class="dropdown-toggle" data-toggle="dropdown">Artists <b class="caret"></b></a>
+                    <div class="dropdown-menu container">
                         <div class="col-md-3"><ul class="nav-multi-list featured">
                                 <li class="divider"></li>
                                 <li class="dropdown-header">Featured Artists</li>
@@ -102,7 +106,7 @@
                                 <li><a href="/artists/claude-monet">Claude Monet</a></li>
                                 <li><a href="/artists/pablo-picasso">Pablo Picasso</a></li>
                                 <li><a href="/artists/pablo-picasso/ceramics">Picasso Ceramics</a></li>
-                                <li><a href="/artists/rembrandt">Rembramdt</a></li>
+                                <li><a href="/artists/rembrandt">Rembrandt</a></li>
                                 <li><a href="/artists/pierre-auguste-renoir">Renoir</a></li>
                                 <li><a href="/artists/andy-warhol">Andy Warhol</a></li>
                                 <li><a href="/artists/victor-vasarely">Victor Vasarely</a></li>
@@ -162,10 +166,12 @@
                         </div>
                     </div>
                 </li>
+                @if (! Config::get('app.gemini_lite'))
                 <li class="dropdown">
                     <a href="/education" class="dropdown-toggle active disabled" data-toggle="dropdown">Art Education <b class="caret"></b></a>
                     @include('widgets.nav', ['parent' => 'education'])
                 </li>
+                @endif
                 <li><a href="/buying">Why Choose Us</a></li>
                 <li><a href="/about">About</a></li>
                 <li><a href="/contact">Contact Us</a></li>
@@ -175,8 +181,13 @@
             {{ Form::open(array('method' => 'get', 'url' => 'search', 'class' => '', 'role' => 'search')) }}
             <div class="input-group">
                     {{ Form::label('q', 'Search') }}
+
+                    @if (! Config::get('app.legacy_search'))
                     {{ Form::text('q', null, array('class' => 'typeahead form-control', 'placeholder' => 'Search artists or artworks', 'autocomplete' => 'off')) }}
                     {{ Form::hidden('q_id', null, array('class' => 'q_id', 'id' => 'q_id')) }}
+                    @else
+                    {{ Form::text('q', null, array('class' => 'form-control', 'placeholder' => 'Search artists or artworks', 'autocomplete' => 'off')) }}
+                    @endif
 
                 <div class="input-group-btn">
                     <button class="btn btn-default">
@@ -271,6 +282,7 @@
 <div class="container">
         &copy; Masterworks Fine Art Gallery. All rights reserved. <a href="#">Privacy Policy</a>. Our gallery is located in the beautiful Oakland Hills of the <b>San Francisco</b> Bay Area, California, USA.
 </div>
+{{ HTML::script('js/jquery-2.1.1.min.js') }}
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
@@ -286,10 +298,12 @@
 <script src="/vendor/handlebars-v1.3.0.js"></script>
 {{ HTML::script('js/gemini-default.js') }}
 
+@if (Config::get('app.artworks_zoom'))
 <script src="/vendor/zoom-master/jquery.zoom.min.js"></script>
 <script>
     $('.zoom').zoom();
 </script>
+@endif
 
 <script>
 </script>
@@ -333,5 +347,52 @@
                                                            src="http://c.statcounter.com/9912918/0/c128aeee/1/"
                                                            alt="hit counter"></a></div></noscript>
 <!-- End of StatCounter Code for Default Guide -->
+
+<script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-3116235-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+</script>
+
+<!-- Start of StatCounter Code -->
+<script type="text/javascript">
+    sc_project=3759295;
+    sc_invisible=1;
+    sc_partition=40;
+    sc_security="ab715bd5";
+</script>
+
+<script type="text/javascript" src="http://www.statcounter.com/counter/counter_xhtml.js"></script><noscript><div class="statcounter"><a href="http://www.statcounter.com/free_hit_counter.html" target="_blank"><img class="statcounter" src="http://c41.statcounter.com/3759295/0/ab715bd5/1/" alt="site hit counter" ></a></div></noscript>
+<!-- End of StatCounter Code -->
+
+
+<!-- Google Code for Remarketing Tag -->
+<script type="text/javascript">
+    var google_tag_params = {
+    };
+</script>
+<script type="text/javascript">
+    /* <![CDATA[ */
+    var google_conversion_id = 1072257179;
+    var google_custom_params = window.google_tag_params;
+    var google_remarketing_only = true;
+    /* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+    <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1072257179/?value=0&amp;guid=ON&amp;script=0"/>
+    </div>
+</noscript>
+
 </body>
 </html>

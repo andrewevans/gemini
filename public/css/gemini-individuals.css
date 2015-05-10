@@ -44,7 +44,6 @@
 .card p,
 .card a {
     text-align: left;
-    word-break:
 }
 
 .card a.card-image {
@@ -93,6 +92,12 @@ ul.featured>li>a {
     font-weight: bold;
 }
 
+.dropdown.open h3.featured,
+.dropdown.open h3.featured a,
+.dropdown.open ul.featured>li>a {
+    font-size: 1em;
+    font-weight: bold;
+}
 /* Paper */
 .paper {
     border: 1px solid #ddd;

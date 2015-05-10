@@ -120,6 +120,8 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
         'Intervention\Image\ImageServiceProvider',
+        'CeesVanEgmond\Minify\MinifyServiceProvider',
+        'Jenssegers\Agent\AgentServiceProvider',
 
 	),
 
@@ -187,9 +189,15 @@ return array(
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
         'Image'           => 'Intervention\Image\Facades\Image',
+        'Agent' => 'Jenssegers\Agent\Facades\Agent',
 
 	),
 
+    'root_mobile' => 'm.masterworksfineart.com',
+    'root_desktop' => 'www.masterworksfineart.com',
     'db_source' => 'calder_masterworksnew',
+    'gemini_lite' => true,
+    'artworks_zoom' => false,
+    'legacy_search' => true,
 
 );

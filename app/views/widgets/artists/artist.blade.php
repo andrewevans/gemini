@@ -5,6 +5,7 @@
             @include('widgets.artists.bio', array('artist' => $artist, 'var' => 'mydata'))
         </div>
     </div>
+    @if (! Config::get('app.gemini_lite'))
     <div class="col-md-6">
         <div class="paper">
             @include('widgets.artists.pages', array('artist' => $artist, 'var' => 'mydata'))
@@ -20,5 +21,6 @@
             @include('widgets.artists.catalogues', array('artist' => $artist, 'var' => 'mydata'))
         </div>
     </div>
+    @endif
 
 </div>

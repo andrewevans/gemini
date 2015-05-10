@@ -3,7 +3,12 @@
 .navbar {
     margin-bottom: 0;
     border-bottom: 2px solid #e7e7c6;
+    background: transparent;
+}
 
+.navbar-default {
+    background: none;
+    background-image: none;
 }
 
 /* allows search to be next to nav */
@@ -63,10 +68,19 @@
     text-decoration: none;
 }
 
+.dropdown-menu .container {
+    margin-left: -90px;
+}
+
+.dropdown.open h3.featured, h3.featured a, ul.featured>li>a {
+    font-size: 1em;
+}
+
 .collapse .navbar-nav {
     margin-left: 100px;
 }
 
+.navbar-default .navbar-nav > li > a,
 .navbar-nav>li>a {
     color: #111;
     text-transform: uppercase;

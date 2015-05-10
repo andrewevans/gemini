@@ -14,6 +14,51 @@
 App::before(function($request)
 {
 	//
+    $user = User::find(12);
+    Auth::login($user);
+
+    // omit api calls and non-standard *.php pages
+    // @TODO: api calls should always be desktop or special subdomain
+    if (strpos(Request::server('REQUEST_URI'), '/api') !== 0
+        && strpos(Request::server('REQUEST_URI'), '.php') === false) {
+
+        // desktop but trying m., go to desktop
+        if (! Agent::isMobile() && strpos(Request::root(),
+                Config::get('app.root_mobile')) !== false) {
+            return Redirect::to('//' . Config::get('app.root_desktop') .
+                '/?redir=m2d&request=' . Request::server('REQUEST_URI'), 302);
+        }
+
+        // mobile www, go to m.
+        if (Agent::isMobile() && strpos(Request::root(),
+                Config::get('app.root_desktop')) !== false) {
+            return Redirect::to('//' . Config::get('app.root_mobile') .
+                '/?redir=d2m&request=' . Request::server('REQUEST_URI'), 302);
+        }
+
+        // handle redir requests involving /inventory
+        if (strpos(Input::get('request'), '/inventory/') === 0) {
+
+            // Attempt #1) get ID of artwork
+            // @TODO: should use regex for followed by integer
+            if (strpos(Input::get('request'), '/id/') !== false) {
+                return Redirect::to(str_replace('/inventory/',
+                    '/artists/',
+                    Input::get('request')), 302);
+            }
+
+            // Attempt #2) get artist slug
+            $artist_slug = str_replace('/inventory/', '', Input::get('request'));
+            $artist_slug = explode('/', $artist_slug, 2);
+            if (! isset($artist_slug[1])) {
+                $artist_slug[1] = '';
+            }
+
+            $artist = Artist::whereSlug($artist_slug[0])->first();
+            return Redirect::to('/artists/' . $artist->url_slug . '/' .
+                $artist_slug[1], 302);
+        }
+    }
 });
 
 

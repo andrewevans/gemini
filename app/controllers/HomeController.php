@@ -19,7 +19,7 @@ class HomeController extends BaseController {
         {
             $artworks_mags_showcaser = Artwork::leftJoin('object_importance', 'object_importance.object_id', '=', 'artworks.id')
                 ->where('object_importance.object_type', '=', 'w-home') // get only artworks for homepage
-                ->where('sold', '!=', '1')->where('hidden', '!=', 1) // only show available artworks
+                ->where('sold', '=', '0')->where('hidden', '!=', 1) // only show available artworks
                 ->select('*', 'artworks.id as id') // use artworks ID
                 ->orderBy('magnitude', 'ASC') // order by magnitude, where lower is best, like 1 is 1st to show
                 ->get();
