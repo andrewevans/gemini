@@ -49,11 +49,21 @@
     <table class="table text-left">
         <tbody>
         <tr>
-            <th>Artist</th><td> <b><a href="{{ $artwork->artist->url() }}">{{ $artwork->artist->first_name }} {{ $artwork->artist->last_name }}</a></b></td>
+            <th>Artist</th><td>
+                <b><a href="{{ $artwork->artist->url() }}">{{ $artwork->artist->first_name }} {{ $artwork->artist->last_name }}</a></b>
+                @if ($artwork->after != '')
+                    <span class="artwork-after">({{ $artwork->after }})</span>
+                @endif
+        </td>
         </tr>
         <tr>
             <th>Title</th><td> {{ $artwork->title }}</td>
         </tr>
+        @if ($artwork->reference != '')
+        <tr>
+            <th>Reference</th><td> {{ $artwork->reference }}</td>
+        </tr>
+        @endif
         @if ($artwork->medium != '')
         <tr>
             <th>Medium</th><td> {{ $artwork->medium }}</td>
@@ -62,6 +72,11 @@
         @if ($artwork->series != '')
         <tr>
             <th>Series</th><td> {{ $artwork->series }}</td>
+        </tr>
+        @endif
+        @if ($artwork->edition != '')
+        <tr>
+            <th>Edition</th><td> {{ $artwork->edition }}</td>
         </tr>
         @endif
         @if ($artwork->signature != '')
@@ -74,18 +89,35 @@
             <th>Condition</th><td> {{ $artwork->condition }}</td>
         </tr>
         @endif
+        @if ($artwork->size_img != ''
+        || $artwork->size_sheet != ''
+        || $artwork->size_framed != '')
         <tr>
-            <th>Gallery Price</th><td>{{ $artwork->price_box() }}</td>
+            <th>Size</th>
+            <td>
+                @if ($artwork->size_img != '')
+                    Image: {{ $artwork->size_img }}.
+                @endif
+                @if ($artwork->size_sheet != '')
+                    Sheet: {{ $artwork->size_sheet }}.
+                @endif
+                @if ($artwork->size_framed != '')
+                    Framed: {{ $artwork->size_framed }}.
+                @endif
+            </td>
+        </tr>
+        @endif
+        <tr>
+            <th>Gallery Price</th>
+            <td>
+                {{ $artwork->price_box() }}
+                @if ($artwork->tagline != '')
+                    <span class="artwork-tagline">{{ $artwork->tagline }}</span>
+                @endif
+            </td>
         </tr>
         </tbody>
     </table>
-<!--
-        <strong>After:</strong> {{ $artwork->after }}<br />
-        <strong>Price on Request:</strong> {{ $artwork->price_on_req }}<br />
-        <strong>Sold:</strong> {{ $artwork->sold }}<br />
-        <strong>On Hold:</strong> {{ $artwork->onhold }}<br />
-        <strong>Hidden:</strong> {{ $artwork->hidden }}<br />
--->
     </div>
 
 </div>

@@ -55,6 +55,10 @@ class Purchase extends Eloquent
                     case 'purchase.index':
                         return Redirect::to('http://www.masterworksfineart.com/inventory/purchase-large.php?i=' . Input::get('artwork_id'), 302);
                         break;
+
+                    case 'contact.index':
+                        return Redirect::to('http://www.masterworksfineart.com/contact/?i=' . Input::get('artwork_id'), 302);
+                        break;
                 }
                 break;
 
