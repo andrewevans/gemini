@@ -45,25 +45,28 @@ class Purchase extends Eloquent
 
     public static function checkRedirect($routeName)
     {
-        switch (Config::get('app.db_source')) {
-            case DB_CALDER:
-                switch ($routeName) {
-                    case 'offer.index':
-                        return Redirect::to('http://www.masterworksfineart.com/inventory/best-offer-large.php?i=' . Input::get('artwork_id'), 302);
-                        break;
+        if (Config::get('app.gemini_lite')) {
+            switch ($routeName) {
+                case 'offer.index':
+                    return Redirect::to('http://www.masterworksfineart.com/inventory/best-offer-large.php?i=' . Input::get('artwork_id'), 302);
+                    break;
 
-                    case 'purchase.index':
-                        return Redirect::to('http://www.masterworksfineart.com/inventory/purchase-large.php?i=' . Input::get('artwork_id'), 302);
-                        break;
+                case 'purchase.index':
+                    return Redirect::to('http://www.masterworksfineart.com/inventory/purchase-large.php?i=' . Input::get('artwork_id'), 302);
+                    break;
 
-                    case 'contact.index':
-                        return Redirect::to('http://www.masterworksfineart.com/contact/?i=' . Input::get('artwork_id'), 302);
-                        break;
-                }
-                break;
+                case 'contact.index':
+                    return Redirect::to('http://www.masterworksfineart.com/contact/?i=' . Input::get('artwork_id'), 302);
+                    break;
 
-            default:
-                break;
+                case '/buying':
+                    return Redirect::to('http://www.masterworksfineart.com/buying/', 302);
+                    break;
+
+                case '/about':
+                    return Redirect::to('http://www.masterworksfineart.com/about/', 302);
+                    break;
+            }
         }
 
         return false;
