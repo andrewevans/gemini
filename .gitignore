@@ -38,7 +38,13 @@ www
 /public/.htaccess
 /mail/
 /public/error_log
-
+/public/css/builds
+/public/js/builds
+/public/inventory
+app/config/packages
+/public/robots.txt
+app/config/remote.php
+scripts/
 .ssh/known_hosts
 .gitconfig
 public/img/favicon.ico
