@@ -98,3 +98,21 @@ when there are only two pieces, the featured card looks funny
 find a place to store the db backup commands:
 cd ~/scripts/ && sudo ./calder_db_backup.sh && sudo ./gemini_db_backup.sh && sudo ./gemini_db_import.sh
 
+    <!-- Custom styles for this template -->
+    {{ HTML::style('css/gemini-global.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
+    {{ HTML::style('css/gemini-nav.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
+    {{ HTML::style('css/gemini-individuals.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
+    {{ HTML::style('css/gemini-search.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
+    {{ HTML::style('css/gemini-widgets.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
+    {{ HTML::style('css/gemini-responsive.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
+    {{ HTML::style('css/gemini-default.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
+
+    {{ HTML::style('themes/netty/netty-default.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
+
+    @if (Session::get('list') == 'row')
+        {{ HTML::style('css/list-row.css', array('media' => 'screen', 'rel' => 'stylesheet')) }}
+    @endif
+
+get rid of artworks field 'framing'?
+
+currency converter needed
