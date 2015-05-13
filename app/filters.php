@@ -36,27 +36,35 @@ App::before(function($request)
                 '/?redir=d2m&request=' . Request::server('REQUEST_URI'), 302);
         }
 
+        // @TODO: use regexes to decrease LOC
         // handle redir requests involving /inventory
         if (strpos(Input::get('request'), '/inventory/') === 0) {
 
-            // Attempt #1) get ID of artwork
-            // @TODO: should use regex for followed by integer
-            if (strpos(Input::get('request'), '/id/') !== false) {
-                return Redirect::to(str_replace('/inventory/',
-                    '/artists/',
-                    Input::get('request')), 302);
+            $request_uri = explode('/', trim(Input::get('request'), '/'));
+            $request_id_key = array_search('id', $request_uri);
+            $path = '';
+
+            if ($request_id_key) {
+                // like: /inventory/andy-warhol/screenprint/mick-jagger-1975/id/4886
+                $artwork = Artwork::find($request_uri[$request_id_key + 1]);
+                $path = $artwork->url();
+            } else {
+
+                if (sizeof($request_uri) == 2 && is_numeric($request_uri[1])) {
+                    // like: /inventory/5043
+                    $artwork = Artwork::find((int)$request_uri[1]);
+                    $path = ($artwork == null) ? '' : $artwork->url();
+                } else {
+
+                    if (sizeof($request_uri) == 2) {
+                        // like: /inventory/picasso
+                        $artist = Artist::whereSlug($request_uri[1])->first();
+                        $path = ($artist == null) ? '' : $artist->url();
+                    }
+                }
             }
 
-            // Attempt #2) get artist slug
-            $artist_slug = str_replace('/inventory/', '', Input::get('request'));
-            $artist_slug = explode('/', $artist_slug, 2);
-            if (! isset($artist_slug[1])) {
-                $artist_slug[1] = '';
-            }
-
-            $artist = Artist::whereSlug($artist_slug[0])->first();
-            return Redirect::to('/artists/' . $artist->url_slug . '/' .
-                $artist_slug[1], 302);
+            return Redirect::to($path, 302);
         }
     }
 });
