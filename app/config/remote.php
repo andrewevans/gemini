@@ -31,7 +31,7 @@ return array(
 		'production' => array(
 			'host'      => $_ENV['PROD_SERVER_HOST'],
 			'username'  => $_ENV['PROD_SERVER_USERNAME'],
-			'password'  => $_ENV['PROD_SERVER_KEY'],
+			'password'  => $_ENV['PROD_SERVER_PASS'],
 			'key'       => '',
 			'keyphrase' => '',
 			'root'      => $_ENV['PROD_SERVER_ROOT'],
