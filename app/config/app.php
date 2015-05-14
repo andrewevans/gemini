@@ -13,7 +13,7 @@ return array(
 	|
 	*/
 
-	'debug' => true,
+	'debug' => $_ENV['DEBUG'],
 
 	/*
 	|--------------------------------------------------------------------------
@@ -193,8 +193,8 @@ return array(
 
 	),
 
-    'root_mobile' => 'm.masterworksfineart.com',
-    'root_desktop' => 'www.masterworksfineart.com',
+    'root_mobile' => $_ENV['ROOT_MOBILE'],
+    'root_desktop' => $_ENV['ROOT_DESKTOP'],
     'db_source' => 'calder_masterworksnew',
     'gemini_lite' => true,
     'artworks_zoom' => false,

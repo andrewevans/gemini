@@ -1,4 +1,6 @@
 <?php
+define('HOST_PROD', 'masterworksfineart.com');
+define('HOST_LOCAL', 'andrew.com');
 
 /*
 |--------------------------------------------------------------------------
