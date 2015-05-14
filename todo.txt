@@ -116,3 +116,5 @@ cd ~/scripts/ && sudo ./calder_db_backup.sh && sudo ./gemini_db_backup.sh && sud
 get rid of artworks field 'framing'?
 
 currency converter needed
+
+better robots.txt management
