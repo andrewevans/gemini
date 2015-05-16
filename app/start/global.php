@@ -66,8 +66,9 @@ Log::useFiles(storage_path().'/logs/laravel.log');
 | shown, which includes a detailed stack trace during debug.
 |
 */
-App::missing(function($exception)
+App::missing(function()
 {
+    Log::error("**CAPTAIN'S LOG: 404 @ '" . Request::server('REQUEST_URI') . "**");
     return Response::view('errors.missing', array('breadcrumb' => '404 WHOOPS!'), 404);
 });
 
