@@ -56,10 +56,19 @@ App::before(function($request)
                     $path = ($artwork == null) ? '' : $artwork->url();
                 } else {
 
-                    if (sizeof($request_uri) == 2) {
-                        // like: /inventory/picasso
-                        $artist = Artist::whereSlug($request_uri[1])->first();
-                        $path = ($artist == null) ? '' : $artist->url();
+                    switch (sizeof($request_uri)) {
+                        case 2:
+                            // like: /inventory/picasso
+                            $artist = Artist::whereSlug($request_uri[1])->first();
+                            $path = ($artist == null) ? '' : $artist->url();
+                            break;
+
+                        case 3:
+                            // like: /inventory/picasso/ceramics
+                            $artist = Artist::whereSlug($request_uri[1])->first();
+                            $path = ($artist == null) ? '' : $artist->url();
+                            $path .= '/' . $request_uri[2];
+                            break;
                     }
                 }
             }
