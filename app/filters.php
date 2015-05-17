@@ -22,23 +22,26 @@ App::before(function($request)
     if (strpos(Request::server('REQUEST_URI'), '/api') !== 0
         && strpos(Request::server('REQUEST_URI'), '.php') === false) {
 
+        $original_uri = 'request=' . str_replace('?', '&', Request::server('REQUEST_URI'));
+
         // desktop but trying m., go to desktop
         if (! Agent::isMobile() && strpos(Request::root(),
                 Config::get('app.root_mobile')) !== false) {
             return Redirect::to('//' . Config::get('app.root_desktop') .
-                '/?redir=m2d&request=' . Request::server('REQUEST_URI'), 302);
+                '/?redir=m2d&' . $original_uri, 302);
         }
 
         // mobile www, go to m.
         if (Agent::isMobile() && strpos(Request::root(),
                 Config::get('app.root_desktop')) !== false) {
             return Redirect::to('//' . Config::get('app.root_mobile') .
-                '/?redir=d2m&request=' . Request::server('REQUEST_URI'), 302);
+                '/?redir=d2m&' . $original_uri, 302);
         }
 
         // @TODO: use regexes to decrease LOC
         // handle redir requests involving /inventory
-        if (strpos(Input::get('request'), '/inventory/') === 0) {
+        if (! Input::get('completed')
+            && strpos(Input::get('request'), '/inventory/') === 0) {
 
             $request_uri = explode('/', trim(Input::get('request'), '/'));
             $request_id_key = array_search('id', $request_uri);
@@ -73,7 +76,9 @@ App::before(function($request)
                 }
             }
 
-            return Redirect::to($path, 302);
+            return Redirect::to($path
+                . '?completed=1&'
+                . Request::server('QUERY_STRING'), 302);
         }
     }
 });
