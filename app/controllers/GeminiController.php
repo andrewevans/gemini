@@ -238,6 +238,16 @@ class GeminiController extends \BaseController {
 
 
     /**
+     * Gets Amazon Service Status
+     * @return XML
+     */
+    public function amazonGetServiceStatus()
+    {
+        return View::make('gemini.amazonGetServiceStatus');
+    }
+
+
+    /**
 	 * Show the form for creating a new resource.
 	 *
 	 * @return Response

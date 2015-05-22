@@ -73,6 +73,7 @@ Route::group(array('prefix' => 'gemini', 'before' => 'auth.basic'), function()
     Route::resource('artworks', 'ArtworksController');
     Route::get('artworks', ['as' => 'gemini.artworks', 'uses' => 'GeminiController@artworks']);
 
+    Route::get('amazonGetServiceStatus', ['as' => 'gemini.amazonGetServiceStatus', 'uses' => 'GeminiController@amazonGetServiceStatus']);
 
     Route::get('artworks/{artwork_id}/delete_img/{img_num}', function($artwork_id, $img_num) {
 
