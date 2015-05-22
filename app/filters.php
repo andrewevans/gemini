@@ -20,6 +20,7 @@ App::before(function($request)
     // omit api calls and non-standard *.php pages
     // @TODO: api calls should always be desktop or special subdomain
     if (strpos(Request::server('REQUEST_URI'), '/api') !== 0
+        && strpos(Request::server('REQUEST_URI'), '/gemini') !== 0
         && strpos(Request::server('REQUEST_URI'), '.php') === false) {
 
         $original_uri = 'request=' . str_replace('?', '&', Request::server('REQUEST_URI'));
