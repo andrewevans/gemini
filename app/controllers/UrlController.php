@@ -342,6 +342,27 @@ class UrlController extends Controller {
 
                 $return = $response['findItemsByKeywordsResponse'][0]['searchResult'][0]['item'];
                 break;
+
+            case 'shopping':
+                $f_endpoint = 'http://svcs.ebay.com/services/search/FindingService/v1';
+                $responseEncoding = 'JSON';
+                $f_version = '1.4.0';
+
+                $apicall = "$f_endpoint?OPERATION-NAME=findItemsAdvanced"
+                    . "&version=$f_version"
+                    . "&SECURITY-APPNAME=" . $_ENV['EBAY_PRODUCTION_APPID']
+                    . "&RESPONSE-DATA-FORMAT=$responseEncoding"
+                    . "&itemFilter(0).name=Seller"
+                    . "&itemFilter(0).value=" . $_ENV['EBAY_SELLER_ID'];
+
+                $connection = curl_init();
+                curl_setopt($connection, CURLOPT_URL, $apicall);
+                curl_setopt($connection, CURLOPT_RETURNTRANSFER, true);
+                $response = json_decode(curl_exec($connection), true);
+                curl_close($connection);
+
+                $return = $response;
+                break;
         }
 
         return Response::make($return, 200);
