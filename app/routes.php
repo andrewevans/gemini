@@ -53,6 +53,8 @@ Route::group(array('prefix' => 'api/v1'), function()
 {
     Route::resource('url', 'UrlController');
     Route::get('newsletter/{cust_email}/{first_name?}/{last_name?}/{lists?}', ['as' => 'api.newsletter', 'uses' => 'UrlController@newsletter']);
+
+    Route::get('ebay/{type}/{keyword}', ['as' => 'api.ebay', 'uses' => 'UrlController@ebay']);
 });
 
 Route::get('gemini', ['as' => 'gemini.index', 'uses' => 'GeminiController@index'])->before('auth');;

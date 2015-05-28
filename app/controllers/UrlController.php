@@ -312,6 +312,41 @@ class UrlController extends Controller {
 		//
 	}
 
+
+    /*
+     * Search eBay with keywords and return result
+     * @return Response
+     */
+    public function ebay($type = 'search', $keyword = '')
+    {
+        $return = [];
+
+        switch ($type) {
+            case 'search':
+                $api_endpoint = 'http://svcs.ebay.com/services/search/FindingService/'
+                    . 'v1?'
+                    . 'OPERATION-NAME=findItemsByKeywords'
+                    . '&SERVICE-VERSION=1.0.0'
+                    . '&SECURITY-APPNAME=' . $_ENV['EBAY_PRODUCTION_APPID']
+                    . '&RESPONSE-DATA-FORMAT=JSON'
+                    . '&REST-PAYLOAD'
+                    . '&keywords='
+                    . urlencode($keyword)
+                    . '&paginationInput.entriesPerPage=10';
+
+                $connection = curl_init();
+                curl_setopt($connection, CURLOPT_URL, $api_endpoint);
+                curl_setopt($connection, CURLOPT_RETURNTRANSFER, true);
+                $response = json_decode(curl_exec($connection), true);
+                curl_close($connection);
+
+                $return = $response['findItemsByKeywordsResponse'][0]['searchResult'][0]['item'];
+                break;
+        }
+
+        return Response::make($return, 200);
+    }
+
     public function newsletter($cust_email, $first_name = null, $last_name = null, $lists = null)
     {
         if ($first_name == "null") {
