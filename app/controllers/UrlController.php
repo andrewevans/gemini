@@ -7,6 +7,11 @@ use Ctct\Components\Contacts\Contact;
 use Ctct\Components\Contacts\ContactList;
 use Ctct\Components\Contacts\EmailAddress;
 use Ctct\Exceptions\CtctException;
+use DTS\eBaySDK\Constants;
+use DTS\eBaySDK\Finding\Services as FindingServices;
+use DTS\eBaySDK\Finding\Types as FindingTypes;
+use DTS\eBaySDK\Trading\Services as TradingServices;
+use DTS\eBaySDK\Trading\Types as TradingTypes;
 
 define("APIKEY", "g7rbwgf9xzygfhneax9j3j4w");
 define("ACCESS_TOKEN", "99b48825-3ded-4ccc-b416-0d19502f0751");
@@ -362,6 +367,63 @@ class UrlController extends Controller {
                 curl_close($connection);
 
                 $return = $response;
+                break;
+
+            case 'trading':
+                $service = new TradingServices\TradingService(array(
+                    'apiVersion' => $_ENV['EBAYSDK_VERSION'],
+                    'siteId' => Constants\SiteIds::US,
+                ));
+
+                $request = new TradingTypes\GeteBayOfficialTimeRequestType();
+                $request->RequesterCredentials = new TradingTypes\CustomSecurityHeaderType();
+                $request->RequesterCredentials->eBayAuthToken = $_ENV['EBAY_AUTH_TOKEN'];
+
+                $response = $service->geteBayOfficialTime($request);
+                if ($response->Ack !== 'Success') {
+                    if (isset($response->Errors)) {
+                        foreach ($response->Errors as $error) {
+                            $return = ["result" => "Error: " . $error->ShortMessage];
+                        }
+                    }
+                } else {
+                    $return = ["result" => "The official eBay time is:" . $response->Timestamp->format('H:i (\G\M\T) \o\n l jS F Y')];
+                }
+                break;
+
+            case 'finding':
+                $service = new FindingServices\FindingService(array(
+                    'appId' => $_ENV['EBAY_PRODUCTION_APPID'],
+                    'globalId' => Constants\GlobalIds::US
+                ));
+
+                // Create the API request object.
+                $request = new FindingTypes\FindItemsByKeywordsRequest();
+
+                // Assign the keywords.
+                $request->keywords = 'March Chagall lithograph';
+
+                // Ask for the first 25 items.
+                $request->paginationInput = new FindingTypes\PaginationInput();
+                $request->paginationInput->entriesPerPage = 25;
+                $request->paginationInput->pageNumber = 1;
+
+                // Ask for the results to be sorted from high to low price.
+                $request->sortOrder = 'CurrentPriceHighest';
+
+                // Send the request.
+                $response = $service->findItemsByKeywords($request);
+
+                // Output the response from the API.
+                if ($response->ack !== 'Success') {
+                    foreach ($response->errorMessage->error as $error) {
+                        $return = "Error: %s\n" . $error->message;
+                    }
+                } else {
+                    foreach ($response->searchResult->item as $item) {
+                        $return = $item->itemId . ' ' . $item->title . ' ' . $item->sellingStatus->currentPrice->value;
+                    }
+                }
                 break;
         }
 
