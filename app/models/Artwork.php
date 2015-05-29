@@ -69,100 +69,158 @@ class Artwork extends Eloquent
         return $this->url_slug(html_entity_decode($data));
     }
 
+    public function medium_simple($medium = null)
+    {
+        if ($medium == null) {
+            $medium = strtolower($this->mediums());
+        } else {
+            $medium = strtolower($medium);
+        }
+
+        $medium_simple = 'artwork';
+
+        if (preg_match('/aquatint/', $medium)){
+            $medium_simple = 'aquatint';
+        }
+
+        if (preg_match('/linocut|linoleum/', $medium)){
+            $medium_simple = 'linocut';
+        }
+
+        if (preg_match('/etching|engraving/', $medium)){
+            $medium_simple = 'etching';
+        }
+
+        if (preg_match('/drawing/', $medium)){
+            $medium_simple = 'drawing';
+        }
+
+        if (preg_match('/panting/', $medium)){
+            $medium_simple = 'painting';
+        }
+
+        if (preg_match('/woodcut/', $medium)){
+            $medium_simple = 'woodcut';
+        }
+
+        if (preg_match('/tapestry/', $medium)){
+            $medium_simple = 'tapestry';
+        }
+
+        if (preg_match('/screenprint/', $medium)){
+            $medium_simple = 'screenprint';
+        }
+
+        if (preg_match('/sculpture|sculpt/', $medium)){
+            $medium_simple = 'sculpture';
+        }
+
+        if (preg_match('/ceramic|madoura|clay/', $medium)){
+            $medium_simple = 'ceramic';
+        }
+
+        if (preg_match('/lithograph/', $medium)){
+            $medium_simple = 'lithograph';
+        }
+
+        return $medium_simple;
+    }
+
     // mediums() needs serious refactoring and cleanup!
     public function mediums($medium = null)
     {
         if ($medium == null) $medium = $this->medium_short;
+        if ($medium == '') $medium = $this->medium;
 
         $seomediumnone=$medium;
 
         $seomedium = "";
 
-        if(substr_count(strtolower($medium),"unique"))
+        if(strpos(strtolower($medium),"unique") !== false)
             $seomedium = " Unique";
 
-        if(substr_count(strtolower($medium),"acrylic"))
+        if(strpos(strtolower($medium),"acrylic") !== false)
             $seomedium = $seomedium." Acrylic";
 
-        if(substr_count(strtolower($medium),"aluminum"))
+        if(strpos(strtolower($medium),"aluminum") !== false)
             $seomedium = $seomedium." Aluminum";
 
-        if(substr_count(strtolower($medium),"woodcut"))
+        if(strpos(strtolower($medium),"woodcut") !== false)
             $seomedium = $seomedium." Woodcut";
         else
-            if(substr_count(strtolower($medium),"wood") || substr_count(strtolower($medium),"wooden"))
+            if(strpos(strtolower($medium),"wood") !== false || strpos(strtolower($medium),"wooden") !== false)
                 $seomedium = $seomedium." Wood";
 
-        if(substr_count(strtolower($medium),"linocut") || substr_count(strtolower($medium),"linoleum"))
+        if(strpos(strtolower($medium),"linocut") !== false || strpos(strtolower($medium),"linoleum") !== false)
             $seomedium = $seomedium." Linocut / Linoleum Cut";
         else
-            if(substr_count(strtolower($medium),"lithograph"))
+            if(strpos(strtolower($medium),"lithograph") !== false)
                 $seomedium = $seomedium." Lithograph";
 
-        if(substr_count(strtolower($medium),"ceramic") || substr_count(strtolower($medium),"clay"))
+        if(strpos(strtolower($medium),"ceramic") !== false || strpos(strtolower($medium),"clay") !== false)
             $seomedium = $seomedium." Ceramic";
 
-        if(substr_count(strtolower($medium),"etching"))
+        if(strpos(strtolower($medium),"etching") !== false)
             $seomedium = $seomedium." Etching";
 
-        if(substr_count(strtolower($medium),"engraving"))
+        if(strpos(strtolower($medium),"engraving") !== false)
             $seomedium = $seomedium." Engraving";
 
-        if(substr_count(strtolower($medium),"aquatint"))
+        if(strpos(strtolower($medium),"aquatint") !== false)
             $seomedium = $seomedium." Aquatint";
 
-        if(substr_count(strtolower($medium),"carborundum"))
+        if(strpos(strtolower($medium),"carborundum") !== false)
             $seomedium = $seomedium." Carborundum";
 
-        if(substr_count(strtolower($medium),"madoura"))
+        if(strpos(strtolower($medium),"madoura") !== false)
             $seomedium = $seomedium." Madoura Sculpture";
 
-        if(substr_count(strtolower($medium),"sculpture"))
+        if(strpos(strtolower($medium),"sculpture") !== false)
             $seomedium = $seomedium." Sculpture";
 
-        if(substr_count(strtolower($medium),"pastel"))
+        if(strpos(strtolower($medium),"pastel") !== false)
             $seomedium = $seomedium." Pastel";
 
-        if(substr_count(strtolower($medium),"crayon"))
+        if(strpos(strtolower($medium),"crayon") !== false)
             $seomedium = $seomedium." Crayon Drawing";
         else
-            if(substr_count(strtolower($medium),"drawing"))
+            if(strpos(strtolower($medium),"drawing") !== false)
                 $seomedium = $seomedium." Drawing";
 
-        if(substr_count(strtolower($medium),"oil"))
+        if(strpos(strtolower($medium),"oil") !== false)
             $seomedium = $seomedium." Oil Painting";
         else
-            if(substr_count(strtolower($medium),"painting"))
+            if(strpos(strtolower($medium),"painting") !== false)
                 $seomedium = $seomedium." Painting";
 
-        if(substr_count(strtolower($medium),"serigraph"))
+        if(strpos(strtolower($medium),"serigraph") !== false)
             $seomedium = $seomedium." Serigraph";
 
-        if(substr_count(strtolower($medium),"screenprint"))
+        if(strpos(strtolower($medium),"screenprint") !== false)
             $seomedium = $seomedium." Screenprint";
 
-        if(substr_count(strtolower($medium),"tapestry"))
+        if(strpos(strtolower($medium),"tapestry") !== false)
             $seomedium = $seomedium." Hand-woven Tapestry";
 
-        if(substr_count(strtolower($medium),"watercolor"))
+        if(strpos(strtolower($medium),"watercolor") !== false)
             $seomedium = $seomedium." Watercolor";
 
-        if(substr_count(strtolower($medium),"gouache"))
+        if(strpos(strtolower($medium),"gouache") !== false)
             $seomedium = $seomedium." Gouache";
 
-        if(substr_count(strtolower($medium),"silkscreen"))
+        if(strpos(strtolower($medium),"silkscreen") !== false)
             $seomedium = $seomedium." Silkscreen";
 
-        if(substr_count(strtolower($medium),"collotype"))
+        if(strpos(strtolower($medium),"collotype") !== false)
             $seomedium = $seomedium." Collotype";
 
-        if(substr_count(strtolower($medium),"horse"))
+        if(strpos(strtolower($medium),"horse") !== false)
             $seomedium = $seomedium." Lifesize Sculpture";
 
-        if(substr_count(strtolower($medium),"porcelain relief"))
+        if(strpos(strtolower($medium),"porcelain relief") !== false)
             $seomedium = $seomedium." Ceramic Porcelain Relief";
 
-        if(substr_count(strtolower($medium),"canvas"))
+        if(strpos(strtolower($medium),"canvas") !== false)
             $seomedium = $seomedium." on Canvas";
 
         if($seomedium=='')

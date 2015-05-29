@@ -178,6 +178,7 @@ class UrlController extends Controller {
                         'price' => $artwork->price,
                         'medium' => $artwork->medium,
                         'medium_short' => $artwork->medium_short(),
+                        'medium_simple' => urlencode(strtolower(trim($artwork->medium_simple()))),
                         'series' => $artwork->series,
                         'series_short' => $artwork->series_short,
                         'after' => $artwork->after,
