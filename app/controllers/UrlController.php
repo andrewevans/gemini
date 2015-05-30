@@ -371,6 +371,7 @@ class UrlController extends Controller {
 
             case 'trading':
                 $service = new TradingServices\TradingService(array(
+                    'sandbox' => true,
                     'apiVersion' => $_ENV['EBAYSDK_VERSION'],
                     'siteId' => Constants\SiteIds::US,
                 ));
@@ -378,6 +379,7 @@ class UrlController extends Controller {
                 $request = new TradingTypes\GeteBayOfficialTimeRequestType();
                 $request->RequesterCredentials = new TradingTypes\CustomSecurityHeaderType();
                 $request->RequesterCredentials->eBayAuthToken = $_ENV['EBAY_AUTH_TOKEN'];
+                $request->RequesterCredentials->eBayAuthToken = $_ENV['EBAY_AUTH_TOKEN_DEV'];
 
                 $response = $service->geteBayOfficialTime($request);
                 if ($response->Ack !== 'Success') {
