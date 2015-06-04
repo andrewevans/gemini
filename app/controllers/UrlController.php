@@ -572,8 +572,8 @@ class UrlController extends Controller {
 
                 $item->ItemID = $keyword;
 
-                $item->Title = $artwork->title_short();
                 $item->SubTitle = 'Masterworks Fine Art Inc. (510)777-9970/1-800-805-7060';
+                $item->Title = html_entity_decode(Url::getTitleSEO($artwork), ENT_NOQUOTES);
 
                 $item->PictureDetails = new TradingTypes\PictureDetailsType();
                 $item->PictureDetails->GalleryType = TradingEnums\GalleryTypeCodeType::C_GALLERY;

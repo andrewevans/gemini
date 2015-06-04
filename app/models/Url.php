@@ -71,4 +71,27 @@ class Url extends Eloquent
         return $new_list;
     }
 
+
+    /*
+     * Generates an SEO-optimized artwork title under 80 characters
+     */
+    public static function getTitleSEO(Artwork $artwork)
+    {
+        $title = $artwork->artist->inverted_alias(true) . ', ' . $artwork->medium_short() . ', ' . $artwork->title_short();
+
+        if (sizeof($title) >= 80) {
+            $title = $artwork->artist->inverted_alias(true) . ', ' . $artwork->mediums() . ', ' . $artwork->title_short();
+        }
+
+        if (sizeof($title) >= 80) {
+            $title = $artwork->artist->inverted_alias(true) . ', ' . $artwork->title_short();
+        }
+
+        if (sizeof($title) >= 80) {
+            $title = $artwork->title_short();
+        }
+
+        return trim($title);
+    }
+
 }

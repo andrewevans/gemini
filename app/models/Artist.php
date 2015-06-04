@@ -46,7 +46,15 @@ class Artist extends Eloquent
         return '/artists/' . $this->url_slug;
     }
 
-    public function inverted_alias() {
+    public function inverted_alias($raw = false) {
+
+        if ($raw) {
+            if ($this->first_name == '') {
+                return $this->alias;
+            }
+
+            return $this->last_name . ', ' . $this->first_name;
+        }
 
         if ($this->first_name == '') return '<span class="uppercase">' . $this->alias . '</span>';
 
