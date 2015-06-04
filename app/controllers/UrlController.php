@@ -333,8 +333,8 @@ class UrlController extends Controller {
 
             case 'find_item':
                 $service = new FindingServices\FindingService(array(
-                    'sandbox' => true,
-                    'appId' => $_ENV['EBAY_APP_KEY_DEV'],
+                    'sandbox' => false,
+                    'appId' => $_ENV['EBAY_APP_KEY'],
                     'globalId' => Constants\GlobalIds::US
                 ));
 
@@ -369,14 +369,14 @@ class UrlController extends Controller {
 
             case 'time':
                 $service = new TradingServices\TradingService(array(
-                    'sandbox' => true,
+                    'sandbox' => false,
                     'apiVersion' => $_ENV['EBAYSDK_VERSION'],
                     'siteId' => Constants\SiteIds::US,
                 ));
 
                 $request = new TradingTypes\GeteBayOfficialTimeRequestType();
                 $request->RequesterCredentials = new TradingTypes\CustomSecurityHeaderType();
-                $request->RequesterCredentials->eBayAuthToken = $_ENV['EBAY_AUTH_TOKEN_DEV'];
+                $request->RequesterCredentials->eBayAuthToken = $_ENV['EBAY_AUTH_TOKEN'];
 
                 $response = $service->geteBayOfficialTime($request);
                 if ($response->Ack !== 'Success') {
@@ -392,7 +392,7 @@ class UrlController extends Controller {
 
             case 'get_id':
                 $service = new TradingServices\TradingService(array(
-                    'sandbox' => true,
+                    'sandbox' => false,
                     'apiVersion' => $_ENV['EBAYSDK_VERSION'],
                     'siteId' => Constants\SiteIds::US,
                 ));
@@ -432,14 +432,14 @@ class UrlController extends Controller {
 
             case 'add_item':
                 $service = new TradingServices\TradingService(array(
-                    'sandbox' => true,
+                    'sandbox' => false,
                     'apiVersion' => $_ENV['EBAYSDK_VERSION'],
                     'siteId' => Constants\SiteIds::US,
                 ));
 
                 $request = new TradingTypes\AddFixedPriceItemRequestType();
                 $request->RequesterCredentials = new TradingTypes\CustomSecurityHeaderType();
-                $request->RequesterCredentials->eBayAuthToken = $_ENV['EBAY_AUTH_TOKEN_DEV'];
+                $request->RequesterCredentials->eBayAuthToken = "AgAAAA**AQAAAA**aAAAAA**//ZvVQ**nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6wJnY+pCpSLoAudj6x9nY+seQ**2uACAA**AAMAAA**xXX/lmbVsw2chrKA6fsoCs/Y7cZ5FEstdY4GLIdEg4RTa5SLwZTW9+Cm6knTGes41QSfzJ5pE/NOwGo3vjFmXDK0Kgo4SxZUMKI5nplcQbeB0nXzpRNcrJmb7Nm8EcGjmcJbqk7ueidibO8AVAmqVrjxs9DyUD2GvRfDWhs0+f1cP+j2djLUKeZ+tUdnIyVQQ3p06czeVi+zFMDihANm936gi4hMzY+zn6ZhV0Hk486dttqtB7EilJgtIGB7LcRdXhj09CfgQt5AWVwQbCd6l0TOShqAqXbWCjHjl2evmUJyMEIGux2xG88mjVbjtYFThOEhS2edncns2RIOMcReavwrpmiUazKgQRlS/t3YIV17fq3RqHIu67Ows9fV9PcAYkM+/+ks2bqedImOsn+ZxF5YJ28xwRvnJsjiMdYcIYLx5sJQdsoRmSDAYeM9cDOjefrdk3LJ+xIsX3CLNdTkv789GEiKoFY7/XZO1pY+0LUjw/IHKdCJjqq2LgaHZQoYwCUNMNydddcShC36bZwAsR8jZyQ6AGmdwV137oj4MiP7lSfk5QK6w4HbzqJm1TwsVhx9RLT426mMh0mXK+xJRLnfnLiksAOgmn3iGV+PvhUas0/UuvEFVkxjnkmaRbjT7ulRjWoEF9ydUto8uB+TH/6voKWjUEj5w86hcQwi0Fy1lqH7iiCul5z0j5bMhugZdowmHT9+2u/ANs6BFkTsl8uZjuNeypcPeKiTE7XhaQzxk+9zgbs19NA/QTu2BuLP";
 
                 $artwork_id = $keyword;
                 $artwork = Artwork::find($artwork_id);
@@ -549,14 +549,14 @@ class UrlController extends Controller {
                 $artwork = Artwork::find($artwork_data->id);
 
                 $service = new TradingServices\TradingService(array(
-                    'sandbox' => true,
+                    'sandbox' => false,
                     'apiVersion' => $_ENV['EBAYSDK_VERSION'],
                     'siteId' => Constants\SiteIds::US,
                 ));
 
                 $request = new TradingTypes\ReviseItemRequestType();
                 $request->RequesterCredentials = new TradingTypes\CustomSecurityHeaderType();
-                $request->RequesterCredentials->eBayAuthToken = $_ENV['EBAY_AUTH_TOKEN_DEV'];
+                $request->RequesterCredentials->eBayAuthToken = $_ENV['EBAY_AUTH_TOKEN'];
 
                 $item = new TradingTypes\ItemType();
 
