@@ -399,7 +399,7 @@ class UrlController extends Controller {
 
                 $request = new TradingTypes\GetItemRequestType();
                 $request->RequesterCredentials = new TradingTypes\CustomSecurityHeaderType();
-                $request->RequesterCredentials->eBayAuthToken = $_ENV['EBAY_AUTH_TOKEN_DEV'];
+                $request->RequesterCredentials->eBayAuthToken = $_ENV['EBAY_AUTH_TOKEN'];
                 $request->ItemID = $keyword;
                 $request->IncludeItemSpecifics = true;
 
@@ -439,7 +439,7 @@ class UrlController extends Controller {
 
                 $request = new TradingTypes\AddFixedPriceItemRequestType();
                 $request->RequesterCredentials = new TradingTypes\CustomSecurityHeaderType();
-                $request->RequesterCredentials->eBayAuthToken = "AgAAAA**AQAAAA**aAAAAA**//ZvVQ**nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6wJnY+pCpSLoAudj6x9nY+seQ**2uACAA**AAMAAA**xXX/lmbVsw2chrKA6fsoCs/Y7cZ5FEstdY4GLIdEg4RTa5SLwZTW9+Cm6knTGes41QSfzJ5pE/NOwGo3vjFmXDK0Kgo4SxZUMKI5nplcQbeB0nXzpRNcrJmb7Nm8EcGjmcJbqk7ueidibO8AVAmqVrjxs9DyUD2GvRfDWhs0+f1cP+j2djLUKeZ+tUdnIyVQQ3p06czeVi+zFMDihANm936gi4hMzY+zn6ZhV0Hk486dttqtB7EilJgtIGB7LcRdXhj09CfgQt5AWVwQbCd6l0TOShqAqXbWCjHjl2evmUJyMEIGux2xG88mjVbjtYFThOEhS2edncns2RIOMcReavwrpmiUazKgQRlS/t3YIV17fq3RqHIu67Ows9fV9PcAYkM+/+ks2bqedImOsn+ZxF5YJ28xwRvnJsjiMdYcIYLx5sJQdsoRmSDAYeM9cDOjefrdk3LJ+xIsX3CLNdTkv789GEiKoFY7/XZO1pY+0LUjw/IHKdCJjqq2LgaHZQoYwCUNMNydddcShC36bZwAsR8jZyQ6AGmdwV137oj4MiP7lSfk5QK6w4HbzqJm1TwsVhx9RLT426mMh0mXK+xJRLnfnLiksAOgmn3iGV+PvhUas0/UuvEFVkxjnkmaRbjT7ulRjWoEF9ydUto8uB+TH/6voKWjUEj5w86hcQwi0Fy1lqH7iiCul5z0j5bMhugZdowmHT9+2u/ANs6BFkTsl8uZjuNeypcPeKiTE7XhaQzxk+9zgbs19NA/QTu2BuLP";
+                $request->RequesterCredentials->eBayAuthToken = $_ENV['EBAY_AUTH_TOKEN'];
 
                 $artwork_id = $keyword;
                 $artwork = Artwork::find($artwork_id);
@@ -449,79 +449,7 @@ class UrlController extends Controller {
                     return Response::make($return, 200);
                 }
 
-                $ch = curl_init("http://www.masterworksfineart.com/ext_files/ebayTemplate_clean.php?i=" . $artwork_id);
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($ch, CURLOPT_BINARYTRANSFER, true);
-                $content = curl_exec($ch);
-                curl_close($ch);
-
-                $artwork->artwork_description = ArtworkDescription::whereArtworkId($artwork_id)->first();
-                $artwork->price = number_format($artwork->price, 2, '.', '');
-
-                $item = new TradingTypes\ItemType();
-
-                $item->Title = htmlspecialchars($artwork->title_short(), ENT_XML1);
-                $item->SubTitle = htmlspecialchars('Masterworks Fine Art Inc. (510)777-9970/1-800-805-7060');
-                $item->Description = htmlspecialchars($content, ENT_XML1);
-
-                $item->PictureDetails = new TradingTypes\PictureDetailsType();
-                $item->PictureDetails->GalleryType = TradingEnums\GalleryTypeCodeType::C_GALLERY;
-                $img_url = $artwork->img_url();
-                $item->PictureDetails->PictureURL = array($img_url);
-
-                $item->PrimaryCategory = new TradingTypes\CategoryType();
-                $item->PrimaryCategory->CategoryID = '360';
-                $item->DispatchTimeMax = 5;
-
-                $item->ItemSpecifics = new TradingTypes\NameValueListArrayType();
-                $item->ItemSpecifics->NameValueList[] = new TradingTypes\NameValueListType(array(
-                    'Name' => 'Listed By',
-                    'Value' => array('Dealer or Reseller')
-                ));
-
-                $item->ItemSpecifics->NameValueList[] = new TradingTypes\NameValueListType(array(
-                    'Name' => 'Original/Reproduction',
-                    'Value' => array('Original Print')
-                ));
-
-                $item->ItemSpecifics->NameValueList[] = new TradingTypes\NameValueListType(array(
-                    'Name' => 'Signed',
-                    'Value' => array('Signed')
-                ));
-
-                $item->ItemSpecifics->NameValueList[] = new TradingTypes\NameValueListType(array(
-                    'Name' => 'Edition Type',
-                    'Value' => array('Limited Edition')
-                ));
-
-                $item->ItemSpecifics->NameValueList[] = new TradingTypes\NameValueListType(array(
-                    'Name' => 'MFA Item Number',
-                    'Value' => array((string)$artwork->id)
-                ));
-
-                $item->ListingType = TradingEnums\ListingTypeCodeType::C_FIXED_PRICE_ITEM;
-                $item->Quantity = 1;
-                $item->ListingDuration = TradingEnums\ListingDurationCodeType::C_DAYS_10;
-                $item->StartPrice = new TradingTypes\AmountType(array('value' => (double)$artwork->price));
-                $item->Country = 'US';
-                $item->Location = 'Oakland';
-                $item->Currency = 'USD';
-                $item->PaymentMethods[] = 'PayPal';
-                $item->PayPalEmailAddress = 'rob@masterworksfineart.com';
-                $item->DispatchTimeMax = 1;
-                $item->ShipToLocations[] = 'Worldwide';
-                $item->ReturnPolicy = new TradingTypes\ReturnPolicyType();
-                $item->ReturnPolicy->ReturnsAcceptedOption = 'ReturnsAccepted';
-
-                $item->ShippingDetails = new TradingTypes\ShippingDetailsType();
-                $item->ShippingDetails->ShippingType = TradingEnums\ShippingTypeCodeType::C_FLAT;
-
-                $shippingService = new TradingTypes\ShippingServiceOptionsType();
-                $shippingService->ShippingServicePriority = 1;
-                $shippingService->ShippingService = 'UPSGround';
-                $shippingService->ShippingServiceCost = new TradingTypes\AmountType(array('value' => 150.00));
-
-                $item->ShippingDetails->ShippingServiceOptions[] = $shippingService;
+                $item = Url::getEbayItem($artwork);
 
                 $request->Item = $item;
 
@@ -568,70 +496,7 @@ class UrlController extends Controller {
                 $request->RequesterCredentials = new TradingTypes\CustomSecurityHeaderType();
                 $request->RequesterCredentials->eBayAuthToken = $_ENV['EBAY_AUTH_TOKEN'];
 
-                $item = new TradingTypes\ItemType();
-
-                $item->ItemID = $keyword;
-
-                $item->SubTitle = 'Masterworks Fine Art Inc. (510)777-9970/1-800-805-7060';
-                $item->Title = html_entity_decode(Url::getTitleSEO($artwork), ENT_NOQUOTES);
-
-                $item->PictureDetails = new TradingTypes\PictureDetailsType();
-                $item->PictureDetails->GalleryType = TradingEnums\GalleryTypeCodeType::C_GALLERY;
-                $item->PictureDetails->PictureURL = array($artwork->img_url());
-
-                $item->PrimaryCategory = new TradingTypes\CategoryType();
-                $item->PrimaryCategory->CategoryID = '360';
-                $item->DispatchTimeMax = 5;
-
-                $item->ItemSpecifics = new TradingTypes\NameValueListArrayType();
-                $item->ItemSpecifics->NameValueList[] = new TradingTypes\NameValueListType(array(
-                    'Name' => 'Listed By',
-                    'Value' => array('Dealer or Reseller')
-                ));
-
-                $item->ItemSpecifics->NameValueList[] = new TradingTypes\NameValueListType(array(
-                    'Name' => 'Original/Reproduction',
-                    'Value' => array('Original Print')
-                ));
-
-                $item->ItemSpecifics->NameValueList[] = new TradingTypes\NameValueListType(array(
-                    'Name' => 'Signed',
-                    'Value' => array('Signed')
-                ));
-
-                $item->ItemSpecifics->NameValueList[] = new TradingTypes\NameValueListType(array(
-                    'Name' => 'Edition Type',
-                    'Value' => array('Limited Edition')
-                ));
-
-                $item->ItemSpecifics->NameValueList[] = new TradingTypes\NameValueListType(array(
-                    'Name' => 'MFA Item Number',
-                    'Value' => array((string)$artwork->id)
-                ));
-
-                $item->ListingType = TradingEnums\ListingTypeCodeType::C_FIXED_PRICE_ITEM;
-                $item->Quantity = 1;
-                $item->ListingDuration = TradingEnums\ListingDurationCodeType::C_DAYS_10;
-                $item->StartPrice = new TradingTypes\AmountType(array('value' => (double)$artwork->price));
-                $item->Country = 'US';
-                $item->Location = 'Oakland';
-                $item->Currency = 'USD';
-                $item->PaymentMethods[] = 'PayPal';
-                $item->PayPalEmailAddress = 'rob@masterworksfineart.com';
-                $item->DispatchTimeMax = 1;
-                $item->ShipToLocations[] = 'Worldwide';
-                $item->ReturnPolicy = new TradingTypes\ReturnPolicyType();
-                $item->ReturnPolicy->ReturnsAcceptedOption = 'ReturnsAccepted';
-
-                $item->ShippingDetails = new TradingTypes\ShippingDetailsType();
-                $item->ShippingDetails->ShippingType = TradingEnums\ShippingTypeCodeType::C_FLAT;
-
-                $shippingService = new TradingTypes\ShippingServiceOptionsType();
-                $shippingService->ShippingServicePriority = 1;
-                $shippingService->ShippingService = 'UPSGround';
-                $shippingService->ShippingServiceCost = new TradingTypes\AmountType(array('value' => 150.00));
-
-                $item->ShippingDetails->ShippingServiceOptions[] = $shippingService;
+                $item = Url::getEbayItem($artwork, $keyword);
 
                 $request->Item = $item;
 
