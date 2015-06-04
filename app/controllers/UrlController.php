@@ -390,6 +390,36 @@ class UrlController extends Controller {
                 }
                 break;
 
+            case 'get_item_number':
+                $service = new FindingServices\FindingService(array(
+                    'sandbox' => false,
+                    'appId' => $_ENV['EBAY_PRODUCTION_APPID'],
+                    'globalId' => Constants\GlobalIds::US
+                ));
+
+                $request = new FindingTypes\FindItemsIneBayStoresRequest();
+                $request->storeName = "Masterworks Fine Art";
+                $response = $service->findItemsIneBayStores($request);
+
+                $return['itemId'] = null;
+
+                if ($response->ack !== 'Success') {
+                    foreach ($response->errorMessage->error as $error) {
+                        $return = "Error: %s\n" . $error->message;
+                    }
+                } else {
+                    foreach ($response->searchResult->item as $item) {
+                        $requestItemNumber = Request::create('/api/v1/ebay/get_id/' . $item->itemId, 'GET');
+                        $artwork_data = json_decode(Route::dispatch($requestItemNumber)->getContent());
+
+                        if ($artwork_data->id == $keyword) {
+                            $return['itemId'] = $item->itemId;
+                        }
+                    }
+                }
+
+                break;
+
             case 'get_id':
                 $service = new TradingServices\TradingService(array(
                     'sandbox' => false,
@@ -475,11 +505,10 @@ class UrlController extends Controller {
                 break;
 
             case 'revise':
+                $requestItemNumber = Request::create('/api/v1/ebay/get_item_number/' . $keyword, 'GET');
+                $item_number = json_decode(Route::dispatch($requestItemNumber)->getContent());
 
-                $requestItemNumber = Request::create('/api/v1/ebay/get_id/' . $keyword, 'GET');
-                $artwork_data = json_decode(Route::dispatch($requestItemNumber)->getContent());
-
-                $artwork = Artwork::find($artwork_data->id);
+                $artwork = Artwork::find((int)$keyword);
 
                 if ($artwork->sold != 0 || $artwork->hidden != 0) {
                     $return = ['message' => 'Item not available for revision.'];
@@ -492,15 +521,24 @@ class UrlController extends Controller {
                     'siteId' => Constants\SiteIds::US,
                 ));
 
-                $request = new TradingTypes\ReviseItemRequestType();
+                if ($item_number->itemId) {
+                    $request = new TradingTypes\ReviseItemRequestType();
+                } else {
+                    $request = new TradingTypes\AddFixedPriceItemRequestType();
+                }
+
                 $request->RequesterCredentials = new TradingTypes\CustomSecurityHeaderType();
                 $request->RequesterCredentials->eBayAuthToken = $_ENV['EBAY_AUTH_TOKEN'];
 
-                $item = Url::getEbayItem($artwork, $keyword);
+                $item = Url::getEbayItem($artwork, $item_number->itemId);
 
                 $request->Item = $item;
 
-                $response = $service->reviseItem($request);
+                if ($item_number->itemId) {
+                    $response = $service->reviseItem($request);
+                } else {
+                    $response = $service->addFixedPriceItem($request);
+                }
 
                 if (isset($response->Errors)) {
                     foreach ($response->Errors as $error) {
@@ -513,7 +551,7 @@ class UrlController extends Controller {
                 }
 
                 if ($response->Ack !== 'Failure') {
-                    $return[] = sprintf("The item was listed to the eBay Sandbox with the Item number %s\n",
+                    $return[] = sprintf("The item was listed to eBay with the Item number %s\n",
                         $response->ItemID
                     );
                 }

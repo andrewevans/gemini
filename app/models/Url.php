@@ -132,7 +132,10 @@ class Url extends Eloquent
 
         $item->PictureDetails = new TradingTypes\PictureDetailsType();
         $item->PictureDetails->GalleryType = TradingEnums\GalleryTypeCodeType::C_GALLERY;
-        $item->PictureDetails->PictureURL = array($artwork->img_url());
+
+        $img_url = 'http://www.masterworksfineart.com/inventory/' . $artwork->artist->slug . '/original/' . $artwork->artist->slug . $artwork->id . '.jpg';
+
+        $item->PictureDetails->PictureURL = array($img_url);
 
         $item->PrimaryCategory = new TradingTypes\CategoryType();
         $item->PrimaryCategory->CategoryID = '360';
