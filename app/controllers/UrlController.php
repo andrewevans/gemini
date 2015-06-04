@@ -444,6 +444,11 @@ class UrlController extends Controller {
                 $artwork_id = $keyword;
                 $artwork = Artwork::find($artwork_id);
 
+                if ($artwork->sold != 0 || $artwork->hidden != 0) {
+                    $return = ['message' => 'Item not available for sale.'];
+                    return Response::make($return, 200);
+                }
+
                 $ch = curl_init("http://www.masterworksfineart.com/ext_files/ebayTemplate_clean.php?i=" . $artwork_id);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                 curl_setopt($ch, CURLOPT_BINARYTRANSFER, true);
@@ -547,6 +552,11 @@ class UrlController extends Controller {
                 $artwork_data = json_decode(Route::dispatch($requestItemNumber)->getContent());
 
                 $artwork = Artwork::find($artwork_data->id);
+
+                if ($artwork->sold != 0 || $artwork->hidden != 0) {
+                    $return = ['message' => 'Item not available for revision.'];
+                    return Response::make($return, 200);
+                }
 
                 $service = new TradingServices\TradingService(array(
                     'sandbox' => false,
