@@ -13,9 +13,6 @@
 
 App::before(function($request)
 {
-	//
-    $user = User::find(12);
-    Auth::login($user);
 
     // omit api calls and non-standard *.php pages
     // @TODO: api calls should always be desktop or special subdomain
