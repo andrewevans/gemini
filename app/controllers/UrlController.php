@@ -510,8 +510,10 @@ class UrlController extends Controller {
 
                 $artwork = Artwork::find((int)$keyword);
 
-                if ($artwork->sold != 0 || $artwork->hidden != 0) {
+                if ($artwork->sold + $artwork->hidden + $artwork->onhold + $artwork->price_on_req > 0
+                    || $artwork->price < 1000) {
                     $return = ['message' => 'Item not available for revision.'];
+
                     return Response::make($return, 200);
                 }
 
