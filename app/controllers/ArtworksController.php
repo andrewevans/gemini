@@ -10,7 +10,6 @@ class ArtworksController extends \BaseController {
     public function __construct(Artwork $artwork, ArtworkDescription $artwork_description)
     {
         $this->artwork = $artwork;
-        $this->beforeFilter('auth');
         $this->artwork_description = $artwork_description;
     }
 
