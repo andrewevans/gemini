@@ -14,46 +14,41 @@ class HomeController extends BaseController {
 
     public function index()
     {
+        $artworks_mags_showcaser = Artwork::leftJoin('object_importance', 'object_importance.object_id', '=', 'artworks.id')
+            ->where('object_importance.object_type', '=', 'w-home') // get only artworks for homepage
+            ->where('sold', '=', '0')->where('hidden', '!=', 1) // only show available artworks
+            ->select('*', 'artworks.id as id') // use artworks ID
+            ->orderBy('magnitude', 'ASC') // order by magnitude, where lower is best, like 1 is 1st to show
+            ->get();
 
-        if (Auth::check())
-        {
-            $artworks_mags_showcaser = Artwork::leftJoin('object_importance', 'object_importance.object_id', '=', 'artworks.id')
-                ->where('object_importance.object_type', '=', 'w-home') // get only artworks for homepage
-                ->where('sold', '=', '0')->where('hidden', '!=', 1) // only show available artworks
-                ->select('*', 'artworks.id as id') // use artworks ID
-                ->orderBy('magnitude', 'ASC') // order by magnitude, where lower is best, like 1 is 1st to show
-                ->get();
+        $artworks = $this->artwork->where('artist_id', '!=', 0)->whereSold(0)->whereHidden(0)->take(7)->orderBy('id', 'desc')->get();
 
-            $artworks = $this->artwork->where('artist_id', '!=', 0)->whereSold(0)->whereHidden(0)->take(7)->orderBy('id', 'desc')->get();
+        $artworks = $artworks_mags_showcaser->merge($artworks);
 
-            $artworks = $artworks_mags_showcaser->merge($artworks);
-
-            $artists_mags_showcaser = Artist::leftJoin('object_importance', 'object_importance.object_id', '=', 'artists.id')
-                ->where('object_importance.object_type', '=', 'a-home') // get only artworks for homepage
-                ->select('*', 'artists.id as id') // use artworks ID
-                ->orderBy('magnitude', 'ASC') // order by magnitude, where lower is best, like 1 is 1st to show
-                ->get();
+        $artists_mags_showcaser = Artist::leftJoin('object_importance', 'object_importance.object_id', '=', 'artists.id')
+            ->where('object_importance.object_type', '=', 'a-home') // get only artworks for homepage
+            ->select('*', 'artists.id as id') // use artworks ID
+            ->orderBy('magnitude', 'ASC') // order by magnitude, where lower is best, like 1 is 1st to show
+            ->get();
 
 
-            $artists = $this->artist->whereIn('id', array(23, 44))->orderBy('id', 'desc')->get();
+        $artists = $this->artist->whereIn('id', array(23, 44))->orderBy('id', 'desc')->get();
 
-            $artists = $artists_mags_showcaser->merge($artists);
+        $artists = $artists_mags_showcaser->merge($artists);
 
-            $artworks_previous = Tools::artworks_previous();
-            $artists_previous = Tools::artists_previous();
+        $artworks_previous = Tools::artworks_previous();
+        $artists_previous = Tools::artists_previous();
 
-            // The user is logged in...
-            return View::make('home.index')
-                ->with('artworks', $artworks)
-                ->with('artists', $artists)
-                ->with('artists_featured', $artists_mags_showcaser)
-                ->with('artworks_previous', $artworks_previous)
-                ->with('artists_previous', $artists_previous)
-                ->with('pages', $this->pages)
-                ->with('posts', $this->posts)
-                ->with('page_title', "Original Lithographs, Drawings, Etchings, Sculptures, Prints, Masterworks Fine Art Gallery");
-        }
-        return Redirect::to('login');
+        // The user is logged in...
+        return View::make('home.index')
+            ->with('artworks', $artworks)
+            ->with('artists', $artists)
+            ->with('artists_featured', $artists_mags_showcaser)
+            ->with('artworks_previous', $artworks_previous)
+            ->with('artists_previous', $artists_previous)
+            ->with('pages', $this->pages)
+            ->with('posts', $this->posts)
+            ->with('page_title', "Original Lithographs, Drawings, Etchings, Sculptures, Prints, Masterworks Fine Art Gallery");
     }
 
     public function getIndex()
