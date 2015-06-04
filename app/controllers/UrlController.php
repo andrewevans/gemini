@@ -12,6 +12,9 @@ use DTS\eBaySDK\Finding\Services as FindingServices;
 use DTS\eBaySDK\Finding\Types as FindingTypes;
 use DTS\eBaySDK\Trading\Services as TradingServices;
 use DTS\eBaySDK\Trading\Types as TradingTypes;
+use DTS\eBaySDK\Trading\Enums as TradingEnums;
+use \DTS\eBaySDK\Trading;
+use \DTS\eBaySDK\FileTransfer;
 
 define("APIKEY", "g7rbwgf9xzygfhneax9j3j4w");
 define("ACCESS_TOKEN", "99b48825-3ded-4ccc-b416-0d19502f0751");
@@ -327,75 +330,11 @@ class UrlController extends Controller {
         $return = [];
 
         switch ($type) {
-            case 'search':
-                $api_endpoint = 'http://svcs.ebay.com/services/search/FindingService/'
-                    . 'v1?'
-                    . 'OPERATION-NAME=findItemsByKeywords'
-                    . '&SERVICE-VERSION=1.0.0'
-                    . '&SECURITY-APPNAME=' . $_ENV['EBAY_PRODUCTION_APPID']
-                    . '&RESPONSE-DATA-FORMAT=JSON'
-                    . '&REST-PAYLOAD'
-                    . '&keywords='
-                    . urlencode($keyword)
-                    . '&paginationInput.entriesPerPage=10';
 
-                $connection = curl_init();
-                curl_setopt($connection, CURLOPT_URL, $api_endpoint);
-                curl_setopt($connection, CURLOPT_RETURNTRANSFER, true);
-                $response = json_decode(curl_exec($connection), true);
-                curl_close($connection);
-
-                $return = $response['findItemsByKeywordsResponse'][0]['searchResult'][0]['item'];
-                break;
-
-            case 'shopping':
-                $f_endpoint = 'http://svcs.ebay.com/services/search/FindingService/v1';
-                $responseEncoding = 'JSON';
-                $f_version = '1.4.0';
-
-                $apicall = "$f_endpoint?OPERATION-NAME=findItemsAdvanced"
-                    . "&version=$f_version"
-                    . "&SECURITY-APPNAME=" . $_ENV['EBAY_PRODUCTION_APPID']
-                    . "&RESPONSE-DATA-FORMAT=$responseEncoding"
-                    . "&itemFilter(0).name=Seller"
-                    . "&itemFilter(0).value=" . $_ENV['EBAY_SELLER_ID'];
-
-                $connection = curl_init();
-                curl_setopt($connection, CURLOPT_URL, $apicall);
-                curl_setopt($connection, CURLOPT_RETURNTRANSFER, true);
-                $response = json_decode(curl_exec($connection), true);
-                curl_close($connection);
-
-                $return = $response;
-                break;
-
-            case 'trading':
-                $service = new TradingServices\TradingService(array(
-                    'sandbox' => true,
-                    'apiVersion' => $_ENV['EBAYSDK_VERSION'],
-                    'siteId' => Constants\SiteIds::US,
-                ));
-
-                $request = new TradingTypes\GeteBayOfficialTimeRequestType();
-                $request->RequesterCredentials = new TradingTypes\CustomSecurityHeaderType();
-                $request->RequesterCredentials->eBayAuthToken = $_ENV['EBAY_AUTH_TOKEN'];
-                $request->RequesterCredentials->eBayAuthToken = $_ENV['EBAY_AUTH_TOKEN_DEV'];
-
-                $response = $service->geteBayOfficialTime($request);
-                if ($response->Ack !== 'Success') {
-                    if (isset($response->Errors)) {
-                        foreach ($response->Errors as $error) {
-                            $return = ["result" => "Error: " . $error->ShortMessage];
-                        }
-                    }
-                } else {
-                    $return = ["result" => "The official eBay time is:" . $response->Timestamp->format('H:i (\G\M\T) \o\n l jS F Y')];
-                }
-                break;
-
-            case 'finding':
+            case 'find_item':
                 $service = new FindingServices\FindingService(array(
-                    'appId' => $_ENV['EBAY_PRODUCTION_APPID'],
+                    'sandbox' => true,
+                    'appId' => $_ENV['EBAY_APP_KEY_DEV'],
                     'globalId' => Constants\GlobalIds::US
                 ));
 
@@ -403,7 +342,7 @@ class UrlController extends Controller {
                 $request = new FindingTypes\FindItemsByKeywordsRequest();
 
                 // Assign the keywords.
-                $request->keywords = 'March Chagall lithograph';
+                $request->keywords = $keyword;
 
                 // Ask for the first 25 items.
                 $request->paginationInput = new FindingTypes\PaginationInput();
@@ -423,9 +362,288 @@ class UrlController extends Controller {
                     }
                 } else {
                     foreach ($response->searchResult->item as $item) {
-                        $return = $item->itemId . ' ' . $item->title . ' ' . $item->sellingStatus->currentPrice->value;
+                        $return['itemId'][] = $item->itemId;
                     }
                 }
+                break;
+
+            case 'time':
+                $service = new TradingServices\TradingService(array(
+                    'sandbox' => true,
+                    'apiVersion' => $_ENV['EBAYSDK_VERSION'],
+                    'siteId' => Constants\SiteIds::US,
+                ));
+
+                $request = new TradingTypes\GeteBayOfficialTimeRequestType();
+                $request->RequesterCredentials = new TradingTypes\CustomSecurityHeaderType();
+                $request->RequesterCredentials->eBayAuthToken = $_ENV['EBAY_AUTH_TOKEN_DEV'];
+
+                $response = $service->geteBayOfficialTime($request);
+                if ($response->Ack !== 'Success') {
+                    if (isset($response->Errors)) {
+                        foreach ($response->Errors as $error) {
+                            $return = ["result" => "Error: " . $error->ShortMessage];
+                        }
+                    }
+                } else {
+                    $return = ["result" => "The official eBay time is:" . $response->Timestamp->format('H:i (\G\M\T) \o\n l jS F Y')];
+                }
+                break;
+
+            case 'get_id':
+                $service = new TradingServices\TradingService(array(
+                    'sandbox' => true,
+                    'apiVersion' => $_ENV['EBAYSDK_VERSION'],
+                    'siteId' => Constants\SiteIds::US,
+                ));
+
+                $request = new TradingTypes\GetItemRequestType();
+                $request->RequesterCredentials = new TradingTypes\CustomSecurityHeaderType();
+                $request->RequesterCredentials->eBayAuthToken = $_ENV['EBAY_AUTH_TOKEN_DEV'];
+                $request->ItemID = $keyword;
+                $request->IncludeItemSpecifics = true;
+
+                $response = $service->getItem($request);
+
+                if (isset($response->Errors)) {
+                    foreach ($response->Errors as $error) {
+                        $return[] = sprintf("%s: %s\n%s\n\n",
+                            $error->SeverityCode === TradingEnums\SeverityCodeType::C_ERROR ? 'Error' : 'Warning',
+                            $error->ShortMessage,
+                            $error->LongMessage
+                        );
+                    }
+                }
+
+                if ($response->Ack !== 'Failure') {
+                    $return[] = sprintf("The item was listed to the eBay Sandbox with the Item number %s\n",
+                        $response->Item->ItemID
+                    );
+                }
+
+                $return = ['id' => null];
+
+                foreach ($response->Item->ItemSpecifics->NameValueList as $item) {
+                    if ($item->Name == 'MFA Item Number') {
+                        $return = ['id' => $item->Value[0]];
+                    }
+                }
+                break;
+
+            case 'add_item':
+                $service = new TradingServices\TradingService(array(
+                    'sandbox' => true,
+                    'apiVersion' => $_ENV['EBAYSDK_VERSION'],
+                    'siteId' => Constants\SiteIds::US,
+                ));
+
+                $request = new TradingTypes\AddFixedPriceItemRequestType();
+                $request->RequesterCredentials = new TradingTypes\CustomSecurityHeaderType();
+                $request->RequesterCredentials->eBayAuthToken = $_ENV['EBAY_AUTH_TOKEN_DEV'];
+
+                $artwork_id = $keyword;
+                $artwork = Artwork::find($artwork_id);
+
+                $ch = curl_init("http://www.masterworksfineart.com/ext_files/ebayTemplate_clean.php?i=" . $artwork_id);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_BINARYTRANSFER, true);
+                $content = curl_exec($ch);
+                curl_close($ch);
+
+                $artwork->artwork_description = ArtworkDescription::whereArtworkId($artwork_id)->first();
+                $artwork->price = number_format($artwork->price, 2, '.', '');
+
+                $item = new TradingTypes\ItemType();
+
+                $item->Title = htmlspecialchars($artwork->title_short(), ENT_XML1);
+                $item->SubTitle = htmlspecialchars('Masterworks Fine Art Inc. (510)777-9970/1-800-805-7060');
+                $item->Description = htmlspecialchars($content, ENT_XML1);
+
+                $item->PictureDetails = new TradingTypes\PictureDetailsType();
+                $item->PictureDetails->GalleryType = TradingEnums\GalleryTypeCodeType::C_GALLERY;
+                $img_url = $artwork->img_url();
+                $item->PictureDetails->PictureURL = array($img_url);
+
+                $item->PrimaryCategory = new TradingTypes\CategoryType();
+                $item->PrimaryCategory->CategoryID = '360';
+                $item->DispatchTimeMax = 5;
+
+                $item->ItemSpecifics = new TradingTypes\NameValueListArrayType();
+                $item->ItemSpecifics->NameValueList[] = new TradingTypes\NameValueListType(array(
+                    'Name' => 'Listed By',
+                    'Value' => array('Dealer or Reseller')
+                ));
+
+                $item->ItemSpecifics->NameValueList[] = new TradingTypes\NameValueListType(array(
+                    'Name' => 'Original/Reproduction',
+                    'Value' => array('Original Print')
+                ));
+
+                $item->ItemSpecifics->NameValueList[] = new TradingTypes\NameValueListType(array(
+                    'Name' => 'Signed',
+                    'Value' => array('Signed')
+                ));
+
+                $item->ItemSpecifics->NameValueList[] = new TradingTypes\NameValueListType(array(
+                    'Name' => 'Edition Type',
+                    'Value' => array('Limited Edition')
+                ));
+
+                $item->ItemSpecifics->NameValueList[] = new TradingTypes\NameValueListType(array(
+                    'Name' => 'MFA Item Number',
+                    'Value' => array((string)$artwork->id)
+                ));
+
+                $item->ListingType = TradingEnums\ListingTypeCodeType::C_FIXED_PRICE_ITEM;
+                $item->Quantity = 1;
+                $item->ListingDuration = TradingEnums\ListingDurationCodeType::C_DAYS_10;
+                $item->StartPrice = new TradingTypes\AmountType(array('value' => (double)$artwork->price));
+                $item->Country = 'US';
+                $item->Location = 'Oakland';
+                $item->Currency = 'USD';
+                $item->PaymentMethods[] = 'PayPal';
+                $item->PayPalEmailAddress = 'rob@masterworksfineart.com';
+                $item->DispatchTimeMax = 1;
+                $item->ShipToLocations[] = 'Worldwide';
+                $item->ReturnPolicy = new TradingTypes\ReturnPolicyType();
+                $item->ReturnPolicy->ReturnsAcceptedOption = 'ReturnsAccepted';
+
+                $item->ShippingDetails = new TradingTypes\ShippingDetailsType();
+                $item->ShippingDetails->ShippingType = TradingEnums\ShippingTypeCodeType::C_FLAT;
+
+                $shippingService = new TradingTypes\ShippingServiceOptionsType();
+                $shippingService->ShippingServicePriority = 1;
+                $shippingService->ShippingService = 'UPSGround';
+                $shippingService->ShippingServiceCost = new TradingTypes\AmountType(array('value' => 150.00));
+
+                $item->ShippingDetails->ShippingServiceOptions[] = $shippingService;
+
+                $request->Item = $item;
+
+                $response = $service->addFixedPriceItem($request);
+
+                if (isset($response->Errors)) {
+                    foreach ($response->Errors as $error) {
+                        $return[] = sprintf("%s: %s\n%s\n\n",
+                            $error->SeverityCode === TradingEnums\SeverityCodeType::C_ERROR ? 'Error' : 'Warning',
+                            $error->ShortMessage,
+                            $error->LongMessage
+                        );
+                    }
+                }
+
+                if ($response->Ack !== 'Failure') {
+                    $return[] = sprintf("The item was listed to the eBay Sandbox with the Item number %s\n",
+                        $response->ItemID
+                    );
+                }
+
+                $return[] = $response;
+                break;
+
+            case 'revise':
+
+                $requestItemNumber = Request::create('/api/v1/ebay/get_id/' . $keyword, 'GET');
+                $artwork_data = json_decode(Route::dispatch($requestItemNumber)->getContent());
+
+                $artwork = Artwork::find($artwork_data->id);
+
+                $service = new TradingServices\TradingService(array(
+                    'sandbox' => true,
+                    'apiVersion' => $_ENV['EBAYSDK_VERSION'],
+                    'siteId' => Constants\SiteIds::US,
+                ));
+
+                $request = new TradingTypes\ReviseItemRequestType();
+                $request->RequesterCredentials = new TradingTypes\CustomSecurityHeaderType();
+                $request->RequesterCredentials->eBayAuthToken = $_ENV['EBAY_AUTH_TOKEN_DEV'];
+
+                $item = new TradingTypes\ItemType();
+
+                $item->ItemID = $keyword;
+
+                $item->Title = $artwork->title_short();
+                $item->SubTitle = 'Masterworks Fine Art Inc. (510)777-9970/1-800-805-7060';
+
+                $item->PictureDetails = new TradingTypes\PictureDetailsType();
+                $item->PictureDetails->GalleryType = TradingEnums\GalleryTypeCodeType::C_GALLERY;
+                $item->PictureDetails->PictureURL = array($artwork->img_url());
+
+                $item->PrimaryCategory = new TradingTypes\CategoryType();
+                $item->PrimaryCategory->CategoryID = '360';
+                $item->DispatchTimeMax = 5;
+
+                $item->ItemSpecifics = new TradingTypes\NameValueListArrayType();
+                $item->ItemSpecifics->NameValueList[] = new TradingTypes\NameValueListType(array(
+                    'Name' => 'Listed By',
+                    'Value' => array('Dealer or Reseller')
+                ));
+
+                $item->ItemSpecifics->NameValueList[] = new TradingTypes\NameValueListType(array(
+                    'Name' => 'Original/Reproduction',
+                    'Value' => array('Original Print')
+                ));
+
+                $item->ItemSpecifics->NameValueList[] = new TradingTypes\NameValueListType(array(
+                    'Name' => 'Signed',
+                    'Value' => array('Signed')
+                ));
+
+                $item->ItemSpecifics->NameValueList[] = new TradingTypes\NameValueListType(array(
+                    'Name' => 'Edition Type',
+                    'Value' => array('Limited Edition')
+                ));
+
+                $item->ItemSpecifics->NameValueList[] = new TradingTypes\NameValueListType(array(
+                    'Name' => 'MFA Item Number',
+                    'Value' => array((string)$artwork->id)
+                ));
+
+                $item->ListingType = TradingEnums\ListingTypeCodeType::C_FIXED_PRICE_ITEM;
+                $item->Quantity = 1;
+                $item->ListingDuration = TradingEnums\ListingDurationCodeType::C_DAYS_10;
+                $item->StartPrice = new TradingTypes\AmountType(array('value' => (double)$artwork->price));
+                $item->Country = 'US';
+                $item->Location = 'Oakland';
+                $item->Currency = 'USD';
+                $item->PaymentMethods[] = 'PayPal';
+                $item->PayPalEmailAddress = 'rob@masterworksfineart.com';
+                $item->DispatchTimeMax = 1;
+                $item->ShipToLocations[] = 'Worldwide';
+                $item->ReturnPolicy = new TradingTypes\ReturnPolicyType();
+                $item->ReturnPolicy->ReturnsAcceptedOption = 'ReturnsAccepted';
+
+                $item->ShippingDetails = new TradingTypes\ShippingDetailsType();
+                $item->ShippingDetails->ShippingType = TradingEnums\ShippingTypeCodeType::C_FLAT;
+
+                $shippingService = new TradingTypes\ShippingServiceOptionsType();
+                $shippingService->ShippingServicePriority = 1;
+                $shippingService->ShippingService = 'UPSGround';
+                $shippingService->ShippingServiceCost = new TradingTypes\AmountType(array('value' => 150.00));
+
+                $item->ShippingDetails->ShippingServiceOptions[] = $shippingService;
+
+                $request->Item = $item;
+
+                $response = $service->reviseItem($request);
+
+                if (isset($response->Errors)) {
+                    foreach ($response->Errors as $error) {
+                        $return[] = sprintf("%s: %s\n%s\n\n",
+                            $error->SeverityCode === TradingEnums\SeverityCodeType::C_ERROR ? 'Error' : 'Warning',
+                            $error->ShortMessage,
+                            $error->LongMessage
+                        );
+                    }
+                }
+
+                if ($response->Ack !== 'Failure') {
+                    $return[] = sprintf("The item was listed to the eBay Sandbox with the Item number %s\n",
+                        $response->ItemID
+                    );
+                }
+
+                $return[] = $response;
                 break;
         }
 
