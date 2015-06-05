@@ -13,6 +13,9 @@ use DTS\eBaySDK\Finding\Types as FindingTypes;
 use DTS\eBaySDK\Trading\Services as TradingServices;
 use DTS\eBaySDK\Trading\Types as TradingTypes;
 use DTS\eBaySDK\Trading\Enums as TradingEnums;
+use DTS\eBaySDK\Shopping\Services as ShoppingServices;
+use DTS\eBaySDK\Shopping\Types as ShoppingTypes;
+use DTS\eBaySDK\Shopping\Enums as ShoppingEnums;
 use \DTS\eBaySDK\Trading;
 use \DTS\eBaySDK\FileTransfer;
 
@@ -391,33 +394,20 @@ class UrlController extends Controller {
                 break;
 
             case 'get_item_number':
-                $service = new FindingServices\FindingService(array(
-                    'sandbox' => false,
-                    'appId' => $_ENV['EBAY_PRODUCTION_APPID'],
-                    'globalId' => Constants\GlobalIds::US
-                ));
+                Log::info("**CAPTAIN'S LOG: getting item number for ID# " . $keyword);
 
-                $request = new FindingTypes\FindItemsIneBayStoresRequest();
-                $request->storeName = "Masterworks Fine Art";
-                $response = $service->findItemsIneBayStores($request);
+                if (! isset($store_mapping)) {
+                    $requestStoreMapping = Request::create('/api/v1/ebay/store/0', 'GET');
+                    $store_mapping = json_decode(Route::dispatch($requestStoreMapping)->getContent());
+                }
 
                 $return['itemId'] = null;
 
-                if ($response->ack !== 'Success') {
-                    foreach ($response->errorMessage->error as $error) {
-                        $return = "Error: %s\n" . $error->message;
-                    }
-                } else {
-                    foreach ($response->searchResult->item as $item) {
-                        $requestItemNumber = Request::create('/api/v1/ebay/get_id/' . $item->itemId, 'GET');
-                        $artwork_data = json_decode(Route::dispatch($requestItemNumber)->getContent());
-
-                        if ($artwork_data->id == $keyword) {
-                            $return['itemId'] = $item->itemId;
-                        }
+                foreach ($store_mapping as $map) {
+                    if ($map->artwork_id == $keyword) {
+                        $return['itemId'] = $map->itemId;
                     }
                 }
-
                 break;
 
             case 'get_id':
@@ -529,6 +519,8 @@ class UrlController extends Controller {
                 break;
 
             case 'revise':
+                Log::info("**CAPTAIN'S LOG: ebay revision for ID# " . $keyword);
+
                 $artwork = Artwork::find((int)$keyword);
 
                 if (! isset($artwork->id) || $artwork->sold + $artwork->hidden + $artwork->onhold + $artwork->price_on_req > 0
