@@ -504,6 +504,34 @@ class UrlController extends Controller {
                 $return[] = $response;
                 break;
 
+            case 'store':
+                $service = new FindingServices\FindingService(array(
+                    'sandbox' => false,
+                    'appId' => $_ENV['EBAY_PRODUCTION_APPID'],
+                    'globalId' => Constants\GlobalIds::US
+                ));
+
+                $request = new FindingTypes\FindItemsIneBayStoresRequest();
+                $request->storeName = "Masterworks Fine Art";
+                $response = $service->findItemsIneBayStores($request);
+
+                $return = null;
+
+                if ($response->ack !== 'Success') {
+                    foreach ($response->errorMessage->error as $error) {
+                        $return[]['error'] = $error->message;
+                    }
+                } else {
+                    foreach ($response->searchResult->item as $key => $item) {
+                        $requestItemNumber = Request::create('/api/v1/ebay/get_id/' . $item->itemId, 'GET');
+                        $artwork_data = json_decode(Route::dispatch($requestItemNumber)->getContent());
+
+                        $return[$key]['itemId'] = $item->itemId;
+                        $return[$key]['artwork_id'] = $artwork_data->id;
+                    }
+                }
+                break;
+
             case 'revise':
                 $artwork = Artwork::find((int)$keyword);
 
