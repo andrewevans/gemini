@@ -505,6 +505,7 @@ class UrlController extends Controller {
                 break;
 
             case 'store':
+                Log::info("**CAPTAIN'S LOG: fetching eBay store");
                 $service = new FindingServices\FindingService(array(
                     'sandbox' => false,
                     'appId' => $_ENV['EBAY_PRODUCTION_APPID'],
@@ -522,13 +523,8 @@ class UrlController extends Controller {
                         $return[]['error'] = $error->message;
                     }
                 } else {
-                    foreach ($response->searchResult->item as $key => $item) {
-                        $requestItemNumber = Request::create('/api/v1/ebay/get_id/' . $item->itemId, 'GET');
-                        $artwork_data = json_decode(Route::dispatch($requestItemNumber)->getContent());
-
-                        $return[$key]['itemId'] = $item->itemId;
-                        $return[$key]['artwork_id'] = $artwork_data->id;
-                    }
+                    $return = Url::store_mapping($response);
+                    $store_mapping = $return;
                 }
                 break;
 

@@ -6,6 +6,9 @@ use DTS\eBaySDK\Finding\Types as FindingTypes;
 use DTS\eBaySDK\Trading\Services as TradingServices;
 use DTS\eBaySDK\Trading\Types as TradingTypes;
 use DTS\eBaySDK\Trading\Enums as TradingEnums;
+use DTS\eBaySDK\Shopping\Services as ShoppingServices;
+use DTS\eBaySDK\Shopping\Types as ShoppingTypes;
+use DTS\eBaySDK\Shopping\Enums as ShoppingEnums;
 use \DTS\eBaySDK\Trading;
 use \DTS\eBaySDK\FileTransfer;
 
@@ -208,5 +211,65 @@ class Url extends Eloquent
         $item->ShippingDetails->ShippingServiceOptions[] = $shippingService;
 
         return $item;
+    }
+
+    /**
+     * Generates a key/value pairs of itemId/artwork_id for mapping
+     * between eBay and local DB.
+     *
+     * @param  FindingTypes\FindItemsIneBayStoresResponse $response
+     * @return Array
+     */
+    public static function store_mapping($response)
+    {
+        $service = new ShoppingServices\ShoppingService(array(
+            'apiVersion' => '897',
+            'appId' => $_ENV['EBAY_PRODUCTION_APPID'],
+        ));
+
+        $request = new ShoppingTypes\GetMultipleItemsRequestType();
+        $request->IncludeSelector = 'ItemSpecifics';
+
+        foreach ($response->searchResult->item as $item) {
+            $items[] = $item->itemId;
+        }
+
+        $list_count = 0;
+
+        for ($offset = 0; $offset < sizeof($items); $offset+= 20) {
+            $request->ItemID = array_slice($items, $offset, 20, true);
+
+            $response = $service->getMultipleItems($request);
+
+            if (isset($response->Errors)) {
+                foreach ($response->Errors as $error) {
+                    $return[] = sprintf("%s: %s\n%s\n\n",
+                        $error->SeverityCode === ShoppingEnums\SeverityCodeType::C_ERROR ? 'Error' : 'Warning',
+                        $error->ShortMessage,
+                        $error->LongMessage
+                    );
+                }
+            }
+
+            if (! sizeof($response->Item)) {
+                $return['itemId'] = null;
+            }
+
+            if ($response->Ack !== 'Failure') {
+                foreach ($response->Item as $item) {
+                    $return[$list_count]['itemId'] = $item->ItemID;
+
+                    foreach ($item->ItemSpecifics->NameValueList as $list) {
+                        if ($list->Name == 'MFA Item Number') {
+                            $return[$list_count]['artwork_id'] = $list->Value[0];
+                        }
+                    }
+
+                    $list_count++;
+                }
+            }
+        }
+
+        return $return;
     }
 }
