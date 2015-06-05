@@ -505,17 +505,17 @@ class UrlController extends Controller {
                 break;
 
             case 'revise':
-                $requestItemNumber = Request::create('/api/v1/ebay/get_item_number/' . $keyword, 'GET');
-                $item_number = json_decode(Route::dispatch($requestItemNumber)->getContent());
-
                 $artwork = Artwork::find((int)$keyword);
 
-                if ($artwork->sold + $artwork->hidden + $artwork->onhold + $artwork->price_on_req > 0
+                if (! isset($artwork->id) || $artwork->sold + $artwork->hidden + $artwork->onhold + $artwork->price_on_req > 0
                     || $artwork->price < 1000) {
-                    $return = ['message' => 'Item not available for revision.'];
+                    $return = ['itemNumber' => null];
 
                     return Response::make($return, 200);
                 }
+
+                $requestItemNumber = Request::create('/api/v1/ebay/get_item_number/' . $keyword, 'GET');
+                $item_number = json_decode(Route::dispatch($requestItemNumber)->getContent());
 
                 $service = new TradingServices\TradingService(array(
                     'sandbox' => false,
