@@ -544,7 +544,7 @@ class UrlController extends Controller {
 
                 if (isset($response->Errors)) {
                     foreach ($response->Errors as $error) {
-                        $return[] = sprintf("%s: %s\n%s\n\n",
+                        $return['error'] = sprintf("%s: %s\n%s\n\n",
                             $error->SeverityCode === TradingEnums\SeverityCodeType::C_ERROR ? 'Error' : 'Warning',
                             $error->ShortMessage,
                             $error->LongMessage
@@ -553,12 +553,11 @@ class UrlController extends Controller {
                 }
 
                 if ($response->Ack !== 'Failure') {
-                    $return[] = sprintf("The item was listed to eBay with the Item number %s\n",
-                        $response->ItemID
-                    );
+                    $return['itemNumber'] = $response->ItemID;
+                } else {
+                    $return['itemNumber'] = null;
                 }
 
-                $return[] = $response;
                 break;
         }
 
