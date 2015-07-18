@@ -268,6 +268,10 @@ class UrlController extends Controller {
                 }
                 break;
 
+            case 'quotables':
+                $return_array = Quotable::all()->toArray();
+                break;
+
             default:
                 return Response::json(array(), 404);
                 break;
