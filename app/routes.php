@@ -13,6 +13,8 @@
 
 Route::resource('people', 'ArtistsController');
 
+Route::get('quotables', 'QuotablesController@index');
+Route::get('quotables/{id}', 'QuotablesController@show');
 Route::get('artists',  ['as' => 'artists.index', 'uses' => 'ArtistsController@index']);
 Route::get('artists/{artist_url_slug}',  ['as' => 'artists.show', 'uses' => 'ArtistsController@show']);
 Route::get('artists/{artist_url_slug}/bio/catalogue-raisonnes', ['as' => 'artists.catalogues.index', 'uses' => 'CataloguesController@index']);
