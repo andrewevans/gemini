@@ -207,6 +207,7 @@
 @if('home.index' != Route::current()->getName() )
     <div class="container size-xs">
         @include('widgets.breadcrumb')
+        @include('widgets.quotables')
     </div>
 @endif
 

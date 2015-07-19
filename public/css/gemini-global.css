@@ -77,12 +77,28 @@ a:hover {
 }
 
 .breadcrumb {
+    display: inline-block;
     background-color: transparent;
     margin-bottom: 0;
 }
 
 .breadcrumb li>a {
     text-transform: uppercase;
+}
+/**********/
+
+/* Quotables */
+.quotables {
+    display: none; /* div unhidden with javascript */
+}
+
+.quotables > span {
+    margin-left: 0.25em;
+}
+
+.quotables > span.quotablesDescription {
+    font-style: italic;
+    text-overflow: ellipsis;
 }
 /**********/
 
