@@ -118,3 +118,5 @@ get rid of artworks field 'framing'?
 currency converter needed
 
 better robots.txt management
+
+get '.quotables' in ajax call to use global var
