@@ -2,7 +2,7 @@
  * Created by vesper on 5/31/14.
  */
 
-var MFART = {};
+var GART = {};
 
 $('#myCarousel').carousel({
     interval: 4000
@@ -197,22 +197,28 @@ for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document
 var quotables;
 var $quotables = $('.quotables');
 
-MFART.displayQuotable = function (quotables) {
+// Update quotable DOM elements with random quotable
+GART.displayQuotable = function (quotables, self) {
     var quotable = quotables[Math.floor(Math.random() * quotables.length)];
-    $quotables.find('span.quotablesDescription').html(quotable.description);
-    $quotables.find('span.quotablesAuthor').html(quotable.author);
+    $(self).find('span.quotablesDescription').html(quotable.description);
+    $(self).find('span.quotablesAuthor').html(quotable.author);
     var quotable_date = new Date(quotable.quotable_date).toLocaleDateString();
-    $quotables.find('span.quotablesDate').html(quotable_date);
+    $(self).find('span.quotablesDate').html(quotable_date);
 }
 
+// Make an ajax request for quotables JSON
 $.getJSON( "/api/v1/url/quotables", function(data) {
     quotables = data;
-    MFART.displayQuotable(quotables);
-    $('.quotables').css('display', 'inline-block');
-}).done(function() {
-});
 
-$quotables.find('a.quotablesNext').on('click', function(e) {
-    e.preventDefault();
-    MFART.displayQuotable(quotables);
+    // Attach click event to each quotable element to show another random quotable
+    $quotables.each(function () {
+        var self = this;
+        $(this).find('a.quotablesNext').on('click', function(e) {
+            e.preventDefault();
+            GART.displayQuotable(quotables, self);
+        }).click(); // Simulate a click to show the first quotables
+    });
+
+    // Display quotables elements
+    $quotables.css('display', 'inline-block');
 });
