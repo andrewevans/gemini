@@ -282,6 +282,12 @@ View::composer('widgets.nav.education', function($view) {
         ->with('parent', $parent);
 });
 
+View::composer('widgets.nav.artists', function($view) {
+    $artists = Tools::artists_with_inventory();
+
+    $view->with(['artists' => $artists]);
+});
+
 View::composer('widgets.filters.list', function($view){
     $params = Input::all();
 

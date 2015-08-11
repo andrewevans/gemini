@@ -8,6 +8,19 @@ class Tools {
         return (mt_rand(1,2) == 1) ? 'something' : 'other';
     }
 
+    /**
+     * @return Collection the artists that have available inventory
+     */
+    public static function artists_with_inventory()
+    {
+        return Artist::whereIn('id', function($query) {
+            $query->select('artist_id')
+                ->from('artworks')
+                ->whereSold(0)
+                ->whereHidden(0)->get();
+        })->groupBy('genre')->orderBy('last_name', 'asc')->get();
+    }
+
     /*
      * Method to strip tags globally.
      */
