@@ -169,7 +169,7 @@
                 @if (! Config::get('app.gemini_lite'))
                 <li class="dropdown">
                     <a href="/education" class="dropdown-toggle active disabled" data-toggle="dropdown">Art Education <b class="caret"></b></a>
-                    @include('widgets.nav', ['parent' => 'education'])
+                    @include('widgets.nav.education', ['parent' => 'education'])
                 </li>
                 @endif
                 <li><a href="/buying">Why Choose Us</a></li>

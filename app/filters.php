@@ -270,7 +270,7 @@ View::composer('widgets.post', function($view){
         ->with('post', $post);
 });
 
-View::composer('widgets.nav', function($view){
+View::composer('widgets.nav.education', function($view) {
     $parent = get_page_by_path($view->parent);
     $posts = get_pages(array(
         'child_of' => $parent->ID,
