@@ -5,7 +5,6 @@ class StaticController extends \BaseController {
 
     public function __construct()
     {
-        $this->beforeFilter('auth');
     }
 
 	/**
