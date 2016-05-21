@@ -335,14 +335,12 @@ class Artwork extends Eloquent
         curl_setopt($ch, CURLOPT_NOBODY, 1);
         curl_setopt($ch, CURLOPT_FAILONERROR, 1);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        if(curl_exec($ch)!==FALSE)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+
+        $file_found = (curl_exec($ch) !== false
+            && curl_getinfo($ch, CURLINFO_HTTP_CODE) == 200
+            && strpos(curl_getinfo($ch, CURLINFO_CONTENT_TYPE), "image/") === 0);
+
+        return $file_found;
     }
 
 
